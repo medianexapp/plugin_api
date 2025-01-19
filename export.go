@@ -6,10 +6,19 @@ import (
 	"github.com/labulakalia/wazero_net/util"
 )
 
-var pluginimpl iPlugin
+var pluginExport IPluginExport
 
-func init() {
-	pluginimpl = newPlugin()
+type PluginExport struct {
+	IPlugin
+}
+
+func (pe *PluginExport) PluginAPISchema() int {
+	return pluginAPISchema
+}
+
+type IPluginExport interface {
+	PluginAPISchema() int
+	IPlugin
 }
 
 // [32 byte][1 err flag][31 length]
@@ -22,7 +31,7 @@ func err2Uint64(err error) uint64 {
 
 // go::wasmexport plugin_id
 func plugin_id() uint64 {
-	id := pluginimpl.PluginId()
+	id := pluginExport.PluginId()
 	idPtr := uint32(util.StringToPtr(&id))
 	idLen := uint32(len(id))
 	return util.Uint32ToUint64(idPtr, idLen)
@@ -30,7 +39,7 @@ func plugin_id() uint64 {
 
 // go::wasmexport get_auth_type
 func get_auth_type() uint64 {
-	authType := pluginimpl.GetAuthType()
+	authType := pluginExport.GetAuthType()
 	data, err := json.Marshal(authType)
 	if err != nil {
 		return err2Uint64(err)
@@ -46,7 +55,7 @@ func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
 	if err != nil {
 		return err2Uint64(err)
 	}
-	status := pluginimpl.CheckAuth(authType)
+	status := pluginExport.CheckAuth(authType)
 	statusData, err := json.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)
@@ -56,14 +65,14 @@ func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
 
 // go::wasmexport get_auth_data
 func get_auth_data() uint64 {
-	authData := pluginimpl.GetAuthData()
+	authData := pluginExport.GetAuthData()
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(authData)), uint32(len(authData)))
 }
 
 // go::wasmexport init_auth
 func init_auth(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	status := pluginimpl.InitAuth(rawAuthData)
+	status := pluginExport.InitAuth(rawAuthData)
 	statusData, err := json.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)
@@ -73,14 +82,14 @@ func init_auth(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 
 // go::wasmexport plugin_auth_id
 func plugin_auth_id() uint64 {
-	authId := pluginimpl.PluginAuthId()
+	authId := pluginExport.PluginAuthId()
 	return util.Uint32ToUint64(uint32(util.StringToPtr(&authId)), uint32(len(authId)))
 }
 
 // go::wasmexport get_dir_entry
 func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 	dir := util.PtrToString(uint32(dir_pathPtr), uint32(dir_pathLen))
-	dirEntry := pluginimpl.GetDirEntry(dir, page, page_size)
+	dirEntry := pluginExport.GetDirEntry(dir, page, page_size)
 	dirEntryData, err := json.Marshal(dirEntry)
 	if err != nil {
 		return err2Uint64(err)
@@ -91,7 +100,7 @@ func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 // go::wasmexport get_file_resource
 func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
 	file_path := util.PtrToString(uint32(file_pathPtr), uint32(file_pathLen))
-	fileResource := pluginimpl.GetFileResource(file_path)
+	fileResource := pluginExport.GetFileResource(file_path)
 	fileResourceData, err := json.Marshal(fileResource)
 	if err != nil {
 		return err2Uint64(err)
@@ -101,6 +110,6 @@ func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
 
 // go::wasmexport close
 func close() uint64 {
-	pluginimpl.Close()
+	pluginExport.Close()
 	return 0
 }
