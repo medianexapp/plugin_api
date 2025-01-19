@@ -2,9 +2,6 @@
 version: v2
 modules:
   - name: buf.build/labulakalia/plugin-api
-lint:
-  use:
-    - STANDARD
 breaking:
   use:
     - FILE
