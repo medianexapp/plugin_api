@@ -1,8 +1,7 @@
 # For details on buf.yaml configuration, visit https://buf.build/docs/configuration/v2/buf-yaml
 version: v2
 modules:
-  - path: plugin
-    name: buf.build/labulaka/plugin_api
+  - name: buf.build/labulakalia/plugin-api
 lint:
   use:
     - STANDARD
