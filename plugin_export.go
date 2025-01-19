@@ -74,10 +74,10 @@ func get_auth_data() uint64 {
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(authData)), uint32(len(authData)))
 }
 
-// go::wasmexport init_auth
-func init_auth(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
+// go::wasmexport check_auth_data
+func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	status := pluginExport.InitAuth(rawAuthData)
+	status := pluginExport.CheckAuthData(rawAuthData)
 	statusData, err := proto.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)

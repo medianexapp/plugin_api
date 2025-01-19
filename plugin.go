@@ -12,7 +12,7 @@ type IPlugin interface {
 	// get auth data when check auth status is success
 	GetAuthData() []byte
 	// use auth data init auth
-	InitAuth([]byte) *plugin.Status
+	CheckAuthData([]byte) *plugin.Status
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() string
 	// get dir entry from driver plugin
