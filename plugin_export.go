@@ -12,17 +12,20 @@ type PluginExport struct {
 	IPlugin
 }
 
-func (pe *PluginExport) PluginAPISchema() int {
-	return pluginAPISchema
+func (pe *PluginExport) PluginAPISchema() (uint64, error) {
+	return pluginAPISchema, nil
 }
 
 type IPluginExport interface {
-	PluginAPISchema() int
+	PluginAPISchema() (uint64, error)
 	IPlugin
 }
 
 // [32 byte][1 err flag][31 length]
 func err2Uint64(err error) uint64 {
+	if err == nil {
+		return 0
+	}
 	errStr := err.Error()
 	errLength := uint32(len(errStr) | 1<<31)
 	errPtr := uint32(util.StringToPtr(&errStr))
@@ -31,12 +34,16 @@ func err2Uint64(err error) uint64 {
 
 // go::wasmexport plugin_api_schema
 func plugin_api_schema() uint64 {
-	return uint64(pluginExport.PluginAPISchema())
+	apiSchema, _ := pluginExport.PluginAPISchema()
+	return apiSchema
 }
 
 // go::wasmexport plugin_id
 func plugin_id() uint64 {
-	id := pluginExport.PluginId()
+	id, err := pluginExport.PluginId()
+	if err != nil {
+		return err2Uint64(err)
+	}
 	idPtr := uint32(util.StringToPtr(&id))
 	idLen := uint32(len(id))
 	return util.Uint32ToUint64(idPtr, idLen)
@@ -44,7 +51,10 @@ func plugin_id() uint64 {
 
 // go::wasmexport get_auth_type
 func get_auth_type() uint64 {
-	authType := pluginExport.GetAuthType()
+	authType, err := pluginExport.GetAuthType()
+	if err != nil {
+		return err2Uint64(err)
+	}
 	data, err := proto.Marshal(authType)
 	if err != nil {
 		return err2Uint64(err)
@@ -60,7 +70,10 @@ func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
 	if err != nil {
 		return err2Uint64(err)
 	}
-	status := pluginExport.CheckAuth(authType)
+	status, err := pluginExport.CheckAuth(authType)
+	if err != nil {
+		return err2Uint64(err)
+	}
 	statusData, err := proto.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)
@@ -70,14 +83,20 @@ func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
 
 // go::wasmexport get_auth_data
 func get_auth_data() uint64 {
-	authData := pluginExport.GetAuthData()
+	authData, err := pluginExport.GetAuthData()
+	if err != nil {
+		return err2Uint64(err)
+	}
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(authData)), uint32(len(authData)))
 }
 
 // go::wasmexport check_auth_data
 func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	status := pluginExport.CheckAuthData(rawAuthData)
+	status, err := pluginExport.CheckAuthData(rawAuthData)
+	if err != nil {
+		return err2Uint64(err)
+	}
 	statusData, err := proto.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)
@@ -87,14 +106,20 @@ func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 
 // go::wasmexport plugin_auth_id
 func plugin_auth_id() uint64 {
-	authId := pluginExport.PluginAuthId()
+	authId, err := pluginExport.PluginAuthId()
+	if err != nil {
+		return err2Uint64(err)
+	}
 	return util.Uint32ToUint64(uint32(util.StringToPtr(&authId)), uint32(len(authId)))
 }
 
 // go::wasmexport get_dir_entry
 func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 	dir := util.PtrToString(uint32(dir_pathPtr), uint32(dir_pathLen))
-	dirEntry := pluginExport.GetDirEntry(dir, page, page_size)
+	dirEntry, err := pluginExport.GetDirEntry(dir, page, page_size)
+	if err != nil {
+		return err2Uint64(err)
+	}
 	dirEntryData, err := proto.Marshal(dirEntry)
 	if err != nil {
 		return err2Uint64(err)
@@ -105,7 +130,10 @@ func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 // go::wasmexport get_file_resource
 func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
 	file_path := util.PtrToString(uint32(file_pathPtr), uint32(file_pathLen))
-	fileResource := pluginExport.GetFileResource(file_path)
+	fileResource, err := pluginExport.GetFileResource(file_path)
+	if err != nil {
+		return err2Uint64(err)
+	}
 	fileResourceData, err := proto.Marshal(fileResource)
 	if err != nil {
 		return err2Uint64(err)
@@ -115,6 +143,6 @@ func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
 
 // go::wasmexport close
 func close() uint64 {
-	pluginExport.Close()
-	return 0
+
+	return err2Uint64(pluginExport.Close())
 }
