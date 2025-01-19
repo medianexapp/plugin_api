@@ -29,6 +29,11 @@ func err2Uint64(err error) uint64 {
 	return util.Uint32ToUint64(errPtr, uint32(errLength))
 }
 
+// go::wasmexport plugin_api_schema
+func plugin_api_schema() uint64 {
+	return uint64(pluginExport.PluginAPISchema())
+}
+
 // go::wasmexport plugin_id
 func plugin_id() uint64 {
 	id := pluginExport.PluginId()
