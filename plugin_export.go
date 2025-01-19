@@ -1,9 +1,9 @@
 package plugin_api
 
 import (
-	"encoding/json"
-
+	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
+	"google.golang.org/protobuf/proto"
 )
 
 var pluginExport IPluginExport
@@ -45,7 +45,7 @@ func plugin_id() uint64 {
 // go::wasmexport get_auth_type
 func get_auth_type() uint64 {
 	authType := pluginExport.GetAuthType()
-	data, err := json.Marshal(authType)
+	data, err := proto.Marshal(authType)
 	if err != nil {
 		return err2Uint64(err)
 	}
@@ -55,13 +55,13 @@ func get_auth_type() uint64 {
 // go::wasmexport check_auth
 func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
 	data := util.PtrToBytes(uint32(authTypePtr), uint32(authTypeLenPtr))
-	authType := &AuthType{}
-	err := json.Unmarshal(data, authType)
+	authType := &plugin.AuthType{}
+	err := proto.Unmarshal(data, authType)
 	if err != nil {
 		return err2Uint64(err)
 	}
 	status := pluginExport.CheckAuth(authType)
-	statusData, err := json.Marshal(status)
+	statusData, err := proto.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)
 	}
@@ -78,7 +78,7 @@ func get_auth_data() uint64 {
 func init_auth(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
 	status := pluginExport.InitAuth(rawAuthData)
-	statusData, err := json.Marshal(status)
+	statusData, err := proto.Marshal(status)
 	if err != nil {
 		return err2Uint64(err)
 	}
@@ -95,7 +95,7 @@ func plugin_auth_id() uint64 {
 func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 	dir := util.PtrToString(uint32(dir_pathPtr), uint32(dir_pathLen))
 	dirEntry := pluginExport.GetDirEntry(dir, page, page_size)
-	dirEntryData, err := json.Marshal(dirEntry)
+	dirEntryData, err := proto.Marshal(dirEntry)
 	if err != nil {
 		return err2Uint64(err)
 	}
@@ -106,7 +106,7 @@ func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
 	file_path := util.PtrToString(uint32(file_pathPtr), uint32(file_pathLen))
 	fileResource := pluginExport.GetFileResource(file_path)
-	fileResourceData, err := json.Marshal(fileResource)
+	fileResourceData, err := proto.Marshal(fileResource)
 	if err != nil {
 		return err2Uint64(err)
 	}
