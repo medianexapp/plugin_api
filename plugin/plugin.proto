@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package plugin;
 option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
+import "google/protobuf/any.proto";
 
 message AuthType {
     enum ValueType {
@@ -19,6 +20,7 @@ message AuthType {
         string    label      = 3;
         ValueType value_type = 4;
         repeated FormData enum_form_data = 5;
+        google.protobuf.Any data = 6;
     }
 
     bool              use_form = 1;
