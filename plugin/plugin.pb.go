@@ -21,67 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AuthType_ValueType int32
-
-const (
-	AuthType_UNSPECIFIED AuthType_ValueType = 0
-	AuthType_StringVal   AuthType_ValueType = 1
-	AuthType_IntVal      AuthType_ValueType = 2
-	AuthType_BoolVal     AuthType_ValueType = 3
-	AuthType_PathVal     AuthType_ValueType = 4
-	AuthType_PasswordVal AuthType_ValueType = 5
-	AuthType_EnumVal     AuthType_ValueType = 6
-)
-
-// Enum value maps for AuthType_ValueType.
-var (
-	AuthType_ValueType_name = map[int32]string{
-		0: "UNSPECIFIED",
-		1: "StringVal",
-		2: "IntVal",
-		3: "BoolVal",
-		4: "PathVal",
-		5: "PasswordVal",
-		6: "EnumVal",
-	}
-	AuthType_ValueType_value = map[string]int32{
-		"UNSPECIFIED": 0,
-		"StringVal":   1,
-		"IntVal":      2,
-		"BoolVal":     3,
-		"PathVal":     4,
-		"PasswordVal": 5,
-		"EnumVal":     6,
-	}
-)
-
-func (x AuthType_ValueType) Enum() *AuthType_ValueType {
-	p := new(AuthType_ValueType)
-	*p = x
-	return p
-}
-
-func (x AuthType_ValueType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (AuthType_ValueType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[0].Descriptor()
-}
-
-func (AuthType_ValueType) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[0]
-}
-
-func (x AuthType_ValueType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use AuthType_ValueType.Descriptor instead.
-func (AuthType_ValueType) EnumDescriptor() ([]byte, []int) {
-	return file_plugin_plugin_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type Status_State int32
 
 const (
@@ -121,11 +60,11 @@ func (x Status_State) String() string {
 }
 
 func (Status_State) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[1].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[0].Descriptor()
 }
 
 func (Status_State) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[1]
+	return &file_plugin_plugin_proto_enumTypes[0]
 }
 
 func (x Status_State) Number() protoreflect.EnumNumber {
@@ -170,11 +109,11 @@ func (x FileEntry_FileType) String() string {
 }
 
 func (FileEntry_FileType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[2].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[1].Descriptor()
 }
 
 func (FileEntry_FileType) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[2]
+	return &file_plugin_plugin_proto_enumTypes[1]
 }
 
 func (x FileEntry_FileType) Number() protoreflect.EnumNumber {
@@ -232,11 +171,11 @@ func (x FileResource_VideoResolution) String() string {
 }
 
 func (FileResource_VideoResolution) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[3].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[2].Descriptor()
 }
 
 func (FileResource_VideoResolution) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[3]
+	return &file_plugin_plugin_proto_enumTypes[2]
 }
 
 func (x FileResource_VideoResolution) Number() protoreflect.EnumNumber {
@@ -284,11 +223,11 @@ func (x FileResource_ResourceType) String() string {
 }
 
 func (FileResource_ResourceType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[4].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[3].Descriptor()
 }
 
 func (FileResource_ResourceType) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[4]
+	return &file_plugin_plugin_proto_enumTypes[3]
 }
 
 func (x FileResource_ResourceType) Number() protoreflect.EnumNumber {
@@ -652,11 +591,9 @@ func (x *FileResource) GetStatus() *Status {
 type AuthType_FormData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Value         string                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	Label         string                 `protobuf:"bytes,3,opt,name=label,proto3" json:"label,omitempty"`
-	ValueType     AuthType_ValueType     `protobuf:"varint,4,opt,name=value_type,json=valueType,proto3,enum=plugin.AuthType_ValueType" json:"value_type,omitempty"`
-	EnumFormData  []*AuthType_FormData   `protobuf:"bytes,5,rep,name=enum_form_data,json=enumFormData,proto3" json:"enum_form_data,omitempty"`
-	Data          *anypb.Any             `protobuf:"bytes,6,opt,name=data,proto3" json:"data,omitempty"`
+	Label         string                 `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	EnumFormData  []*AuthType_FormData   `protobuf:"bytes,4,rep,name=enum_form_data,json=enumFormData,proto3" json:"enum_form_data,omitempty"`
+	Value         *anypb.Any             `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -698,25 +635,11 @@ func (x *AuthType_FormData) GetName() string {
 	return ""
 }
 
-func (x *AuthType_FormData) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
 func (x *AuthType_FormData) GetLabel() string {
 	if x != nil {
 		return x.Label
 	}
 	return ""
-}
-
-func (x *AuthType_FormData) GetValueType() AuthType_ValueType {
-	if x != nil {
-		return x.ValueType
-	}
-	return AuthType_UNSPECIFIED
 }
 
 func (x *AuthType_FormData) GetEnumFormData() []*AuthType_FormData {
@@ -726,9 +649,9 @@ func (x *AuthType_FormData) GetEnumFormData() []*AuthType_FormData {
 	return nil
 }
 
-func (x *AuthType_FormData) GetData() *anypb.Any {
+func (x *AuthType_FormData) GetValue() *anypb.Any {
 	if x != nil {
-		return x.Data
+		return x.Value
 	}
 	return nil
 }
@@ -823,7 +746,7 @@ var file_plugin_plugin_proto_rawDesc = []byte{
 	0x0a, 0x13, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x1a, 0x19, 0x67,
 	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x61,
-	0x6e, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x94, 0x05, 0x0a, 0x08, 0x41, 0x75, 0x74,
+	0x6e, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xd4, 0x03, 0x0a, 0x08, 0x41, 0x75, 0x74,
 	0x68, 0x54, 0x79, 0x70, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x5f, 0x66, 0x6f, 0x72,
 	0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x75, 0x73, 0x65, 0x46, 0x6f, 0x72, 0x6d,
 	0x12, 0x2f, 0x0a, 0x05, 0x66, 0x6f, 0x72, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
@@ -842,29 +765,17 @@ var file_plugin_plugin_proto_rawDesc = []byte{
 	0x09, 0x52, 0x08, 0x6f, 0x61, 0x75, 0x74, 0x68, 0x55, 0x72, 0x6c, 0x12, 0x2e, 0x0a, 0x13, 0x6f,
 	0x61, 0x75, 0x74, 0x68, 0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x5f, 0x64, 0x61,
 	0x74, 0x61, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x11, 0x6f, 0x61, 0x75, 0x74, 0x68, 0x43,
-	0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x44, 0x61, 0x74, 0x61, 0x1a, 0xf0, 0x01, 0x0a, 0x08,
+	0x61, 0x6c, 0x6c, 0x62, 0x61, 0x63, 0x6b, 0x44, 0x61, 0x74, 0x61, 0x1a, 0xa1, 0x01, 0x0a, 0x08,
 	0x46, 0x6f, 0x72, 0x6d, 0x44, 0x61, 0x74, 0x61, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
-	0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x05, 0x6c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x39, 0x0a, 0x0a, 0x76, 0x61, 0x6c, 0x75,
-	0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x70,
-	0x6c, 0x75, 0x67, 0x69, 0x6e, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x54, 0x79, 0x70, 0x65, 0x2e, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x54, 0x79, 0x70, 0x65, 0x52, 0x09, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x54,
-	0x79, 0x70, 0x65, 0x12, 0x3f, 0x0a, 0x0e, 0x65, 0x6e, 0x75, 0x6d, 0x5f, 0x66, 0x6f, 0x72, 0x6d,
-	0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x70, 0x6c,
-	0x75, 0x67, 0x69, 0x6e, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x54, 0x79, 0x70, 0x65, 0x2e, 0x46, 0x6f,
-	0x72, 0x6d, 0x44, 0x61, 0x74, 0x61, 0x52, 0x0c, 0x65, 0x6e, 0x75, 0x6d, 0x46, 0x6f, 0x72, 0x6d,
-	0x44, 0x61, 0x74, 0x61, 0x12, 0x28, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x06, 0x20, 0x01,
+	0x6c, 0x61, 0x62, 0x65, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6c, 0x61, 0x62,
+	0x65, 0x6c, 0x12, 0x3f, 0x0a, 0x0e, 0x65, 0x6e, 0x75, 0x6d, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x5f,
+	0x64, 0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x70, 0x6c, 0x75,
+	0x67, 0x69, 0x6e, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x54, 0x79, 0x70, 0x65, 0x2e, 0x46, 0x6f, 0x72,
+	0x6d, 0x44, 0x61, 0x74, 0x61, 0x52, 0x0c, 0x65, 0x6e, 0x75, 0x6d, 0x46, 0x6f, 0x72, 0x6d, 0x44,
+	0x61, 0x74, 0x61, 0x12, 0x2a, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x14, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x41, 0x6e, 0x79, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x6f,
-	0x0a, 0x09, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x55,
-	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x49,
-	0x6e, 0x74, 0x56, 0x61, 0x6c, 0x10, 0x02, 0x12, 0x0b, 0x0a, 0x07, 0x42, 0x6f, 0x6f, 0x6c, 0x56,
-	0x61, 0x6c, 0x10, 0x03, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x61, 0x74, 0x68, 0x56, 0x61, 0x6c, 0x10,
-	0x04, 0x12, 0x0f, 0x0a, 0x0b, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x56, 0x61, 0x6c,
-	0x10, 0x05, 0x12, 0x0b, 0x0a, 0x07, 0x45, 0x6e, 0x75, 0x6d, 0x56, 0x61, 0x6c, 0x10, 0x06, 0x22,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x41, 0x6e, 0x79, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22,
 	0x98, 0x01, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2a, 0x0a, 0x05, 0x73, 0x74,
 	0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x14, 0x2e, 0x70, 0x6c, 0x75, 0x67,
 	0x69, 0x6e, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x52,
@@ -963,43 +874,41 @@ func file_plugin_plugin_proto_rawDescGZIP() []byte {
 	return file_plugin_plugin_proto_rawDescData
 }
 
-var file_plugin_plugin_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_plugin_plugin_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_plugin_plugin_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_plugin_plugin_proto_goTypes = []any{
-	(AuthType_ValueType)(0),               // 0: plugin.AuthType.ValueType
-	(Status_State)(0),                     // 1: plugin.Status.State
-	(FileEntry_FileType)(0),               // 2: plugin.FileEntry.FileType
-	(FileResource_VideoResolution)(0),     // 3: plugin.FileResource.VideoResolution
-	(FileResource_ResourceType)(0),        // 4: plugin.FileResource.ResourceType
-	(*AuthType)(nil),                      // 5: plugin.AuthType
-	(*Status)(nil),                        // 6: plugin.Status
-	(*FileEntry)(nil),                     // 7: plugin.FileEntry
-	(*DirEntry)(nil),                      // 8: plugin.DirEntry
-	(*FileResource)(nil),                  // 9: plugin.FileResource
-	(*AuthType_FormData)(nil),             // 10: plugin.AuthType.FormData
-	(*FileResource_FileResourceData)(nil), // 11: plugin.FileResource.FileResourceData
-	nil,                                   // 12: plugin.FileResource.FileResourceData.HeaderEntry
-	(*anypb.Any)(nil),                     // 13: google.protobuf.Any
+	(Status_State)(0),                     // 0: plugin.Status.State
+	(FileEntry_FileType)(0),               // 1: plugin.FileEntry.FileType
+	(FileResource_VideoResolution)(0),     // 2: plugin.FileResource.VideoResolution
+	(FileResource_ResourceType)(0),        // 3: plugin.FileResource.ResourceType
+	(*AuthType)(nil),                      // 4: plugin.AuthType
+	(*Status)(nil),                        // 5: plugin.Status
+	(*FileEntry)(nil),                     // 6: plugin.FileEntry
+	(*DirEntry)(nil),                      // 7: plugin.DirEntry
+	(*FileResource)(nil),                  // 8: plugin.FileResource
+	(*AuthType_FormData)(nil),             // 9: plugin.AuthType.FormData
+	(*FileResource_FileResourceData)(nil), // 10: plugin.FileResource.FileResourceData
+	nil,                                   // 11: plugin.FileResource.FileResourceData.HeaderEntry
+	(*anypb.Any)(nil),                     // 12: google.protobuf.Any
 }
 var file_plugin_plugin_proto_depIdxs = []int32{
-	10, // 0: plugin.AuthType.forms:type_name -> plugin.AuthType.FormData
-	1,  // 1: plugin.Status.state:type_name -> plugin.Status.State
-	2,  // 2: plugin.FileEntry.fileType:type_name -> plugin.FileEntry.FileType
-	7,  // 3: plugin.DirEntry.file_entries:type_name -> plugin.FileEntry
-	6,  // 4: plugin.DirEntry.status:type_name -> plugin.Status
-	11, // 5: plugin.FileResource.file_resource_data:type_name -> plugin.FileResource.FileResourceData
-	6,  // 6: plugin.FileResource.status:type_name -> plugin.Status
-	0,  // 7: plugin.AuthType.FormData.value_type:type_name -> plugin.AuthType.ValueType
-	10, // 8: plugin.AuthType.FormData.enum_form_data:type_name -> plugin.AuthType.FormData
-	13, // 9: plugin.AuthType.FormData.data:type_name -> google.protobuf.Any
-	3,  // 10: plugin.FileResource.FileResourceData.video_resolution:type_name -> plugin.FileResource.VideoResolution
-	4,  // 11: plugin.FileResource.FileResourceData.resource_type:type_name -> plugin.FileResource.ResourceType
-	12, // 12: plugin.FileResource.FileResourceData.header:type_name -> plugin.FileResource.FileResourceData.HeaderEntry
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	9,  // 0: plugin.AuthType.forms:type_name -> plugin.AuthType.FormData
+	0,  // 1: plugin.Status.state:type_name -> plugin.Status.State
+	1,  // 2: plugin.FileEntry.fileType:type_name -> plugin.FileEntry.FileType
+	6,  // 3: plugin.DirEntry.file_entries:type_name -> plugin.FileEntry
+	5,  // 4: plugin.DirEntry.status:type_name -> plugin.Status
+	10, // 5: plugin.FileResource.file_resource_data:type_name -> plugin.FileResource.FileResourceData
+	5,  // 6: plugin.FileResource.status:type_name -> plugin.Status
+	9,  // 7: plugin.AuthType.FormData.enum_form_data:type_name -> plugin.AuthType.FormData
+	12, // 8: plugin.AuthType.FormData.value:type_name -> google.protobuf.Any
+	2,  // 9: plugin.FileResource.FileResourceData.video_resolution:type_name -> plugin.FileResource.VideoResolution
+	3,  // 10: plugin.FileResource.FileResourceData.resource_type:type_name -> plugin.FileResource.ResourceType
+	11, // 11: plugin.FileResource.FileResourceData.header:type_name -> plugin.FileResource.FileResourceData.HeaderEntry
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_plugin_plugin_proto_init() }
@@ -1012,7 +921,7 @@ func file_plugin_plugin_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugin_plugin_proto_rawDesc,
-			NumEnums:      5,
+			NumEnums:      4,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
