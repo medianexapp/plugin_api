@@ -8,11 +8,11 @@ type IPlugin interface {
 	// get auth type like form edit,qrcode,oauth2
 	GetAuthType() (*plugin.AuthType, error)
 	// check auth data status
-	CheckAuth(*plugin.AuthType) (*plugin.Status, error)
+	CheckAuth(*plugin.AuthType) error
 	// get auth data when check auth status is success
 	GetAuthData() ([]byte, error)
 	// use auth data init auth
-	CheckAuthData([]byte) (*plugin.Status, error)
+	CheckAuthData([]byte) error
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() (string, error)
 	// get dir entry from driver plugin

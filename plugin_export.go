@@ -70,15 +70,11 @@ func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
 	if err != nil {
 		return err2Uint64(err)
 	}
-	status, err := pluginExport.CheckAuth(authType)
+	err = pluginExport.CheckAuth(authType)
 	if err != nil {
 		return err2Uint64(err)
 	}
-	statusData, err := proto.Marshal(status)
-	if err != nil {
-		return err2Uint64(err)
-	}
-	return util.Uint32ToUint64(uint32(util.BytesToPtr(statusData)), uint32(len(data)))
+	return 0
 }
 
 // go::wasmexport get_auth_data
@@ -93,15 +89,11 @@ func get_auth_data() uint64 {
 // go::wasmexport check_auth_data
 func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	status, err := pluginExport.CheckAuthData(rawAuthData)
+	err := pluginExport.CheckAuthData(rawAuthData)
 	if err != nil {
 		return err2Uint64(err)
 	}
-	statusData, err := proto.Marshal(status)
-	if err != nil {
-		return err2Uint64(err)
-	}
-	return util.Uint32ToUint64(uint32(util.BytesToPtr(statusData)), uint32(len(statusData)))
+	return 0
 }
 
 // go::wasmexport plugin_auth_id

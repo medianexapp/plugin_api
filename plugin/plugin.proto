@@ -25,17 +25,6 @@ message AuthType {
     bytes  oauth_callback_data = 8;  // qrcode callback auth data
 }
 
-message Status {
-    enum State {
-        UNSPECIFIED = 0;
-        Success     = 1;
-        Fail        = 2;
-        AuthFinish  = 3;
-        AuthExpired = 4;
-    }
-    State  state = 1;
-    string msg   = 2;
-}
 
 message FileEntry {
     enum FileType {
@@ -54,8 +43,6 @@ message FileEntry {
 
 message DirEntry {
     repeated FileEntry file_entries = 1;
-
-    Status status = 100;
 }
 
 message FileResource {
@@ -84,5 +71,4 @@ message FileResource {
         map<string, string> header           = 6;
     }
     repeated FileResourceData file_resource_data = 1;
-    Status                    status             = 100;
 }
