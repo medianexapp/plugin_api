@@ -8,8 +8,8 @@ message AuthType {
     message FormData {
         string    name                   = 1;
         string    label                  = 2;
-        repeated FormData enum_form_data = 4;
         google.protobuf.Any value        = 3;
+        repeated FormData enum_form_data = 4; // for dropdown widget
     }
 
     bool              use_form = 1;
