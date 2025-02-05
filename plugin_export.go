@@ -3,6 +3,7 @@ package plugin_api
 import (
 	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
+	_ "github.com/labulakalia/wazero_net/wasi/malloc"
 	"google.golang.org/protobuf/proto"
 )
 
