@@ -5,11 +5,17 @@ option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
 import "google/protobuf/any.proto";
 
 message AuthType {
+    enum FromDataType {
+        UNSPECIFIED=0;
+        LOCALPATH=1;
+        HIDDEN=2;
+    }
     message FormData {
         string    name                   = 1;
         string    label                  = 2;
         google.protobuf.Any value        = 3;
-        repeated FormData enum_form_data = 4; // for dropdown widget
+        FromDataType form_data_type      = 4;
+        repeated FormData enum_form_data = 5; // for dropdown widget
     }
 
     bool              use_form = 1;
