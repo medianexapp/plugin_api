@@ -268,7 +268,6 @@ class FileEntry extends $pb.GeneratedMessage {
     $core.String? name,
     FileEntry_FileType? fileType,
     $fixnum.Int64? size,
-    $core.int? fileMode,
     $fixnum.Int64? createdTime,
     $fixnum.Int64? modifiedTime,
     $fixnum.Int64? accessedTime,
@@ -282,9 +281,6 @@ class FileEntry extends $pb.GeneratedMessage {
     }
     if (size != null) {
       $result.size = size;
-    }
-    if (fileMode != null) {
-      $result.fileMode = fileMode;
     }
     if (createdTime != null) {
       $result.createdTime = createdTime;
@@ -303,12 +299,11 @@ class FileEntry extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FileEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, protoName: 'fileType', defaultOrMaker: FileEntry_FileType.FileTypeUNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
+    ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, protoName: 'fileType', defaultOrMaker: FileEntry_FileType.UNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'fileMode', $pb.PbFieldType.OU3)
-    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'createdTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'modifiedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(7, _omitFieldNames ? '' : 'accessedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'createdTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'modifiedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'accessedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -360,41 +355,32 @@ class FileEntry extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSize() => clearField(3);
 
-  @$pb.TagNumber(4)
-  $core.int get fileMode => $_getIZ(3);
-  @$pb.TagNumber(4)
-  set fileMode($core.int v) { $_setUnsignedInt32(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasFileMode() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearFileMode() => clearField(4);
+  @$pb.TagNumber(10)
+  $fixnum.Int64 get createdTime => $_getI64(3);
+  @$pb.TagNumber(10)
+  set createdTime($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasCreatedTime() => $_has(3);
+  @$pb.TagNumber(10)
+  void clearCreatedTime() => clearField(10);
 
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get createdTime => $_getI64(4);
-  @$pb.TagNumber(5)
-  set createdTime($fixnum.Int64 v) { $_setInt64(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasCreatedTime() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearCreatedTime() => clearField(5);
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get modifiedTime => $_getI64(4);
+  @$pb.TagNumber(11)
+  set modifiedTime($fixnum.Int64 v) { $_setInt64(4, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasModifiedTime() => $_has(4);
+  @$pb.TagNumber(11)
+  void clearModifiedTime() => clearField(11);
 
-  @$pb.TagNumber(6)
-  $fixnum.Int64 get modifiedTime => $_getI64(5);
-  @$pb.TagNumber(6)
-  set modifiedTime($fixnum.Int64 v) { $_setInt64(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasModifiedTime() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearModifiedTime() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $fixnum.Int64 get accessedTime => $_getI64(6);
-  @$pb.TagNumber(7)
-  set accessedTime($fixnum.Int64 v) { $_setInt64(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasAccessedTime() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearAccessedTime() => clearField(7);
+  @$pb.TagNumber(12)
+  $fixnum.Int64 get accessedTime => $_getI64(5);
+  @$pb.TagNumber(12)
+  set accessedTime($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasAccessedTime() => $_has(5);
+  @$pb.TagNumber(12)
+  void clearAccessedTime() => clearField(12);
 }
 
 class DirEntry extends $pb.GeneratedMessage {

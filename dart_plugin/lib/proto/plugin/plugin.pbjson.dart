@@ -73,10 +73,9 @@ const FileEntry$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'fileType', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileEntry.FileType', '10': 'fileType'},
     {'1': 'size', '3': 3, '4': 1, '5': 4, '10': 'size'},
-    {'1': 'file_mode', '3': 4, '4': 1, '5': 13, '10': 'fileMode'},
-    {'1': 'created_time', '3': 5, '4': 1, '5': 4, '10': 'createdTime'},
-    {'1': 'modified_time', '3': 6, '4': 1, '5': 4, '10': 'modifiedTime'},
-    {'1': 'accessed_time', '3': 7, '4': 1, '5': 4, '10': 'accessedTime'},
+    {'1': 'created_time', '3': 10, '4': 1, '5': 4, '10': 'createdTime'},
+    {'1': 'modified_time', '3': 11, '4': 1, '5': 4, '10': 'modifiedTime'},
+    {'1': 'accessed_time', '3': 12, '4': 1, '5': 4, '10': 'accessedTime'},
   ],
   '4': [FileEntry_FileType$json],
 };
@@ -85,20 +84,20 @@ const FileEntry$json = {
 const FileEntry_FileType$json = {
   '1': 'FileType',
   '2': [
-    {'1': 'FileTypeUNSPECIFIED', '2': 0},
-    {'1': 'FileTypeDir', '2': 1},
-    {'1': 'FileTypeFile', '2': 2},
+    {'1': 'UNSPECIFIED', '2': 0},
+    {'1': 'Dir', '2': 1},
+    {'1': 'File', '2': 2},
+    {'1': 'Link', '2': 3},
   ],
 };
 
 /// Descriptor for `FileEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fileEntryDescriptor = $convert.base64Decode(
     'CglGaWxlRW50cnkSEgoEbmFtZRgBIAEoCVIEbmFtZRI2CghmaWxlVHlwZRgCIAEoDjIaLnBsdW'
-    'dpbi5GaWxlRW50cnkuRmlsZVR5cGVSCGZpbGVUeXBlEhIKBHNpemUYAyABKARSBHNpemUSGwoJ'
-    'ZmlsZV9tb2RlGAQgASgNUghmaWxlTW9kZRIhCgxjcmVhdGVkX3RpbWUYBSABKARSC2NyZWF0ZW'
-    'RUaW1lEiMKDW1vZGlmaWVkX3RpbWUYBiABKARSDG1vZGlmaWVkVGltZRIjCg1hY2Nlc3NlZF90'
-    'aW1lGAcgASgEUgxhY2Nlc3NlZFRpbWUiRgoIRmlsZVR5cGUSFwoTRmlsZVR5cGVVTlNQRUNJRk'
-    'lFRBAAEg8KC0ZpbGVUeXBlRGlyEAESEAoMRmlsZVR5cGVGaWxlEAI=');
+    'dpbi5GaWxlRW50cnkuRmlsZVR5cGVSCGZpbGVUeXBlEhIKBHNpemUYAyABKARSBHNpemUSIQoM'
+    'Y3JlYXRlZF90aW1lGAogASgEUgtjcmVhdGVkVGltZRIjCg1tb2RpZmllZF90aW1lGAsgASgEUg'
+    'xtb2RpZmllZFRpbWUSIwoNYWNjZXNzZWRfdGltZRgMIAEoBFIMYWNjZXNzZWRUaW1lIjgKCEZp'
+    'bGVUeXBlEg8KC1VOU1BFQ0lGSUVEEAASBwoDRGlyEAESCAoERmlsZRACEggKBExpbmsQAw==');
 
 @$core.Deprecated('Use dirEntryDescriptor instead')
 const DirEntry$json = {

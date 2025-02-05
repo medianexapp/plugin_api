@@ -32,19 +32,22 @@ message AuthType {
 }
 
 
+
+
 message FileEntry {
     enum FileType {
-        FileTypeUNSPECIFIED = 0;
-        FileTypeDir         = 1;
-        FileTypeFile        = 2;
+        UNSPECIFIED = 0;
+        Dir         = 1;
+        File        = 2;
+        Link        = 3;
     }
     string   name          = 1;
     FileType fileType      = 2;
     uint64   size          = 3;
-    uint32   file_mode     = 4;
-    uint64   created_time  = 5;
-    uint64   modified_time = 6;
-    uint64   accessed_time = 7;
+
+    uint64   created_time  = 10;
+    uint64   modified_time = 11;
+    uint64   accessed_time = 12;
 }
 
 message DirEntry {

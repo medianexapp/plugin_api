@@ -31,14 +31,16 @@ class AuthType_FromDataType extends $pb.ProtobufEnum {
 }
 
 class FileEntry_FileType extends $pb.ProtobufEnum {
-  static const FileEntry_FileType FileTypeUNSPECIFIED = FileEntry_FileType._(0, _omitEnumNames ? '' : 'FileTypeUNSPECIFIED');
-  static const FileEntry_FileType FileTypeDir = FileEntry_FileType._(1, _omitEnumNames ? '' : 'FileTypeDir');
-  static const FileEntry_FileType FileTypeFile = FileEntry_FileType._(2, _omitEnumNames ? '' : 'FileTypeFile');
+  static const FileEntry_FileType UNSPECIFIED = FileEntry_FileType._(0, _omitEnumNames ? '' : 'UNSPECIFIED');
+  static const FileEntry_FileType Dir = FileEntry_FileType._(1, _omitEnumNames ? '' : 'Dir');
+  static const FileEntry_FileType File = FileEntry_FileType._(2, _omitEnumNames ? '' : 'File');
+  static const FileEntry_FileType Link = FileEntry_FileType._(3, _omitEnumNames ? '' : 'Link');
 
   static const $core.List<FileEntry_FileType> values = <FileEntry_FileType> [
-    FileTypeUNSPECIFIED,
-    FileTypeDir,
-    FileTypeFile,
+    UNSPECIFIED,
+    Dir,
+    File,
+    Link,
   ];
 
   static final $core.Map<$core.int, FileEntry_FileType> _byValue = $pb.ProtobufEnum.initByValue(values);
