@@ -19,12 +19,111 @@ import 'plugin.pbenum.dart';
 
 export 'plugin.pbenum.dart';
 
+class FormDataValueHidden extends $pb.GeneratedMessage {
+  factory FormDataValueHidden({
+    $core.String? value,
+  }) {
+    final $result = create();
+    if (value != null) {
+      $result.value = value;
+    }
+    return $result;
+  }
+  FormDataValueHidden._() : super();
+  factory FormDataValueHidden.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FormDataValueHidden.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FormDataValueHidden', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'value')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FormDataValueHidden clone() => FormDataValueHidden()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FormDataValueHidden copyWith(void Function(FormDataValueHidden) updates) => super.copyWith((message) => updates(message as FormDataValueHidden)) as FormDataValueHidden;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FormDataValueHidden create() => FormDataValueHidden._();
+  FormDataValueHidden createEmptyInstance() => create();
+  static $pb.PbList<FormDataValueHidden> createRepeated() => $pb.PbList<FormDataValueHidden>();
+  @$core.pragma('dart2js:noInline')
+  static FormDataValueHidden getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FormDataValueHidden>(create);
+  static FormDataValueHidden? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get value => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set value($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasValue() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearValue() => clearField(1);
+}
+
+class FormDataValueLocal extends $pb.GeneratedMessage {
+  factory FormDataValueLocal({
+    $core.String? value,
+  }) {
+    final $result = create();
+    if (value != null) {
+      $result.value = value;
+    }
+    return $result;
+  }
+  FormDataValueLocal._() : super();
+  factory FormDataValueLocal.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FormDataValueLocal.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FormDataValueLocal', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'value')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FormDataValueLocal clone() => FormDataValueLocal()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FormDataValueLocal copyWith(void Function(FormDataValueLocal) updates) => super.copyWith((message) => updates(message as FormDataValueLocal)) as FormDataValueLocal;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FormDataValueLocal create() => FormDataValueLocal._();
+  FormDataValueLocal createEmptyInstance() => create();
+  static $pb.PbList<FormDataValueLocal> createRepeated() => $pb.PbList<FormDataValueLocal>();
+  @$core.pragma('dart2js:noInline')
+  static FormDataValueLocal getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FormDataValueLocal>(create);
+  static FormDataValueLocal? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get value => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set value($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasValue() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearValue() => clearField(1);
+}
+
 class AuthType_FormData extends $pb.GeneratedMessage {
   factory AuthType_FormData({
     $core.String? name,
     $core.String? label,
     $0.Any? value,
-    AuthType_FromDataType? formDataType,
     $core.Iterable<AuthType_FormData>? enumFormData,
   }) {
     final $result = create();
@@ -36,9 +135,6 @@ class AuthType_FormData extends $pb.GeneratedMessage {
     }
     if (value != null) {
       $result.value = value;
-    }
-    if (formDataType != null) {
-      $result.formDataType = formDataType;
     }
     if (enumFormData != null) {
       $result.enumFormData.addAll(enumFormData);
@@ -53,7 +149,6 @@ class AuthType_FormData extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'label')
     ..aOM<$0.Any>(3, _omitFieldNames ? '' : 'value', subBuilder: $0.Any.create)
-    ..e<AuthType_FromDataType>(4, _omitFieldNames ? '' : 'formDataType', $pb.PbFieldType.OE, defaultOrMaker: AuthType_FromDataType.UNSPECIFIED, valueOf: AuthType_FromDataType.valueOf, enumValues: AuthType_FromDataType.values)
     ..pc<AuthType_FormData>(5, _omitFieldNames ? '' : 'enumFormData', $pb.PbFieldType.PM, subBuilder: AuthType_FormData.create)
     ..hasRequiredFields = false
   ;
@@ -108,17 +203,8 @@ class AuthType_FormData extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   $0.Any ensureValue() => $_ensure(2);
 
-  @$pb.TagNumber(4)
-  AuthType_FromDataType get formDataType => $_getN(3);
-  @$pb.TagNumber(4)
-  set formDataType(AuthType_FromDataType v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasFormDataType() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearFormDataType() => clearField(4);
-
   @$pb.TagNumber(5)
-  $core.List<AuthType_FormData> get enumFormData => $_getList(4);
+  $core.List<AuthType_FormData> get enumFormData => $_getList(3);
 }
 
 class AuthType extends $pb.GeneratedMessage {

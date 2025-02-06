@@ -63,15 +63,15 @@ func get_auth_type() uint64 {
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(data)), uint32(len(data)))
 }
 
-//go:wasmexport check_auth
-func check_auth(authTypePtr, authTypeLenPtr uint64) uint64 {
+//go:wasmexport check_auth_type
+func check_auth_type(authTypePtr, authTypeLenPtr uint64) uint64 {
 	data := util.PtrToBytes(uint32(authTypePtr), uint32(authTypeLenPtr))
 	authType := &plugin.AuthType{}
 	err := proto.Unmarshal(data, authType)
 	if err != nil {
 		return err2Uint64(err)
 	}
-	err = pluginExport.CheckAuth(authType)
+	err = pluginExport.CheckAuthType(authType)
 	if err != nil {
 		return err2Uint64(err)
 	}

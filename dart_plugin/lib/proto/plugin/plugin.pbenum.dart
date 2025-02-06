@@ -13,23 +13,6 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class AuthType_FromDataType extends $pb.ProtobufEnum {
-  static const AuthType_FromDataType UNSPECIFIED = AuthType_FromDataType._(0, _omitEnumNames ? '' : 'UNSPECIFIED');
-  static const AuthType_FromDataType LOCALPATH = AuthType_FromDataType._(1, _omitEnumNames ? '' : 'LOCALPATH');
-  static const AuthType_FromDataType HIDDEN = AuthType_FromDataType._(2, _omitEnumNames ? '' : 'HIDDEN');
-
-  static const $core.List<AuthType_FromDataType> values = <AuthType_FromDataType> [
-    UNSPECIFIED,
-    LOCALPATH,
-    HIDDEN,
-  ];
-
-  static final $core.Map<$core.int, AuthType_FromDataType> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static AuthType_FromDataType? valueOf($core.int value) => _byValue[value];
-
-  const AuthType_FromDataType._($core.int v, $core.String n) : super(v, n);
-}
-
 class FileEntry_FileType extends $pb.ProtobufEnum {
   static const FileEntry_FileType FileTypeUNSPECIFIED = FileEntry_FileType._(0, _omitEnumNames ? '' : 'FileTypeUNSPECIFIED');
   static const FileEntry_FileType FileTypeDir = FileEntry_FileType._(1, _omitEnumNames ? '' : 'FileTypeDir');

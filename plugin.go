@@ -7,8 +7,10 @@ type IPlugin interface {
 	PluginId() (string, error)
 	// get auth type like form edit,qrcode,oauth2
 	GetAuthType() (*plugin.AuthType, error)
-	// check auth data status
-	CheckAuth(*plugin.AuthType) error
+	// check auth type input data
+	// check input data is valid when use form
+	// get auth token when auth type is oauth2 or scanner code
+	CheckAuthType(*plugin.AuthType) error
 	// get auth data when check auth status is success
 	GetAuthData() ([]byte, error)
 	// use auth data init auth

@@ -13,6 +13,30 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use formDataValueHiddenDescriptor instead')
+const FormDataValueHidden$json = {
+  '1': 'FormDataValueHidden',
+  '2': [
+    {'1': 'value', '3': 1, '4': 1, '5': 9, '10': 'value'},
+  ],
+};
+
+/// Descriptor for `FormDataValueHidden`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List formDataValueHiddenDescriptor = $convert.base64Decode(
+    'ChNGb3JtRGF0YVZhbHVlSGlkZGVuEhQKBXZhbHVlGAEgASgJUgV2YWx1ZQ==');
+
+@$core.Deprecated('Use formDataValueLocalDescriptor instead')
+const FormDataValueLocal$json = {
+  '1': 'FormDataValueLocal',
+  '2': [
+    {'1': 'value', '3': 1, '4': 1, '5': 9, '10': 'value'},
+  ],
+};
+
+/// Descriptor for `FormDataValueLocal`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List formDataValueLocalDescriptor = $convert.base64Decode(
+    'ChJGb3JtRGF0YVZhbHVlTG9jYWwSFAoFdmFsdWUYASABKAlSBXZhbHVl');
+
 @$core.Deprecated('Use authTypeDescriptor instead')
 const AuthType$json = {
   '1': 'AuthType',
@@ -27,7 +51,6 @@ const AuthType$json = {
     {'1': 'oauth_callback_data', '3': 8, '4': 1, '5': 12, '10': 'oauthCallbackData'},
   ],
   '3': [AuthType_FormData$json],
-  '4': [AuthType_FromDataType$json],
 };
 
 @$core.Deprecated('Use authTypeDescriptor instead')
@@ -37,18 +60,7 @@ const AuthType_FormData$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'label', '3': 2, '4': 1, '5': 9, '10': 'label'},
     {'1': 'value', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Any', '10': 'value'},
-    {'1': 'form_data_type', '3': 4, '4': 1, '5': 14, '6': '.plugin.AuthType.FromDataType', '10': 'formDataType'},
     {'1': 'enum_form_data', '3': 5, '4': 3, '5': 11, '6': '.plugin.AuthType.FormData', '10': 'enumFormData'},
-  ],
-};
-
-@$core.Deprecated('Use authTypeDescriptor instead')
-const AuthType_FromDataType$json = {
-  '1': 'FromDataType',
-  '2': [
-    {'1': 'UNSPECIFIED', '2': 0},
-    {'1': 'LOCALPATH', '2': 1},
-    {'1': 'HIDDEN', '2': 2},
   ],
 };
 
@@ -59,12 +71,10 @@ final $typed_data.Uint8List authTypeDescriptor = $convert.base64Decode(
     'UXJjb2RlEiEKDHFyY29kZV9pbWFnZRgEIAEoDFILcXJjb2RlSW1hZ2USLAoScXJjb2RlX2V4cG'
     'lyZV90aW1lGAUgASgEUhBxcmNvZGVFeHBpcmVUaW1lEhsKCXVzZV9vYXV0aBgGIAEoCFIIdXNl'
     'T2F1dGgSGwoJb2F1dGhfdXJsGAcgASgJUghvYXV0aFVybBIuChNvYXV0aF9jYWxsYmFja19kYX'
-    'RhGAggASgMUhFvYXV0aENhbGxiYWNrRGF0YRrmAQoIRm9ybURhdGESEgoEbmFtZRgBIAEoCVIE'
+    'RhGAggASgMUhFvYXV0aENhbGxiYWNrRGF0YRqhAQoIRm9ybURhdGESEgoEbmFtZRgBIAEoCVIE'
     'bmFtZRIUCgVsYWJlbBgCIAEoCVIFbGFiZWwSKgoFdmFsdWUYAyABKAsyFC5nb29nbGUucHJvdG'
-    '9idWYuQW55UgV2YWx1ZRJDCg5mb3JtX2RhdGFfdHlwZRgEIAEoDjIdLnBsdWdpbi5BdXRoVHlw'
-    'ZS5Gcm9tRGF0YVR5cGVSDGZvcm1EYXRhVHlwZRI/Cg5lbnVtX2Zvcm1fZGF0YRgFIAMoCzIZLn'
-    'BsdWdpbi5BdXRoVHlwZS5Gb3JtRGF0YVIMZW51bUZvcm1EYXRhIjoKDEZyb21EYXRhVHlwZRIP'
-    'CgtVTlNQRUNJRklFRBAAEg0KCUxPQ0FMUEFUSBABEgoKBkhJRERFThAC');
+    '9idWYuQW55UgV2YWx1ZRI/Cg5lbnVtX2Zvcm1fZGF0YRgFIAMoCzIZLnBsdWdpbi5BdXRoVHlw'
+    'ZS5Gb3JtRGF0YVIMZW51bUZvcm1EYXRh');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
