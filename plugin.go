@@ -1,6 +1,11 @@
 package plugin_api
 
-import "github.com/labulakalia/plugin_api/plugin"
+import (
+	"log/slog"
+	"os"
+
+	"github.com/labulakalia/plugin_api/plugin"
+)
 
 type IPlugin interface {
 	// plugin id
@@ -29,4 +34,9 @@ func RegistryPlugin(iPlugin IPlugin) {
 	pluginExport = &PluginExport{
 		IPlugin: iPlugin,
 	}
+	pluginId, _ := iPlugin.PluginId()
+	handlder := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.LevelDebug,
+	})
+	slog.SetDefault(slog.New(handlder).With("plugin", pluginId))
 }

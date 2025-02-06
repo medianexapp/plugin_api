@@ -121,17 +121,17 @@ const BytesValue$json = {
 final $typed_data.Uint8List bytesValueDescriptor = $convert.base64Decode(
     'CgpCeXRlc1ZhbHVlEhQKBXZhbHVlGAEgASgMUgV2YWx1ZQ==');
 
-@$core.Deprecated('Use obscureStringValueDescriptor instead')
-const ObscureStringValue$json = {
-  '1': 'ObscureStringValue',
+@$core.Deprecated('Use obscureValueDescriptor instead')
+const ObscureValue$json = {
+  '1': 'ObscureValue',
   '2': [
     {'1': 'value', '3': 1, '4': 1, '5': 9, '10': 'value'},
   ],
 };
 
-/// Descriptor for `ObscureStringValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List obscureStringValueDescriptor = $convert.base64Decode(
-    'ChJPYnNjdXJlU3RyaW5nVmFsdWUSFAoFdmFsdWUYASABKAlSBXZhbHVl');
+/// Descriptor for `ObscureValue`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List obscureValueDescriptor = $convert.base64Decode(
+    'CgxPYnNjdXJlVmFsdWUSFAoFdmFsdWUYASABKAlSBXZhbHVl');
 
 @$core.Deprecated('Use localPathValueDescriptor instead')
 const LocalPathValue$json = {

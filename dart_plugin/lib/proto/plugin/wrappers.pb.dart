@@ -483,8 +483,8 @@ class BytesValue extends $pb.GeneratedMessage {
 }
 
 /// Wrapper message for obscure string, input not show,like for input password
-class ObscureStringValue extends $pb.GeneratedMessage {
-  factory ObscureStringValue({
+class ObscureValue extends $pb.GeneratedMessage {
+  factory ObscureValue({
     $core.String? value,
   }) {
     final $result = create();
@@ -493,11 +493,11 @@ class ObscureStringValue extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  ObscureStringValue._() : super();
-  factory ObscureStringValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ObscureStringValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ObscureValue._() : super();
+  factory ObscureValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ObscureValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ObscureStringValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ObscureValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false
   ;
@@ -506,22 +506,22 @@ class ObscureStringValue extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ObscureStringValue clone() => ObscureStringValue()..mergeFromMessage(this);
+  ObscureValue clone() => ObscureValue()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ObscureStringValue copyWith(void Function(ObscureStringValue) updates) => super.copyWith((message) => updates(message as ObscureStringValue)) as ObscureStringValue;
+  ObscureValue copyWith(void Function(ObscureValue) updates) => super.copyWith((message) => updates(message as ObscureValue)) as ObscureValue;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ObscureStringValue create() => ObscureStringValue._();
-  ObscureStringValue createEmptyInstance() => create();
-  static $pb.PbList<ObscureStringValue> createRepeated() => $pb.PbList<ObscureStringValue>();
+  static ObscureValue create() => ObscureValue._();
+  ObscureValue createEmptyInstance() => create();
+  static $pb.PbList<ObscureValue> createRepeated() => $pb.PbList<ObscureValue>();
   @$core.pragma('dart2js:noInline')
-  static ObscureStringValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ObscureStringValue>(create);
-  static ObscureStringValue? _defaultInstance;
+  static ObscureValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ObscureValue>(create);
+  static ObscureValue? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get value => $_getSZ(0);

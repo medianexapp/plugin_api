@@ -60,7 +60,7 @@ message BytesValue {
 
 
 // Wrapper message for obscure string, input not show,like for input password
-message ObscureStringValue {
+message ObscureValue {
     string value = 1;
 }
 
