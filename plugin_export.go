@@ -19,9 +19,19 @@ func (pe *PluginExport) PluginAPISchema() (uint64, error) {
 	return pluginAPISchema, nil
 }
 
+func (pe *PluginExport) SetSlogLevel(level uint64) {
+	slog.SetLogLoggerLevel(slog.Level(level))
+}
+
 type IPluginExport interface {
 	PluginAPISchema() (uint64, error)
+	SetSlogLevel(uint64)
 	IPlugin
+}
+
+//go:wasmexport set_slog_level
+func set_slog_level(l uint64) {
+	pluginExport.SetSlogLevel(l)
 }
 
 //go:wasmexport plugin_api_schema

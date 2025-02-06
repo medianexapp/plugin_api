@@ -31,12 +31,15 @@ type IPlugin interface {
 }
 
 func RegistryPlugin(iPlugin IPlugin) {
+	if pluginExport != nil {
+		panic("plugin already registered")
+	}
 	pluginExport = &PluginExport{
 		IPlugin: iPlugin,
 	}
 	pluginId, _ := iPlugin.PluginId()
 	handlder := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
+		Level: slog.LevelInfo,
 	})
 	slog.SetDefault(slog.New(handlder).With("plugin", pluginId))
 }
