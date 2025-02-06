@@ -4,13 +4,7 @@ package plugin;
 option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
 import "google/protobuf/any.proto";
 
-message FormDataValueHidden {
-    string value = 1;
-}
 
-message FormDataValueLocal {
-    string value = 1;
-}
 
 message AuthType {
     message FormData {

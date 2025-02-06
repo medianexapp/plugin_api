@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package plugin;
+option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
+
+
+// Wrapper message for `double`.
+message DoubleValue {
+  // The double value.
+  double value = 1;
+}
+
+// Wrapper message for `float`.
+message FloatValue {
+  // The float value.
+  float value = 1;
+}
+
+// Wrapper message for `int64`.
+message Int64Value {
+  // The int64 value.
+  int64 value = 1;
+}
+
+// Wrapper message for `uint64`.
+message UInt64Value {
+  // The uint64 value.
+  uint64 value = 1;
+}
+
+// Wrapper message for `int32`.
+message Int32Value {
+  // The int32 value.
+  int32 value = 1;
+}
+
+// Wrapper message for `uint32`.
+message UInt32Value {
+  // The uint32 value.
+  uint32 value = 1;
+}
+
+// Wrapper message for `bool`.
+message BoolValue {
+  // The bool value.
+  bool value = 1;
+}
+
+// Wrapper message for `string`.
+message StringValue {
+  // The string value.
+  string value = 1;
+}
+
+// Wrapper message for `bytes`.
+message BytesValue {
+  // The bytes value.
+  bytes value = 1;
+}
+
+
+// Wrapper message for obscure string, input not show,like for input password
+message ObscureStringValue {
+    string value = 1;
+}
+
+// Wrapper message for select local path
+message LocalPathValue {
+    string value = 1;
+}
+
+//

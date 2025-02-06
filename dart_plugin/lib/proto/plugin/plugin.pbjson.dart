@@ -13,30 +13,6 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use formDataValueHiddenDescriptor instead')
-const FormDataValueHidden$json = {
-  '1': 'FormDataValueHidden',
-  '2': [
-    {'1': 'value', '3': 1, '4': 1, '5': 9, '10': 'value'},
-  ],
-};
-
-/// Descriptor for `FormDataValueHidden`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List formDataValueHiddenDescriptor = $convert.base64Decode(
-    'ChNGb3JtRGF0YVZhbHVlSGlkZGVuEhQKBXZhbHVlGAEgASgJUgV2YWx1ZQ==');
-
-@$core.Deprecated('Use formDataValueLocalDescriptor instead')
-const FormDataValueLocal$json = {
-  '1': 'FormDataValueLocal',
-  '2': [
-    {'1': 'value', '3': 1, '4': 1, '5': 9, '10': 'value'},
-  ],
-};
-
-/// Descriptor for `FormDataValueLocal`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List formDataValueLocalDescriptor = $convert.base64Decode(
-    'ChJGb3JtRGF0YVZhbHVlTG9jYWwSFAoFdmFsdWUYASABKAlSBXZhbHVl');
-
 @$core.Deprecated('Use authTypeDescriptor instead')
 const AuthType$json = {
   '1': 'AuthType',
