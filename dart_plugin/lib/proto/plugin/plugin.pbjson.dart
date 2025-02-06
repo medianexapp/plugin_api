@@ -84,10 +84,10 @@ const FileEntry$json = {
 const FileEntry_FileType$json = {
   '1': 'FileType',
   '2': [
-    {'1': 'UNSPECIFIED', '2': 0},
-    {'1': 'Dir', '2': 1},
-    {'1': 'File', '2': 2},
-    {'1': 'Link', '2': 3},
+    {'1': 'FileTypeUNSPECIFIED', '2': 0},
+    {'1': 'FileTypeDir', '2': 1},
+    {'1': 'FileTypeFile', '2': 2},
+    {'1': 'FileTypeLink', '2': 3},
   ],
 };
 
@@ -96,8 +96,9 @@ final $typed_data.Uint8List fileEntryDescriptor = $convert.base64Decode(
     'CglGaWxlRW50cnkSEgoEbmFtZRgBIAEoCVIEbmFtZRI2CghmaWxlVHlwZRgCIAEoDjIaLnBsdW'
     'dpbi5GaWxlRW50cnkuRmlsZVR5cGVSCGZpbGVUeXBlEhIKBHNpemUYAyABKARSBHNpemUSIQoM'
     'Y3JlYXRlZF90aW1lGAogASgEUgtjcmVhdGVkVGltZRIjCg1tb2RpZmllZF90aW1lGAsgASgEUg'
-    'xtb2RpZmllZFRpbWUSIwoNYWNjZXNzZWRfdGltZRgMIAEoBFIMYWNjZXNzZWRUaW1lIjgKCEZp'
-    'bGVUeXBlEg8KC1VOU1BFQ0lGSUVEEAASBwoDRGlyEAESCAoERmlsZRACEggKBExpbmsQAw==');
+    'xtb2RpZmllZFRpbWUSIwoNYWNjZXNzZWRfdGltZRgMIAEoBFIMYWNjZXNzZWRUaW1lIlgKCEZp'
+    'bGVUeXBlEhcKE0ZpbGVUeXBlVU5TUEVDSUZJRUQQABIPCgtGaWxlVHlwZURpchABEhAKDEZpbG'
+    'VUeXBlRmlsZRACEhAKDEZpbGVUeXBlTGluaxAD');
 
 @$core.Deprecated('Use dirEntryDescriptor instead')
 const DirEntry$json = {

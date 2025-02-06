@@ -299,7 +299,7 @@ class FileEntry extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FileEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, protoName: 'fileType', defaultOrMaker: FileEntry_FileType.UNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
+    ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, protoName: 'fileType', defaultOrMaker: FileEntry_FileType.FileTypeUNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'createdTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'modifiedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)

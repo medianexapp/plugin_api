@@ -36,10 +36,10 @@ message AuthType {
 
 message FileEntry {
     enum FileType {
-        UNSPECIFIED = 0;
-        Dir         = 1;
-        File        = 2;
-        Link        = 3;
+        FileTypeUNSPECIFIED = 0;
+        FileTypeDir         = 1;
+        FileTypeFile        = 2;
+        FileTypeLink        = 3;
     }
     string   name          = 1;
     FileType fileType      = 2;
