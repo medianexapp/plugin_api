@@ -13,6 +13,23 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
+@$core.Deprecated('Use authStatusDescriptor instead')
+const AuthStatus$json = {
+  '1': 'AuthStatus',
+  '2': [
+    {'1': 'UNSPECIFIED', '2': 0},
+    {'1': 'AuthNone', '2': 1},
+    {'1': 'AuthPending', '2': 2},
+    {'1': 'AuthFailed', '2': 3},
+    {'1': 'AuthSuccess', '2': 4},
+  ],
+};
+
+/// Descriptor for `AuthStatus`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List authStatusDescriptor = $convert.base64Decode(
+    'CgpBdXRoU3RhdHVzEg8KC1VOU1BFQ0lGSUVEEAASDAoIQXV0aE5vbmUQARIPCgtBdXRoUGVuZG'
+    'luZxACEg4KCkF1dGhGYWlsZWQQAxIPCgtBdXRoU3VjY2VzcxAE');
+
 @$core.Deprecated('Use authTypeDescriptor instead')
 const AuthType$json = {
   '1': 'AuthType',

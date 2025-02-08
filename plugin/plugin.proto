@@ -4,8 +4,6 @@ package plugin;
 option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
 import "google/protobuf/any.proto";
 
-
-
 message AuthType {
     message FormData {
         string    name                   = 1;
@@ -27,7 +25,14 @@ message AuthType {
     bytes  oauth_callback_data = 8;  // qrcode callback auth data
 }
 
-
+// auth status
+enum AuthStatus {
+    UNSPECIFIED = 0;
+    AuthNone    = 1;
+    AuthPending = 2;
+    AuthFailed  = 3;
+    AuthSuccess = 4;
+}
 
 
 message FileEntry {

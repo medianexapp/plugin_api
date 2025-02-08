@@ -93,11 +93,11 @@ func get_auth_data() uint64 {
 //go:wasmexport check_auth_data
 func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	err := pluginExport.CheckAuthData(rawAuthData)
+	status, err := pluginExport.CheckAuthData(rawAuthData)
 	if err != nil {
 		return ErrorToUint64(err)
 	}
-	return 0
+	return uint64(status)
 }
 
 //go:wasmexport plugin_auth_id

@@ -21,6 +21,62 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// auth status
+type AuthStatus int32
+
+const (
+	AuthStatus_UNSPECIFIED AuthStatus = 0
+	AuthStatus_AuthNone    AuthStatus = 1
+	AuthStatus_AuthPending AuthStatus = 2
+	AuthStatus_AuthFailed  AuthStatus = 3
+	AuthStatus_AuthSuccess AuthStatus = 4
+)
+
+// Enum value maps for AuthStatus.
+var (
+	AuthStatus_name = map[int32]string{
+		0: "UNSPECIFIED",
+		1: "AuthNone",
+		2: "AuthPending",
+		3: "AuthFailed",
+		4: "AuthSuccess",
+	}
+	AuthStatus_value = map[string]int32{
+		"UNSPECIFIED": 0,
+		"AuthNone":    1,
+		"AuthPending": 2,
+		"AuthFailed":  3,
+		"AuthSuccess": 4,
+	}
+)
+
+func (x AuthStatus) Enum() *AuthStatus {
+	p := new(AuthStatus)
+	*p = x
+	return p
+}
+
+func (x AuthStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AuthStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_plugin_plugin_proto_enumTypes[0].Descriptor()
+}
+
+func (AuthStatus) Type() protoreflect.EnumType {
+	return &file_plugin_plugin_proto_enumTypes[0]
+}
+
+func (x AuthStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AuthStatus.Descriptor instead.
+func (AuthStatus) EnumDescriptor() ([]byte, []int) {
+	return file_plugin_plugin_proto_rawDescGZIP(), []int{0}
+}
+
 type FileEntry_FileType int32
 
 const (
@@ -57,11 +113,11 @@ func (x FileEntry_FileType) String() string {
 }
 
 func (FileEntry_FileType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[0].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[1].Descriptor()
 }
 
 func (FileEntry_FileType) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[0]
+	return &file_plugin_plugin_proto_enumTypes[1]
 }
 
 func (x FileEntry_FileType) Number() protoreflect.EnumNumber {
@@ -119,11 +175,11 @@ func (x FileResource_VideoResolution) String() string {
 }
 
 func (FileResource_VideoResolution) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[1].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[2].Descriptor()
 }
 
 func (FileResource_VideoResolution) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[1]
+	return &file_plugin_plugin_proto_enumTypes[2]
 }
 
 func (x FileResource_VideoResolution) Number() protoreflect.EnumNumber {
@@ -171,11 +227,11 @@ func (x FileResource_ResourceType) String() string {
 }
 
 func (FileResource_ResourceType) Descriptor() protoreflect.EnumDescriptor {
-	return file_plugin_plugin_proto_enumTypes[2].Descriptor()
+	return file_plugin_plugin_proto_enumTypes[3].Descriptor()
 }
 
 func (FileResource_ResourceType) Type() protoreflect.EnumType {
-	return &file_plugin_plugin_proto_enumTypes[2]
+	return &file_plugin_plugin_proto_enumTypes[3]
 }
 
 func (x FileResource_ResourceType) Number() protoreflect.EnumNumber {
@@ -712,11 +768,17 @@ var file_plugin_plugin_proto_rawDesc = []byte{
 	0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x55, 0x4e, 0x53, 0x50, 0x45,
 	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x56, 0x69, 0x64, 0x65,
 	0x6f, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x53, 0x75, 0x62, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x10,
-	0x02, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x75, 0x64, 0x69, 0x6f, 0x10, 0x03, 0x42, 0x31, 0x5a, 0x2f,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6c, 0x61, 0x62, 0x75, 0x6c,
-	0x61, 0x6b, 0x61, 0x6c, 0x69, 0x61, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x61, 0x70,
-	0x69, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x3b, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x02, 0x12, 0x09, 0x0a, 0x05, 0x41, 0x75, 0x64, 0x69, 0x6f, 0x10, 0x03, 0x2a, 0x5d, 0x0a, 0x0a,
+	0x41, 0x75, 0x74, 0x68, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0f, 0x0a, 0x0b, 0x55, 0x4e,
+	0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x41,
+	0x75, 0x74, 0x68, 0x4e, 0x6f, 0x6e, 0x65, 0x10, 0x01, 0x12, 0x0f, 0x0a, 0x0b, 0x41, 0x75, 0x74,
+	0x68, 0x50, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x10, 0x02, 0x12, 0x0e, 0x0a, 0x0a, 0x41, 0x75,
+	0x74, 0x68, 0x46, 0x61, 0x69, 0x6c, 0x65, 0x64, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x41, 0x75,
+	0x74, 0x68, 0x53, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x10, 0x04, 0x42, 0x31, 0x5a, 0x2f, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6c, 0x61, 0x62, 0x75, 0x6c, 0x61,
+	0x6b, 0x61, 0x6c, 0x69, 0x61, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x61, 0x70, 0x69,
+	0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x3b, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -731,31 +793,32 @@ func file_plugin_plugin_proto_rawDescGZIP() []byte {
 	return file_plugin_plugin_proto_rawDescData
 }
 
-var file_plugin_plugin_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_plugin_plugin_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_plugin_plugin_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_plugin_plugin_proto_goTypes = []any{
-	(FileEntry_FileType)(0),               // 0: plugin.FileEntry.FileType
-	(FileResource_VideoResolution)(0),     // 1: plugin.FileResource.VideoResolution
-	(FileResource_ResourceType)(0),        // 2: plugin.FileResource.ResourceType
-	(*AuthType)(nil),                      // 3: plugin.AuthType
-	(*FileEntry)(nil),                     // 4: plugin.FileEntry
-	(*DirEntry)(nil),                      // 5: plugin.DirEntry
-	(*FileResource)(nil),                  // 6: plugin.FileResource
-	(*AuthType_FormData)(nil),             // 7: plugin.AuthType.FormData
-	(*FileResource_FileResourceData)(nil), // 8: plugin.FileResource.FileResourceData
-	nil,                                   // 9: plugin.FileResource.FileResourceData.HeaderEntry
-	(*anypb.Any)(nil),                     // 10: google.protobuf.Any
+	(AuthStatus)(0),                       // 0: plugin.AuthStatus
+	(FileEntry_FileType)(0),               // 1: plugin.FileEntry.FileType
+	(FileResource_VideoResolution)(0),     // 2: plugin.FileResource.VideoResolution
+	(FileResource_ResourceType)(0),        // 3: plugin.FileResource.ResourceType
+	(*AuthType)(nil),                      // 4: plugin.AuthType
+	(*FileEntry)(nil),                     // 5: plugin.FileEntry
+	(*DirEntry)(nil),                      // 6: plugin.DirEntry
+	(*FileResource)(nil),                  // 7: plugin.FileResource
+	(*AuthType_FormData)(nil),             // 8: plugin.AuthType.FormData
+	(*FileResource_FileResourceData)(nil), // 9: plugin.FileResource.FileResourceData
+	nil,                                   // 10: plugin.FileResource.FileResourceData.HeaderEntry
+	(*anypb.Any)(nil),                     // 11: google.protobuf.Any
 }
 var file_plugin_plugin_proto_depIdxs = []int32{
-	7,  // 0: plugin.AuthType.forms:type_name -> plugin.AuthType.FormData
-	0,  // 1: plugin.FileEntry.fileType:type_name -> plugin.FileEntry.FileType
-	4,  // 2: plugin.DirEntry.file_entries:type_name -> plugin.FileEntry
-	8,  // 3: plugin.FileResource.file_resource_data:type_name -> plugin.FileResource.FileResourceData
-	10, // 4: plugin.AuthType.FormData.value:type_name -> google.protobuf.Any
-	7,  // 5: plugin.AuthType.FormData.enum_form_data:type_name -> plugin.AuthType.FormData
-	1,  // 6: plugin.FileResource.FileResourceData.video_resolution:type_name -> plugin.FileResource.VideoResolution
-	2,  // 7: plugin.FileResource.FileResourceData.resource_type:type_name -> plugin.FileResource.ResourceType
-	9,  // 8: plugin.FileResource.FileResourceData.header:type_name -> plugin.FileResource.FileResourceData.HeaderEntry
+	8,  // 0: plugin.AuthType.forms:type_name -> plugin.AuthType.FormData
+	1,  // 1: plugin.FileEntry.fileType:type_name -> plugin.FileEntry.FileType
+	5,  // 2: plugin.DirEntry.file_entries:type_name -> plugin.FileEntry
+	9,  // 3: plugin.FileResource.file_resource_data:type_name -> plugin.FileResource.FileResourceData
+	11, // 4: plugin.AuthType.FormData.value:type_name -> google.protobuf.Any
+	8,  // 5: plugin.AuthType.FormData.enum_form_data:type_name -> plugin.AuthType.FormData
+	2,  // 6: plugin.FileResource.FileResourceData.video_resolution:type_name -> plugin.FileResource.VideoResolution
+	3,  // 7: plugin.FileResource.FileResourceData.resource_type:type_name -> plugin.FileResource.ResourceType
+	10, // 8: plugin.FileResource.FileResourceData.header:type_name -> plugin.FileResource.FileResourceData.HeaderEntry
 	9,  // [9:9] is the sub-list for method output_type
 	9,  // [9:9] is the sub-list for method input_type
 	9,  // [9:9] is the sub-list for extension type_name
@@ -773,7 +836,7 @@ func file_plugin_plugin_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugin_plugin_proto_rawDesc,
-			NumEnums:      3,
+			NumEnums:      4,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,

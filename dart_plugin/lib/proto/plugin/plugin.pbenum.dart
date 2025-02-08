@@ -13,6 +13,28 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+/// auth status
+class AuthStatus extends $pb.ProtobufEnum {
+  static const AuthStatus UNSPECIFIED = AuthStatus._(0, _omitEnumNames ? '' : 'UNSPECIFIED');
+  static const AuthStatus AuthNone = AuthStatus._(1, _omitEnumNames ? '' : 'AuthNone');
+  static const AuthStatus AuthPending = AuthStatus._(2, _omitEnumNames ? '' : 'AuthPending');
+  static const AuthStatus AuthFailed = AuthStatus._(3, _omitEnumNames ? '' : 'AuthFailed');
+  static const AuthStatus AuthSuccess = AuthStatus._(4, _omitEnumNames ? '' : 'AuthSuccess');
+
+  static const $core.List<AuthStatus> values = <AuthStatus> [
+    UNSPECIFIED,
+    AuthNone,
+    AuthPending,
+    AuthFailed,
+    AuthSuccess,
+  ];
+
+  static final $core.Map<$core.int, AuthStatus> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static AuthStatus? valueOf($core.int value) => _byValue[value];
+
+  const AuthStatus._($core.int v, $core.String n) : super(v, n);
+}
+
 class FileEntry_FileType extends $pb.ProtobufEnum {
   static const FileEntry_FileType FileTypeUNSPECIFIED = FileEntry_FileType._(0, _omitEnumNames ? '' : 'FileTypeUNSPECIFIED');
   static const FileEntry_FileType FileTypeDir = FileEntry_FileType._(1, _omitEnumNames ? '' : 'FileTypeDir');

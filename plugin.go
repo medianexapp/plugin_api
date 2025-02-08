@@ -18,8 +18,10 @@ type IPlugin interface {
 	CheckAuthType(*plugin.AuthType) error
 	// get auth data when check auth status is success
 	GetAuthData() ([]byte, error)
-	// use auth data init auth
-	CheckAuthData([]byte) error
+	// check auth data by raw auth data
+	// ret:
+	//  uint64
+	CheckAuthData([]byte) (plugin.AuthStatus, error)
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() (string, error)
 	// get dir entry from driver plugin
