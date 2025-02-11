@@ -13,15 +13,12 @@ type IPlugin interface {
 	// get auth type like form edit,qrcode,oauth2
 	GetAuthType() (*plugin.AuthType, error)
 	// check auth type input data
-	// check input data is valid when use form
-	// get auth token when auth type is oauth2 or scanner code
-	CheckAuthType(*plugin.AuthType) error
-	// get auth data when check auth status is success
-	GetAuthData() ([]byte, error)
-	// check auth data by raw auth data
 	// ret:
-	//  uint64
-	CheckAuthData([]byte) (plugin.AuthStatus, error)
+	// authdata []byte
+	// err errir
+	CheckAuthType(*plugin.AuthType) (authData []byte, err error)
+	// check auth is success by raw auth data
+	CheckAuthData([]byte) error
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() (string, error)
 	// get dir entry from driver plugin

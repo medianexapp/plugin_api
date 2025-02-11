@@ -19,19 +19,19 @@ func (pe *PluginExport) PluginAPISchema() (uint64, error) {
 	return pluginAPISchema, nil
 }
 
-func (pe *PluginExport) SetSlogLevel(level uint64) {
+func (pe *PluginExport) SetSlogLevel(level slog.Level) {
 	slog.SetLogLoggerLevel(slog.Level(level))
 }
 
 type IPluginExport interface {
 	PluginAPISchema() (uint64, error)
-	SetSlogLevel(uint64)
+	SetSlogLevel(slog.Level)
 	IPlugin
 }
 
 //go:wasmexport set_slog_level
 func set_slog_level(l uint64) {
-	pluginExport.SetSlogLevel(l)
+	pluginExport.SetSlogLevel(slog.Level(l))
 }
 
 //go:wasmexport plugin_api_schema
@@ -73,19 +73,13 @@ func check_auth_type(authTypePtr, authTypeLenPtr uint64) uint64 {
 		slog.Error("unmarshal failed", "err", err)
 		return ErrorToUint64(err)
 	}
-	err = pluginExport.CheckAuthType(authType)
+	authData, err := pluginExport.CheckAuthType(authType)
 	if err != nil {
 		slog.Error("check auth type failed", "err", err)
 		return ErrorToUint64(err)
 	}
-	return 0
-}
-
-//go:wasmexport get_auth_data
-func get_auth_data() uint64 {
-	authData, err := pluginExport.GetAuthData()
-	if err != nil {
-		return ErrorToUint64(err)
+	if len(authData) == 0 {
+		return 0
 	}
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(authData)), uint32(len(authData)))
 }
@@ -93,11 +87,11 @@ func get_auth_data() uint64 {
 //go:wasmexport check_auth_data
 func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	status, err := pluginExport.CheckAuthData(rawAuthData)
+	err := pluginExport.CheckAuthData(rawAuthData)
 	if err != nil {
 		return ErrorToUint64(err)
 	}
-	return uint64(status)
+	return 0
 }
 
 //go:wasmexport plugin_auth_id
