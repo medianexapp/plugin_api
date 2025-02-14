@@ -8,7 +8,7 @@ import (
 )
 
 type IPlugin interface {
-	// plugin id
+	// plugin id 
 	PluginId() (string, error)
 	// get auth type like form edit,qrcode,oauth2
 	GetAuthType() (*plugin.AuthType, error)

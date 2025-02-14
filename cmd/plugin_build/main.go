@@ -42,7 +42,7 @@ func main() {
 		}
 	}
 	slog.Info("start build driver plugin ", "name", pluginConfig.Name, "id", pluginConfig.Id)
-	_ = os.MkdirAll("dist", 0644)
+	_ = os.MkdirAll("dist", 0755)
 
 	buildWasmFile := fmt.Sprintf("%s.wasm", pluginConfig.Id)
 	defer os.Remove(buildWasmFile)
