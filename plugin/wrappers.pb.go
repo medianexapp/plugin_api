@@ -66,52 +66,6 @@ func (x *DoubleValue) GetValue() float64 {
 	return 0
 }
 
-// Wrapper message for `float`.
-type FloatValue struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The float value.
-	Value         float32 `protobuf:"fixed32,1,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FloatValue) Reset() {
-	*x = FloatValue{}
-	mi := &file_plugin_wrappers_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FloatValue) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FloatValue) ProtoMessage() {}
-
-func (x *FloatValue) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FloatValue.ProtoReflect.Descriptor instead.
-func (*FloatValue) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *FloatValue) GetValue() float32 {
-	if x != nil {
-		return x.Value
-	}
-	return 0
-}
-
 // Wrapper message for `int64`.
 type Int64Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -123,7 +77,7 @@ type Int64Value struct {
 
 func (x *Int64Value) Reset() {
 	*x = Int64Value{}
-	mi := &file_plugin_wrappers_proto_msgTypes[2]
+	mi := &file_plugin_wrappers_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -135,7 +89,7 @@ func (x *Int64Value) String() string {
 func (*Int64Value) ProtoMessage() {}
 
 func (x *Int64Value) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[2]
+	mi := &file_plugin_wrappers_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -148,148 +102,10 @@ func (x *Int64Value) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Int64Value.ProtoReflect.Descriptor instead.
 func (*Int64Value) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{2}
+	return file_plugin_wrappers_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Int64Value) GetValue() int64 {
-	if x != nil {
-		return x.Value
-	}
-	return 0
-}
-
-// Wrapper message for `uint64`.
-type UInt64Value struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The uint64 value.
-	Value         uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UInt64Value) Reset() {
-	*x = UInt64Value{}
-	mi := &file_plugin_wrappers_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UInt64Value) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UInt64Value) ProtoMessage() {}
-
-func (x *UInt64Value) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UInt64Value.ProtoReflect.Descriptor instead.
-func (*UInt64Value) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *UInt64Value) GetValue() uint64 {
-	if x != nil {
-		return x.Value
-	}
-	return 0
-}
-
-// Wrapper message for `int32`.
-type Int32Value struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The int32 value.
-	Value         int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Int32Value) Reset() {
-	*x = Int32Value{}
-	mi := &file_plugin_wrappers_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Int32Value) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Int32Value) ProtoMessage() {}
-
-func (x *Int32Value) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Int32Value.ProtoReflect.Descriptor instead.
-func (*Int32Value) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *Int32Value) GetValue() int32 {
-	if x != nil {
-		return x.Value
-	}
-	return 0
-}
-
-// Wrapper message for `uint32`.
-type UInt32Value struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The uint32 value.
-	Value         uint32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UInt32Value) Reset() {
-	*x = UInt32Value{}
-	mi := &file_plugin_wrappers_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UInt32Value) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UInt32Value) ProtoMessage() {}
-
-func (x *UInt32Value) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UInt32Value.ProtoReflect.Descriptor instead.
-func (*UInt32Value) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UInt32Value) GetValue() uint32 {
 	if x != nil {
 		return x.Value
 	}
@@ -307,7 +123,7 @@ type BoolValue struct {
 
 func (x *BoolValue) Reset() {
 	*x = BoolValue{}
-	mi := &file_plugin_wrappers_proto_msgTypes[6]
+	mi := &file_plugin_wrappers_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -319,7 +135,7 @@ func (x *BoolValue) String() string {
 func (*BoolValue) ProtoMessage() {}
 
 func (x *BoolValue) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[6]
+	mi := &file_plugin_wrappers_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -332,7 +148,7 @@ func (x *BoolValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BoolValue.ProtoReflect.Descriptor instead.
 func (*BoolValue) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{6}
+	return file_plugin_wrappers_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *BoolValue) GetValue() bool {
@@ -353,7 +169,7 @@ type StringValue struct {
 
 func (x *StringValue) Reset() {
 	*x = StringValue{}
-	mi := &file_plugin_wrappers_proto_msgTypes[7]
+	mi := &file_plugin_wrappers_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -365,7 +181,7 @@ func (x *StringValue) String() string {
 func (*StringValue) ProtoMessage() {}
 
 func (x *StringValue) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[7]
+	mi := &file_plugin_wrappers_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -378,7 +194,7 @@ func (x *StringValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringValue.ProtoReflect.Descriptor instead.
 func (*StringValue) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{7}
+	return file_plugin_wrappers_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *StringValue) GetValue() string {
@@ -388,75 +204,30 @@ func (x *StringValue) GetValue() string {
 	return ""
 }
 
-// Wrapper message for `bytes`.
-type BytesValue struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The bytes value.
-	Value         []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *BytesValue) Reset() {
-	*x = BytesValue{}
-	mi := &file_plugin_wrappers_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *BytesValue) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BytesValue) ProtoMessage() {}
-
-func (x *BytesValue) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BytesValue.ProtoReflect.Descriptor instead.
-func (*BytesValue) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *BytesValue) GetValue() []byte {
-	if x != nil {
-		return x.Value
-	}
-	return nil
-}
-
 // Wrapper message for obscure string, input not show,like for input password
-type ObscureValue struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Value         string                 `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+type ObscureStringValue struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// string value
+	Value         string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ObscureValue) Reset() {
-	*x = ObscureValue{}
-	mi := &file_plugin_wrappers_proto_msgTypes[9]
+func (x *ObscureStringValue) Reset() {
+	*x = ObscureStringValue{}
+	mi := &file_plugin_wrappers_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ObscureValue) String() string {
+func (x *ObscureStringValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ObscureValue) ProtoMessage() {}
+func (*ObscureStringValue) ProtoMessage() {}
 
-func (x *ObscureValue) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[9]
+func (x *ObscureStringValue) ProtoReflect() protoreflect.Message {
+	mi := &file_plugin_wrappers_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -467,12 +238,12 @@ func (x *ObscureValue) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ObscureValue.ProtoReflect.Descriptor instead.
-func (*ObscureValue) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{9}
+// Deprecated: Use ObscureStringValue.ProtoReflect.Descriptor instead.
+func (*ObscureStringValue) Descriptor() ([]byte, []int) {
+	return file_plugin_wrappers_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ObscureValue) GetValue() string {
+func (x *ObscureStringValue) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
@@ -480,28 +251,29 @@ func (x *ObscureValue) GetValue() string {
 }
 
 // Wrapper message for select local path
-type LocalPathValue struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Value         string                 `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+type DirPathValue struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// local path value
+	Value         string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LocalPathValue) Reset() {
-	*x = LocalPathValue{}
-	mi := &file_plugin_wrappers_proto_msgTypes[10]
+func (x *DirPathValue) Reset() {
+	*x = DirPathValue{}
+	mi := &file_plugin_wrappers_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LocalPathValue) String() string {
+func (x *DirPathValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LocalPathValue) ProtoMessage() {}
+func (*DirPathValue) ProtoMessage() {}
 
-func (x *LocalPathValue) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_wrappers_proto_msgTypes[10]
+func (x *DirPathValue) ProtoReflect() protoreflect.Message {
+	mi := &file_plugin_wrappers_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -512,12 +284,58 @@ func (x *LocalPathValue) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LocalPathValue.ProtoReflect.Descriptor instead.
-func (*LocalPathValue) Descriptor() ([]byte, []int) {
-	return file_plugin_wrappers_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use DirPathValue.ProtoReflect.Descriptor instead.
+func (*DirPathValue) Descriptor() ([]byte, []int) {
+	return file_plugin_wrappers_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *LocalPathValue) GetValue() string {
+func (x *DirPathValue) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+// Wrapper message for select local path
+type FilePathValue struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// local path value
+	Value         string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FilePathValue) Reset() {
+	*x = FilePathValue{}
+	mi := &file_plugin_wrappers_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FilePathValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilePathValue) ProtoMessage() {}
+
+func (x *FilePathValue) ProtoReflect() protoreflect.Message {
+	mi := &file_plugin_wrappers_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FilePathValue.ProtoReflect.Descriptor instead.
+func (*FilePathValue) Descriptor() ([]byte, []int) {
+	return file_plugin_wrappers_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *FilePathValue) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
@@ -531,33 +349,25 @@ var file_plugin_wrappers_proto_rawDesc = []byte{
 	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x06, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x22,
 	0x23, 0x0a, 0x0b, 0x44, 0x6f, 0x75, 0x62, 0x6c, 0x65, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14,
 	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x05, 0x76,
-	0x61, 0x6c, 0x75, 0x65, 0x22, 0x22, 0x0a, 0x0a, 0x46, 0x6c, 0x6f, 0x61, 0x74, 0x56, 0x61, 0x6c,
+	0x61, 0x6c, 0x75, 0x65, 0x22, 0x22, 0x0a, 0x0a, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c,
 	0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x02, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x22, 0x0a, 0x0a, 0x49, 0x6e, 0x74, 0x36,
-	0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x23, 0x0a, 0x0b,
-	0x55, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76,
-	0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75,
-	0x65, 0x22, 0x22, 0x0a, 0x0a, 0x49, 0x6e, 0x74, 0x33, 0x32, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12,
-	0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x23, 0x0a, 0x0b, 0x55, 0x49, 0x6e, 0x74, 0x33, 0x32, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x0d, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x21, 0x0a, 0x09, 0x42, 0x6f,
-	0x6f, 0x6c, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x23, 0x0a,
-	0x0b, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05,
+	0x03, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x21, 0x0a, 0x09, 0x42, 0x6f, 0x6f, 0x6c,
+	0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x23, 0x0a, 0x0b, 0x53,
+	0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61,
+	0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x22, 0x2a, 0x0a, 0x12, 0x4f, 0x62, 0x73, 0x63, 0x75, 0x72, 0x65, 0x53, 0x74, 0x72, 0x69, 0x6e,
+	0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x24, 0x0a, 0x0c,
+	0x44, 0x69, 0x72, 0x50, 0x61, 0x74, 0x68, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05,
 	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
-	0x75, 0x65, 0x22, 0x22, 0x0a, 0x0a, 0x42, 0x79, 0x74, 0x65, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65,
-	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x24, 0x0a, 0x0c, 0x4f, 0x62, 0x73, 0x63, 0x75, 0x72,
-	0x65, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x26, 0x0a, 0x0e,
-	0x4c, 0x6f, 0x63, 0x61, 0x6c, 0x50, 0x61, 0x74, 0x68, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x14,
-	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76,
-	0x61, 0x6c, 0x75, 0x65, 0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x6c, 0x61, 0x62, 0x75, 0x6c, 0x61, 0x6b, 0x61, 0x6c, 0x69, 0x61, 0x2f, 0x70,
-	0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e,
-	0x3b, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x75, 0x65, 0x22, 0x25, 0x0a, 0x0d, 0x46, 0x69, 0x6c, 0x65, 0x50, 0x61, 0x74, 0x68, 0x56, 0x61,
+	0x6c, 0x75, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6c, 0x61, 0x62, 0x75, 0x6c, 0x61, 0x6b, 0x61,
+	0x6c, 0x69, 0x61, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x61, 0x70, 0x69, 0x2f, 0x70,
+	0x6c, 0x75, 0x67, 0x69, 0x6e, 0x3b, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -572,19 +382,15 @@ func file_plugin_wrappers_proto_rawDescGZIP() []byte {
 	return file_plugin_wrappers_proto_rawDescData
 }
 
-var file_plugin_wrappers_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_plugin_wrappers_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_plugin_wrappers_proto_goTypes = []any{
-	(*DoubleValue)(nil),    // 0: plugin.DoubleValue
-	(*FloatValue)(nil),     // 1: plugin.FloatValue
-	(*Int64Value)(nil),     // 2: plugin.Int64Value
-	(*UInt64Value)(nil),    // 3: plugin.UInt64Value
-	(*Int32Value)(nil),     // 4: plugin.Int32Value
-	(*UInt32Value)(nil),    // 5: plugin.UInt32Value
-	(*BoolValue)(nil),      // 6: plugin.BoolValue
-	(*StringValue)(nil),    // 7: plugin.StringValue
-	(*BytesValue)(nil),     // 8: plugin.BytesValue
-	(*ObscureValue)(nil),   // 9: plugin.ObscureValue
-	(*LocalPathValue)(nil), // 10: plugin.LocalPathValue
+	(*DoubleValue)(nil),        // 0: plugin.DoubleValue
+	(*Int64Value)(nil),         // 1: plugin.Int64Value
+	(*BoolValue)(nil),          // 2: plugin.BoolValue
+	(*StringValue)(nil),        // 3: plugin.StringValue
+	(*ObscureStringValue)(nil), // 4: plugin.ObscureStringValue
+	(*DirPathValue)(nil),       // 5: plugin.DirPathValue
+	(*FilePathValue)(nil),      // 6: plugin.FilePathValue
 }
 var file_plugin_wrappers_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -605,7 +411,7 @@ func file_plugin_wrappers_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugin_wrappers_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

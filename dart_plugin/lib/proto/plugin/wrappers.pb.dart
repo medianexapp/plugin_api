@@ -66,58 +66,6 @@ class DoubleValue extends $pb.GeneratedMessage {
   void clearValue() => clearField(1);
 }
 
-/// Wrapper message for `float`.
-class FloatValue extends $pb.GeneratedMessage {
-  factory FloatValue({
-    $core.double? value,
-  }) {
-    final $result = create();
-    if (value != null) {
-      $result.value = value;
-    }
-    return $result;
-  }
-  FloatValue._() : super();
-  factory FloatValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory FloatValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FloatValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OF)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  FloatValue clone() => FloatValue()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  FloatValue copyWith(void Function(FloatValue) updates) => super.copyWith((message) => updates(message as FloatValue)) as FloatValue;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static FloatValue create() => FloatValue._();
-  FloatValue createEmptyInstance() => create();
-  static $pb.PbList<FloatValue> createRepeated() => $pb.PbList<FloatValue>();
-  @$core.pragma('dart2js:noInline')
-  static FloatValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FloatValue>(create);
-  static FloatValue? _defaultInstance;
-
-  /// The float value.
-  @$pb.TagNumber(1)
-  $core.double get value => $_getN(0);
-  @$pb.TagNumber(1)
-  set value($core.double v) { $_setFloat(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasValue() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearValue() => clearField(1);
-}
-
 /// Wrapper message for `int64`.
 class Int64Value extends $pb.GeneratedMessage {
   factory Int64Value({
@@ -164,162 +112,6 @@ class Int64Value extends $pb.GeneratedMessage {
   $fixnum.Int64 get value => $_getI64(0);
   @$pb.TagNumber(1)
   set value($fixnum.Int64 v) { $_setInt64(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasValue() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearValue() => clearField(1);
-}
-
-/// Wrapper message for `uint64`.
-class UInt64Value extends $pb.GeneratedMessage {
-  factory UInt64Value({
-    $fixnum.Int64? value,
-  }) {
-    final $result = create();
-    if (value != null) {
-      $result.value = value;
-    }
-    return $result;
-  }
-  UInt64Value._() : super();
-  factory UInt64Value.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UInt64Value.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UInt64Value', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  UInt64Value clone() => UInt64Value()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  UInt64Value copyWith(void Function(UInt64Value) updates) => super.copyWith((message) => updates(message as UInt64Value)) as UInt64Value;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UInt64Value create() => UInt64Value._();
-  UInt64Value createEmptyInstance() => create();
-  static $pb.PbList<UInt64Value> createRepeated() => $pb.PbList<UInt64Value>();
-  @$core.pragma('dart2js:noInline')
-  static UInt64Value getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UInt64Value>(create);
-  static UInt64Value? _defaultInstance;
-
-  /// The uint64 value.
-  @$pb.TagNumber(1)
-  $fixnum.Int64 get value => $_getI64(0);
-  @$pb.TagNumber(1)
-  set value($fixnum.Int64 v) { $_setInt64(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasValue() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearValue() => clearField(1);
-}
-
-/// Wrapper message for `int32`.
-class Int32Value extends $pb.GeneratedMessage {
-  factory Int32Value({
-    $core.int? value,
-  }) {
-    final $result = create();
-    if (value != null) {
-      $result.value = value;
-    }
-    return $result;
-  }
-  Int32Value._() : super();
-  factory Int32Value.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Int32Value.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Int32Value', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.O3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  Int32Value clone() => Int32Value()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  Int32Value copyWith(void Function(Int32Value) updates) => super.copyWith((message) => updates(message as Int32Value)) as Int32Value;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static Int32Value create() => Int32Value._();
-  Int32Value createEmptyInstance() => create();
-  static $pb.PbList<Int32Value> createRepeated() => $pb.PbList<Int32Value>();
-  @$core.pragma('dart2js:noInline')
-  static Int32Value getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Int32Value>(create);
-  static Int32Value? _defaultInstance;
-
-  /// The int32 value.
-  @$pb.TagNumber(1)
-  $core.int get value => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set value($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasValue() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearValue() => clearField(1);
-}
-
-/// Wrapper message for `uint32`.
-class UInt32Value extends $pb.GeneratedMessage {
-  factory UInt32Value({
-    $core.int? value,
-  }) {
-    final $result = create();
-    if (value != null) {
-      $result.value = value;
-    }
-    return $result;
-  }
-  UInt32Value._() : super();
-  factory UInt32Value.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UInt32Value.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UInt32Value', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OU3)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  UInt32Value clone() => UInt32Value()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  UInt32Value copyWith(void Function(UInt32Value) updates) => super.copyWith((message) => updates(message as UInt32Value)) as UInt32Value;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static UInt32Value create() => UInt32Value._();
-  UInt32Value createEmptyInstance() => create();
-  static $pb.PbList<UInt32Value> createRepeated() => $pb.PbList<UInt32Value>();
-  @$core.pragma('dart2js:noInline')
-  static UInt32Value getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UInt32Value>(create);
-  static UInt32Value? _defaultInstance;
-
-  /// The uint32 value.
-  @$pb.TagNumber(1)
-  $core.int get value => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set value($core.int v) { $_setUnsignedInt32(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
@@ -430,61 +222,9 @@ class StringValue extends $pb.GeneratedMessage {
   void clearValue() => clearField(1);
 }
 
-/// Wrapper message for `bytes`.
-class BytesValue extends $pb.GeneratedMessage {
-  factory BytesValue({
-    $core.List<$core.int>? value,
-  }) {
-    final $result = create();
-    if (value != null) {
-      $result.value = value;
-    }
-    return $result;
-  }
-  BytesValue._() : super();
-  factory BytesValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory BytesValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BytesValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OY)
-    ..hasRequiredFields = false
-  ;
-
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  BytesValue clone() => BytesValue()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  BytesValue copyWith(void Function(BytesValue) updates) => super.copyWith((message) => updates(message as BytesValue)) as BytesValue;
-
-  $pb.BuilderInfo get info_ => _i;
-
-  @$core.pragma('dart2js:noInline')
-  static BytesValue create() => BytesValue._();
-  BytesValue createEmptyInstance() => create();
-  static $pb.PbList<BytesValue> createRepeated() => $pb.PbList<BytesValue>();
-  @$core.pragma('dart2js:noInline')
-  static BytesValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BytesValue>(create);
-  static BytesValue? _defaultInstance;
-
-  /// The bytes value.
-  @$pb.TagNumber(1)
-  $core.List<$core.int> get value => $_getN(0);
-  @$pb.TagNumber(1)
-  set value($core.List<$core.int> v) { $_setBytes(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasValue() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearValue() => clearField(1);
-}
-
 /// Wrapper message for obscure string, input not show,like for input password
-class ObscureValue extends $pb.GeneratedMessage {
-  factory ObscureValue({
+class ObscureStringValue extends $pb.GeneratedMessage {
+  factory ObscureStringValue({
     $core.String? value,
   }) {
     final $result = create();
@@ -493,11 +233,11 @@ class ObscureValue extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  ObscureValue._() : super();
-  factory ObscureValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ObscureValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  ObscureStringValue._() : super();
+  factory ObscureStringValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ObscureStringValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ObscureValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ObscureStringValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false
   ;
@@ -506,23 +246,24 @@ class ObscureValue extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ObscureValue clone() => ObscureValue()..mergeFromMessage(this);
+  ObscureStringValue clone() => ObscureStringValue()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ObscureValue copyWith(void Function(ObscureValue) updates) => super.copyWith((message) => updates(message as ObscureValue)) as ObscureValue;
+  ObscureStringValue copyWith(void Function(ObscureStringValue) updates) => super.copyWith((message) => updates(message as ObscureStringValue)) as ObscureStringValue;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ObscureValue create() => ObscureValue._();
-  ObscureValue createEmptyInstance() => create();
-  static $pb.PbList<ObscureValue> createRepeated() => $pb.PbList<ObscureValue>();
+  static ObscureStringValue create() => ObscureStringValue._();
+  ObscureStringValue createEmptyInstance() => create();
+  static $pb.PbList<ObscureStringValue> createRepeated() => $pb.PbList<ObscureStringValue>();
   @$core.pragma('dart2js:noInline')
-  static ObscureValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ObscureValue>(create);
-  static ObscureValue? _defaultInstance;
+  static ObscureStringValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ObscureStringValue>(create);
+  static ObscureStringValue? _defaultInstance;
 
+  /// string value
   @$pb.TagNumber(1)
   $core.String get value => $_getSZ(0);
   @$pb.TagNumber(1)
@@ -534,8 +275,8 @@ class ObscureValue extends $pb.GeneratedMessage {
 }
 
 /// Wrapper message for select local path
-class LocalPathValue extends $pb.GeneratedMessage {
-  factory LocalPathValue({
+class DirPathValue extends $pb.GeneratedMessage {
+  factory DirPathValue({
     $core.String? value,
   }) {
     final $result = create();
@@ -544,11 +285,11 @@ class LocalPathValue extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  LocalPathValue._() : super();
-  factory LocalPathValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory LocalPathValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  DirPathValue._() : super();
+  factory DirPathValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DirPathValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LocalPathValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DirPathValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'value')
     ..hasRequiredFields = false
   ;
@@ -557,23 +298,76 @@ class LocalPathValue extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  LocalPathValue clone() => LocalPathValue()..mergeFromMessage(this);
+  DirPathValue clone() => DirPathValue()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  LocalPathValue copyWith(void Function(LocalPathValue) updates) => super.copyWith((message) => updates(message as LocalPathValue)) as LocalPathValue;
+  DirPathValue copyWith(void Function(DirPathValue) updates) => super.copyWith((message) => updates(message as DirPathValue)) as DirPathValue;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static LocalPathValue create() => LocalPathValue._();
-  LocalPathValue createEmptyInstance() => create();
-  static $pb.PbList<LocalPathValue> createRepeated() => $pb.PbList<LocalPathValue>();
+  static DirPathValue create() => DirPathValue._();
+  DirPathValue createEmptyInstance() => create();
+  static $pb.PbList<DirPathValue> createRepeated() => $pb.PbList<DirPathValue>();
   @$core.pragma('dart2js:noInline')
-  static LocalPathValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LocalPathValue>(create);
-  static LocalPathValue? _defaultInstance;
+  static DirPathValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DirPathValue>(create);
+  static DirPathValue? _defaultInstance;
 
+  /// local path value
+  @$pb.TagNumber(1)
+  $core.String get value => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set value($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasValue() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearValue() => clearField(1);
+}
+
+/// Wrapper message for select local path
+class FilePathValue extends $pb.GeneratedMessage {
+  factory FilePathValue({
+    $core.String? value,
+  }) {
+    final $result = create();
+    if (value != null) {
+      $result.value = value;
+    }
+    return $result;
+  }
+  FilePathValue._() : super();
+  factory FilePathValue.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FilePathValue.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FilePathValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'value')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FilePathValue clone() => FilePathValue()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FilePathValue copyWith(void Function(FilePathValue) updates) => super.copyWith((message) => updates(message as FilePathValue)) as FilePathValue;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FilePathValue create() => FilePathValue._();
+  FilePathValue createEmptyInstance() => create();
+  static $pb.PbList<FilePathValue> createRepeated() => $pb.PbList<FilePathValue>();
+  @$core.pragma('dart2js:noInline')
+  static FilePathValue getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FilePathValue>(create);
+  static FilePathValue? _defaultInstance;
+
+  /// local path value
   @$pb.TagNumber(1)
   $core.String get value => $_getSZ(0);
   @$pb.TagNumber(1)

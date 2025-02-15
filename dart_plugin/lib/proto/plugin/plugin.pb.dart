@@ -109,6 +109,7 @@ class AuthType_FormData extends $pb.GeneratedMessage {
 
 class AuthType extends $pb.GeneratedMessage {
   factory AuthType({
+    $core.String? authName,
     $core.bool? useForm,
     $core.Iterable<AuthType_FormData>? forms,
     $core.bool? useQrcode,
@@ -119,6 +120,9 @@ class AuthType extends $pb.GeneratedMessage {
     $core.List<$core.int>? oauthCallbackData,
   }) {
     final $result = create();
+    if (authName != null) {
+      $result.authName = authName;
+    }
     if (useForm != null) {
       $result.useForm = useForm;
     }
@@ -150,14 +154,15 @@ class AuthType extends $pb.GeneratedMessage {
   factory AuthType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthType', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'useForm')
-    ..pc<AuthType_FormData>(2, _omitFieldNames ? '' : 'forms', $pb.PbFieldType.PM, subBuilder: AuthType_FormData.create)
-    ..aOB(3, _omitFieldNames ? '' : 'useQrcode')
-    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
-    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOB(6, _omitFieldNames ? '' : 'useOauth')
-    ..aOS(7, _omitFieldNames ? '' : 'oauthUrl')
-    ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'oauthCallbackData', $pb.PbFieldType.OY)
+    ..aOS(1, _omitFieldNames ? '' : 'authName')
+    ..aOB(2, _omitFieldNames ? '' : 'useForm')
+    ..pc<AuthType_FormData>(3, _omitFieldNames ? '' : 'forms', $pb.PbFieldType.PM, subBuilder: AuthType_FormData.create)
+    ..aOB(4, _omitFieldNames ? '' : 'useQrcode')
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(7, _omitFieldNames ? '' : 'useOauth')
+    ..aOS(8, _omitFieldNames ? '' : 'oauthUrl')
+    ..a<$core.List<$core.int>>(9, _omitFieldNames ? '' : 'oauthCallbackData', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -183,70 +188,79 @@ class AuthType extends $pb.GeneratedMessage {
   static AuthType? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get useForm => $_getBF(0);
+  $core.String get authName => $_getSZ(0);
   @$pb.TagNumber(1)
-  set useForm($core.bool v) { $_setBool(0, v); }
+  set authName($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUseForm() => $_has(0);
+  $core.bool hasAuthName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUseForm() => clearField(1);
+  void clearAuthName() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<AuthType_FormData> get forms => $_getList(1);
+  $core.bool get useForm => $_getBF(1);
+  @$pb.TagNumber(2)
+  set useForm($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUseForm() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUseForm() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.bool get useQrcode => $_getBF(2);
-  @$pb.TagNumber(3)
-  set useQrcode($core.bool v) { $_setBool(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasUseQrcode() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUseQrcode() => clearField(3);
+  $core.List<AuthType_FormData> get forms => $_getList(2);
 
   @$pb.TagNumber(4)
-  $core.List<$core.int> get qrcodeImage => $_getN(3);
+  $core.bool get useQrcode => $_getBF(3);
   @$pb.TagNumber(4)
-  set qrcodeImage($core.List<$core.int> v) { $_setBytes(3, v); }
+  set useQrcode($core.bool v) { $_setBool(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasQrcodeImage() => $_has(3);
+  $core.bool hasUseQrcode() => $_has(3);
   @$pb.TagNumber(4)
-  void clearQrcodeImage() => clearField(4);
+  void clearUseQrcode() => clearField(4);
 
   @$pb.TagNumber(5)
-  $fixnum.Int64 get qrcodeExpireTime => $_getI64(4);
+  $core.List<$core.int> get qrcodeImage => $_getN(4);
   @$pb.TagNumber(5)
-  set qrcodeExpireTime($fixnum.Int64 v) { $_setInt64(4, v); }
+  set qrcodeImage($core.List<$core.int> v) { $_setBytes(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasQrcodeExpireTime() => $_has(4);
+  $core.bool hasQrcodeImage() => $_has(4);
   @$pb.TagNumber(5)
-  void clearQrcodeExpireTime() => clearField(5);
+  void clearQrcodeImage() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.bool get useOauth => $_getBF(5);
+  $fixnum.Int64 get qrcodeExpireTime => $_getI64(5);
   @$pb.TagNumber(6)
-  set useOauth($core.bool v) { $_setBool(5, v); }
+  set qrcodeExpireTime($fixnum.Int64 v) { $_setInt64(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasUseOauth() => $_has(5);
+  $core.bool hasQrcodeExpireTime() => $_has(5);
   @$pb.TagNumber(6)
-  void clearUseOauth() => clearField(6);
+  void clearQrcodeExpireTime() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get oauthUrl => $_getSZ(6);
+  $core.bool get useOauth => $_getBF(6);
   @$pb.TagNumber(7)
-  set oauthUrl($core.String v) { $_setString(6, v); }
+  set useOauth($core.bool v) { $_setBool(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasOauthUrl() => $_has(6);
+  $core.bool hasUseOauth() => $_has(6);
   @$pb.TagNumber(7)
-  void clearOauthUrl() => clearField(7);
+  void clearUseOauth() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.List<$core.int> get oauthCallbackData => $_getN(7);
+  $core.String get oauthUrl => $_getSZ(7);
   @$pb.TagNumber(8)
-  set oauthCallbackData($core.List<$core.int> v) { $_setBytes(7, v); }
+  set oauthUrl($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasOauthCallbackData() => $_has(7);
+  $core.bool hasOauthUrl() => $_has(7);
   @$pb.TagNumber(8)
-  void clearOauthCallbackData() => clearField(8);
+  void clearOauthUrl() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.List<$core.int> get oauthCallbackData => $_getN(8);
+  @$pb.TagNumber(9)
+  set oauthCallbackData($core.List<$core.int> v) { $_setBytes(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasOauthCallbackData() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearOauthCallbackData() => clearField(9);
 }
 
 class FileEntry extends $pb.GeneratedMessage {

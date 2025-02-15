@@ -17,14 +17,15 @@ import 'dart:typed_data' as $typed_data;
 const AuthType$json = {
   '1': 'AuthType',
   '2': [
-    {'1': 'use_form', '3': 1, '4': 1, '5': 8, '10': 'useForm'},
-    {'1': 'forms', '3': 2, '4': 3, '5': 11, '6': '.plugin.AuthType.FormData', '10': 'forms'},
-    {'1': 'use_qrcode', '3': 3, '4': 1, '5': 8, '10': 'useQrcode'},
-    {'1': 'qrcode_image', '3': 4, '4': 1, '5': 12, '10': 'qrcodeImage'},
-    {'1': 'qrcode_expire_time', '3': 5, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
-    {'1': 'use_oauth', '3': 6, '4': 1, '5': 8, '10': 'useOauth'},
-    {'1': 'oauth_url', '3': 7, '4': 1, '5': 9, '10': 'oauthUrl'},
-    {'1': 'oauth_callback_data', '3': 8, '4': 1, '5': 12, '10': 'oauthCallbackData'},
+    {'1': 'auth_name', '3': 1, '4': 1, '5': 9, '10': 'authName'},
+    {'1': 'use_form', '3': 2, '4': 1, '5': 8, '10': 'useForm'},
+    {'1': 'forms', '3': 3, '4': 3, '5': 11, '6': '.plugin.AuthType.FormData', '10': 'forms'},
+    {'1': 'use_qrcode', '3': 4, '4': 1, '5': 8, '10': 'useQrcode'},
+    {'1': 'qrcode_image', '3': 5, '4': 1, '5': 12, '10': 'qrcodeImage'},
+    {'1': 'qrcode_expire_time', '3': 6, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
+    {'1': 'use_oauth', '3': 7, '4': 1, '5': 8, '10': 'useOauth'},
+    {'1': 'oauth_url', '3': 8, '4': 1, '5': 9, '10': 'oauthUrl'},
+    {'1': 'oauth_callback_data', '3': 9, '4': 1, '5': 12, '10': 'oauthCallbackData'},
   ],
   '3': [AuthType_FormData$json],
 };
@@ -42,15 +43,15 @@ const AuthType_FormData$json = {
 
 /// Descriptor for `AuthType`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authTypeDescriptor = $convert.base64Decode(
-    'CghBdXRoVHlwZRIZCgh1c2VfZm9ybRgBIAEoCFIHdXNlRm9ybRIvCgVmb3JtcxgCIAMoCzIZLn'
-    'BsdWdpbi5BdXRoVHlwZS5Gb3JtRGF0YVIFZm9ybXMSHQoKdXNlX3FyY29kZRgDIAEoCFIJdXNl'
-    'UXJjb2RlEiEKDHFyY29kZV9pbWFnZRgEIAEoDFILcXJjb2RlSW1hZ2USLAoScXJjb2RlX2V4cG'
-    'lyZV90aW1lGAUgASgEUhBxcmNvZGVFeHBpcmVUaW1lEhsKCXVzZV9vYXV0aBgGIAEoCFIIdXNl'
-    'T2F1dGgSGwoJb2F1dGhfdXJsGAcgASgJUghvYXV0aFVybBIuChNvYXV0aF9jYWxsYmFja19kYX'
-    'RhGAggASgMUhFvYXV0aENhbGxiYWNrRGF0YRqhAQoIRm9ybURhdGESEgoEbmFtZRgBIAEoCVIE'
-    'bmFtZRIUCgVsYWJlbBgCIAEoCVIFbGFiZWwSKgoFdmFsdWUYAyABKAsyFC5nb29nbGUucHJvdG'
-    '9idWYuQW55UgV2YWx1ZRI/Cg5lbnVtX2Zvcm1fZGF0YRgFIAMoCzIZLnBsdWdpbi5BdXRoVHlw'
-    'ZS5Gb3JtRGF0YVIMZW51bUZvcm1EYXRh');
+    'CghBdXRoVHlwZRIbCglhdXRoX25hbWUYASABKAlSCGF1dGhOYW1lEhkKCHVzZV9mb3JtGAIgAS'
+    'gIUgd1c2VGb3JtEi8KBWZvcm1zGAMgAygLMhkucGx1Z2luLkF1dGhUeXBlLkZvcm1EYXRhUgVm'
+    'b3JtcxIdCgp1c2VfcXJjb2RlGAQgASgIUgl1c2VRcmNvZGUSIQoMcXJjb2RlX2ltYWdlGAUgAS'
+    'gMUgtxcmNvZGVJbWFnZRIsChJxcmNvZGVfZXhwaXJlX3RpbWUYBiABKARSEHFyY29kZUV4cGly'
+    'ZVRpbWUSGwoJdXNlX29hdXRoGAcgASgIUgh1c2VPYXV0aBIbCglvYXV0aF91cmwYCCABKAlSCG'
+    '9hdXRoVXJsEi4KE29hdXRoX2NhbGxiYWNrX2RhdGEYCSABKAxSEW9hdXRoQ2FsbGJhY2tEYXRh'
+    'GqEBCghGb3JtRGF0YRISCgRuYW1lGAEgASgJUgRuYW1lEhQKBWxhYmVsGAIgASgJUgVsYWJlbB'
+    'IqCgV2YWx1ZRgDIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSBXZhbHVlEj8KDmVudW1fZm9y'
+    'bV9kYXRhGAUgAygLMhkucGx1Z2luLkF1dGhUeXBlLkZvcm1EYXRhUgxlbnVtRm9ybURhdGE=');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
