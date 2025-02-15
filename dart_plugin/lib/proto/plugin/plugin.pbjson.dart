@@ -17,7 +17,7 @@ import 'dart:typed_data' as $typed_data;
 const AuthType$json = {
   '1': 'AuthType',
   '2': [
-    {'1': 'auth_name', '3': 1, '4': 1, '5': 9, '10': 'authName'},
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'use_form', '3': 2, '4': 1, '5': 8, '10': 'useForm'},
     {'1': 'forms', '3': 3, '4': 3, '5': 11, '6': '.plugin.AuthType.FormData', '10': 'forms'},
     {'1': 'use_qrcode', '3': 4, '4': 1, '5': 8, '10': 'useQrcode'},
@@ -43,15 +43,15 @@ const AuthType_FormData$json = {
 
 /// Descriptor for `AuthType`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authTypeDescriptor = $convert.base64Decode(
-    'CghBdXRoVHlwZRIbCglhdXRoX25hbWUYASABKAlSCGF1dGhOYW1lEhkKCHVzZV9mb3JtGAIgAS'
-    'gIUgd1c2VGb3JtEi8KBWZvcm1zGAMgAygLMhkucGx1Z2luLkF1dGhUeXBlLkZvcm1EYXRhUgVm'
-    'b3JtcxIdCgp1c2VfcXJjb2RlGAQgASgIUgl1c2VRcmNvZGUSIQoMcXJjb2RlX2ltYWdlGAUgAS'
-    'gMUgtxcmNvZGVJbWFnZRIsChJxcmNvZGVfZXhwaXJlX3RpbWUYBiABKARSEHFyY29kZUV4cGly'
-    'ZVRpbWUSGwoJdXNlX29hdXRoGAcgASgIUgh1c2VPYXV0aBIbCglvYXV0aF91cmwYCCABKAlSCG'
-    '9hdXRoVXJsEi4KE29hdXRoX2NhbGxiYWNrX2RhdGEYCSABKAxSEW9hdXRoQ2FsbGJhY2tEYXRh'
-    'GqEBCghGb3JtRGF0YRISCgRuYW1lGAEgASgJUgRuYW1lEhQKBWxhYmVsGAIgASgJUgVsYWJlbB'
-    'IqCgV2YWx1ZRgDIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSBXZhbHVlEj8KDmVudW1fZm9y'
-    'bV9kYXRhGAUgAygLMhkucGx1Z2luLkF1dGhUeXBlLkZvcm1EYXRhUgxlbnVtRm9ybURhdGE=');
+    'CghBdXRoVHlwZRISCgRuYW1lGAEgASgJUgRuYW1lEhkKCHVzZV9mb3JtGAIgASgIUgd1c2VGb3'
+    'JtEi8KBWZvcm1zGAMgAygLMhkucGx1Z2luLkF1dGhUeXBlLkZvcm1EYXRhUgVmb3JtcxIdCgp1'
+    'c2VfcXJjb2RlGAQgASgIUgl1c2VRcmNvZGUSIQoMcXJjb2RlX2ltYWdlGAUgASgMUgtxcmNvZG'
+    'VJbWFnZRIsChJxcmNvZGVfZXhwaXJlX3RpbWUYBiABKARSEHFyY29kZUV4cGlyZVRpbWUSGwoJ'
+    'dXNlX29hdXRoGAcgASgIUgh1c2VPYXV0aBIbCglvYXV0aF91cmwYCCABKAlSCG9hdXRoVXJsEi'
+    '4KE29hdXRoX2NhbGxiYWNrX2RhdGEYCSABKAxSEW9hdXRoQ2FsbGJhY2tEYXRhGqEBCghGb3Jt'
+    'RGF0YRISCgRuYW1lGAEgASgJUgRuYW1lEhQKBWxhYmVsGAIgASgJUgVsYWJlbBIqCgV2YWx1ZR'
+    'gDIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSBXZhbHVlEj8KDmVudW1fZm9ybV9kYXRhGAUg'
+    'AygLMhkucGx1Z2luLkF1dGhUeXBlLkZvcm1EYXRhUgxlbnVtRm9ybURhdGE=');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
