@@ -330,10 +330,14 @@ class DirPathValue extends $pb.GeneratedMessage {
 class FilePathValue extends $pb.GeneratedMessage {
   factory FilePathValue({
     $core.String? value,
+    $core.Iterable<$core.String>? allowExt,
   }) {
     final $result = create();
     if (value != null) {
       $result.value = value;
+    }
+    if (allowExt != null) {
+      $result.allowExt.addAll(allowExt);
     }
     return $result;
   }
@@ -343,6 +347,7 @@ class FilePathValue extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FilePathValue', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'value')
+    ..pPS(2, _omitFieldNames ? '' : 'allowExt')
     ..hasRequiredFields = false
   ;
 
@@ -376,6 +381,9 @@ class FilePathValue extends $pb.GeneratedMessage {
   $core.bool hasValue() => $_has(0);
   @$pb.TagNumber(1)
   void clearValue() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.String> get allowExt => $_getList(1);
 }
 
 

@@ -45,5 +45,3 @@ message FilePathValue {
     string value              = 1;
     repeated string allow_ext = 2;
 }
-
-//

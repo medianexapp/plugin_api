@@ -70,12 +70,10 @@ func check_auth_type(authTypePtr, authTypeLenPtr uint64) uint64 {
 	authType := &plugin.AuthType{}
 	err := proto.Unmarshal(data, authType)
 	if err != nil {
-		slog.Error("unmarshal failed", "err", err)
 		return ErrorToUint64(err)
 	}
 	authData, err := pluginExport.CheckAuthType(authType)
 	if err != nil {
-		slog.Error("check auth type failed", "err", err)
 		return ErrorToUint64(err)
 	}
 	if len(authData) == 0 {

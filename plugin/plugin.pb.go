@@ -194,7 +194,6 @@ type AuthType struct {
 	UseQrcode        bool                   `protobuf:"varint,3,opt,name=use_qrcode,json=useQrcode,proto3" json:"use_qrcode,omitempty"`
 	QrcodeImage      []byte                 `protobuf:"bytes,4,opt,name=qrcode_image,json=qrcodeImage,proto3" json:"qrcode_image,omitempty"`                   // qrcode image
 	QrcodeExpireTime uint64                 `protobuf:"varint,5,opt,name=qrcode_expire_time,json=qrcodeExpireTime,proto3" json:"qrcode_expire_time,omitempty"` // qrcode expire time
-	//
 	UseOauth          bool   `protobuf:"varint,6,opt,name=use_oauth,json=useOauth,proto3" json:"use_oauth,omitempty"`
 	OauthUrl          string `protobuf:"bytes,7,opt,name=oauth_url,json=oauthUrl,proto3" json:"oauth_url,omitempty"`                              // oauth2 url
 	OauthCallbackData []byte `protobuf:"bytes,8,opt,name=oauth_callback_data,json=oauthCallbackData,proto3" json:"oauth_callback_data,omitempty"` // qrcode callback auth data
