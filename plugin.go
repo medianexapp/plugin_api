@@ -8,7 +8,7 @@ import (
 )
 
 type IPlugin interface {
-	// plugin id 
+	// plugin id
 	PluginId() (string, error)
 	// get auth type like form edit,qrcode,oauth2
 	GetAuthType() (*plugin.AuthType, error)
@@ -25,8 +25,6 @@ type IPlugin interface {
 	GetDirEntry(dir_path string, page, page_size uint64) (*plugin.DirEntry, error)
 	// get file entry resource from driver plugin
 	GetFileResource(file_path string) (*plugin.FileResource, error)
-	// close driver plugin
-	Close() error
 }
 
 func RegistryPlugin(iPlugin IPlugin) {
