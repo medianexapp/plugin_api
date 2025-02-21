@@ -128,8 +128,3 @@ func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
 	}
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(fileResourceData)), uint32(len(fileResourceData)))
 }
-
-//go:wasmexport close
-func close() uint64 {
-	return ErrorToUint64(pluginExport.Close())
-}
