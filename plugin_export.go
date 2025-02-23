@@ -1,8 +1,6 @@
 package plugin_api
 
 import (
-	"log/slog"
-
 	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
 	_ "github.com/labulakalia/wazero_net/wasi/malloc"
@@ -19,19 +17,9 @@ func (pe *PluginExport) PluginAPISchema() (uint64, error) {
 	return pluginAPISchema, nil
 }
 
-func (pe *PluginExport) SetSlogLevel(level slog.Level) {
-	slog.SetLogLoggerLevel(slog.Level(level))
-}
-
 type IPluginExport interface {
 	PluginAPISchema() (uint64, error)
-	SetSlogLevel(slog.Level)
 	IPlugin
-}
-
-//go:wasmexport set_slog_level
-func set_slog_level(l uint64) {
-	pluginExport.SetSlogLevel(slog.Level(l))
 }
 
 //go:wasmexport plugin_api_schema

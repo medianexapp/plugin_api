@@ -36,7 +36,7 @@ func RegistryPlugin(iPlugin IPlugin) {
 	}
 	pluginId, _ := iPlugin.PluginId()
 	handlder := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelInfo,
+		Level: slog.LevelDebug,
 	})
 	slog.SetDefault(slog.New(handlder).With("plugin", pluginId))
 }
