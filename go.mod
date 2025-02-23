@@ -10,4 +10,4 @@ require (
 	google.golang.org/protobuf v1.36.5
 )
 
-require github.com/tetratelabs/wazero v1.8.2 // indirect
+require github.com/tetratelabs/wazero v1.9.0 // indirect
