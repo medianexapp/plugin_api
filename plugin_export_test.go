@@ -16,18 +16,18 @@ import (
 func TestError(t *testing.T) {
 
 	str := "this is error"
-	ret := ErrorToUint64(errors.New(str))
-	if Uint64HasError(ret) != true {
+	ret := util.ErrorToUint64(errors.New(str))
+	if util.Uint64HasError(ret) != true {
 		t.Fatal("ret should has error")
 	}
-	ptr, dataLen := Uint64ToErrPtrLength(ret)
+	ptr, dataLen := util.Uint64ToErrPtrLength(ret)
 	res := util.PtrToString(ptr, dataLen)
 	if res != str {
 		t.Fatal("err not equal")
 	}
 
-	ret = ErrorToUint64(nil)
-	if Uint64HasError(ret) == true {
+	ret = util.ErrorToUint64(nil)
+	if util.Uint64HasError(ret) == true {
 		t.Fatal("ret should no error")
 	}
 
