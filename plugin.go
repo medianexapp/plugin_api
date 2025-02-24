@@ -9,22 +9,26 @@ import (
 
 type IPlugin interface {
 	// plugin id
-	PluginId() (string, error)
+	PluginId() (pluginId string, err error)
 	// get auth type like form edit,qrcode,oauth2
-	GetAuthType() (*plugin.AuthType, error)
-	// check auth type input data
-	// ret:
-	// authdata []byte
-	// err errir
-	CheckAuthType(*plugin.AuthType) (authData []byte, err error)
+	GetAuthType() (authType *plugin.AuthType, err error)
+	// check auth type
+	// if use form auth,only need marshal auth data to []byte
+	// if use qrcode auth, CheckAuthType will check qrcode is scanned,
+	//		if not scanned,will return AuthNone and recall after
+	// 		if scanned is failed,will return AuthFailed
+	// 		id scanned is successed,need return auth data
+	// if use oauth auth,CheckAuthType will call by oauth2 callback code,then need return auth data by code
+	CheckAuthType(authType *plugin.AuthType) (authData []byte, err error)
 	// check auth is success by raw auth data
-	CheckAuthData([]byte) error
+	//  if authData is error, will return error,will return error,then need auth again
+	CheckAuthData(authData []byte) (err error)
 	// plugin auth id,it need unqiue for same driver
-	PluginAuthId() (string, error)
+	PluginAuthId() (pluginAuthId string, err error)
 	// get dir entry from driver plugin
-	GetDirEntry(dir_path string, page, page_size uint64) (*plugin.DirEntry, error)
+	GetDirEntry(dir_path string, page, page_size uint64) (dirEntry *plugin.DirEntry, err error)
 	// get file entry resource from driver plugin
-	GetFileResource(file_path string) (*plugin.FileResource, error)
+	GetFileResource(file_path string) (fileResource *plugin.FileResource, err error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {
