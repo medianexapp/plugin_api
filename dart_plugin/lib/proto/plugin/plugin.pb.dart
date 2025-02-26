@@ -19,37 +19,32 @@ import 'plugin.pbenum.dart';
 
 export 'plugin.pbenum.dart';
 
-class AuthType_FormData extends $pb.GeneratedMessage {
-  factory AuthType_FormData({
+class Auth_FormData_FormItem extends $pb.GeneratedMessage {
+  factory Auth_FormData_FormItem({
     $core.String? name,
-    $core.String? label,
     $0.Any? value,
-    $core.Iterable<AuthType_FormData>? enumFormData,
+    $core.Iterable<Auth_FormData_FormItem>? enumValues,
   }) {
     final $result = create();
     if (name != null) {
       $result.name = name;
     }
-    if (label != null) {
-      $result.label = label;
-    }
     if (value != null) {
       $result.value = value;
     }
-    if (enumFormData != null) {
-      $result.enumFormData.addAll(enumFormData);
+    if (enumValues != null) {
+      $result.enumValues.addAll(enumValues);
     }
     return $result;
   }
-  AuthType_FormData._() : super();
-  factory AuthType_FormData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory AuthType_FormData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Auth_FormData_FormItem._() : super();
+  factory Auth_FormData_FormItem.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Auth_FormData_FormItem.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthType.FormData', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.FormData.FormItem', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aOS(2, _omitFieldNames ? '' : 'label')
-    ..aOM<$0.Any>(3, _omitFieldNames ? '' : 'value', subBuilder: $0.Any.create)
-    ..pc<AuthType_FormData>(5, _omitFieldNames ? '' : 'enumFormData', $pb.PbFieldType.PM, subBuilder: AuthType_FormData.create)
+    ..aOM<$0.Any>(2, _omitFieldNames ? '' : 'value', subBuilder: $0.Any.create)
+    ..pc<Auth_FormData_FormItem>(3, _omitFieldNames ? '' : 'enumValues', $pb.PbFieldType.PM, subBuilder: Auth_FormData_FormItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -57,22 +52,22 @@ class AuthType_FormData extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  AuthType_FormData clone() => AuthType_FormData()..mergeFromMessage(this);
+  Auth_FormData_FormItem clone() => Auth_FormData_FormItem()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  AuthType_FormData copyWith(void Function(AuthType_FormData) updates) => super.copyWith((message) => updates(message as AuthType_FormData)) as AuthType_FormData;
+  Auth_FormData_FormItem copyWith(void Function(Auth_FormData_FormItem) updates) => super.copyWith((message) => updates(message as Auth_FormData_FormItem)) as Auth_FormData_FormItem;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static AuthType_FormData create() => AuthType_FormData._();
-  AuthType_FormData createEmptyInstance() => create();
-  static $pb.PbList<AuthType_FormData> createRepeated() => $pb.PbList<AuthType_FormData>();
+  static Auth_FormData_FormItem create() => Auth_FormData_FormItem._();
+  Auth_FormData_FormItem createEmptyInstance() => create();
+  static $pb.PbList<Auth_FormData_FormItem> createRepeated() => $pb.PbList<Auth_FormData_FormItem>();
   @$core.pragma('dart2js:noInline')
-  static AuthType_FormData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthType_FormData>(create);
-  static AuthType_FormData? _defaultInstance;
+  static Auth_FormData_FormItem getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth_FormData_FormItem>(create);
+  static Auth_FormData_FormItem? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
@@ -84,80 +79,37 @@ class AuthType_FormData extends $pb.GeneratedMessage {
   void clearName() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get label => $_getSZ(1);
+  $0.Any get value => $_getN(1);
   @$pb.TagNumber(2)
-  set label($core.String v) { $_setString(1, v); }
+  set value($0.Any v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasLabel() => $_has(1);
+  $core.bool hasValue() => $_has(1);
   @$pb.TagNumber(2)
-  void clearLabel() => clearField(2);
+  void clearValue() => clearField(2);
+  @$pb.TagNumber(2)
+  $0.Any ensureValue() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $0.Any get value => $_getN(2);
-  @$pb.TagNumber(3)
-  set value($0.Any v) { setField(3, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasValue() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearValue() => clearField(3);
-  @$pb.TagNumber(3)
-  $0.Any ensureValue() => $_ensure(2);
-
-  @$pb.TagNumber(5)
-  $core.List<AuthType_FormData> get enumFormData => $_getList(3);
+  $core.List<Auth_FormData_FormItem> get enumValues => $_getList(2);
 }
 
-class AuthType extends $pb.GeneratedMessage {
-  factory AuthType({
-    $core.bool? useForm,
-    $core.Iterable<AuthType_FormData>? forms,
-    $core.bool? useQrcode,
-    $core.List<$core.int>? qrcodeImage,
-    $fixnum.Int64? qrcodeExpireTime,
-    $core.bool? useOauth,
-    $core.String? oauthUrl,
-    $core.List<$core.int>? oauthCallbackData,
+/// form data input
+class Auth_FormData extends $pb.GeneratedMessage {
+  factory Auth_FormData({
+    $core.Iterable<Auth_FormData_FormItem>? formItems,
   }) {
     final $result = create();
-    if (useForm != null) {
-      $result.useForm = useForm;
-    }
-    if (forms != null) {
-      $result.forms.addAll(forms);
-    }
-    if (useQrcode != null) {
-      $result.useQrcode = useQrcode;
-    }
-    if (qrcodeImage != null) {
-      $result.qrcodeImage = qrcodeImage;
-    }
-    if (qrcodeExpireTime != null) {
-      $result.qrcodeExpireTime = qrcodeExpireTime;
-    }
-    if (useOauth != null) {
-      $result.useOauth = useOauth;
-    }
-    if (oauthUrl != null) {
-      $result.oauthUrl = oauthUrl;
-    }
-    if (oauthCallbackData != null) {
-      $result.oauthCallbackData = oauthCallbackData;
+    if (formItems != null) {
+      $result.formItems.addAll(formItems);
     }
     return $result;
   }
-  AuthType._() : super();
-  factory AuthType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory AuthType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Auth_FormData._() : super();
+  factory Auth_FormData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Auth_FormData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthType', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'useForm')
-    ..pc<AuthType_FormData>(2, _omitFieldNames ? '' : 'forms', $pb.PbFieldType.PM, subBuilder: AuthType_FormData.create)
-    ..aOB(3, _omitFieldNames ? '' : 'useQrcode')
-    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
-    ..a<$fixnum.Int64>(5, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOB(6, _omitFieldNames ? '' : 'useOauth')
-    ..aOS(7, _omitFieldNames ? '' : 'oauthUrl')
-    ..a<$core.List<$core.int>>(8, _omitFieldNames ? '' : 'oauthCallbackData', $pb.PbFieldType.OY)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.FormData', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..pc<Auth_FormData_FormItem>(1, _omitFieldNames ? '' : 'formItems', $pb.PbFieldType.PM, subBuilder: Auth_FormData_FormItem.create)
     ..hasRequiredFields = false
   ;
 
@@ -165,88 +117,197 @@ class AuthType extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  AuthType clone() => AuthType()..mergeFromMessage(this);
+  Auth_FormData clone() => Auth_FormData()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  AuthType copyWith(void Function(AuthType) updates) => super.copyWith((message) => updates(message as AuthType)) as AuthType;
+  Auth_FormData copyWith(void Function(Auth_FormData) updates) => super.copyWith((message) => updates(message as Auth_FormData)) as Auth_FormData;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static AuthType create() => AuthType._();
-  AuthType createEmptyInstance() => create();
-  static $pb.PbList<AuthType> createRepeated() => $pb.PbList<AuthType>();
+  static Auth_FormData create() => Auth_FormData._();
+  Auth_FormData createEmptyInstance() => create();
+  static $pb.PbList<Auth_FormData> createRepeated() => $pb.PbList<Auth_FormData>();
   @$core.pragma('dart2js:noInline')
-  static AuthType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthType>(create);
-  static AuthType? _defaultInstance;
+  static Auth_FormData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth_FormData>(create);
+  static Auth_FormData? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get useForm => $_getBF(0);
+  $core.List<Auth_FormData_FormItem> get formItems => $_getList(0);
+}
+
+class Auth_ScanQrcode extends $pb.GeneratedMessage {
+  factory Auth_ScanQrcode({
+    $core.List<$core.int>? qrcodeImage,
+    $fixnum.Int64? qrcodeExpireTime,
+  }) {
+    final $result = create();
+    if (qrcodeImage != null) {
+      $result.qrcodeImage = qrcodeImage;
+    }
+    if (qrcodeExpireTime != null) {
+      $result.qrcodeExpireTime = qrcodeExpireTime;
+    }
+    return $result;
+  }
+  Auth_ScanQrcode._() : super();
+  factory Auth_ScanQrcode.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Auth_ScanQrcode.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.ScanQrcode', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Auth_ScanQrcode clone() => Auth_ScanQrcode()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Auth_ScanQrcode copyWith(void Function(Auth_ScanQrcode) updates) => super.copyWith((message) => updates(message as Auth_ScanQrcode)) as Auth_ScanQrcode;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Auth_ScanQrcode create() => Auth_ScanQrcode._();
+  Auth_ScanQrcode createEmptyInstance() => create();
+  static $pb.PbList<Auth_ScanQrcode> createRepeated() => $pb.PbList<Auth_ScanQrcode>();
+  @$core.pragma('dart2js:noInline')
+  static Auth_ScanQrcode getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth_ScanQrcode>(create);
+  static Auth_ScanQrcode? _defaultInstance;
+
   @$pb.TagNumber(1)
-  set useForm($core.bool v) { $_setBool(0, v); }
+  $core.List<$core.int> get qrcodeImage => $_getN(0);
   @$pb.TagNumber(1)
-  $core.bool hasUseForm() => $_has(0);
+  set qrcodeImage($core.List<$core.int> v) { $_setBytes(0, v); }
   @$pb.TagNumber(1)
-  void clearUseForm() => clearField(1);
+  $core.bool hasQrcodeImage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearQrcodeImage() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.List<AuthType_FormData> get forms => $_getList(1);
+  $fixnum.Int64 get qrcodeExpireTime => $_getI64(1);
+  @$pb.TagNumber(2)
+  set qrcodeExpireTime($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasQrcodeExpireTime() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearQrcodeExpireTime() => clearField(2);
+}
 
-  @$pb.TagNumber(3)
-  $core.bool get useQrcode => $_getBF(2);
-  @$pb.TagNumber(3)
-  set useQrcode($core.bool v) { $_setBool(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasUseQrcode() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearUseQrcode() => clearField(3);
+class Auth_CallbackUrl extends $pb.GeneratedMessage {
+  factory Auth_CallbackUrl({
+    $core.String? callbackUrl,
+    $core.String? callbackUrlData,
+  }) {
+    final $result = create();
+    if (callbackUrl != null) {
+      $result.callbackUrl = callbackUrl;
+    }
+    if (callbackUrlData != null) {
+      $result.callbackUrlData = callbackUrlData;
+    }
+    return $result;
+  }
+  Auth_CallbackUrl._() : super();
+  factory Auth_CallbackUrl.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Auth_CallbackUrl.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  @$pb.TagNumber(4)
-  $core.List<$core.int> get qrcodeImage => $_getN(3);
-  @$pb.TagNumber(4)
-  set qrcodeImage($core.List<$core.int> v) { $_setBytes(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasQrcodeImage() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearQrcodeImage() => clearField(4);
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.CallbackUrl', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'callbackUrl')
+    ..aOS(2, _omitFieldNames ? '' : 'callbackUrlData')
+    ..hasRequiredFields = false
+  ;
 
-  @$pb.TagNumber(5)
-  $fixnum.Int64 get qrcodeExpireTime => $_getI64(4);
-  @$pb.TagNumber(5)
-  set qrcodeExpireTime($fixnum.Int64 v) { $_setInt64(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasQrcodeExpireTime() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearQrcodeExpireTime() => clearField(5);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Auth_CallbackUrl clone() => Auth_CallbackUrl()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Auth_CallbackUrl copyWith(void Function(Auth_CallbackUrl) updates) => super.copyWith((message) => updates(message as Auth_CallbackUrl)) as Auth_CallbackUrl;
 
-  @$pb.TagNumber(6)
-  $core.bool get useOauth => $_getBF(5);
-  @$pb.TagNumber(6)
-  set useOauth($core.bool v) { $_setBool(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasUseOauth() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearUseOauth() => clearField(6);
+  $pb.BuilderInfo get info_ => _i;
 
-  @$pb.TagNumber(7)
-  $core.String get oauthUrl => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set oauthUrl($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasOauthUrl() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearOauthUrl() => clearField(7);
+  @$core.pragma('dart2js:noInline')
+  static Auth_CallbackUrl create() => Auth_CallbackUrl._();
+  Auth_CallbackUrl createEmptyInstance() => create();
+  static $pb.PbList<Auth_CallbackUrl> createRepeated() => $pb.PbList<Auth_CallbackUrl>();
+  @$core.pragma('dart2js:noInline')
+  static Auth_CallbackUrl getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth_CallbackUrl>(create);
+  static Auth_CallbackUrl? _defaultInstance;
 
-  @$pb.TagNumber(8)
-  $core.List<$core.int> get oauthCallbackData => $_getN(7);
-  @$pb.TagNumber(8)
-  set oauthCallbackData($core.List<$core.int> v) { $_setBytes(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasOauthCallbackData() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearOauthCallbackData() => clearField(8);
+  @$pb.TagNumber(1)
+  $core.String get callbackUrl => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set callbackUrl($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCallbackUrl() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCallbackUrl() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get callbackUrlData => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set callbackUrlData($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCallbackUrlData() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCallbackUrlData() => clearField(2);
+}
+
+class Auth extends $pb.GeneratedMessage {
+  factory Auth({
+    $core.Iterable<$0.Any>? authMethods,
+  }) {
+    final $result = create();
+    if (authMethods != null) {
+      $result.authMethods.addAll(authMethods);
+    }
+    return $result;
+  }
+  Auth._() : super();
+  factory Auth.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Auth.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..pc<$0.Any>(1, _omitFieldNames ? '' : 'authMethods', $pb.PbFieldType.PM, subBuilder: $0.Any.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Auth clone() => Auth()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Auth copyWith(void Function(Auth) updates) => super.copyWith((message) => updates(message as Auth)) as Auth;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Auth create() => Auth._();
+  Auth createEmptyInstance() => create();
+  static $pb.PbList<Auth> createRepeated() => $pb.PbList<Auth>();
+  @$core.pragma('dart2js:noInline')
+  static Auth getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth>(create);
+  static Auth? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$0.Any> get authMethods => $_getList(0);
 }
 
 class FileEntry extends $pb.GeneratedMessage {
@@ -285,7 +346,7 @@ class FileEntry extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FileEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, protoName: 'fileType', defaultOrMaker: FileEntry_FileType.FileTypeUNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
+    ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, defaultOrMaker: FileEntry_FileType.FileTypeUNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'createdTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'modifiedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -416,7 +477,7 @@ class DirEntry extends $pb.GeneratedMessage {
 class FileResource_FileResourceData extends $pb.GeneratedMessage {
   factory FileResource_FileResourceData({
     $core.String? url,
-    FileResource_VideoResolution? videoResolution,
+    FileResource_Resolution? resolution,
     $fixnum.Int64? expireTime,
     FileResource_ResourceType? resourceType,
     $core.String? title,
@@ -426,8 +487,8 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     if (url != null) {
       $result.url = url;
     }
-    if (videoResolution != null) {
-      $result.videoResolution = videoResolution;
+    if (resolution != null) {
+      $result.resolution = resolution;
     }
     if (expireTime != null) {
       $result.expireTime = expireTime;
@@ -449,9 +510,9 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'FileResource.FileResourceData', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'url')
-    ..e<FileResource_VideoResolution>(2, _omitFieldNames ? '' : 'videoResolution', $pb.PbFieldType.OE, defaultOrMaker: FileResource_VideoResolution.Unspecified, valueOf: FileResource_VideoResolution.valueOf, enumValues: FileResource_VideoResolution.values)
+    ..e<FileResource_Resolution>(2, _omitFieldNames ? '' : 'resolution', $pb.PbFieldType.OE, defaultOrMaker: FileResource_Resolution.ResolutionUNSPECIFIED, valueOf: FileResource_Resolution.valueOf, enumValues: FileResource_Resolution.values)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'expireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..e<FileResource_ResourceType>(4, _omitFieldNames ? '' : 'resourceType', $pb.PbFieldType.OE, defaultOrMaker: FileResource_ResourceType.MediaResourceTypeUNSPECIFIED, valueOf: FileResource_ResourceType.valueOf, enumValues: FileResource_ResourceType.values)
+    ..e<FileResource_ResourceType>(4, _omitFieldNames ? '' : 'resourceType', $pb.PbFieldType.OE, defaultOrMaker: FileResource_ResourceType.ResourceTypeUNSPECIFIED, valueOf: FileResource_ResourceType.valueOf, enumValues: FileResource_ResourceType.values)
     ..aOS(5, _omitFieldNames ? '' : 'title')
     ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'header', entryClassName: 'FileResource.FileResourceData.HeaderEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('plugin'))
     ..hasRequiredFields = false
@@ -488,13 +549,13 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
   void clearUrl() => clearField(1);
 
   @$pb.TagNumber(2)
-  FileResource_VideoResolution get videoResolution => $_getN(1);
+  FileResource_Resolution get resolution => $_getN(1);
   @$pb.TagNumber(2)
-  set videoResolution(FileResource_VideoResolution v) { setField(2, v); }
+  set resolution(FileResource_Resolution v) { setField(2, v); }
   @$pb.TagNumber(2)
-  $core.bool hasVideoResolution() => $_has(1);
+  $core.bool hasResolution() => $_has(1);
   @$pb.TagNumber(2)
-  void clearVideoResolution() => clearField(2);
+  void clearResolution() => clearField(2);
 
   @$pb.TagNumber(3)
   $fixnum.Int64 get expireTime => $_getI64(2);

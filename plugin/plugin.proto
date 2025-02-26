@@ -1,66 +1,77 @@
 syntax = "proto3";
 
 package plugin;
-option go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
+option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
 import "google/protobuf/any.proto";
 
-message AuthType {
+message Auth {
+    // form data input
     message FormData {
-        string name                      = 1;
-        string label                     = 2;
-        google.protobuf.Any value        = 3;
-        repeated FormData enum_form_data = 5;  // for dropdown widget
+        message FormItem {
+            string              name        = 1;
+            google.protobuf.Any value       = 2;
+            repeated FormItem   enum_values = 3;  // for dropdown widget
+        }
+        repeated FormItem form_items = 1;
     }
 
-    bool use_form           = 1;
-    repeated FormData forms = 2;
+    message ScanQrcode {
+        bytes  qrcode_image       = 1;  // qrcode image
+        uint64 qrcode_expire_time = 2;  // qrcode expire time
+    }
 
-    bool use_qrcode           = 3;
-    bytes qrcode_image        = 4;  // qrcode image
-    uint64 qrcode_expire_time = 5;  // qrcode expire time
-
-    //
-    bool use_oauth            = 6;
-    string oauth_url          = 7;  // oauth2 url
-    bytes oauth_callback_data = 8;  // qrcode callback auth data
+    message CallbackUrl {
+        string callback_url      = 1;  // callback url
+        string callback_url_data = 2;  // callback data
+    }
+    repeated google.protobuf.Any auth_methods = 1;  //
 }
 
 message FileEntry {
     enum FileType {
-        FileTypeUNSPECIFIED = 0; FileTypeDir = 1; FileTypeFile = 2;
-        FileTypeLink                                           = 3;
+        FileTypeUNSPECIFIED = 0;
+        FileTypeDir         = 1;
+        FileTypeFile        = 2;
+        FileTypeLink        = 3;
     }
-    string name       = 1;
-    FileType fileType = 2;
-    uint64 size       = 3;
+    string   name      = 1;
+    FileType file_type = 2;
+    uint64   size      = 3;
 
     uint64 created_time  = 10;
     uint64 modified_time = 11;
     uint64 accessed_time = 12;
 }
 
-message DirEntry { repeated FileEntry file_entries = 1; }
+message DirEntry {
+    repeated FileEntry file_entries = 1;
+}
 
 message FileResource {
     // video display VideoResolution
-    enum VideoResolution {
-        Unspecified = 0; Original = 1;  // Origin
-        SD                        = 2;  // 480P high defintion
-        HD                        = 3;  // 720P high defintion
-        FHD                       = 4;  // 1080P full high defintion
-        QHD                       = 5;  // 2K  quad high defintion
-        UHD                       = 6;  // 4K ultra high defintion
+    enum Resolution {
+        ResolutionUNSPECIFIED = 0;
+        Original              = 1;  // Origin
+        SD                    = 2;  // 480P high defintion
+        HD                    = 3;  // 720P high defintion
+        FHD                   = 4;  // 1080P full high defintion
+        QHD                   = 5;  // 2K  quad high defintion
+        UHD                   = 6;  // 4K ultra high defintion
     }
     enum ResourceType {
-        MediaResourceTypeUNSPECIFIED = 0; Video = 1; Subtitle = 2; Audio = 3;
+        ResourceTypeUNSPECIFIED = 0;
+        Video                   = 1;
+        Subtitle                = 2;
+        Audio                   = 3;
     }
+
     message FileResourceData {
-        string url                       = 1;
-        VideoResolution video_resolution = 2;
-        uint64 expire_time               = 3;
-        ResourceType resource_type       = 4;
-        string title                     = 5;
-        map<string, string> header       = 6;
+        string              url           = 1;
+        Resolution          resolution    = 2;
+        uint64              expire_time   = 3;
+        ResourceType        resource_type = 4;
+        string              title         = 5;
+        map<string, string> header        = 6;
     }
     repeated FileResourceData file_resource_data = 1;
 }

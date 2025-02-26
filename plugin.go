@@ -5,13 +5,14 @@ import (
 	"os"
 
 	"github.com/labulakalia/plugin_api/plugin"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 type IPlugin interface {
 	// plugin id
 	PluginId() (pluginId string, err error)
-	// get auth type like form edit,qrcode,oauth2
-	GetAuthType() (authType *plugin.AuthType, err error)
+	// get auth like form edit,qrcode,oauth2
+	GetAuth() (auth *plugin.Auth, err error)
 	// check auth type
 	// if use form auth,only need marshal auth data to []byte
 	// if use qrcode auth, CheckAuthType will check qrcode is scanned,
@@ -19,7 +20,7 @@ type IPlugin interface {
 	// 		if scanned is failed,will return AuthFailed
 	// 		id scanned is successed,need return auth data
 	// if use oauth auth,CheckAuthType will call by oauth2 callback code,then need return auth data by code
-	CheckAuthType(authType *plugin.AuthType) (authData []byte, err error)
+	CheckAuth(authMethod *anypb.Any) (authData []byte, err error)
 	// check auth is success by raw auth data
 	//  if authData is error, will return error,will return error,then need auth again
 	CheckAuthData(authData []byte) (err error)

@@ -33,17 +33,17 @@ class FileEntry_FileType extends $pb.ProtobufEnum {
 }
 
 /// video display VideoResolution
-class FileResource_VideoResolution extends $pb.ProtobufEnum {
-  static const FileResource_VideoResolution Unspecified = FileResource_VideoResolution._(0, _omitEnumNames ? '' : 'Unspecified');
-  static const FileResource_VideoResolution Original = FileResource_VideoResolution._(1, _omitEnumNames ? '' : 'Original');
-  static const FileResource_VideoResolution SD = FileResource_VideoResolution._(2, _omitEnumNames ? '' : 'SD');
-  static const FileResource_VideoResolution HD = FileResource_VideoResolution._(3, _omitEnumNames ? '' : 'HD');
-  static const FileResource_VideoResolution FHD = FileResource_VideoResolution._(4, _omitEnumNames ? '' : 'FHD');
-  static const FileResource_VideoResolution QHD = FileResource_VideoResolution._(5, _omitEnumNames ? '' : 'QHD');
-  static const FileResource_VideoResolution UHD = FileResource_VideoResolution._(6, _omitEnumNames ? '' : 'UHD');
+class FileResource_Resolution extends $pb.ProtobufEnum {
+  static const FileResource_Resolution ResolutionUNSPECIFIED = FileResource_Resolution._(0, _omitEnumNames ? '' : 'ResolutionUNSPECIFIED');
+  static const FileResource_Resolution Original = FileResource_Resolution._(1, _omitEnumNames ? '' : 'Original');
+  static const FileResource_Resolution SD = FileResource_Resolution._(2, _omitEnumNames ? '' : 'SD');
+  static const FileResource_Resolution HD = FileResource_Resolution._(3, _omitEnumNames ? '' : 'HD');
+  static const FileResource_Resolution FHD = FileResource_Resolution._(4, _omitEnumNames ? '' : 'FHD');
+  static const FileResource_Resolution QHD = FileResource_Resolution._(5, _omitEnumNames ? '' : 'QHD');
+  static const FileResource_Resolution UHD = FileResource_Resolution._(6, _omitEnumNames ? '' : 'UHD');
 
-  static const $core.List<FileResource_VideoResolution> values = <FileResource_VideoResolution> [
-    Unspecified,
+  static const $core.List<FileResource_Resolution> values = <FileResource_Resolution> [
+    ResolutionUNSPECIFIED,
     Original,
     SD,
     HD,
@@ -52,20 +52,20 @@ class FileResource_VideoResolution extends $pb.ProtobufEnum {
     UHD,
   ];
 
-  static final $core.Map<$core.int, FileResource_VideoResolution> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static FileResource_VideoResolution? valueOf($core.int value) => _byValue[value];
+  static final $core.Map<$core.int, FileResource_Resolution> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static FileResource_Resolution? valueOf($core.int value) => _byValue[value];
 
-  const FileResource_VideoResolution._($core.int v, $core.String n) : super(v, n);
+  const FileResource_Resolution._($core.int v, $core.String n) : super(v, n);
 }
 
 class FileResource_ResourceType extends $pb.ProtobufEnum {
-  static const FileResource_ResourceType MediaResourceTypeUNSPECIFIED = FileResource_ResourceType._(0, _omitEnumNames ? '' : 'MediaResourceTypeUNSPECIFIED');
+  static const FileResource_ResourceType ResourceTypeUNSPECIFIED = FileResource_ResourceType._(0, _omitEnumNames ? '' : 'ResourceTypeUNSPECIFIED');
   static const FileResource_ResourceType Video = FileResource_ResourceType._(1, _omitEnumNames ? '' : 'Video');
   static const FileResource_ResourceType Subtitle = FileResource_ResourceType._(2, _omitEnumNames ? '' : 'Subtitle');
   static const FileResource_ResourceType Audio = FileResource_ResourceType._(3, _omitEnumNames ? '' : 'Audio');
 
   static const $core.List<FileResource_ResourceType> values = <FileResource_ResourceType> [
-    MediaResourceTypeUNSPECIFIED,
+    ResourceTypeUNSPECIFIED,
     Video,
     Subtitle,
     Audio,

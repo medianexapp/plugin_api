@@ -1,10 +1,10 @@
 package plugin_api
 
 import (
-	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
 	_ "github.com/labulakalia/wazero_net/wasi/malloc"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 var pluginExport IPluginExport
@@ -41,7 +41,7 @@ func plugin_id() uint64 {
 
 //go:wasmexport get_auth_type
 func get_auth_type() uint64 {
-	authType, err := pluginExport.GetAuthType()
+	authType, err := pluginExport.GetAuth()
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -52,15 +52,15 @@ func get_auth_type() uint64 {
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(data)), uint32(len(data)))
 }
 
-//go:wasmexport check_auth_type
-func check_auth_type(authTypePtr, authTypeLenPtr uint64) uint64 {
-	data := util.PtrToBytes(uint32(authTypePtr), uint32(authTypeLenPtr))
-	authType := &plugin.AuthType{}
-	err := proto.Unmarshal(data, authType)
+//go:wasmexport check_auth
+func check_auth(authPtr, authLenPtr uint64) uint64 {
+	data := util.PtrToBytes(uint32(authPtr), uint32(authLenPtr))
+	anyData := &anypb.Any{}
+	err := proto.Unmarshal(data, anyData)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	authData, err := pluginExport.CheckAuthType(authType)
+	authData, err := pluginExport.CheckAuth(anyData)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}

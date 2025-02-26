@@ -13,51 +13,70 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use authTypeDescriptor instead')
-const AuthType$json = {
-  '1': 'AuthType',
+@$core.Deprecated('Use authDescriptor instead')
+const Auth$json = {
+  '1': 'Auth',
   '2': [
-    {'1': 'use_form', '3': 1, '4': 1, '5': 8, '10': 'useForm'},
-    {'1': 'forms', '3': 2, '4': 3, '5': 11, '6': '.plugin.AuthType.FormData', '10': 'forms'},
-    {'1': 'use_qrcode', '3': 3, '4': 1, '5': 8, '10': 'useQrcode'},
-    {'1': 'qrcode_image', '3': 4, '4': 1, '5': 12, '10': 'qrcodeImage'},
-    {'1': 'qrcode_expire_time', '3': 5, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
-    {'1': 'use_oauth', '3': 6, '4': 1, '5': 8, '10': 'useOauth'},
-    {'1': 'oauth_url', '3': 7, '4': 1, '5': 9, '10': 'oauthUrl'},
-    {'1': 'oauth_callback_data', '3': 8, '4': 1, '5': 12, '10': 'oauthCallbackData'},
+    {'1': 'auth_methods', '3': 1, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'authMethods'},
   ],
-  '3': [AuthType_FormData$json],
+  '3': [Auth_FormData$json, Auth_ScanQrcode$json, Auth_CallbackUrl$json],
 };
 
-@$core.Deprecated('Use authTypeDescriptor instead')
-const AuthType_FormData$json = {
+@$core.Deprecated('Use authDescriptor instead')
+const Auth_FormData$json = {
   '1': 'FormData',
   '2': [
+    {'1': 'form_items', '3': 1, '4': 3, '5': 11, '6': '.plugin.Auth.FormData.FormItem', '10': 'formItems'},
+  ],
+  '3': [Auth_FormData_FormItem$json],
+};
+
+@$core.Deprecated('Use authDescriptor instead')
+const Auth_FormData_FormItem$json = {
+  '1': 'FormItem',
+  '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'label', '3': 2, '4': 1, '5': 9, '10': 'label'},
-    {'1': 'value', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Any', '10': 'value'},
-    {'1': 'enum_form_data', '3': 5, '4': 3, '5': 11, '6': '.plugin.AuthType.FormData', '10': 'enumFormData'},
+    {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Any', '10': 'value'},
+    {'1': 'enum_values', '3': 3, '4': 3, '5': 11, '6': '.plugin.Auth.FormData.FormItem', '10': 'enumValues'},
   ],
 };
 
-/// Descriptor for `AuthType`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List authTypeDescriptor = $convert.base64Decode(
-    'CghBdXRoVHlwZRIZCgh1c2VfZm9ybRgBIAEoCFIHdXNlRm9ybRIvCgVmb3JtcxgCIAMoCzIZLn'
-    'BsdWdpbi5BdXRoVHlwZS5Gb3JtRGF0YVIFZm9ybXMSHQoKdXNlX3FyY29kZRgDIAEoCFIJdXNl'
-    'UXJjb2RlEiEKDHFyY29kZV9pbWFnZRgEIAEoDFILcXJjb2RlSW1hZ2USLAoScXJjb2RlX2V4cG'
-    'lyZV90aW1lGAUgASgEUhBxcmNvZGVFeHBpcmVUaW1lEhsKCXVzZV9vYXV0aBgGIAEoCFIIdXNl'
-    'T2F1dGgSGwoJb2F1dGhfdXJsGAcgASgJUghvYXV0aFVybBIuChNvYXV0aF9jYWxsYmFja19kYX'
-    'RhGAggASgMUhFvYXV0aENhbGxiYWNrRGF0YRqhAQoIRm9ybURhdGESEgoEbmFtZRgBIAEoCVIE'
-    'bmFtZRIUCgVsYWJlbBgCIAEoCVIFbGFiZWwSKgoFdmFsdWUYAyABKAsyFC5nb29nbGUucHJvdG'
-    '9idWYuQW55UgV2YWx1ZRI/Cg5lbnVtX2Zvcm1fZGF0YRgFIAMoCzIZLnBsdWdpbi5BdXRoVHlw'
-    'ZS5Gb3JtRGF0YVIMZW51bUZvcm1EYXRh');
+@$core.Deprecated('Use authDescriptor instead')
+const Auth_ScanQrcode$json = {
+  '1': 'ScanQrcode',
+  '2': [
+    {'1': 'qrcode_image', '3': 1, '4': 1, '5': 12, '10': 'qrcodeImage'},
+    {'1': 'qrcode_expire_time', '3': 2, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
+  ],
+};
+
+@$core.Deprecated('Use authDescriptor instead')
+const Auth_CallbackUrl$json = {
+  '1': 'CallbackUrl',
+  '2': [
+    {'1': 'callback_url', '3': 1, '4': 1, '5': 9, '10': 'callbackUrl'},
+    {'1': 'callback_url_data', '3': 2, '4': 1, '5': 9, '10': 'callbackUrlData'},
+  ],
+};
+
+/// Descriptor for `Auth`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List authDescriptor = $convert.base64Decode(
+    'CgRBdXRoEjcKDGF1dGhfbWV0aG9kcxgBIAMoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSC2F1dG'
+    'hNZXRob2RzGtcBCghGb3JtRGF0YRI9Cgpmb3JtX2l0ZW1zGAEgAygLMh4ucGx1Z2luLkF1dGgu'
+    'Rm9ybURhdGEuRm9ybUl0ZW1SCWZvcm1JdGVtcxqLAQoIRm9ybUl0ZW0SEgoEbmFtZRgBIAEoCV'
+    'IEbmFtZRIqCgV2YWx1ZRgCIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSBXZhbHVlEj8KC2Vu'
+    'dW1fdmFsdWVzGAMgAygLMh4ucGx1Z2luLkF1dGguRm9ybURhdGEuRm9ybUl0ZW1SCmVudW1WYW'
+    'x1ZXMaXQoKU2NhblFyY29kZRIhCgxxcmNvZGVfaW1hZ2UYASABKAxSC3FyY29kZUltYWdlEiwK'
+    'EnFyY29kZV9leHBpcmVfdGltZRgCIAEoBFIQcXJjb2RlRXhwaXJlVGltZRpcCgtDYWxsYmFja1'
+    'VybBIhCgxjYWxsYmFja191cmwYASABKAlSC2NhbGxiYWNrVXJsEioKEWNhbGxiYWNrX3VybF9k'
+    'YXRhGAIgASgJUg9jYWxsYmFja1VybERhdGE=');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
   '1': 'FileEntry',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'fileType', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileEntry.FileType', '10': 'fileType'},
+    {'1': 'file_type', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileEntry.FileType', '10': 'fileType'},
     {'1': 'size', '3': 3, '4': 1, '5': 4, '10': 'size'},
     {'1': 'created_time', '3': 10, '4': 1, '5': 4, '10': 'createdTime'},
     {'1': 'modified_time', '3': 11, '4': 1, '5': 4, '10': 'modifiedTime'},
@@ -79,12 +98,12 @@ const FileEntry_FileType$json = {
 
 /// Descriptor for `FileEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fileEntryDescriptor = $convert.base64Decode(
-    'CglGaWxlRW50cnkSEgoEbmFtZRgBIAEoCVIEbmFtZRI2CghmaWxlVHlwZRgCIAEoDjIaLnBsdW'
-    'dpbi5GaWxlRW50cnkuRmlsZVR5cGVSCGZpbGVUeXBlEhIKBHNpemUYAyABKARSBHNpemUSIQoM'
-    'Y3JlYXRlZF90aW1lGAogASgEUgtjcmVhdGVkVGltZRIjCg1tb2RpZmllZF90aW1lGAsgASgEUg'
-    'xtb2RpZmllZFRpbWUSIwoNYWNjZXNzZWRfdGltZRgMIAEoBFIMYWNjZXNzZWRUaW1lIlgKCEZp'
-    'bGVUeXBlEhcKE0ZpbGVUeXBlVU5TUEVDSUZJRUQQABIPCgtGaWxlVHlwZURpchABEhAKDEZpbG'
-    'VUeXBlRmlsZRACEhAKDEZpbGVUeXBlTGluaxAD');
+    'CglGaWxlRW50cnkSEgoEbmFtZRgBIAEoCVIEbmFtZRI3CglmaWxlX3R5cGUYAiABKA4yGi5wbH'
+    'VnaW4uRmlsZUVudHJ5LkZpbGVUeXBlUghmaWxlVHlwZRISCgRzaXplGAMgASgEUgRzaXplEiEK'
+    'DGNyZWF0ZWRfdGltZRgKIAEoBFILY3JlYXRlZFRpbWUSIwoNbW9kaWZpZWRfdGltZRgLIAEoBF'
+    'IMbW9kaWZpZWRUaW1lEiMKDWFjY2Vzc2VkX3RpbWUYDCABKARSDGFjY2Vzc2VkVGltZSJYCghG'
+    'aWxlVHlwZRIXChNGaWxlVHlwZVVOU1BFQ0lGSUVEEAASDwoLRmlsZVR5cGVEaXIQARIQCgxGaW'
+    'xlVHlwZUZpbGUQAhIQCgxGaWxlVHlwZUxpbmsQAw==');
 
 @$core.Deprecated('Use dirEntryDescriptor instead')
 const DirEntry$json = {
@@ -106,7 +125,7 @@ const FileResource$json = {
     {'1': 'file_resource_data', '3': 1, '4': 3, '5': 11, '6': '.plugin.FileResource.FileResourceData', '10': 'fileResourceData'},
   ],
   '3': [FileResource_FileResourceData$json],
-  '4': [FileResource_VideoResolution$json, FileResource_ResourceType$json],
+  '4': [FileResource_Resolution$json, FileResource_ResourceType$json],
 };
 
 @$core.Deprecated('Use fileResourceDescriptor instead')
@@ -114,7 +133,7 @@ const FileResource_FileResourceData$json = {
   '1': 'FileResourceData',
   '2': [
     {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
-    {'1': 'video_resolution', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileResource.VideoResolution', '10': 'videoResolution'},
+    {'1': 'resolution', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileResource.Resolution', '10': 'resolution'},
     {'1': 'expire_time', '3': 3, '4': 1, '5': 4, '10': 'expireTime'},
     {'1': 'resource_type', '3': 4, '4': 1, '5': 14, '6': '.plugin.FileResource.ResourceType', '10': 'resourceType'},
     {'1': 'title', '3': 5, '4': 1, '5': 9, '10': 'title'},
@@ -134,10 +153,10 @@ const FileResource_FileResourceData_HeaderEntry$json = {
 };
 
 @$core.Deprecated('Use fileResourceDescriptor instead')
-const FileResource_VideoResolution$json = {
-  '1': 'VideoResolution',
+const FileResource_Resolution$json = {
+  '1': 'Resolution',
   '2': [
-    {'1': 'Unspecified', '2': 0},
+    {'1': 'ResolutionUNSPECIFIED', '2': 0},
     {'1': 'Original', '2': 1},
     {'1': 'SD', '2': 2},
     {'1': 'HD', '2': 3},
@@ -151,7 +170,7 @@ const FileResource_VideoResolution$json = {
 const FileResource_ResourceType$json = {
   '1': 'ResourceType',
   '2': [
-    {'1': 'MediaResourceTypeUNSPECIFIED', '2': 0},
+    {'1': 'ResourceTypeUNSPECIFIED', '2': 0},
     {'1': 'Video', '2': 1},
     {'1': 'Subtitle', '2': 2},
     {'1': 'Audio', '2': 3},
@@ -161,15 +180,15 @@ const FileResource_ResourceType$json = {
 /// Descriptor for `FileResource`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
     'CgxGaWxlUmVzb3VyY2USUwoSZmlsZV9yZXNvdXJjZV9kYXRhGAEgAygLMiUucGx1Z2luLkZpbG'
-    'VSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhUhBmaWxlUmVzb3VyY2VEYXRhGvoCChBGaWxlUmVz'
-    'b3VyY2VEYXRhEhAKA3VybBgBIAEoCVIDdXJsEk8KEHZpZGVvX3Jlc29sdXRpb24YAiABKA4yJC'
-    '5wbHVnaW4uRmlsZVJlc291cmNlLlZpZGVvUmVzb2x1dGlvblIPdmlkZW9SZXNvbHV0aW9uEh8K'
-    'C2V4cGlyZV90aW1lGAMgASgEUgpleHBpcmVUaW1lEkYKDXJlc291cmNlX3R5cGUYBCABKA4yIS'
-    '5wbHVnaW4uRmlsZVJlc291cmNlLlJlc291cmNlVHlwZVIMcmVzb3VyY2VUeXBlEhQKBXRpdGxl'
-    'GAUgASgJUgV0aXRsZRJJCgZoZWFkZXIYBiADKAsyMS5wbHVnaW4uRmlsZVJlc291cmNlLkZpbG'
-    'VSZXNvdXJjZURhdGEuSGVhZGVyRW50cnlSBmhlYWRlcho5CgtIZWFkZXJFbnRyeRIQCgNrZXkY'
-    'ASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBIlsKD1ZpZGVvUmVzb2x1dGlvbh'
-    'IPCgtVbnNwZWNpZmllZBAAEgwKCE9yaWdpbmFsEAESBgoCU0QQAhIGCgJIRBADEgcKA0ZIRBAE'
-    'EgcKA1FIRBAFEgcKA1VIRBAGIlQKDFJlc291cmNlVHlwZRIgChxNZWRpYVJlc291cmNlVHlwZV'
-    'VOU1BFQ0lGSUVEEAASCQoFVmlkZW8QARIMCghTdWJ0aXRsZRACEgkKBUF1ZGlvEAM=');
+    'VSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhUhBmaWxlUmVzb3VyY2VEYXRhGuoCChBGaWxlUmVz'
+    'b3VyY2VEYXRhEhAKA3VybBgBIAEoCVIDdXJsEj8KCnJlc29sdXRpb24YAiABKA4yHy5wbHVnaW'
+    '4uRmlsZVJlc291cmNlLlJlc29sdXRpb25SCnJlc29sdXRpb24SHwoLZXhwaXJlX3RpbWUYAyAB'
+    'KARSCmV4cGlyZVRpbWUSRgoNcmVzb3VyY2VfdHlwZRgEIAEoDjIhLnBsdWdpbi5GaWxlUmVzb3'
+    'VyY2UuUmVzb3VyY2VUeXBlUgxyZXNvdXJjZVR5cGUSFAoFdGl0bGUYBSABKAlSBXRpdGxlEkkK'
+    'BmhlYWRlchgGIAMoCzIxLnBsdWdpbi5GaWxlUmVzb3VyY2UuRmlsZVJlc291cmNlRGF0YS5IZW'
+    'FkZXJFbnRyeVIGaGVhZGVyGjkKC0hlYWRlckVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZh'
+    'bHVlGAIgASgJUgV2YWx1ZToCOAEiYAoKUmVzb2x1dGlvbhIZChVSZXNvbHV0aW9uVU5TUEVDSU'
+    'ZJRUQQABIMCghPcmlnaW5hbBABEgYKAlNEEAISBgoCSEQQAxIHCgNGSEQQBBIHCgNRSEQQBRIH'
+    'CgNVSEQQBiJPCgxSZXNvdXJjZVR5cGUSGwoXUmVzb3VyY2VUeXBlVU5TUEVDSUZJRUQQABIJCg'
+    'VWaWRlbxABEgwKCFN1YnRpdGxlEAISCQoFQXVkaW8QAw==');
 
