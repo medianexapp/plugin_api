@@ -20,7 +20,7 @@ type IPlugin interface {
 	// 		if scanned is failed,will return AuthFailed
 	// 		id scanned is successed,need return auth data
 	// if use oauth auth,CheckAuthType will call by oauth2 callback code,then need return auth data by code
-	CheckAuth(authMethod *anypb.Any) (authData []byte, err error)
+	CheckAuthMethod(authMethod *anypb.Any) (authData []byte, err error)
 	// check auth is success by raw auth data
 	//  if authData is error, will return error,will return error,then need auth again
 	CheckAuthData(authData []byte) (err error)
