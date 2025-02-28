@@ -15,15 +15,13 @@ import (
 )
 
 type pluginConfig struct {
-	Id           string   `toml:"id"`
-	Name         string   `toml:"name"`
-	Desc         string   `toml:"desc"`
-	Author       []string `toml:"author"`
-	Version      string   `toml:"version"`
-	ReleasedTime string   `toml:"released_time"`
-	Url          string   `toml:"url"`
-	Icon         string   `toml:"icon"`
-	Changelog    []string `toml:"changelog"`
+	Id        string   `toml:"id"`
+	Name      string   `toml:"name"`
+	Desc      string   `toml:"desc"`
+	Author    []string `toml:"author"`
+	Version   string   `toml:"version"`
+	Icon      string   `toml:"icon"`
+	Changelog []string `toml:"changelog"`
 }
 
 func main() {
@@ -41,9 +39,16 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	slog.Info("start build driver plugin ", "name", pluginConfig.Name, "id", pluginConfig.Id)
-	_ = os.MkdirAll("dist", 0755)
-
+	err = os.RemoveAll("./dist/*")
+	if err != nil {
+		slog.Error("clean dist dir failed", "err", err)
+		os.Exit(1)
+	}
+	err = os.MkdirAll("dist", 0755)
+	if err != nil {
+		slog.Error("mkdir dist dir failed", "err", err)
+		os.Exit(1)
+	}
 	buildWasmFile := fmt.Sprintf("%s.wasm", pluginConfig.Id)
 	defer os.Remove(buildWasmFile)
 
@@ -57,8 +62,12 @@ func main() {
 		slog.Error("exec command failed", "err", err)
 		os.Exit(1)
 	}
-	outCompressFile := filepath.Join("dist", fmt.Sprintf("%s_%s.zip", pluginConfig.Id, pluginConfig.Version))
-	_ = os.MkdirAll("dist", 0755)
+	pwd, err := os.Getwd()
+	if err != nil {
+		slog.Error("get pwd failed", "err", err)
+		os.Exit(1)
+	}
+	outCompressFile := filepath.Join(pwd, "dist", fmt.Sprintf("%s_%s.zip", pluginConfig.Id, pluginConfig.Version))
 	outFile, err := os.Create(outCompressFile)
 	if err != nil {
 		slog.Error("create file failed", "file", outCompressFile, "err", err)
@@ -92,6 +101,5 @@ func main() {
 		io.Copy(zwfile, localFile)
 		localFile.Close()
 	}
-
-	slog.Info("build success", "file", outCompressFile)
+	slog.Info("build success", "plugin", pluginConfig.Name, "plugin_path", outCompressFile)
 }
