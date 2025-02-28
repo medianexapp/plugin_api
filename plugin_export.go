@@ -39,8 +39,8 @@ func plugin_id() uint64 {
 	return util.Uint32ToUint64(idPtr, idLen)
 }
 
-//go:wasmexport get_auth_type
-func get_auth_type() uint64 {
+//go:wasmexport get_auth
+func get_auth() uint64 {
 	authType, err := pluginExport.GetAuth()
 	if err != nil {
 		return util.ErrorToUint64(err)
