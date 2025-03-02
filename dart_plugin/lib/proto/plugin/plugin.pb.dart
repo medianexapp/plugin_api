@@ -141,11 +141,15 @@ class Auth_FormData extends $pb.GeneratedMessage {
 class Auth_ScanQrcode extends $pb.GeneratedMessage {
   factory Auth_ScanQrcode({
     $core.List<$core.int>? qrcodeImage,
+    $core.String? qrcodeKey,
     $fixnum.Int64? qrcodeExpireTime,
   }) {
     final $result = create();
     if (qrcodeImage != null) {
       $result.qrcodeImage = qrcodeImage;
+    }
+    if (qrcodeKey != null) {
+      $result.qrcodeKey = qrcodeKey;
     }
     if (qrcodeExpireTime != null) {
       $result.qrcodeExpireTime = qrcodeExpireTime;
@@ -158,7 +162,8 @@ class Auth_ScanQrcode extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.ScanQrcode', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(2, _omitFieldNames ? '' : 'qrcodeKey')
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -193,13 +198,22 @@ class Auth_ScanQrcode extends $pb.GeneratedMessage {
   void clearQrcodeImage() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get qrcodeExpireTime => $_getI64(1);
+  $core.String get qrcodeKey => $_getSZ(1);
   @$pb.TagNumber(2)
-  set qrcodeExpireTime($fixnum.Int64 v) { $_setInt64(1, v); }
+  set qrcodeKey($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasQrcodeExpireTime() => $_has(1);
+  $core.bool hasQrcodeKey() => $_has(1);
   @$pb.TagNumber(2)
-  void clearQrcodeExpireTime() => clearField(2);
+  void clearQrcodeKey() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $fixnum.Int64 get qrcodeExpireTime => $_getI64(2);
+  @$pb.TagNumber(3)
+  set qrcodeExpireTime($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasQrcodeExpireTime() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQrcodeExpireTime() => clearField(3);
 }
 
 class Auth_Callback extends $pb.GeneratedMessage {

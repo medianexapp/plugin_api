@@ -17,7 +17,8 @@ message Auth {
 
     message ScanQrcode {
         bytes  qrcode_image       = 1;  // qrcode image
-        uint64 qrcode_expire_time = 2;  // qrcode expire time
+        string qrcode_key         = 2;  // check qrcode scan status
+        uint64 qrcode_expire_time = 3;  // qrcode expire time
     }
 
     message Callback {

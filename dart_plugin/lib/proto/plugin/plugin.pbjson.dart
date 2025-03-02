@@ -46,7 +46,8 @@ const Auth_ScanQrcode$json = {
   '1': 'ScanQrcode',
   '2': [
     {'1': 'qrcode_image', '3': 1, '4': 1, '5': 12, '10': 'qrcodeImage'},
-    {'1': 'qrcode_expire_time', '3': 2, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
+    {'1': 'qrcode_key', '3': 2, '4': 1, '5': 9, '10': 'qrcodeKey'},
+    {'1': 'qrcode_expire_time', '3': 3, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
   ],
 };
 
@@ -66,9 +67,10 @@ final $typed_data.Uint8List authDescriptor = $convert.base64Decode(
     'Rm9ybURhdGEuRm9ybUl0ZW1SCWZvcm1JdGVtcxqLAQoIRm9ybUl0ZW0SEgoEbmFtZRgBIAEoCV'
     'IEbmFtZRIqCgV2YWx1ZRgCIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSBXZhbHVlEj8KC2Vu'
     'dW1fdmFsdWVzGAMgAygLMh4ucGx1Z2luLkF1dGguRm9ybURhdGEuRm9ybUl0ZW1SCmVudW1WYW'
-    'x1ZXMaXQoKU2NhblFyY29kZRIhCgxxcmNvZGVfaW1hZ2UYASABKAxSC3FyY29kZUltYWdlEiwK'
-    'EnFyY29kZV9leHBpcmVfdGltZRgCIAEoBFIQcXJjb2RlRXhwaXJlVGltZRpBCghDYWxsYmFjax'
-    'IQCgN1cmwYASABKAlSA3VybBIjCg1jYWxsYmFja19kYXRhGAIgASgJUgxjYWxsYmFja0RhdGE=');
+    'x1ZXMafAoKU2NhblFyY29kZRIhCgxxcmNvZGVfaW1hZ2UYASABKAxSC3FyY29kZUltYWdlEh0K'
+    'CnFyY29kZV9rZXkYAiABKAlSCXFyY29kZUtleRIsChJxcmNvZGVfZXhwaXJlX3RpbWUYAyABKA'
+    'RSEHFyY29kZUV4cGlyZVRpbWUaQQoIQ2FsbGJhY2sSEAoDdXJsGAEgASgJUgN1cmwSIwoNY2Fs'
+    'bGJhY2tfZGF0YRgCIAEoCVIMY2FsbGJhY2tEYXRh');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
