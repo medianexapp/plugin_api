@@ -20,9 +20,9 @@ message Auth {
         uint64 qrcode_expire_time = 2;  // qrcode expire time
     }
 
-    message CallbackUrl {
-        string callback_url      = 1;  // callback url
-        string callback_url_data = 2;  // callback data
+    message Callback {
+        string url           = 1;  // callback url
+        string callback_data = 2;  // callback data
     }
     repeated google.protobuf.Any auth_methods = 1;  //
 }

@@ -202,27 +202,27 @@ class Auth_ScanQrcode extends $pb.GeneratedMessage {
   void clearQrcodeExpireTime() => clearField(2);
 }
 
-class Auth_CallbackUrl extends $pb.GeneratedMessage {
-  factory Auth_CallbackUrl({
-    $core.String? callbackUrl,
-    $core.String? callbackUrlData,
+class Auth_Callback extends $pb.GeneratedMessage {
+  factory Auth_Callback({
+    $core.String? url,
+    $core.String? callbackData,
   }) {
     final $result = create();
-    if (callbackUrl != null) {
-      $result.callbackUrl = callbackUrl;
+    if (url != null) {
+      $result.url = url;
     }
-    if (callbackUrlData != null) {
-      $result.callbackUrlData = callbackUrlData;
+    if (callbackData != null) {
+      $result.callbackData = callbackData;
     }
     return $result;
   }
-  Auth_CallbackUrl._() : super();
-  factory Auth_CallbackUrl.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Auth_CallbackUrl.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  Auth_Callback._() : super();
+  factory Auth_Callback.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Auth_Callback.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.CallbackUrl', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'callbackUrl')
-    ..aOS(2, _omitFieldNames ? '' : 'callbackUrlData')
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.Callback', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'url')
+    ..aOS(2, _omitFieldNames ? '' : 'callbackData')
     ..hasRequiredFields = false
   ;
 
@@ -230,40 +230,40 @@ class Auth_CallbackUrl extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Auth_CallbackUrl clone() => Auth_CallbackUrl()..mergeFromMessage(this);
+  Auth_Callback clone() => Auth_Callback()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Auth_CallbackUrl copyWith(void Function(Auth_CallbackUrl) updates) => super.copyWith((message) => updates(message as Auth_CallbackUrl)) as Auth_CallbackUrl;
+  Auth_Callback copyWith(void Function(Auth_Callback) updates) => super.copyWith((message) => updates(message as Auth_Callback)) as Auth_Callback;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Auth_CallbackUrl create() => Auth_CallbackUrl._();
-  Auth_CallbackUrl createEmptyInstance() => create();
-  static $pb.PbList<Auth_CallbackUrl> createRepeated() => $pb.PbList<Auth_CallbackUrl>();
+  static Auth_Callback create() => Auth_Callback._();
+  Auth_Callback createEmptyInstance() => create();
+  static $pb.PbList<Auth_Callback> createRepeated() => $pb.PbList<Auth_Callback>();
   @$core.pragma('dart2js:noInline')
-  static Auth_CallbackUrl getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth_CallbackUrl>(create);
-  static Auth_CallbackUrl? _defaultInstance;
+  static Auth_Callback getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Auth_Callback>(create);
+  static Auth_Callback? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get callbackUrl => $_getSZ(0);
+  $core.String get url => $_getSZ(0);
   @$pb.TagNumber(1)
-  set callbackUrl($core.String v) { $_setString(0, v); }
+  set url($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasCallbackUrl() => $_has(0);
+  $core.bool hasUrl() => $_has(0);
   @$pb.TagNumber(1)
-  void clearCallbackUrl() => clearField(1);
+  void clearUrl() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get callbackUrlData => $_getSZ(1);
+  $core.String get callbackData => $_getSZ(1);
   @$pb.TagNumber(2)
-  set callbackUrlData($core.String v) { $_setString(1, v); }
+  set callbackData($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCallbackUrlData() => $_has(1);
+  $core.bool hasCallbackData() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCallbackUrlData() => clearField(2);
+  void clearCallbackData() => clearField(2);
 }
 
 class Auth extends $pb.GeneratedMessage {

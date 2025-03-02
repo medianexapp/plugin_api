@@ -19,7 +19,7 @@ const Auth$json = {
   '2': [
     {'1': 'auth_methods', '3': 1, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'authMethods'},
   ],
-  '3': [Auth_FormData$json, Auth_ScanQrcode$json, Auth_CallbackUrl$json],
+  '3': [Auth_FormData$json, Auth_ScanQrcode$json, Auth_Callback$json],
 };
 
 @$core.Deprecated('Use authDescriptor instead')
@@ -51,11 +51,11 @@ const Auth_ScanQrcode$json = {
 };
 
 @$core.Deprecated('Use authDescriptor instead')
-const Auth_CallbackUrl$json = {
-  '1': 'CallbackUrl',
+const Auth_Callback$json = {
+  '1': 'Callback',
   '2': [
-    {'1': 'callback_url', '3': 1, '4': 1, '5': 9, '10': 'callbackUrl'},
-    {'1': 'callback_url_data', '3': 2, '4': 1, '5': 9, '10': 'callbackUrlData'},
+    {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
+    {'1': 'callback_data', '3': 2, '4': 1, '5': 9, '10': 'callbackData'},
   ],
 };
 
@@ -67,9 +67,8 @@ final $typed_data.Uint8List authDescriptor = $convert.base64Decode(
     'IEbmFtZRIqCgV2YWx1ZRgCIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSBXZhbHVlEj8KC2Vu'
     'dW1fdmFsdWVzGAMgAygLMh4ucGx1Z2luLkF1dGguRm9ybURhdGEuRm9ybUl0ZW1SCmVudW1WYW'
     'x1ZXMaXQoKU2NhblFyY29kZRIhCgxxcmNvZGVfaW1hZ2UYASABKAxSC3FyY29kZUltYWdlEiwK'
-    'EnFyY29kZV9leHBpcmVfdGltZRgCIAEoBFIQcXJjb2RlRXhwaXJlVGltZRpcCgtDYWxsYmFja1'
-    'VybBIhCgxjYWxsYmFja191cmwYASABKAlSC2NhbGxiYWNrVXJsEioKEWNhbGxiYWNrX3VybF9k'
-    'YXRhGAIgASgJUg9jYWxsYmFja1VybERhdGE=');
+    'EnFyY29kZV9leHBpcmVfdGltZRgCIAEoBFIQcXJjb2RlRXhwaXJlVGltZRpBCghDYWxsYmFjax'
+    'IQCgN1cmwYASABKAlSA3VybBIjCg1jYWxsYmFja19kYXRhGAIgASgJUgxjYWxsYmFja0RhdGE=');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
