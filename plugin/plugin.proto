@@ -17,13 +17,14 @@ message Auth {
 
     message ScanQrcode {
         bytes  qrcode_image       = 1;  // qrcode image
-        string qrcode_key         = 2;  // check qrcode scan status
+        string qrcode_image_param = 2;  // qrcode image some param,like qrcode check key
         uint64 qrcode_expire_time = 3;  // qrcode expire time
     }
 
     message Callback {
-        string url           = 1;  // callback url
-        string callback_data = 2;  // callback data
+        string callback_url       = 1;  // callback url
+        string callback_url_param = 2;  // param for call back url
+        string callback_url_data  = 3;  // url callback data
     }
     repeated google.protobuf.Any auth_methods = 1;  //
 }

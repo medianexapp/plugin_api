@@ -141,15 +141,15 @@ class Auth_FormData extends $pb.GeneratedMessage {
 class Auth_ScanQrcode extends $pb.GeneratedMessage {
   factory Auth_ScanQrcode({
     $core.List<$core.int>? qrcodeImage,
-    $core.String? qrcodeKey,
+    $core.String? qrcodeImageParam,
     $fixnum.Int64? qrcodeExpireTime,
   }) {
     final $result = create();
     if (qrcodeImage != null) {
       $result.qrcodeImage = qrcodeImage;
     }
-    if (qrcodeKey != null) {
-      $result.qrcodeKey = qrcodeKey;
+    if (qrcodeImageParam != null) {
+      $result.qrcodeImageParam = qrcodeImageParam;
     }
     if (qrcodeExpireTime != null) {
       $result.qrcodeExpireTime = qrcodeExpireTime;
@@ -162,7 +162,7 @@ class Auth_ScanQrcode extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.ScanQrcode', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
-    ..aOS(2, _omitFieldNames ? '' : 'qrcodeKey')
+    ..aOS(2, _omitFieldNames ? '' : 'qrcodeImageParam')
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
@@ -198,13 +198,13 @@ class Auth_ScanQrcode extends $pb.GeneratedMessage {
   void clearQrcodeImage() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get qrcodeKey => $_getSZ(1);
+  $core.String get qrcodeImageParam => $_getSZ(1);
   @$pb.TagNumber(2)
-  set qrcodeKey($core.String v) { $_setString(1, v); }
+  set qrcodeImageParam($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasQrcodeKey() => $_has(1);
+  $core.bool hasQrcodeImageParam() => $_has(1);
   @$pb.TagNumber(2)
-  void clearQrcodeKey() => clearField(2);
+  void clearQrcodeImageParam() => clearField(2);
 
   @$pb.TagNumber(3)
   $fixnum.Int64 get qrcodeExpireTime => $_getI64(2);
@@ -218,15 +218,19 @@ class Auth_ScanQrcode extends $pb.GeneratedMessage {
 
 class Auth_Callback extends $pb.GeneratedMessage {
   factory Auth_Callback({
-    $core.String? url,
-    $core.String? callbackData,
+    $core.String? callbackUrl,
+    $core.String? callbackUrlParam,
+    $core.String? callbackUrlData,
   }) {
     final $result = create();
-    if (url != null) {
-      $result.url = url;
+    if (callbackUrl != null) {
+      $result.callbackUrl = callbackUrl;
     }
-    if (callbackData != null) {
-      $result.callbackData = callbackData;
+    if (callbackUrlParam != null) {
+      $result.callbackUrlParam = callbackUrlParam;
+    }
+    if (callbackUrlData != null) {
+      $result.callbackUrlData = callbackUrlData;
     }
     return $result;
   }
@@ -235,8 +239,9 @@ class Auth_Callback extends $pb.GeneratedMessage {
   factory Auth_Callback.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth.Callback', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'url')
-    ..aOS(2, _omitFieldNames ? '' : 'callbackData')
+    ..aOS(1, _omitFieldNames ? '' : 'callbackUrl')
+    ..aOS(2, _omitFieldNames ? '' : 'callbackUrlParam')
+    ..aOS(3, _omitFieldNames ? '' : 'callbackUrlData')
     ..hasRequiredFields = false
   ;
 
@@ -262,22 +267,31 @@ class Auth_Callback extends $pb.GeneratedMessage {
   static Auth_Callback? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get url => $_getSZ(0);
+  $core.String get callbackUrl => $_getSZ(0);
   @$pb.TagNumber(1)
-  set url($core.String v) { $_setString(0, v); }
+  set callbackUrl($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUrl() => $_has(0);
+  $core.bool hasCallbackUrl() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUrl() => clearField(1);
+  void clearCallbackUrl() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get callbackData => $_getSZ(1);
+  $core.String get callbackUrlParam => $_getSZ(1);
   @$pb.TagNumber(2)
-  set callbackData($core.String v) { $_setString(1, v); }
+  set callbackUrlParam($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasCallbackData() => $_has(1);
+  $core.bool hasCallbackUrlParam() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCallbackData() => clearField(2);
+  void clearCallbackUrlParam() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get callbackUrlData => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set callbackUrlData($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCallbackUrlData() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCallbackUrlData() => clearField(3);
 }
 
 class Auth extends $pb.GeneratedMessage {
