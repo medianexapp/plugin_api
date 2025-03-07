@@ -1,6 +1,9 @@
 package plugin_api
 
 import (
+	"errors"
+	"runtime/debug"
+
 	"github.com/labulakalia/wazero_net/util"
 	_ "github.com/labulakalia/wazero_net/wasi/malloc"
 	"google.golang.org/protobuf/proto"
@@ -29,7 +32,13 @@ func plugin_api_schema() uint64 {
 }
 
 //go:wasmexport plugin_id
-func plugin_id() uint64 {
+func plugin_id() (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	id, err := pluginExport.PluginId()
 	if err != nil {
 		return util.ErrorToUint64(err)
@@ -40,7 +49,13 @@ func plugin_id() uint64 {
 }
 
 //go:wasmexport get_auth
-func get_auth() uint64 {
+func get_auth() (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	authType, err := pluginExport.GetAuth()
 	if err != nil {
 		return util.ErrorToUint64(err)
@@ -53,7 +68,13 @@ func get_auth() uint64 {
 }
 
 //go:wasmexport check_auth_method
-func check_auth_method(authPtr, authLenPtr uint64) uint64 {
+func check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	data := util.PtrToBytes(uint32(authPtr), uint32(authLenPtr))
 	anyData := &anypb.Any{}
 	err := proto.Unmarshal(data, anyData)
@@ -71,7 +92,13 @@ func check_auth_method(authPtr, authLenPtr uint64) uint64 {
 }
 
 //go:wasmexport check_auth_data
-func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
+func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
 	err := pluginExport.CheckAuthData(rawAuthData)
 	if err != nil {
@@ -81,7 +108,13 @@ func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) uint64 {
 }
 
 //go:wasmexport plugin_auth_id
-func plugin_auth_id() uint64 {
+func plugin_auth_id() (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	authId, err := pluginExport.PluginAuthId()
 	if err != nil {
 		return util.ErrorToUint64(err)
@@ -90,7 +123,13 @@ func plugin_auth_id() uint64 {
 }
 
 //go:wasmexport get_dir_entry
-func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
+func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	dir := util.PtrToString(uint32(dir_pathPtr), uint32(dir_pathLen))
 	dirEntry, err := pluginExport.GetDirEntry(dir, page, page_size)
 	if err != nil {
@@ -104,7 +143,13 @@ func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) uint64 {
 }
 
 //go:wasmexport get_file_resource
-func get_file_resource(file_pathPtr, file_pathLen uint64) uint64 {
+func get_file_resource(file_pathPtr, file_pathLen uint64) (ret uint64) {
+	defer func() {
+		if r := recover(); r != nil {
+			stack := debug.Stack()
+			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
+		}
+	}()
 	file_path := util.PtrToString(uint32(file_pathPtr), uint32(file_pathLen))
 	fileResource, err := pluginExport.GetFileResource(file_path)
 	if err != nil {
