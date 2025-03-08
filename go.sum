@@ -16,6 +16,8 @@ github.com/labulakalia/wazero_net v0.0.9-0.20250224145013-71fc876e89f3 h1:R/taK8
 github.com/labulakalia/wazero_net v0.0.9-0.20250224145013-71fc876e89f3/go.mod h1:G17fPdVtcBYTXlu6cP3bvz75bi/VDzPEnp4cvCzMCsM=
 github.com/labulakalia/wazero_net v0.0.9-0.20250226121734-cdee066367bc h1:z2mSs10reKf/EbULLuAMNtNobtqSDojsqYLD9xX8gJU=
 github.com/labulakalia/wazero_net v0.0.9-0.20250226121734-cdee066367bc/go.mod h1:RlNCabPrlaUaYUXBZWlEEj28FbU6/xe8qT2mhtwigZE=
+github.com/labulakalia/wazero_net v0.0.9-0.20250308094800-cfe51da8ab44 h1:WhTXC9bStQaS13/WFuUFiD9t4+Fs0gBCCIlVRWOA2Og=
+github.com/labulakalia/wazero_net v0.0.9-0.20250308094800-cfe51da8ab44/go.mod h1:RlNCabPrlaUaYUXBZWlEEj28FbU6/xe8qT2mhtwigZE=
 github.com/tetratelabs/wazero v1.8.2 h1:yIgLR/b2bN31bjxwXHD8a3d+BogigR952csSDdLYEv4=
 github.com/tetratelabs/wazero v1.8.2/go.mod h1:yAI0XTsMBhREkM/YDAK/zNou3GoiAce1P6+rp/wQhjs=
 github.com/tetratelabs/wazero v1.9.0 h1:IcZ56OuxrtaEz8UYNRHBrUa9bYeX9oVY93KspZZBf/I=

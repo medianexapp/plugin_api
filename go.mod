@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/BurntSushi/toml v1.4.0
-	github.com/labulakalia/wazero_net v0.0.9-0.20250226121734-cdee066367bc
+	github.com/labulakalia/wazero_net v0.0.9-0.20250308094800-cfe51da8ab44
 	google.golang.org/protobuf v1.36.5
 )
 

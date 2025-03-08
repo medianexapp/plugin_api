@@ -6,7 +6,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
+	"google.golang.org/protobuf/proto"
 )
 
 // & 与 0 & 1 = 0  1 & 1 = 1
@@ -41,5 +43,10 @@ func TestLo(t *testing.T) {
 	slog.SetDefault(slog.New(handlder).With("plugin", "ftp"))
 	slog.SetLogLoggerLevel(slog.LevelDebug)
 	slog.Error("isisisiss")
+
+	entry := plugin.DirEntry{
+		FileEntries: []*plugin.FileEntry{},
+	}
+	t.Log(proto.Marshal(&entry))
 
 }
