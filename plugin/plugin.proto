@@ -54,11 +54,12 @@ message FileResource {
     enum Resolution {
         ResolutionUNSPECIFIED = 0;
         Original              = 1;  // Origin
-        SD                    = 2;  // 480P high defintion
-        HD                    = 3;  // 720P high defintion
-        FHD                   = 4;  // 1080P full high defintion
-        QHD                   = 5;  // 2K  quad high defintion
-        UHD                   = 6;  // 4K ultra high defintion
+        LD                    = 2;  // 360P high defintion
+        SD                    = 3;  // 480P high defintion
+        HD                    = 4;  // 720P high defintion
+        FHD                   = 5;  // 1080P full high defintion
+        QHD                   = 6;  // 2K  quad high defintion
+        UHD                   = 7;  // 4K ultra high defintion
     }
     enum ResourceType {
         ResourceTypeUNSPECIFIED = 0;

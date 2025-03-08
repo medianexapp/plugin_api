@@ -162,11 +162,12 @@ const FileResource_Resolution$json = {
   '2': [
     {'1': 'ResolutionUNSPECIFIED', '2': 0},
     {'1': 'Original', '2': 1},
-    {'1': 'SD', '2': 2},
-    {'1': 'HD', '2': 3},
-    {'1': 'FHD', '2': 4},
-    {'1': 'QHD', '2': 5},
-    {'1': 'UHD', '2': 6},
+    {'1': 'LD', '2': 2},
+    {'1': 'SD', '2': 3},
+    {'1': 'HD', '2': 4},
+    {'1': 'FHD', '2': 5},
+    {'1': 'QHD', '2': 6},
+    {'1': 'UHD', '2': 7},
   ],
 };
 
@@ -191,8 +192,8 @@ final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
     'VyY2UuUmVzb3VyY2VUeXBlUgxyZXNvdXJjZVR5cGUSFAoFdGl0bGUYBSABKAlSBXRpdGxlEkkK'
     'BmhlYWRlchgGIAMoCzIxLnBsdWdpbi5GaWxlUmVzb3VyY2UuRmlsZVJlc291cmNlRGF0YS5IZW'
     'FkZXJFbnRyeVIGaGVhZGVyGjkKC0hlYWRlckVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZh'
-    'bHVlGAIgASgJUgV2YWx1ZToCOAEiYAoKUmVzb2x1dGlvbhIZChVSZXNvbHV0aW9uVU5TUEVDSU'
-    'ZJRUQQABIMCghPcmlnaW5hbBABEgYKAlNEEAISBgoCSEQQAxIHCgNGSEQQBBIHCgNRSEQQBRIH'
-    'CgNVSEQQBiJPCgxSZXNvdXJjZVR5cGUSGwoXUmVzb3VyY2VUeXBlVU5TUEVDSUZJRUQQABIJCg'
-    'VWaWRlbxABEgwKCFN1YnRpdGxlEAISCQoFQXVkaW8QAw==');
+    'bHVlGAIgASgJUgV2YWx1ZToCOAEiaAoKUmVzb2x1dGlvbhIZChVSZXNvbHV0aW9uVU5TUEVDSU'
+    'ZJRUQQABIMCghPcmlnaW5hbBABEgYKAkxEEAISBgoCU0QQAxIGCgJIRBAEEgcKA0ZIRBAFEgcK'
+    'A1FIRBAGEgcKA1VIRBAHIk8KDFJlc291cmNlVHlwZRIbChdSZXNvdXJjZVR5cGVVTlNQRUNJRk'
+    'lFRBAAEgkKBVZpZGVvEAESDAoIU3VidGl0bGUQAhIJCgVBdWRpbxAD');
 

@@ -36,15 +36,17 @@ class FileEntry_FileType extends $pb.ProtobufEnum {
 class FileResource_Resolution extends $pb.ProtobufEnum {
   static const FileResource_Resolution ResolutionUNSPECIFIED = FileResource_Resolution._(0, _omitEnumNames ? '' : 'ResolutionUNSPECIFIED');
   static const FileResource_Resolution Original = FileResource_Resolution._(1, _omitEnumNames ? '' : 'Original');
-  static const FileResource_Resolution SD = FileResource_Resolution._(2, _omitEnumNames ? '' : 'SD');
-  static const FileResource_Resolution HD = FileResource_Resolution._(3, _omitEnumNames ? '' : 'HD');
-  static const FileResource_Resolution FHD = FileResource_Resolution._(4, _omitEnumNames ? '' : 'FHD');
-  static const FileResource_Resolution QHD = FileResource_Resolution._(5, _omitEnumNames ? '' : 'QHD');
-  static const FileResource_Resolution UHD = FileResource_Resolution._(6, _omitEnumNames ? '' : 'UHD');
+  static const FileResource_Resolution LD = FileResource_Resolution._(2, _omitEnumNames ? '' : 'LD');
+  static const FileResource_Resolution SD = FileResource_Resolution._(3, _omitEnumNames ? '' : 'SD');
+  static const FileResource_Resolution HD = FileResource_Resolution._(4, _omitEnumNames ? '' : 'HD');
+  static const FileResource_Resolution FHD = FileResource_Resolution._(5, _omitEnumNames ? '' : 'FHD');
+  static const FileResource_Resolution QHD = FileResource_Resolution._(6, _omitEnumNames ? '' : 'QHD');
+  static const FileResource_Resolution UHD = FileResource_Resolution._(7, _omitEnumNames ? '' : 'UHD');
 
   static const $core.List<FileResource_Resolution> values = <FileResource_Resolution> [
     ResolutionUNSPECIFIED,
     Original,
+    LD,
     SD,
     HD,
     FHD,
