@@ -13,3 +13,7 @@ func IsAuthCallback(authMethod *anypb.Any) bool {
 func IsAuthScanQrcode(authMethod *anypb.Any) bool {
 	return authMethod.MessageIs(&Auth_ScanQrcode{})
 }
+
+func IsAuthRefresh(authMethod *anypb.Any) bool {
+	return authMethod.MessageIs(&AuthRefresh{})
+}

@@ -24,7 +24,7 @@ type IPlugin interface {
 	// if authMethod Type is RefreshToken, this is func need refresh token
 	CheckAuthMethod(authMethod *anypb.Any) (authData *plugin.AuthData, err error)
 	// check auth is success by raw auth data
-	//  if authData is error, will return error,will return error,then need auth again
+	//  if authData is error, will return error,then need auth again
 	CheckAuthData(authDataBytes []byte) (err error)
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() (pluginAuthId string, err error)
