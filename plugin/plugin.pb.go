@@ -502,6 +502,170 @@ func (x *AuthRefresh) GetAuthData() *AuthData {
 	return nil
 }
 
+// oauth config
+type OauthConfig struct {
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	ClientId     string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	ClientSecret string                 `protobuf:"bytes,2,opt,name=client_secret,json=clientSecret,proto3" json:"client_secret,omitempty"`
+	RedirectUri  string                 `protobuf:"bytes,3,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`
+	AuthUrl      string                 `protobuf:"bytes,4,opt,name=auth_url,json=authUrl,proto3" json:"auth_url,omitempty"`
+	TokenUrl     string                 `protobuf:"bytes,5,opt,name=token_url,json=tokenUrl,proto3" json:"token_url,omitempty"`
+	Scopes       []string               `protobuf:"bytes,6,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	// json POST application/json
+	// form POST application/x-www-form-urlencoded
+	// uri GET
+	TokenReqType  string `protobuf:"bytes,7,opt,name=token_req_type,json=tokenReqType,proto3" json:"token_req_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OauthConfig) Reset() {
+	*x = OauthConfig{}
+	mi := &file_plugin_plugin_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OauthConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OauthConfig) ProtoMessage() {}
+
+func (x *OauthConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_plugin_plugin_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OauthConfig.ProtoReflect.Descriptor instead.
+func (*OauthConfig) Descriptor() ([]byte, []int) {
+	return file_plugin_plugin_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *OauthConfig) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *OauthConfig) GetClientSecret() string {
+	if x != nil {
+		return x.ClientSecret
+	}
+	return ""
+}
+
+func (x *OauthConfig) GetRedirectUri() string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return ""
+}
+
+func (x *OauthConfig) GetAuthUrl() string {
+	if x != nil {
+		return x.AuthUrl
+	}
+	return ""
+}
+
+func (x *OauthConfig) GetTokenUrl() string {
+	if x != nil {
+		return x.TokenUrl
+	}
+	return ""
+}
+
+func (x *OauthConfig) GetScopes() []string {
+	if x != nil {
+		return x.Scopes
+	}
+	return nil
+}
+
+func (x *OauthConfig) GetTokenReqType() string {
+	if x != nil {
+		return x.TokenReqType
+	}
+	return ""
+}
+
+type Token struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TokenType     string                 `protobuf:"bytes,1,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
+	AccessToken   string                 `protobuf:"bytes,2,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,3,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	ExpiresIn     uint64                 `protobuf:"varint,4,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Token) Reset() {
+	*x = Token{}
+	mi := &file_plugin_plugin_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Token) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Token) ProtoMessage() {}
+
+func (x *Token) ProtoReflect() protoreflect.Message {
+	mi := &file_plugin_plugin_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Token.ProtoReflect.Descriptor instead.
+func (*Token) Descriptor() ([]byte, []int) {
+	return file_plugin_plugin_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *Token) GetTokenType() string {
+	if x != nil {
+		return x.TokenType
+	}
+	return ""
+}
+
+func (x *Token) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *Token) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *Token) GetExpiresIn() uint64 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
+}
+
 // form data input
 type Auth_FormData struct {
 	state         protoimpl.MessageState    `protogen:"open.v1"`
@@ -512,7 +676,7 @@ type Auth_FormData struct {
 
 func (x *Auth_FormData) Reset() {
 	*x = Auth_FormData{}
-	mi := &file_plugin_plugin_proto_msgTypes[6]
+	mi := &file_plugin_plugin_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -524,7 +688,7 @@ func (x *Auth_FormData) String() string {
 func (*Auth_FormData) ProtoMessage() {}
 
 func (x *Auth_FormData) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_plugin_proto_msgTypes[6]
+	mi := &file_plugin_plugin_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -558,7 +722,7 @@ type Auth_ScanQrcode struct {
 
 func (x *Auth_ScanQrcode) Reset() {
 	*x = Auth_ScanQrcode{}
-	mi := &file_plugin_plugin_proto_msgTypes[7]
+	mi := &file_plugin_plugin_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -570,7 +734,7 @@ func (x *Auth_ScanQrcode) String() string {
 func (*Auth_ScanQrcode) ProtoMessage() {}
 
 func (x *Auth_ScanQrcode) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_plugin_proto_msgTypes[7]
+	mi := &file_plugin_plugin_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -618,7 +782,7 @@ type Auth_Callback struct {
 
 func (x *Auth_Callback) Reset() {
 	*x = Auth_Callback{}
-	mi := &file_plugin_plugin_proto_msgTypes[8]
+	mi := &file_plugin_plugin_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -630,7 +794,7 @@ func (x *Auth_Callback) String() string {
 func (*Auth_Callback) ProtoMessage() {}
 
 func (x *Auth_Callback) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_plugin_proto_msgTypes[8]
+	mi := &file_plugin_plugin_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -678,7 +842,7 @@ type Auth_FormData_FormItem struct {
 
 func (x *Auth_FormData_FormItem) Reset() {
 	*x = Auth_FormData_FormItem{}
-	mi := &file_plugin_plugin_proto_msgTypes[9]
+	mi := &file_plugin_plugin_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -690,7 +854,7 @@ func (x *Auth_FormData_FormItem) String() string {
 func (*Auth_FormData_FormItem) ProtoMessage() {}
 
 func (x *Auth_FormData_FormItem) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_plugin_proto_msgTypes[9]
+	mi := &file_plugin_plugin_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -741,7 +905,7 @@ type FileResource_FileResourceData struct {
 
 func (x *FileResource_FileResourceData) Reset() {
 	*x = FileResource_FileResourceData{}
-	mi := &file_plugin_plugin_proto_msgTypes[10]
+	mi := &file_plugin_plugin_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -753,7 +917,7 @@ func (x *FileResource_FileResourceData) String() string {
 func (*FileResource_FileResourceData) ProtoMessage() {}
 
 func (x *FileResource_FileResourceData) ProtoReflect() protoreflect.Message {
-	mi := &file_plugin_plugin_proto_msgTypes[10]
+	mi := &file_plugin_plugin_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -927,10 +1091,34 @@ var file_plugin_plugin_proto_rawDesc = []byte{
 	0x68, 0x12, 0x2d, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x2e, 0x41, 0x75,
 	0x74, 0x68, 0x44, 0x61, 0x74, 0x61, 0x52, 0x08, 0x61, 0x75, 0x74, 0x68, 0x44, 0x61, 0x74, 0x61,
-	0x42, 0x31, 0x5a, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6c,
-	0x61, 0x62, 0x75, 0x6c, 0x61, 0x6b, 0x61, 0x6c, 0x69, 0x61, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69,
-	0x6e, 0x5f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x3b, 0x70, 0x6c, 0x75,
-	0x67, 0x69, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0xe8, 0x01, 0x0a, 0x0b, 0x4f, 0x61, 0x75, 0x74, 0x68, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x23, 0x0a,
+	0x0d, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x63, 0x72,
+	0x65, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x65, 0x64, 0x69, 0x72, 0x65, 0x63, 0x74, 0x5f, 0x75,
+	0x72, 0x69, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x72, 0x65, 0x64, 0x69, 0x72, 0x65,
+	0x63, 0x74, 0x55, 0x72, 0x69, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x75, 0x72,
+	0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x75, 0x74, 0x68, 0x55, 0x72, 0x6c,
+	0x12, 0x1b, 0x0a, 0x09, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x55, 0x72, 0x6c, 0x12, 0x16, 0x0a,
+	0x06, 0x73, 0x63, 0x6f, 0x70, 0x65, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x73,
+	0x63, 0x6f, 0x70, 0x65, 0x73, 0x12, 0x24, 0x0a, 0x0e, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x72,
+	0x65, 0x71, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x74,
+	0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x54, 0x79, 0x70, 0x65, 0x22, 0x8d, 0x01, 0x0a, 0x05,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x6f, 0x6b, 0x65, 0x6e,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x5f, 0x74,
+	0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x65,
+	0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x66, 0x72, 0x65,
+	0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c,
+	0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x1d, 0x0a, 0x0a,
+	0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x73, 0x5f, 0x69, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x09, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x73, 0x49, 0x6e, 0x42, 0x31, 0x5a, 0x2f, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x6c, 0x61, 0x62, 0x75, 0x6c, 0x61,
+	0x6b, 0x61, 0x6c, 0x69, 0x61, 0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x5f, 0x61, 0x70, 0x69,
+	0x2f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x3b, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -946,7 +1134,7 @@ func file_plugin_plugin_proto_rawDescGZIP() []byte {
 }
 
 var file_plugin_plugin_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_plugin_plugin_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_plugin_plugin_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_plugin_plugin_proto_goTypes = []any{
 	(FileEntry_FileType)(0),               // 0: plugin.FileEntry.FileType
 	(FileResource_Resolution)(0),          // 1: plugin.FileResource.Resolution
@@ -957,26 +1145,28 @@ var file_plugin_plugin_proto_goTypes = []any{
 	(*FileResource)(nil),                  // 6: plugin.FileResource
 	(*AuthData)(nil),                      // 7: plugin.AuthData
 	(*AuthRefresh)(nil),                   // 8: plugin.AuthRefresh
-	(*Auth_FormData)(nil),                 // 9: plugin.Auth.FormData
-	(*Auth_ScanQrcode)(nil),               // 10: plugin.Auth.ScanQrcode
-	(*Auth_Callback)(nil),                 // 11: plugin.Auth.Callback
-	(*Auth_FormData_FormItem)(nil),        // 12: plugin.Auth.FormData.FormItem
-	(*FileResource_FileResourceData)(nil), // 13: plugin.FileResource.FileResourceData
-	nil,                                   // 14: plugin.FileResource.FileResourceData.HeaderEntry
-	(*anypb.Any)(nil),                     // 15: google.protobuf.Any
+	(*OauthConfig)(nil),                   // 9: plugin.OauthConfig
+	(*Token)(nil),                         // 10: plugin.Token
+	(*Auth_FormData)(nil),                 // 11: plugin.Auth.FormData
+	(*Auth_ScanQrcode)(nil),               // 12: plugin.Auth.ScanQrcode
+	(*Auth_Callback)(nil),                 // 13: plugin.Auth.Callback
+	(*Auth_FormData_FormItem)(nil),        // 14: plugin.Auth.FormData.FormItem
+	(*FileResource_FileResourceData)(nil), // 15: plugin.FileResource.FileResourceData
+	nil,                                   // 16: plugin.FileResource.FileResourceData.HeaderEntry
+	(*anypb.Any)(nil),                     // 17: google.protobuf.Any
 }
 var file_plugin_plugin_proto_depIdxs = []int32{
-	15, // 0: plugin.Auth.auth_methods:type_name -> google.protobuf.Any
+	17, // 0: plugin.Auth.auth_methods:type_name -> google.protobuf.Any
 	0,  // 1: plugin.FileEntry.file_type:type_name -> plugin.FileEntry.FileType
 	4,  // 2: plugin.DirEntry.file_entries:type_name -> plugin.FileEntry
-	13, // 3: plugin.FileResource.file_resource_data:type_name -> plugin.FileResource.FileResourceData
+	15, // 3: plugin.FileResource.file_resource_data:type_name -> plugin.FileResource.FileResourceData
 	7,  // 4: plugin.AuthRefresh.auth_data:type_name -> plugin.AuthData
-	12, // 5: plugin.Auth.FormData.form_items:type_name -> plugin.Auth.FormData.FormItem
-	15, // 6: plugin.Auth.FormData.FormItem.value:type_name -> google.protobuf.Any
-	12, // 7: plugin.Auth.FormData.FormItem.enum_values:type_name -> plugin.Auth.FormData.FormItem
+	14, // 5: plugin.Auth.FormData.form_items:type_name -> plugin.Auth.FormData.FormItem
+	17, // 6: plugin.Auth.FormData.FormItem.value:type_name -> google.protobuf.Any
+	14, // 7: plugin.Auth.FormData.FormItem.enum_values:type_name -> plugin.Auth.FormData.FormItem
 	1,  // 8: plugin.FileResource.FileResourceData.resolution:type_name -> plugin.FileResource.Resolution
 	2,  // 9: plugin.FileResource.FileResourceData.resource_type:type_name -> plugin.FileResource.ResourceType
-	14, // 10: plugin.FileResource.FileResourceData.header:type_name -> plugin.FileResource.FileResourceData.HeaderEntry
+	16, // 10: plugin.FileResource.FileResourceData.header:type_name -> plugin.FileResource.FileResourceData.HeaderEntry
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
@@ -995,7 +1185,7 @@ func file_plugin_plugin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plugin_plugin_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

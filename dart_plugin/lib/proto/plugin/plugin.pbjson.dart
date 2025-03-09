@@ -224,3 +224,42 @@ final $typed_data.Uint8List authRefreshDescriptor = $convert.base64Decode(
     'CgtBdXRoUmVmcmVzaBItCglhdXRoX2RhdGEYASABKAsyEC5wbHVnaW4uQXV0aERhdGFSCGF1dG'
     'hEYXRh');
 
+@$core.Deprecated('Use oauthConfigDescriptor instead')
+const OauthConfig$json = {
+  '1': 'OauthConfig',
+  '2': [
+    {'1': 'client_id', '3': 1, '4': 1, '5': 9, '10': 'clientId'},
+    {'1': 'client_secret', '3': 2, '4': 1, '5': 9, '10': 'clientSecret'},
+    {'1': 'redirect_uri', '3': 3, '4': 1, '5': 9, '10': 'redirectUri'},
+    {'1': 'auth_url', '3': 4, '4': 1, '5': 9, '10': 'authUrl'},
+    {'1': 'token_url', '3': 5, '4': 1, '5': 9, '10': 'tokenUrl'},
+    {'1': 'scopes', '3': 6, '4': 3, '5': 9, '10': 'scopes'},
+    {'1': 'token_req_type', '3': 7, '4': 1, '5': 9, '10': 'tokenReqType'},
+  ],
+};
+
+/// Descriptor for `OauthConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List oauthConfigDescriptor = $convert.base64Decode(
+    'CgtPYXV0aENvbmZpZxIbCgljbGllbnRfaWQYASABKAlSCGNsaWVudElkEiMKDWNsaWVudF9zZW'
+    'NyZXQYAiABKAlSDGNsaWVudFNlY3JldBIhCgxyZWRpcmVjdF91cmkYAyABKAlSC3JlZGlyZWN0'
+    'VXJpEhkKCGF1dGhfdXJsGAQgASgJUgdhdXRoVXJsEhsKCXRva2VuX3VybBgFIAEoCVIIdG9rZW'
+    '5VcmwSFgoGc2NvcGVzGAYgAygJUgZzY29wZXMSJAoOdG9rZW5fcmVxX3R5cGUYByABKAlSDHRv'
+    'a2VuUmVxVHlwZQ==');
+
+@$core.Deprecated('Use tokenDescriptor instead')
+const Token$json = {
+  '1': 'Token',
+  '2': [
+    {'1': 'token_type', '3': 1, '4': 1, '5': 9, '10': 'tokenType'},
+    {'1': 'access_token', '3': 2, '4': 1, '5': 9, '10': 'accessToken'},
+    {'1': 'refresh_token', '3': 3, '4': 1, '5': 9, '10': 'refreshToken'},
+    {'1': 'expires_in', '3': 4, '4': 1, '5': 4, '10': 'expiresIn'},
+  ],
+};
+
+/// Descriptor for `Token`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List tokenDescriptor = $convert.base64Decode(
+    'CgVUb2tlbhIdCgp0b2tlbl90eXBlGAEgASgJUgl0b2tlblR5cGUSIQoMYWNjZXNzX3Rva2VuGA'
+    'IgASgJUgthY2Nlc3NUb2tlbhIjCg1yZWZyZXNoX3Rva2VuGAMgASgJUgxyZWZyZXNoVG9rZW4S'
+    'HQoKZXhwaXJlc19pbhgEIAEoBFIJZXhwaXJlc0lu');
+

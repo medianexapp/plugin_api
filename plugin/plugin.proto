@@ -87,3 +87,32 @@ message AuthData {
 message AuthRefresh {
     AuthData auth_data = 1;
 }
+
+// oauth config
+message OauthConfig {
+    string          client_id     = 1;
+    string          client_secret = 2;
+    string          redirect_uri  = 3;
+    string          auth_url      = 4;
+    string          token_url     = 5;
+    repeated string scopes        = 6;
+    // json POST application/json
+    // form POST application/x-www-form-urlencoded
+    // uri GET
+    string token_req_type = 7;
+}
+
+// message TokenRequest {
+//     string client_id     = 1;
+//     string client_secret = 2;
+//     string grant_type    = 3;
+//     string code          = 4;
+//     string refresh_token = 5;
+// }
+
+message Token {
+    string token_type    = 1;
+    string access_token  = 2;
+    string refresh_token = 3;
+    uint64 expires_in    = 4;
+}

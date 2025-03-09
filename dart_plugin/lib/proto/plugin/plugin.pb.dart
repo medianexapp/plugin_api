@@ -776,6 +776,230 @@ class AuthRefresh extends $pb.GeneratedMessage {
   AuthData ensureAuthData() => $_ensure(0);
 }
 
+/// oauth config
+class OauthConfig extends $pb.GeneratedMessage {
+  factory OauthConfig({
+    $core.String? clientId,
+    $core.String? clientSecret,
+    $core.String? redirectUri,
+    $core.String? authUrl,
+    $core.String? tokenUrl,
+    $core.Iterable<$core.String>? scopes,
+    $core.String? tokenReqType,
+  }) {
+    final $result = create();
+    if (clientId != null) {
+      $result.clientId = clientId;
+    }
+    if (clientSecret != null) {
+      $result.clientSecret = clientSecret;
+    }
+    if (redirectUri != null) {
+      $result.redirectUri = redirectUri;
+    }
+    if (authUrl != null) {
+      $result.authUrl = authUrl;
+    }
+    if (tokenUrl != null) {
+      $result.tokenUrl = tokenUrl;
+    }
+    if (scopes != null) {
+      $result.scopes.addAll(scopes);
+    }
+    if (tokenReqType != null) {
+      $result.tokenReqType = tokenReqType;
+    }
+    return $result;
+  }
+  OauthConfig._() : super();
+  factory OauthConfig.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory OauthConfig.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OauthConfig', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'clientId')
+    ..aOS(2, _omitFieldNames ? '' : 'clientSecret')
+    ..aOS(3, _omitFieldNames ? '' : 'redirectUri')
+    ..aOS(4, _omitFieldNames ? '' : 'authUrl')
+    ..aOS(5, _omitFieldNames ? '' : 'tokenUrl')
+    ..pPS(6, _omitFieldNames ? '' : 'scopes')
+    ..aOS(7, _omitFieldNames ? '' : 'tokenReqType')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  OauthConfig clone() => OauthConfig()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  OauthConfig copyWith(void Function(OauthConfig) updates) => super.copyWith((message) => updates(message as OauthConfig)) as OauthConfig;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OauthConfig create() => OauthConfig._();
+  OauthConfig createEmptyInstance() => create();
+  static $pb.PbList<OauthConfig> createRepeated() => $pb.PbList<OauthConfig>();
+  @$core.pragma('dart2js:noInline')
+  static OauthConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OauthConfig>(create);
+  static OauthConfig? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get clientId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set clientId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasClientId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearClientId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get clientSecret => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set clientSecret($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasClientSecret() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearClientSecret() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get redirectUri => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set redirectUri($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRedirectUri() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRedirectUri() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get authUrl => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set authUrl($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAuthUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAuthUrl() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get tokenUrl => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set tokenUrl($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTokenUrl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTokenUrl() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.String> get scopes => $_getList(5);
+
+  /// json POST application/json
+  /// form POST application/x-www-form-urlencoded
+  /// uri GET
+  @$pb.TagNumber(7)
+  $core.String get tokenReqType => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set tokenReqType($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasTokenReqType() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearTokenReqType() => clearField(7);
+}
+
+class Token extends $pb.GeneratedMessage {
+  factory Token({
+    $core.String? tokenType,
+    $core.String? accessToken,
+    $core.String? refreshToken,
+    $fixnum.Int64? expiresIn,
+  }) {
+    final $result = create();
+    if (tokenType != null) {
+      $result.tokenType = tokenType;
+    }
+    if (accessToken != null) {
+      $result.accessToken = accessToken;
+    }
+    if (refreshToken != null) {
+      $result.refreshToken = refreshToken;
+    }
+    if (expiresIn != null) {
+      $result.expiresIn = expiresIn;
+    }
+    return $result;
+  }
+  Token._() : super();
+  factory Token.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Token.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Token', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'tokenType')
+    ..aOS(2, _omitFieldNames ? '' : 'accessToken')
+    ..aOS(3, _omitFieldNames ? '' : 'refreshToken')
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'expiresIn', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Token clone() => Token()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Token copyWith(void Function(Token) updates) => super.copyWith((message) => updates(message as Token)) as Token;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Token create() => Token._();
+  Token createEmptyInstance() => create();
+  static $pb.PbList<Token> createRepeated() => $pb.PbList<Token>();
+  @$core.pragma('dart2js:noInline')
+  static Token getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Token>(create);
+  static Token? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get tokenType => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set tokenType($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTokenType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTokenType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get accessToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set accessToken($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAccessToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAccessToken() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get refreshToken => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set refreshToken($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasRefreshToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearRefreshToken() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $fixnum.Int64 get expiresIn => $_getI64(3);
+  @$pb.TagNumber(4)
+  set expiresIn($fixnum.Int64 v) { $_setInt64(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasExpiresIn() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearExpiresIn() => clearField(4);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');
