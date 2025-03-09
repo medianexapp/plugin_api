@@ -782,9 +782,11 @@ class OauthConfig extends $pb.GeneratedMessage {
     $core.String? clientId,
     $core.String? clientSecret,
     $core.String? redirectUri,
-    $core.String? authUrl,
-    $core.String? tokenUrl,
     $core.Iterable<$core.String>? scopes,
+    $core.String? authUrl,
+    $core.String? qrcodeUrl,
+    $core.String? qrcodeReqType,
+    $core.String? tokenUrl,
     $core.String? tokenReqType,
   }) {
     final $result = create();
@@ -797,14 +799,20 @@ class OauthConfig extends $pb.GeneratedMessage {
     if (redirectUri != null) {
       $result.redirectUri = redirectUri;
     }
+    if (scopes != null) {
+      $result.scopes.addAll(scopes);
+    }
     if (authUrl != null) {
       $result.authUrl = authUrl;
     }
+    if (qrcodeUrl != null) {
+      $result.qrcodeUrl = qrcodeUrl;
+    }
+    if (qrcodeReqType != null) {
+      $result.qrcodeReqType = qrcodeReqType;
+    }
     if (tokenUrl != null) {
       $result.tokenUrl = tokenUrl;
-    }
-    if (scopes != null) {
-      $result.scopes.addAll(scopes);
     }
     if (tokenReqType != null) {
       $result.tokenReqType = tokenReqType;
@@ -819,10 +827,12 @@ class OauthConfig extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'clientId')
     ..aOS(2, _omitFieldNames ? '' : 'clientSecret')
     ..aOS(3, _omitFieldNames ? '' : 'redirectUri')
-    ..aOS(4, _omitFieldNames ? '' : 'authUrl')
-    ..aOS(5, _omitFieldNames ? '' : 'tokenUrl')
-    ..pPS(6, _omitFieldNames ? '' : 'scopes')
-    ..aOS(7, _omitFieldNames ? '' : 'tokenReqType')
+    ..pPS(4, _omitFieldNames ? '' : 'scopes')
+    ..aOS(5, _omitFieldNames ? '' : 'authUrl')
+    ..aOS(6, _omitFieldNames ? '' : 'qrcodeUrl')
+    ..aOS(7, _omitFieldNames ? '' : 'qrcodeReqType')
+    ..aOS(10, _omitFieldNames ? '' : 'tokenUrl')
+    ..aOS(11, _omitFieldNames ? '' : 'tokenReqType')
     ..hasRequiredFields = false
   ;
 
@@ -875,37 +885,55 @@ class OauthConfig extends $pb.GeneratedMessage {
   void clearRedirectUri() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get authUrl => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set authUrl($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasAuthUrl() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearAuthUrl() => clearField(4);
+  $core.List<$core.String> get scopes => $_getList(3);
 
   @$pb.TagNumber(5)
-  $core.String get tokenUrl => $_getSZ(4);
+  $core.String get authUrl => $_getSZ(4);
   @$pb.TagNumber(5)
-  set tokenUrl($core.String v) { $_setString(4, v); }
+  set authUrl($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasTokenUrl() => $_has(4);
+  $core.bool hasAuthUrl() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTokenUrl() => clearField(5);
+  void clearAuthUrl() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.List<$core.String> get scopes => $_getList(5);
+  $core.String get qrcodeUrl => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set qrcodeUrl($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasQrcodeUrl() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearQrcodeUrl() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get qrcodeReqType => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set qrcodeReqType($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasQrcodeReqType() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearQrcodeReqType() => clearField(7);
+
+  @$pb.TagNumber(10)
+  $core.String get tokenUrl => $_getSZ(7);
+  @$pb.TagNumber(10)
+  set tokenUrl($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasTokenUrl() => $_has(7);
+  @$pb.TagNumber(10)
+  void clearTokenUrl() => clearField(10);
 
   /// json POST application/json
   /// form POST application/x-www-form-urlencoded
   /// uri GET
-  @$pb.TagNumber(7)
-  $core.String get tokenReqType => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set tokenReqType($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasTokenReqType() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearTokenReqType() => clearField(7);
+  @$pb.TagNumber(11)
+  $core.String get tokenReqType => $_getSZ(8);
+  @$pb.TagNumber(11)
+  set tokenReqType($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasTokenReqType() => $_has(8);
+  @$pb.TagNumber(11)
+  void clearTokenReqType() => clearField(11);
 }
 
 class Token extends $pb.GeneratedMessage {

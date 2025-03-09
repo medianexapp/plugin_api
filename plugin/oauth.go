@@ -29,6 +29,13 @@ func (o *OauthConfig) GetAuthAddr(state string, param map[string]string) string 
 	return fmt.Sprintf("%s?%s", o.AuthUrl, u.Encode())
 }
 
+func (o *OauthConfig) GetQrcodeData(param map[string]string) {
+	u := url.Values{}
+	u.Add("client_id", o.ClientId)
+	u.Add("redirect_uri", o.ClientId)
+	u.Add("scope", strings.Join(o.Scopes, ","))
+}
+
 func (o *OauthConfig) AuthCodeVerifier(codeVerifier string) (*Token, error) {
 	return o.getToken("authorization_code", "", "", codeVerifier)
 }

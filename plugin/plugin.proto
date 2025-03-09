@@ -90,25 +90,20 @@ message AuthRefresh {
 
 // oauth config
 message OauthConfig {
-    string          client_id     = 1;
-    string          client_secret = 2;
-    string          redirect_uri  = 3;
-    string          auth_url      = 4;
-    string          token_url     = 5;
-    repeated string scopes        = 6;
+    string          client_id       = 1;
+    string          client_secret   = 2;
+    string          redirect_uri    = 3;
+    repeated string scopes          = 4;
+    string          auth_url        = 5;
+    string          qrcode_url      = 6;
+    string          qrcode_req_type = 7;  // json,url
+
+    string token_url = 10;
     // json POST application/json
     // form POST application/x-www-form-urlencoded
     // uri GET
-    string token_req_type = 7;
+    string token_req_type = 11;
 }
-
-// message TokenRequest {
-//     string client_id     = 1;
-//     string client_secret = 2;
-//     string grant_type    = 3;
-//     string code          = 4;
-//     string refresh_token = 5;
-// }
 
 message Token {
     string token_type    = 1;

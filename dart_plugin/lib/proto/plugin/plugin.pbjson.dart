@@ -231,10 +231,12 @@ const OauthConfig$json = {
     {'1': 'client_id', '3': 1, '4': 1, '5': 9, '10': 'clientId'},
     {'1': 'client_secret', '3': 2, '4': 1, '5': 9, '10': 'clientSecret'},
     {'1': 'redirect_uri', '3': 3, '4': 1, '5': 9, '10': 'redirectUri'},
-    {'1': 'auth_url', '3': 4, '4': 1, '5': 9, '10': 'authUrl'},
-    {'1': 'token_url', '3': 5, '4': 1, '5': 9, '10': 'tokenUrl'},
-    {'1': 'scopes', '3': 6, '4': 3, '5': 9, '10': 'scopes'},
-    {'1': 'token_req_type', '3': 7, '4': 1, '5': 9, '10': 'tokenReqType'},
+    {'1': 'scopes', '3': 4, '4': 3, '5': 9, '10': 'scopes'},
+    {'1': 'auth_url', '3': 5, '4': 1, '5': 9, '10': 'authUrl'},
+    {'1': 'qrcode_url', '3': 6, '4': 1, '5': 9, '10': 'qrcodeUrl'},
+    {'1': 'qrcode_req_type', '3': 7, '4': 1, '5': 9, '10': 'qrcodeReqType'},
+    {'1': 'token_url', '3': 10, '4': 1, '5': 9, '10': 'tokenUrl'},
+    {'1': 'token_req_type', '3': 11, '4': 1, '5': 9, '10': 'tokenReqType'},
   ],
 };
 
@@ -242,9 +244,10 @@ const OauthConfig$json = {
 final $typed_data.Uint8List oauthConfigDescriptor = $convert.base64Decode(
     'CgtPYXV0aENvbmZpZxIbCgljbGllbnRfaWQYASABKAlSCGNsaWVudElkEiMKDWNsaWVudF9zZW'
     'NyZXQYAiABKAlSDGNsaWVudFNlY3JldBIhCgxyZWRpcmVjdF91cmkYAyABKAlSC3JlZGlyZWN0'
-    'VXJpEhkKCGF1dGhfdXJsGAQgASgJUgdhdXRoVXJsEhsKCXRva2VuX3VybBgFIAEoCVIIdG9rZW'
-    '5VcmwSFgoGc2NvcGVzGAYgAygJUgZzY29wZXMSJAoOdG9rZW5fcmVxX3R5cGUYByABKAlSDHRv'
-    'a2VuUmVxVHlwZQ==');
+    'VXJpEhYKBnNjb3BlcxgEIAMoCVIGc2NvcGVzEhkKCGF1dGhfdXJsGAUgASgJUgdhdXRoVXJsEh'
+    '0KCnFyY29kZV91cmwYBiABKAlSCXFyY29kZVVybBImCg9xcmNvZGVfcmVxX3R5cGUYByABKAlS'
+    'DXFyY29kZVJlcVR5cGUSGwoJdG9rZW5fdXJsGAogASgJUgh0b2tlblVybBIkCg50b2tlbl9yZX'
+    'FfdHlwZRgLIAEoCVIMdG9rZW5SZXFUeXBl');
 
 @$core.Deprecated('Use tokenDescriptor instead')
 const Token$json = {
