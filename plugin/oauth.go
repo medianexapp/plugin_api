@@ -9,18 +9,21 @@ import (
 	"strings"
 )
 
-func (o *OauthConfig) GetAuthAddr(state string, params map[string]string) string {
+func (o *OauthConfig) GetAuthAddr(state string, param map[string]string) string {
 	u := url.Values{}
 	u.Add("client_id", o.ClientId)
 	u.Add("redirect_uri", o.ClientId)
 	u.Add("scope", strings.Join(o.Scopes, ","))
 	u.Add("state", state)
 
-	if params["response_type"] == "" {
+	if param == nil {
+		param = make(map[string]string)
+	}
+	if param["response_type"] == "" {
 		u.Add("response_type", "code")
 	}
 
-	for k, v := range params {
+	for k, v := range param {
 		u.Set(k, v)
 	}
 	return fmt.Sprintf("%s?%s", o.AuthUrl, u.Encode())
