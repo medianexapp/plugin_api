@@ -202,12 +202,25 @@ const AuthData$json = {
   '1': 'AuthData',
   '2': [
     {'1': 'auth_data', '3': 1, '4': 1, '5': 12, '10': 'authData'},
-    {'1': 'expired_time', '3': 2, '4': 1, '5': 4, '10': 'expiredTime'},
+    {'1': 'auth_expired_time', '3': 2, '4': 1, '5': 4, '10': 'authExpiredTime'},
   ],
 };
 
 /// Descriptor for `AuthData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authDataDescriptor = $convert.base64Decode(
-    'CghBdXRoRGF0YRIbCglhdXRoX2RhdGEYASABKAxSCGF1dGhEYXRhEiEKDGV4cGlyZWRfdGltZR'
-    'gCIAEoBFILZXhwaXJlZFRpbWU=');
+    'CghBdXRoRGF0YRIbCglhdXRoX2RhdGEYASABKAxSCGF1dGhEYXRhEioKEWF1dGhfZXhwaXJlZF'
+    '90aW1lGAIgASgEUg9hdXRoRXhwaXJlZFRpbWU=');
+
+@$core.Deprecated('Use refreshTokenDescriptor instead')
+const RefreshToken$json = {
+  '1': 'RefreshToken',
+  '2': [
+    {'1': 'auth_data', '3': 1, '4': 1, '5': 11, '6': '.plugin.AuthData', '10': 'authData'},
+  ],
+};
+
+/// Descriptor for `RefreshToken`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List refreshTokenDescriptor = $convert.base64Decode(
+    'CgxSZWZyZXNoVG9rZW4SLQoJYXV0aF9kYXRhGAEgASgLMhAucGx1Z2luLkF1dGhEYXRhUghhdX'
+    'RoRGF0YQ==');
 

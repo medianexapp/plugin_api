@@ -80,8 +80,8 @@ message FileResource {
 }
 
 message AuthData {
-    bytes  auth_data    = 1;
-    uint64 expired_time = 2;
+    bytes  auth_data         = 1;
+    uint64 auth_expired_time = 2;
 }
 
 message RefreshToken {

@@ -663,14 +663,14 @@ class FileResource extends $pb.GeneratedMessage {
 class AuthData extends $pb.GeneratedMessage {
   factory AuthData({
     $core.List<$core.int>? authData,
-    $fixnum.Int64? expiredTime,
+    $fixnum.Int64? authExpiredTime,
   }) {
     final $result = create();
     if (authData != null) {
       $result.authData = authData;
     }
-    if (expiredTime != null) {
-      $result.expiredTime = expiredTime;
+    if (authExpiredTime != null) {
+      $result.authExpiredTime = authExpiredTime;
     }
     return $result;
   }
@@ -680,7 +680,7 @@ class AuthData extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthData', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'authData', $pb.PbFieldType.OY)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'expiredTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'authExpiredTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -715,13 +715,65 @@ class AuthData extends $pb.GeneratedMessage {
   void clearAuthData() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get expiredTime => $_getI64(1);
+  $fixnum.Int64 get authExpiredTime => $_getI64(1);
   @$pb.TagNumber(2)
-  set expiredTime($fixnum.Int64 v) { $_setInt64(1, v); }
+  set authExpiredTime($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasExpiredTime() => $_has(1);
+  $core.bool hasAuthExpiredTime() => $_has(1);
   @$pb.TagNumber(2)
-  void clearExpiredTime() => clearField(2);
+  void clearAuthExpiredTime() => clearField(2);
+}
+
+class RefreshToken extends $pb.GeneratedMessage {
+  factory RefreshToken({
+    AuthData? authData,
+  }) {
+    final $result = create();
+    if (authData != null) {
+      $result.authData = authData;
+    }
+    return $result;
+  }
+  RefreshToken._() : super();
+  factory RefreshToken.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory RefreshToken.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RefreshToken', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOM<AuthData>(1, _omitFieldNames ? '' : 'authData', subBuilder: AuthData.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  RefreshToken clone() => RefreshToken()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  RefreshToken copyWith(void Function(RefreshToken) updates) => super.copyWith((message) => updates(message as RefreshToken)) as RefreshToken;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static RefreshToken create() => RefreshToken._();
+  RefreshToken createEmptyInstance() => create();
+  static $pb.PbList<RefreshToken> createRepeated() => $pb.PbList<RefreshToken>();
+  @$core.pragma('dart2js:noInline')
+  static RefreshToken getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RefreshToken>(create);
+  static RefreshToken? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  AuthData get authData => $_getN(0);
+  @$pb.TagNumber(1)
+  set authData(AuthData v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAuthData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAuthData() => clearField(1);
+  @$pb.TagNumber(1)
+  AuthData ensureAuthData() => $_ensure(0);
 }
 
 
