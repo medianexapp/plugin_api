@@ -201,15 +201,15 @@ final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
 const AuthData$json = {
   '1': 'AuthData',
   '2': [
-    {'1': 'auth_data', '3': 1, '4': 1, '5': 12, '10': 'authData'},
+    {'1': 'auth_data_bytes', '3': 1, '4': 1, '5': 12, '10': 'authDataBytes'},
     {'1': 'auth_expired_time', '3': 2, '4': 1, '5': 4, '10': 'authExpiredTime'},
   ],
 };
 
 /// Descriptor for `AuthData`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authDataDescriptor = $convert.base64Decode(
-    'CghBdXRoRGF0YRIbCglhdXRoX2RhdGEYASABKAxSCGF1dGhEYXRhEioKEWF1dGhfZXhwaXJlZF'
-    '90aW1lGAIgASgEUg9hdXRoRXhwaXJlZFRpbWU=');
+    'CghBdXRoRGF0YRImCg9hdXRoX2RhdGFfYnl0ZXMYASABKAxSDWF1dGhEYXRhQnl0ZXMSKgoRYX'
+    'V0aF9leHBpcmVkX3RpbWUYAiABKARSD2F1dGhFeHBpcmVkVGltZQ==');
 
 @$core.Deprecated('Use authRefreshDescriptor instead')
 const AuthRefresh$json = {
