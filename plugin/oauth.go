@@ -9,12 +9,12 @@ import (
 	"strings"
 )
 
-func (o *OauthConfig) GetAuthAddr(params map[string]string) string {
+func (o *OauthConfig) GetAuthAddr(state string, params map[string]string) string {
 	u := url.Values{}
 	u.Add("client_id", o.ClientId)
 	u.Add("redirect_uri", o.ClientId)
 	u.Add("scope", strings.Join(o.Scopes, ","))
-	u.Add("state", "")
+	u.Add("state", state)
 
 	if params["response_type"] == "" {
 		u.Add("response_type", "code")

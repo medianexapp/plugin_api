@@ -1,6 +1,10 @@
 package plugin
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+	"time"
+)
 
 func TestOAuth(t *testing.T) {
 	oauthConfig := OauthConfig{
@@ -12,5 +16,5 @@ func TestOAuth(t *testing.T) {
 		TokenUrl:     "http://token_url",
 		TokenReqType: "json",
 	}
-	t.Log(oauthConfig.GetAuthAddr(map[string]string{"param": "param1"}))
+	t.Log(oauthConfig.GetAuthAddr(fmt.Sprint(time.Now().Unix()), map[string]string{"param": "param1"}))
 }
