@@ -84,6 +84,6 @@ message AuthData {
     uint64 auth_expired_time = 2;
 }
 
-message RefreshToken {
+message AuthRefresh {
     AuthData auth_data = 1;
 }

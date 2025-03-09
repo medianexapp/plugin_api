@@ -724,8 +724,8 @@ class AuthData extends $pb.GeneratedMessage {
   void clearAuthExpiredTime() => clearField(2);
 }
 
-class RefreshToken extends $pb.GeneratedMessage {
-  factory RefreshToken({
+class AuthRefresh extends $pb.GeneratedMessage {
+  factory AuthRefresh({
     AuthData? authData,
   }) {
     final $result = create();
@@ -734,11 +734,11 @@ class RefreshToken extends $pb.GeneratedMessage {
     }
     return $result;
   }
-  RefreshToken._() : super();
-  factory RefreshToken.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory RefreshToken.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  AuthRefresh._() : super();
+  factory AuthRefresh.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AuthRefresh.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'RefreshToken', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthRefresh', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOM<AuthData>(1, _omitFieldNames ? '' : 'authData', subBuilder: AuthData.create)
     ..hasRequiredFields = false
   ;
@@ -747,22 +747,22 @@ class RefreshToken extends $pb.GeneratedMessage {
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  RefreshToken clone() => RefreshToken()..mergeFromMessage(this);
+  AuthRefresh clone() => AuthRefresh()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  RefreshToken copyWith(void Function(RefreshToken) updates) => super.copyWith((message) => updates(message as RefreshToken)) as RefreshToken;
+  AuthRefresh copyWith(void Function(AuthRefresh) updates) => super.copyWith((message) => updates(message as AuthRefresh)) as AuthRefresh;
 
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static RefreshToken create() => RefreshToken._();
-  RefreshToken createEmptyInstance() => create();
-  static $pb.PbList<RefreshToken> createRepeated() => $pb.PbList<RefreshToken>();
+  static AuthRefresh create() => AuthRefresh._();
+  AuthRefresh createEmptyInstance() => create();
+  static $pb.PbList<AuthRefresh> createRepeated() => $pb.PbList<AuthRefresh>();
   @$core.pragma('dart2js:noInline')
-  static RefreshToken getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RefreshToken>(create);
-  static RefreshToken? _defaultInstance;
+  static AuthRefresh getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthRefresh>(create);
+  static AuthRefresh? _defaultInstance;
 
   @$pb.TagNumber(1)
   AuthData get authData => $_getN(0);
