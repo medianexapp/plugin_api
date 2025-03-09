@@ -90,13 +90,12 @@ message AuthRefresh {
 
 // oauth config
 message OauthConfig {
-    string          client_id       = 1;
-    string          client_secret   = 2;
-    string          redirect_uri    = 3;
-    repeated string scopes          = 4;
-    string          auth_url        = 5;
-    string          qrcode_url      = 6;
-    string          qrcode_req_type = 7;  // json,url
+    string          client_id     = 1;
+    string          client_secret = 2;
+    string          redirect_uri  = 3;
+    repeated string scopes        = 4;
+    string          auth_url      = 5;
+    string          qrcode_url    = 6;
 
     string token_url = 10;
     // json POST application/json
