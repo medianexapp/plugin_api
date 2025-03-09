@@ -12,17 +12,20 @@ type IPlugin interface {
 	PluginId() (pluginId string, err error)
 	// get auth like form edit,qrcode,oauth2
 	GetAuth() (auth *plugin.Auth, err error)
-	// check auth type
+	// check auth method
+	// return :
+	//  	1.auth data
 	// if use form auth,only need marshal auth data to []byte
 	// if use qrcode auth, CheckAuthType will check qrcode is scanned,
 	//		if not scanned,will return AuthNone and recall after
 	// 		if scanned is failed,will return AuthFailed
 	// 		id scanned is successed,need return auth data
 	// if use oauth auth,CheckAuthType will call by oauth2 callback code,then need return auth data by code
-	CheckAuthMethod(authMethod *anypb.Any) (authData []byte, err error)
+	// if authMethod Type is RefreshToken, this is func need refresh token
+	CheckAuthMethod(authMethod *anypb.Any) (authData *plugin.AuthData, err error)
 	// check auth is success by raw auth data
 	//  if authData is error, will return error,will return error,then need auth again
-	CheckAuthData(authData []byte) (err error)
+	CheckAuthData(authData *plugin.AuthData) (err error)
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() (pluginAuthId string, err error)
 	// get dir entry from driver plugin

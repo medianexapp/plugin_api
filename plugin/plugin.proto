@@ -78,3 +78,12 @@ message FileResource {
     }
     repeated FileResourceData file_resource_data = 1;
 }
+
+message AuthData {
+    bytes  auth_data    = 1;
+    uint64 expired_time = 2;
+}
+
+message RefreshToken {
+    AuthData auth_data = 1;
+}

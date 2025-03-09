@@ -660,6 +660,70 @@ class FileResource extends $pb.GeneratedMessage {
   $core.List<FileResource_FileResourceData> get fileResourceData => $_getList(0);
 }
 
+class AuthData extends $pb.GeneratedMessage {
+  factory AuthData({
+    $core.List<$core.int>? authData,
+    $fixnum.Int64? expiredTime,
+  }) {
+    final $result = create();
+    if (authData != null) {
+      $result.authData = authData;
+    }
+    if (expiredTime != null) {
+      $result.expiredTime = expiredTime;
+    }
+    return $result;
+  }
+  AuthData._() : super();
+  factory AuthData.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AuthData.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthData', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'authData', $pb.PbFieldType.OY)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'expiredTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AuthData clone() => AuthData()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AuthData copyWith(void Function(AuthData) updates) => super.copyWith((message) => updates(message as AuthData)) as AuthData;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static AuthData create() => AuthData._();
+  AuthData createEmptyInstance() => create();
+  static $pb.PbList<AuthData> createRepeated() => $pb.PbList<AuthData>();
+  @$core.pragma('dart2js:noInline')
+  static AuthData getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AuthData>(create);
+  static AuthData? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<$core.int> get authData => $_getN(0);
+  @$pb.TagNumber(1)
+  set authData($core.List<$core.int> v) { $_setBytes(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAuthData() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAuthData() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get expiredTime => $_getI64(1);
+  @$pb.TagNumber(2)
+  set expiredTime($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasExpiredTime() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearExpiredTime() => clearField(2);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"runtime/debug"
 
+	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
 	_ "github.com/labulakalia/wazero_net/wasi/malloc"
 	"google.golang.org/protobuf/proto"
@@ -85,10 +86,11 @@ func check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	if len(authData) == 0 {
-		return 0
+	bytes, err := proto.Marshal(authData)
+	if err != nil {
+		return util.ErrorToUint64(err)
 	}
-	return util.Uint32ToUint64(uint32(util.BytesToPtr(authData)), uint32(len(authData)))
+	return util.Uint32ToUint64(uint32(util.BytesToPtr(bytes)), uint32(len(bytes)))
 }
 
 //go:wasmexport check_auth_data
@@ -100,7 +102,12 @@ func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) (ret uint64) {
 		}
 	}()
 	rawAuthData := util.PtrToBytes(uint32(raw_auth_dataPtr), uint32(raw_auth_dataLen))
-	err := pluginExport.CheckAuthData(rawAuthData)
+	authData := &plugin.AuthData{}
+	err := proto.Unmarshal(rawAuthData, authData)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	err = pluginExport.CheckAuthData(authData)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
