@@ -82,6 +82,7 @@ const FileEntry$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'file_type', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileEntry.FileType', '10': 'fileType'},
     {'1': 'size', '3': 3, '4': 1, '5': 4, '10': 'size'},
+    {'1': 'raw_data', '3': 4, '4': 1, '5': 12, '10': 'rawData'},
     {'1': 'created_time', '3': 10, '4': 1, '5': 4, '10': 'createdTime'},
     {'1': 'modified_time', '3': 11, '4': 1, '5': 4, '10': 'modifiedTime'},
     {'1': 'accessed_time', '3': 12, '4': 1, '5': 4, '10': 'accessedTime'},
@@ -103,11 +104,12 @@ const FileEntry_FileType$json = {
 /// Descriptor for `FileEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fileEntryDescriptor = $convert.base64Decode(
     'CglGaWxlRW50cnkSEgoEbmFtZRgBIAEoCVIEbmFtZRI3CglmaWxlX3R5cGUYAiABKA4yGi5wbH'
-    'VnaW4uRmlsZUVudHJ5LkZpbGVUeXBlUghmaWxlVHlwZRISCgRzaXplGAMgASgEUgRzaXplEiEK'
-    'DGNyZWF0ZWRfdGltZRgKIAEoBFILY3JlYXRlZFRpbWUSIwoNbW9kaWZpZWRfdGltZRgLIAEoBF'
-    'IMbW9kaWZpZWRUaW1lEiMKDWFjY2Vzc2VkX3RpbWUYDCABKARSDGFjY2Vzc2VkVGltZSJYCghG'
-    'aWxlVHlwZRIXChNGaWxlVHlwZVVOU1BFQ0lGSUVEEAASDwoLRmlsZVR5cGVEaXIQARIQCgxGaW'
-    'xlVHlwZUZpbGUQAhIQCgxGaWxlVHlwZUxpbmsQAw==');
+    'VnaW4uRmlsZUVudHJ5LkZpbGVUeXBlUghmaWxlVHlwZRISCgRzaXplGAMgASgEUgRzaXplEhkK'
+    'CHJhd19kYXRhGAQgASgMUgdyYXdEYXRhEiEKDGNyZWF0ZWRfdGltZRgKIAEoBFILY3JlYXRlZF'
+    'RpbWUSIwoNbW9kaWZpZWRfdGltZRgLIAEoBFIMbW9kaWZpZWRUaW1lEiMKDWFjY2Vzc2VkX3Rp'
+    'bWUYDCABKARSDGFjY2Vzc2VkVGltZSJYCghGaWxlVHlwZRIXChNGaWxlVHlwZVVOU1BFQ0lGSU'
+    'VEEAASDwoLRmlsZVR5cGVEaXIQARIQCgxGaWxlVHlwZUZpbGUQAhIQCgxGaWxlVHlwZUxpbmsQ'
+    'Aw==');
 
 @$core.Deprecated('Use dirEntryDescriptor instead')
 const DirEntry$json = {
@@ -234,7 +236,6 @@ const OauthConfig$json = {
     {'1': 'scopes', '3': 4, '4': 3, '5': 9, '10': 'scopes'},
     {'1': 'auth_url', '3': 5, '4': 1, '5': 9, '10': 'authUrl'},
     {'1': 'qrcode_url', '3': 6, '4': 1, '5': 9, '10': 'qrcodeUrl'},
-    {'1': 'qrcode_req_type', '3': 7, '4': 1, '5': 9, '10': 'qrcodeReqType'},
     {'1': 'token_url', '3': 10, '4': 1, '5': 9, '10': 'tokenUrl'},
     {'1': 'token_req_type', '3': 11, '4': 1, '5': 9, '10': 'tokenReqType'},
   ],
@@ -245,9 +246,8 @@ final $typed_data.Uint8List oauthConfigDescriptor = $convert.base64Decode(
     'CgtPYXV0aENvbmZpZxIbCgljbGllbnRfaWQYASABKAlSCGNsaWVudElkEiMKDWNsaWVudF9zZW'
     'NyZXQYAiABKAlSDGNsaWVudFNlY3JldBIhCgxyZWRpcmVjdF91cmkYAyABKAlSC3JlZGlyZWN0'
     'VXJpEhYKBnNjb3BlcxgEIAMoCVIGc2NvcGVzEhkKCGF1dGhfdXJsGAUgASgJUgdhdXRoVXJsEh'
-    '0KCnFyY29kZV91cmwYBiABKAlSCXFyY29kZVVybBImCg9xcmNvZGVfcmVxX3R5cGUYByABKAlS'
-    'DXFyY29kZVJlcVR5cGUSGwoJdG9rZW5fdXJsGAogASgJUgh0b2tlblVybBIkCg50b2tlbl9yZX'
-    'FfdHlwZRgLIAEoCVIMdG9rZW5SZXFUeXBl');
+    '0KCnFyY29kZV91cmwYBiABKAlSCXFyY29kZVVybBIbCgl0b2tlbl91cmwYCiABKAlSCHRva2Vu'
+    'VXJsEiQKDnRva2VuX3JlcV90eXBlGAsgASgJUgx0b2tlblJlcVR5cGU=');
 
 @$core.Deprecated('Use tokenDescriptor instead')
 const Token$json = {

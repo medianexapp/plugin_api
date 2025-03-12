@@ -343,6 +343,7 @@ class FileEntry extends $pb.GeneratedMessage {
     $core.String? name,
     FileEntry_FileType? fileType,
     $fixnum.Int64? size,
+    $core.List<$core.int>? rawData,
     $fixnum.Int64? createdTime,
     $fixnum.Int64? modifiedTime,
     $fixnum.Int64? accessedTime,
@@ -356,6 +357,9 @@ class FileEntry extends $pb.GeneratedMessage {
     }
     if (size != null) {
       $result.size = size;
+    }
+    if (rawData != null) {
+      $result.rawData = rawData;
     }
     if (createdTime != null) {
       $result.createdTime = createdTime;
@@ -376,6 +380,7 @@ class FileEntry extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..e<FileEntry_FileType>(2, _omitFieldNames ? '' : 'fileType', $pb.PbFieldType.OE, defaultOrMaker: FileEntry_FileType.FileTypeUNSPECIFIED, valueOf: FileEntry_FileType.valueOf, enumValues: FileEntry_FileType.values)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'rawData', $pb.PbFieldType.OY)
     ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'createdTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'modifiedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(12, _omitFieldNames ? '' : 'accessedTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
@@ -430,30 +435,39 @@ class FileEntry extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearSize() => clearField(3);
 
+  @$pb.TagNumber(4)
+  $core.List<$core.int> get rawData => $_getN(3);
+  @$pb.TagNumber(4)
+  set rawData($core.List<$core.int> v) { $_setBytes(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasRawData() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearRawData() => clearField(4);
+
   @$pb.TagNumber(10)
-  $fixnum.Int64 get createdTime => $_getI64(3);
+  $fixnum.Int64 get createdTime => $_getI64(4);
   @$pb.TagNumber(10)
-  set createdTime($fixnum.Int64 v) { $_setInt64(3, v); }
+  set createdTime($fixnum.Int64 v) { $_setInt64(4, v); }
   @$pb.TagNumber(10)
-  $core.bool hasCreatedTime() => $_has(3);
+  $core.bool hasCreatedTime() => $_has(4);
   @$pb.TagNumber(10)
   void clearCreatedTime() => clearField(10);
 
   @$pb.TagNumber(11)
-  $fixnum.Int64 get modifiedTime => $_getI64(4);
+  $fixnum.Int64 get modifiedTime => $_getI64(5);
   @$pb.TagNumber(11)
-  set modifiedTime($fixnum.Int64 v) { $_setInt64(4, v); }
+  set modifiedTime($fixnum.Int64 v) { $_setInt64(5, v); }
   @$pb.TagNumber(11)
-  $core.bool hasModifiedTime() => $_has(4);
+  $core.bool hasModifiedTime() => $_has(5);
   @$pb.TagNumber(11)
   void clearModifiedTime() => clearField(11);
 
   @$pb.TagNumber(12)
-  $fixnum.Int64 get accessedTime => $_getI64(5);
+  $fixnum.Int64 get accessedTime => $_getI64(6);
   @$pb.TagNumber(12)
-  set accessedTime($fixnum.Int64 v) { $_setInt64(5, v); }
+  set accessedTime($fixnum.Int64 v) { $_setInt64(6, v); }
   @$pb.TagNumber(12)
-  $core.bool hasAccessedTime() => $_has(5);
+  $core.bool hasAccessedTime() => $_has(6);
   @$pb.TagNumber(12)
   void clearAccessedTime() => clearField(12);
 }
@@ -785,7 +799,6 @@ class OauthConfig extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? scopes,
     $core.String? authUrl,
     $core.String? qrcodeUrl,
-    $core.String? qrcodeReqType,
     $core.String? tokenUrl,
     $core.String? tokenReqType,
   }) {
@@ -808,9 +821,6 @@ class OauthConfig extends $pb.GeneratedMessage {
     if (qrcodeUrl != null) {
       $result.qrcodeUrl = qrcodeUrl;
     }
-    if (qrcodeReqType != null) {
-      $result.qrcodeReqType = qrcodeReqType;
-    }
     if (tokenUrl != null) {
       $result.tokenUrl = tokenUrl;
     }
@@ -830,7 +840,6 @@ class OauthConfig extends $pb.GeneratedMessage {
     ..pPS(4, _omitFieldNames ? '' : 'scopes')
     ..aOS(5, _omitFieldNames ? '' : 'authUrl')
     ..aOS(6, _omitFieldNames ? '' : 'qrcodeUrl')
-    ..aOS(7, _omitFieldNames ? '' : 'qrcodeReqType')
     ..aOS(10, _omitFieldNames ? '' : 'tokenUrl')
     ..aOS(11, _omitFieldNames ? '' : 'tokenReqType')
     ..hasRequiredFields = false
@@ -905,21 +914,12 @@ class OauthConfig extends $pb.GeneratedMessage {
   @$pb.TagNumber(6)
   void clearQrcodeUrl() => clearField(6);
 
-  @$pb.TagNumber(7)
-  $core.String get qrcodeReqType => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set qrcodeReqType($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasQrcodeReqType() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearQrcodeReqType() => clearField(7);
-
   @$pb.TagNumber(10)
-  $core.String get tokenUrl => $_getSZ(7);
+  $core.String get tokenUrl => $_getSZ(6);
   @$pb.TagNumber(10)
-  set tokenUrl($core.String v) { $_setString(7, v); }
+  set tokenUrl($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(10)
-  $core.bool hasTokenUrl() => $_has(7);
+  $core.bool hasTokenUrl() => $_has(6);
   @$pb.TagNumber(10)
   void clearTokenUrl() => clearField(10);
 
@@ -927,11 +927,11 @@ class OauthConfig extends $pb.GeneratedMessage {
   /// form POST application/x-www-form-urlencoded
   /// uri GET
   @$pb.TagNumber(11)
-  $core.String get tokenReqType => $_getSZ(8);
+  $core.String get tokenReqType => $_getSZ(7);
   @$pb.TagNumber(11)
-  set tokenReqType($core.String v) { $_setString(8, v); }
+  set tokenReqType($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(11)
-  $core.bool hasTokenReqType() => $_has(8);
+  $core.bool hasTokenReqType() => $_has(7);
   @$pb.TagNumber(11)
   void clearTokenReqType() => clearField(11);
 }

@@ -39,6 +39,7 @@ message FileEntry {
     string   name      = 1;
     FileType file_type = 2;
     uint64   size      = 3;
+    bytes    raw_data  = 4;
 
     uint64 created_time  = 10;
     uint64 modified_time = 11;
