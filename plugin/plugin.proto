@@ -50,6 +50,18 @@ message DirEntry {
     repeated FileEntry file_entries = 1;
 }
 
+message GetDirEntryRequest {
+    string    path       = 1;
+    FileEntry path_entry = 2;
+    uint32    page       = 3;
+    uint32    page_size  = 4;
+}
+
+message GetFileResourceRequest {
+    string    path       = 1;
+    FileEntry path_entry = 2;
+}
+
 message FileResource {
     // video display VideoResolution
     enum Resolution {

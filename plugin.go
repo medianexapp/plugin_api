@@ -29,9 +29,9 @@ type IPlugin interface {
 	// plugin auth id,it need unqiue for same driver
 	PluginAuthId() (pluginAuthId string, err error)
 	// get dir entry from driver plugin
-	GetDirEntry(dir_path string, page, page_size uint64) (dirEntry *plugin.DirEntry, err error)
+	GetDirEntry(req *plugin.GetDirEntryRequest) (dirEntry *plugin.DirEntry, err error)
 	// get file entry resource from driver plugin
-	GetFileResource(file_path string) (fileResource *plugin.FileResource, err error)
+	GetFileResource(req *plugin.GetFileResourceRequest) (fileResource *plugin.FileResource, err error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {

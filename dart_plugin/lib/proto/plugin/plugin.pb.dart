@@ -516,6 +516,166 @@ class DirEntry extends $pb.GeneratedMessage {
   $core.List<FileEntry> get fileEntries => $_getList(0);
 }
 
+class GetDirEntryRequest extends $pb.GeneratedMessage {
+  factory GetDirEntryRequest({
+    $core.String? path,
+    FileEntry? pathEntry,
+    $core.int? page,
+    $core.int? pageSize,
+  }) {
+    final $result = create();
+    if (path != null) {
+      $result.path = path;
+    }
+    if (pathEntry != null) {
+      $result.pathEntry = pathEntry;
+    }
+    if (page != null) {
+      $result.page = page;
+    }
+    if (pageSize != null) {
+      $result.pageSize = pageSize;
+    }
+    return $result;
+  }
+  GetDirEntryRequest._() : super();
+  factory GetDirEntryRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetDirEntryRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetDirEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'path')
+    ..aOM<FileEntry>(2, _omitFieldNames ? '' : 'pathEntry', subBuilder: FileEntry.create)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU3)
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetDirEntryRequest clone() => GetDirEntryRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetDirEntryRequest copyWith(void Function(GetDirEntryRequest) updates) => super.copyWith((message) => updates(message as GetDirEntryRequest)) as GetDirEntryRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetDirEntryRequest create() => GetDirEntryRequest._();
+  GetDirEntryRequest createEmptyInstance() => create();
+  static $pb.PbList<GetDirEntryRequest> createRepeated() => $pb.PbList<GetDirEntryRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetDirEntryRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetDirEntryRequest>(create);
+  static GetDirEntryRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get path => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set path($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPath() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPath() => clearField(1);
+
+  @$pb.TagNumber(2)
+  FileEntry get pathEntry => $_getN(1);
+  @$pb.TagNumber(2)
+  set pathEntry(FileEntry v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPathEntry() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPathEntry() => clearField(2);
+  @$pb.TagNumber(2)
+  FileEntry ensurePathEntry() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.int get page => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set page($core.int v) { $_setUnsignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasPage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearPage() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.int get pageSize => $_getIZ(3);
+  @$pb.TagNumber(4)
+  set pageSize($core.int v) { $_setUnsignedInt32(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasPageSize() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearPageSize() => clearField(4);
+}
+
+class GetFileResourceRequest extends $pb.GeneratedMessage {
+  factory GetFileResourceRequest({
+    $core.String? path,
+    FileEntry? pathEntry,
+  }) {
+    final $result = create();
+    if (path != null) {
+      $result.path = path;
+    }
+    if (pathEntry != null) {
+      $result.pathEntry = pathEntry;
+    }
+    return $result;
+  }
+  GetFileResourceRequest._() : super();
+  factory GetFileResourceRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetFileResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFileResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'path')
+    ..aOM<FileEntry>(2, _omitFieldNames ? '' : 'pathEntry', subBuilder: FileEntry.create)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetFileResourceRequest clone() => GetFileResourceRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetFileResourceRequest copyWith(void Function(GetFileResourceRequest) updates) => super.copyWith((message) => updates(message as GetFileResourceRequest)) as GetFileResourceRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetFileResourceRequest create() => GetFileResourceRequest._();
+  GetFileResourceRequest createEmptyInstance() => create();
+  static $pb.PbList<GetFileResourceRequest> createRepeated() => $pb.PbList<GetFileResourceRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetFileResourceRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFileResourceRequest>(create);
+  static GetFileResourceRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get path => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set path($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPath() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPath() => clearField(1);
+
+  @$pb.TagNumber(2)
+  FileEntry get pathEntry => $_getN(1);
+  @$pb.TagNumber(2)
+  set pathEntry(FileEntry v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPathEntry() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPathEntry() => clearField(2);
+  @$pb.TagNumber(2)
+  FileEntry ensurePathEntry() => $_ensure(1);
+}
+
 class FileResource_FileResourceData extends $pb.GeneratedMessage {
   factory FileResource_FileResourceData({
     $core.String? url,

@@ -124,6 +124,37 @@ final $typed_data.Uint8List dirEntryDescriptor = $convert.base64Decode(
     'CghEaXJFbnRyeRI0CgxmaWxlX2VudHJpZXMYASADKAsyES5wbHVnaW4uRmlsZUVudHJ5UgtmaW'
     'xlRW50cmllcw==');
 
+@$core.Deprecated('Use getDirEntryRequestDescriptor instead')
+const GetDirEntryRequest$json = {
+  '1': 'GetDirEntryRequest',
+  '2': [
+    {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
+    {'1': 'path_entry', '3': 2, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'pathEntry'},
+    {'1': 'page', '3': 3, '4': 1, '5': 13, '10': 'page'},
+    {'1': 'page_size', '3': 4, '4': 1, '5': 13, '10': 'pageSize'},
+  ],
+};
+
+/// Descriptor for `GetDirEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getDirEntryRequestDescriptor = $convert.base64Decode(
+    'ChJHZXREaXJFbnRyeVJlcXVlc3QSEgoEcGF0aBgBIAEoCVIEcGF0aBIwCgpwYXRoX2VudHJ5GA'
+    'IgASgLMhEucGx1Z2luLkZpbGVFbnRyeVIJcGF0aEVudHJ5EhIKBHBhZ2UYAyABKA1SBHBhZ2US'
+    'GwoJcGFnZV9zaXplGAQgASgNUghwYWdlU2l6ZQ==');
+
+@$core.Deprecated('Use getFileResourceRequestDescriptor instead')
+const GetFileResourceRequest$json = {
+  '1': 'GetFileResourceRequest',
+  '2': [
+    {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
+    {'1': 'path_entry', '3': 2, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'pathEntry'},
+  ],
+};
+
+/// Descriptor for `GetFileResourceRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getFileResourceRequestDescriptor = $convert.base64Decode(
+    'ChZHZXRGaWxlUmVzb3VyY2VSZXF1ZXN0EhIKBHBhdGgYASABKAlSBHBhdGgSMAoKcGF0aF9lbn'
+    'RyeRgCIAEoCzIRLnBsdWdpbi5GaWxlRW50cnlSCXBhdGhFbnRyeQ==');
+
 @$core.Deprecated('Use fileResourceDescriptor instead')
 const FileResource$json = {
   '1': 'FileResource',

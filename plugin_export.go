@@ -4,6 +4,7 @@ import (
 	"errors"
 	"runtime/debug"
 
+	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
 	_ "github.com/labulakalia/wazero_net/wasi/malloc"
 	"google.golang.org/protobuf/proto"
@@ -124,15 +125,20 @@ func plugin_auth_id() (ret uint64) {
 }
 
 //go:wasmexport get_dir_entry
-func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) (ret uint64) {
+func get_dir_entry(reqPtr, reqLen uint64) (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
 			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
 		}
 	}()
-	dir := util.PtrToString(uint32(dir_pathPtr), uint32(dir_pathLen))
-	dirEntry, err := pluginExport.GetDirEntry(dir, page, page_size)
+	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
+	req := &plugin.GetDirEntryRequest{}
+	err := proto.Unmarshal(bytes, req)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	dirEntry, err := pluginExport.GetDirEntry(req)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -144,15 +150,20 @@ func get_dir_entry(dir_pathPtr, dir_pathLen, page, page_size uint64) (ret uint64
 }
 
 //go:wasmexport get_file_resource
-func get_file_resource(file_pathPtr, file_pathLen uint64) (ret uint64) {
+func get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
 			ret = util.ErrorToUint64(errors.New(util.BytesToString(stack)))
 		}
 	}()
-	file_path := util.PtrToString(uint32(file_pathPtr), uint32(file_pathLen))
-	fileResource, err := pluginExport.GetFileResource(file_path)
+	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
+	req := &plugin.GetFileResourceRequest{}
+	err := proto.Unmarshal(bytes, req)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	fileResource, err := pluginExport.GetFileResource(req)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
