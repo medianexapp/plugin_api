@@ -48,13 +48,16 @@ message FileEntry {
 
 message DirEntry {
     repeated FileEntry file_entries = 1;
+
+    string dir_entry_key = 10;
 }
 
 message GetDirEntryRequest {
-    string    path       = 1;
-    FileEntry path_entry = 2;
-    uint32    page       = 3;
-    uint32    page_size  = 4;
+    string    path          = 1;
+    FileEntry path_entry    = 2;
+    uint32    page          = 3;
+    uint32    page_size     = 4;
+    string    dir_entry_key = 10;  // dir entry key,may be help you to get multi page for one path
 }
 
 message GetFileResourceRequest {

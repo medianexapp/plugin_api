@@ -116,13 +116,14 @@ const DirEntry$json = {
   '1': 'DirEntry',
   '2': [
     {'1': 'file_entries', '3': 1, '4': 3, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntries'},
+    {'1': 'dir_entry_key', '3': 10, '4': 1, '5': 9, '10': 'dirEntryKey'},
   ],
 };
 
 /// Descriptor for `DirEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List dirEntryDescriptor = $convert.base64Decode(
     'CghEaXJFbnRyeRI0CgxmaWxlX2VudHJpZXMYASADKAsyES5wbHVnaW4uRmlsZUVudHJ5UgtmaW'
-    'xlRW50cmllcw==');
+    'xlRW50cmllcxIiCg1kaXJfZW50cnlfa2V5GAogASgJUgtkaXJFbnRyeUtleQ==');
 
 @$core.Deprecated('Use getDirEntryRequestDescriptor instead')
 const GetDirEntryRequest$json = {
@@ -132,6 +133,7 @@ const GetDirEntryRequest$json = {
     {'1': 'path_entry', '3': 2, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'pathEntry'},
     {'1': 'page', '3': 3, '4': 1, '5': 13, '10': 'page'},
     {'1': 'page_size', '3': 4, '4': 1, '5': 13, '10': 'pageSize'},
+    {'1': 'dir_entry_key', '3': 10, '4': 1, '5': 9, '10': 'dirEntryKey'},
   ],
 };
 
@@ -139,7 +141,8 @@ const GetDirEntryRequest$json = {
 final $typed_data.Uint8List getDirEntryRequestDescriptor = $convert.base64Decode(
     'ChJHZXREaXJFbnRyeVJlcXVlc3QSEgoEcGF0aBgBIAEoCVIEcGF0aBIwCgpwYXRoX2VudHJ5GA'
     'IgASgLMhEucGx1Z2luLkZpbGVFbnRyeVIJcGF0aEVudHJ5EhIKBHBhZ2UYAyABKA1SBHBhZ2US'
-    'GwoJcGFnZV9zaXplGAQgASgNUghwYWdlU2l6ZQ==');
+    'GwoJcGFnZV9zaXplGAQgASgNUghwYWdlU2l6ZRIiCg1kaXJfZW50cnlfa2V5GAogASgJUgtkaX'
+    'JFbnRyeUtleQ==');
 
 @$core.Deprecated('Use getFileResourceRequestDescriptor instead')
 const GetFileResourceRequest$json = {
