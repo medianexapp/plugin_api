@@ -865,14 +865,14 @@ class FileResource extends $pb.GeneratedMessage {
 class AuthData extends $pb.GeneratedMessage {
   factory AuthData({
     $core.List<$core.int>? authDataBytes,
-    $fixnum.Int64? authExpiredTime,
+    $fixnum.Int64? authDataExpiredTime,
   }) {
     final $result = create();
     if (authDataBytes != null) {
       $result.authDataBytes = authDataBytes;
     }
-    if (authExpiredTime != null) {
-      $result.authExpiredTime = authExpiredTime;
+    if (authDataExpiredTime != null) {
+      $result.authDataExpiredTime = authDataExpiredTime;
     }
     return $result;
   }
@@ -882,7 +882,7 @@ class AuthData extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'AuthData', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'authDataBytes', $pb.PbFieldType.OY)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'authExpiredTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'authDataExpiredTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -917,13 +917,13 @@ class AuthData extends $pb.GeneratedMessage {
   void clearAuthDataBytes() => clearField(1);
 
   @$pb.TagNumber(2)
-  $fixnum.Int64 get authExpiredTime => $_getI64(1);
+  $fixnum.Int64 get authDataExpiredTime => $_getI64(1);
   @$pb.TagNumber(2)
-  set authExpiredTime($fixnum.Int64 v) { $_setInt64(1, v); }
+  set authDataExpiredTime($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasAuthExpiredTime() => $_has(1);
+  $core.bool hasAuthDataExpiredTime() => $_has(1);
   @$pb.TagNumber(2)
-  void clearAuthExpiredTime() => clearField(2);
+  void clearAuthDataExpiredTime() => clearField(2);
 }
 
 class AuthRefresh extends $pb.GeneratedMessage {
