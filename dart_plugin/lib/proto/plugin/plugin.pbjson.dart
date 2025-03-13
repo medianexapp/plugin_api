@@ -131,8 +131,8 @@ const GetDirEntryRequest$json = {
   '2': [
     {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
     {'1': 'path_entry', '3': 2, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'pathEntry'},
-    {'1': 'page', '3': 3, '4': 1, '5': 13, '10': 'page'},
-    {'1': 'page_size', '3': 4, '4': 1, '5': 13, '10': 'pageSize'},
+    {'1': 'page', '3': 3, '4': 1, '5': 4, '10': 'page'},
+    {'1': 'page_size', '3': 4, '4': 1, '5': 4, '10': 'pageSize'},
     {'1': 'dir_entry_key', '3': 10, '4': 1, '5': 9, '10': 'dirEntryKey'},
   ],
 };
@@ -140,8 +140,8 @@ const GetDirEntryRequest$json = {
 /// Descriptor for `GetDirEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getDirEntryRequestDescriptor = $convert.base64Decode(
     'ChJHZXREaXJFbnRyeVJlcXVlc3QSEgoEcGF0aBgBIAEoCVIEcGF0aBIwCgpwYXRoX2VudHJ5GA'
-    'IgASgLMhEucGx1Z2luLkZpbGVFbnRyeVIJcGF0aEVudHJ5EhIKBHBhZ2UYAyABKA1SBHBhZ2US'
-    'GwoJcGFnZV9zaXplGAQgASgNUghwYWdlU2l6ZRIiCg1kaXJfZW50cnlfa2V5GAogASgJUgtkaX'
+    'IgASgLMhEucGx1Z2luLkZpbGVFbnRyeVIJcGF0aEVudHJ5EhIKBHBhZ2UYAyABKARSBHBhZ2US'
+    'GwoJcGFnZV9zaXplGAQgASgEUghwYWdlU2l6ZRIiCg1kaXJfZW50cnlfa2V5GAogASgJUgtkaX'
     'JFbnRyeUtleQ==');
 
 @$core.Deprecated('Use getFileResourceRequestDescriptor instead')

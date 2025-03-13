@@ -534,8 +534,8 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   factory GetDirEntryRequest({
     $core.String? path,
     FileEntry? pathEntry,
-    $core.int? page,
-    $core.int? pageSize,
+    $fixnum.Int64? page,
+    $fixnum.Int64? pageSize,
     $core.String? dirEntryKey,
   }) {
     final $result = create();
@@ -563,8 +563,8 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetDirEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'path')
     ..aOM<FileEntry>(2, _omitFieldNames ? '' : 'pathEntry', subBuilder: FileEntry.create)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU3)
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU3)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(10, _omitFieldNames ? '' : 'dirEntryKey')
     ..hasRequiredFields = false
   ;
@@ -611,18 +611,18 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   FileEntry ensurePathEntry() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $core.int get page => $_getIZ(2);
+  $fixnum.Int64 get page => $_getI64(2);
   @$pb.TagNumber(3)
-  set page($core.int v) { $_setUnsignedInt32(2, v); }
+  set page($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasPage() => $_has(2);
   @$pb.TagNumber(3)
   void clearPage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get pageSize => $_getIZ(3);
+  $fixnum.Int64 get pageSize => $_getI64(3);
   @$pb.TagNumber(4)
-  set pageSize($core.int v) { $_setUnsignedInt32(3, v); }
+  set pageSize($fixnum.Int64 v) { $_setInt64(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasPageSize() => $_has(3);
   @$pb.TagNumber(4)
