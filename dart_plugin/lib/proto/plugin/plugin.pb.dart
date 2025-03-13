@@ -710,6 +710,7 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     FileResource_Resolution? resolution,
     $fixnum.Int64? expireTime,
     FileResource_ResourceType? resourceType,
+    $core.String? title,
     $core.Map<$core.String, $core.String>? header,
   }) {
     final $result = create();
@@ -725,6 +726,9 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     if (resourceType != null) {
       $result.resourceType = resourceType;
     }
+    if (title != null) {
+      $result.title = title;
+    }
     if (header != null) {
       $result.header.addAll(header);
     }
@@ -739,6 +743,7 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     ..e<FileResource_Resolution>(2, _omitFieldNames ? '' : 'resolution', $pb.PbFieldType.OE, defaultOrMaker: FileResource_Resolution.ResolutionUNSPECIFIED, valueOf: FileResource_Resolution.valueOf, enumValues: FileResource_Resolution.values)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'expireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..e<FileResource_ResourceType>(4, _omitFieldNames ? '' : 'resourceType', $pb.PbFieldType.OE, defaultOrMaker: FileResource_ResourceType.ResourceTypeUNSPECIFIED, valueOf: FileResource_ResourceType.valueOf, enumValues: FileResource_ResourceType.values)
+    ..aOS(5, _omitFieldNames ? '' : 'title')
     ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'header', entryClassName: 'FileResource.FileResourceData.HeaderEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('plugin'))
     ..hasRequiredFields = false
   ;
@@ -800,8 +805,17 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearResourceType() => clearField(4);
 
+  @$pb.TagNumber(5)
+  $core.String get title => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set title($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTitle() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTitle() => clearField(5);
+
   @$pb.TagNumber(6)
-  $core.Map<$core.String, $core.String> get header => $_getMap(4);
+  $core.Map<$core.String, $core.String> get header => $_getMap(5);
 }
 
 class FileResource extends $pb.GeneratedMessage {

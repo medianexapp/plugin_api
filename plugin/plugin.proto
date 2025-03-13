@@ -89,6 +89,7 @@ message FileResource {
         Resolution          resolution    = 2;
         uint64              expire_time   = 3;
         ResourceType        resource_type = 4;
+        string              title         = 5;
         map<string, string> header        = 6;
     }
     repeated FileResourceData file_resource_data = 1;

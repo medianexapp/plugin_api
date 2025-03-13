@@ -176,6 +176,7 @@ const FileResource_FileResourceData$json = {
     {'1': 'resolution', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileResource.Resolution', '10': 'resolution'},
     {'1': 'expire_time', '3': 3, '4': 1, '5': 4, '10': 'expireTime'},
     {'1': 'resource_type', '3': 4, '4': 1, '5': 14, '6': '.plugin.FileResource.ResourceType', '10': 'resourceType'},
+    {'1': 'title', '3': 5, '4': 1, '5': 9, '10': 'title'},
     {'1': 'header', '3': 6, '4': 3, '5': 11, '6': '.plugin.FileResource.FileResourceData.HeaderEntry', '10': 'header'},
   ],
   '3': [FileResource_FileResourceData_HeaderEntry$json],
@@ -220,17 +221,17 @@ const FileResource_ResourceType$json = {
 /// Descriptor for `FileResource`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
     'CgxGaWxlUmVzb3VyY2USUwoSZmlsZV9yZXNvdXJjZV9kYXRhGAEgAygLMiUucGx1Z2luLkZpbG'
-    'VSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhUhBmaWxlUmVzb3VyY2VEYXRhGtQCChBGaWxlUmVz'
+    'VSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhUhBmaWxlUmVzb3VyY2VEYXRhGuoCChBGaWxlUmVz'
     'b3VyY2VEYXRhEhAKA3VybBgBIAEoCVIDdXJsEj8KCnJlc29sdXRpb24YAiABKA4yHy5wbHVnaW'
     '4uRmlsZVJlc291cmNlLlJlc29sdXRpb25SCnJlc29sdXRpb24SHwoLZXhwaXJlX3RpbWUYAyAB'
     'KARSCmV4cGlyZVRpbWUSRgoNcmVzb3VyY2VfdHlwZRgEIAEoDjIhLnBsdWdpbi5GaWxlUmVzb3'
-    'VyY2UuUmVzb3VyY2VUeXBlUgxyZXNvdXJjZVR5cGUSSQoGaGVhZGVyGAYgAygLMjEucGx1Z2lu'
-    'LkZpbGVSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhLkhlYWRlckVudHJ5UgZoZWFkZXIaOQoLSG'
-    'VhZGVyRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4ASJo'
-    'CgpSZXNvbHV0aW9uEhkKFVJlc29sdXRpb25VTlNQRUNJRklFRBAAEgwKCE9yaWdpbmFsEAESBg'
-    'oCTEQQAhIGCgJTRBADEgYKAkhEEAQSBwoDRkhEEAUSBwoDUUhEEAYSBwoDVUhEEAciTwoMUmVz'
-    'b3VyY2VUeXBlEhsKF1Jlc291cmNlVHlwZVVOU1BFQ0lGSUVEEAASCQoFVmlkZW8QARIMCghTdW'
-    'J0aXRsZRACEgkKBUF1ZGlvEAM=');
+    'VyY2UuUmVzb3VyY2VUeXBlUgxyZXNvdXJjZVR5cGUSFAoFdGl0bGUYBSABKAlSBXRpdGxlEkkK'
+    'BmhlYWRlchgGIAMoCzIxLnBsdWdpbi5GaWxlUmVzb3VyY2UuRmlsZVJlc291cmNlRGF0YS5IZW'
+    'FkZXJFbnRyeVIGaGVhZGVyGjkKC0hlYWRlckVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZh'
+    'bHVlGAIgASgJUgV2YWx1ZToCOAEiaAoKUmVzb2x1dGlvbhIZChVSZXNvbHV0aW9uVU5TUEVDSU'
+    'ZJRUQQABIMCghPcmlnaW5hbBABEgYKAkxEEAISBgoCU0QQAxIGCgJIRBAEEgcKA0ZIRBAFEgcK'
+    'A1FIRBAGEgcKA1VIRBAHIk8KDFJlc291cmNlVHlwZRIbChdSZXNvdXJjZVR5cGVVTlNQRUNJRk'
+    'lFRBAAEgkKBVZpZGVvEAESDAoIU3VidGl0bGUQAhIJCgVBdWRpbxAD');
 
 @$core.Deprecated('Use authDataDescriptor instead')
 const AuthData$json = {
