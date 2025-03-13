@@ -15,7 +15,7 @@ func GetUserAgent() string {
 	return userAgent
 }
 
-func SetUserAgent(req *http.Request) {
+func (c *Client) setUserAgent(req *http.Request) {
 	req.Header.Set("User-Agent", userAgent)
 	return
 }
@@ -31,7 +31,7 @@ func NewClient() *Client {
 }
 
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
-	SetHttpUserAgent(req)
+	c.setUserAgent(req)
 	return c.Client.Do(req)
 }
 func (c *Client) Get(url string) (resp *http.Response, err error) {
@@ -39,7 +39,7 @@ func (c *Client) Get(url string) (resp *http.Response, err error) {
 	if err != nil {
 		return nil, err
 	}
-	SetHttpUserAgent(req)
+	c.setUserAgent(req)
 	return c.Client.Do(req)
 }
 func (c *Client) Head(url string) (resp *http.Response, err error) {
@@ -47,7 +47,7 @@ func (c *Client) Head(url string) (resp *http.Response, err error) {
 	if err != nil {
 		return nil, err
 	}
-	SetHttpUserAgent(req)
+	c.setUserAgent(req)
 	return c.Client.Do(req)
 }
 func (c *Client) Post(url string, contentType string, body io.Reader) (resp *http.Response, err error) {
@@ -56,7 +56,7 @@ func (c *Client) Post(url string, contentType string, body io.Reader) (resp *htt
 		return nil, err
 	}
 	req.Header.Set("Content-Type", contentType)
-	SetHttpUserAgent(req)
+	c.setUserAgent(req)
 
 	return c.Client.Do(req)
 }
