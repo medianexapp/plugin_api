@@ -7,7 +7,7 @@ import (
 )
 
 func TestHttp(t *testing.T) {
-	client := NewHttpClient()
+	client := NewClient()
 	response, err := client.Get("https://httpbin.io/user-agent")
 	if err != nil {
 		t.Fatal(err)
