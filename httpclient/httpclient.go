@@ -51,7 +51,7 @@ func (c *Client) Post(url string, contentType string, body io.Reader) (resp *htt
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("Context-Type", contentType)
+	req.Header.Set("Content-Type", contentType)
 	SetHttpUserAgent(req)
 
 	return c.Client.Do(req)
