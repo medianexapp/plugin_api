@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	userAgent = "Mediagate/v0.0.1"
+	userAgent = "Mediagate/plugin_api"
 )
 
 func GetUserAgent() string {
