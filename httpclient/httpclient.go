@@ -11,7 +11,11 @@ const (
 	userAgent = "Mediagate/v0.0.1"
 )
 
-func SetHttpUserAgent(req *http.Request) {
+func GetUserAgent() string {
+	return userAgent
+}
+
+func SetUserAgent(req *http.Request) {
 	req.Header.Set("User-Agent", userAgent)
 	return
 }
