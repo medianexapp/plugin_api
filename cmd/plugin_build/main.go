@@ -3,6 +3,8 @@ package main
 import (
 	"archive/zip"
 	"compress/flate"
+	"errors"
+
 	"fmt"
 	"io"
 	"path/filepath"
@@ -26,12 +28,19 @@ type pluginConfig struct {
 
 func main() {
 	pluginTomlFile := "plugin.toml"
+	pluginFile, err := os.Open("plugin.toml")
+	if err != nil {
+		slog.Error("can open plugin config file plugin.toml")
+		os.Exit(1)
+	}
 	pluginConfig := &pluginConfig{}
-	_, err := toml.DecodeFile(pluginTomlFile, pluginConfig)
+	_, err = toml.NewDecoder(pluginFile).Decode(pluginConfig)
 	if err != nil {
 		slog.Error("read plugin.toml failed", "err", err)
 		os.Exit(1)
 	}
+	pluginFile.Close()
+
 	if len(pluginConfig.Icon) > 0 {
 		_, err = os.Stat(pluginConfig.Icon)
 		if err != nil {
@@ -39,22 +48,25 @@ func main() {
 			os.Exit(1)
 		}
 	}
-	err = os.RemoveAll("./dist/*")
+	_, err = os.Stat("dist")
 	if err != nil {
-		slog.Error("clean dist dir failed", "err", err)
-		os.Exit(1)
+		if !errors.Is(err, os.ErrNotExist) {
+			slog.Error("check dist dir failed", "err", err)
+			os.Exit(1)
+		}
+		err = os.MkdirAll("dist", 0755)
+		if err != nil {
+			slog.Error("mkdir dist dir failed", "err", err)
+			os.Exit(1)
+		}
+	} else {
+		_ = os.RemoveAll("./dist/*")
 	}
-	err = os.MkdirAll("dist", 0755)
-	if err != nil {
-		slog.Error("mkdir dist dir failed", "err", err)
-		os.Exit(1)
-	}
-	buildWasmFile := fmt.Sprintf("%s.wasm", pluginConfig.Id)
+
+	buildWasmFile := fmt.Sprintf("dist/%s.wasm", pluginConfig.Id)
 	defer os.Remove(buildWasmFile)
-
-	buildCmd := fmt.Sprintf("GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o '%s' .", buildWasmFile)
-
-	cmd := exec.Command("bash", "-c", buildCmd)
+	cmd := exec.Command("go", "build", "-buildmode=c-shared", "-o", buildWasmFile, ".")
+	cmd.Env = append(os.Environ(), "GOOS=wasip1", "GOARCH=wasm")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
@@ -62,12 +74,8 @@ func main() {
 		slog.Error("exec command failed", "err", err)
 		os.Exit(1)
 	}
-	pwd, err := os.Getwd()
-	if err != nil {
-		slog.Error("get pwd failed", "err", err)
-		os.Exit(1)
-	}
-	outCompressFile := filepath.Join(pwd, "dist", fmt.Sprintf("%s_%s.zip", pluginConfig.Id, pluginConfig.Version))
+
+	outCompressFile := filepath.Join("./dist", fmt.Sprintf("%s_%s.zip", pluginConfig.Id, pluginConfig.Version))
 	outFile, err := os.Create(outCompressFile)
 	if err != nil {
 		slog.Error("create file failed", "file", outCompressFile, "err", err)
@@ -80,26 +88,27 @@ func main() {
 	})
 	defer zw.Close()
 
-	fileList := []string{
-		pluginTomlFile,
-		fmt.Sprintf("%s.wasm", pluginConfig.Id),
-		pluginConfig.Icon,
+	zipFileMap := map[string]string{
+		pluginTomlFile:                          pluginTomlFile,
+		fmt.Sprintf("%s.wasm", pluginConfig.Id): buildWasmFile,
+		pluginConfig.Icon:                       pluginConfig.Icon,
 	}
 
-	for _, file := range fileList {
-		localFile, err := os.Open(file)
+	for fileName, filePath := range zipFileMap {
+		localFile, err := os.Open(filePath)
 		if err != nil {
-			slog.Error("zip create file failed", "file", file, "err", err)
+			slog.Error("zip create file failed", "file", filePath, "err", err)
 			os.Exit(1)
 		}
 
-		zwfile, err := zw.Create(file)
+		zwfile, err := zw.Create(fileName)
 		if err != nil {
-			slog.Error("zip create file failed", "file", file, "err", err)
+			slog.Error("zip create file failed", "file", fileName, "err", err)
 			os.Exit(1)
 		}
 		io.Copy(zwfile, localFile)
 		localFile.Close()
 	}
+
 	slog.Info("build success", "plugin", pluginConfig.Name, "plugin_path", outCompressFile)
 }
