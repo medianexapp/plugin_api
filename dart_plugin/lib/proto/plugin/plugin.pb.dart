@@ -533,17 +533,14 @@ class DirEntry extends $pb.GeneratedMessage {
 class GetDirEntryRequest extends $pb.GeneratedMessage {
   factory GetDirEntryRequest({
     $core.String? path,
-    FileEntry? pathEntry,
     $fixnum.Int64? page,
     $fixnum.Int64? pageSize,
     $core.String? dirEntryKey,
+    FileEntry? fileEntry,
   }) {
     final $result = create();
     if (path != null) {
       $result.path = path;
-    }
-    if (pathEntry != null) {
-      $result.pathEntry = pathEntry;
     }
     if (page != null) {
       $result.page = page;
@@ -554,6 +551,9 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
     if (dirEntryKey != null) {
       $result.dirEntryKey = dirEntryKey;
     }
+    if (fileEntry != null) {
+      $result.fileEntry = fileEntry;
+    }
     return $result;
   }
   GetDirEntryRequest._() : super();
@@ -562,10 +562,10 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetDirEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'path')
-    ..aOM<FileEntry>(2, _omitFieldNames ? '' : 'pathEntry', subBuilder: FileEntry.create)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(10, _omitFieldNames ? '' : 'dirEntryKey')
+    ..aOM<FileEntry>(11, _omitFieldNames ? '' : 'fileEntry', subBuilder: FileEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -599,56 +599,56 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPath() => clearField(1);
 
-  @$pb.TagNumber(2)
-  FileEntry get pathEntry => $_getN(1);
-  @$pb.TagNumber(2)
-  set pathEntry(FileEntry v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasPathEntry() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearPathEntry() => clearField(2);
-  @$pb.TagNumber(2)
-  FileEntry ensurePathEntry() => $_ensure(1);
-
   @$pb.TagNumber(3)
-  $fixnum.Int64 get page => $_getI64(2);
+  $fixnum.Int64 get page => $_getI64(1);
   @$pb.TagNumber(3)
-  set page($fixnum.Int64 v) { $_setInt64(2, v); }
+  set page($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasPage() => $_has(2);
+  $core.bool hasPage() => $_has(1);
   @$pb.TagNumber(3)
   void clearPage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $fixnum.Int64 get pageSize => $_getI64(3);
+  $fixnum.Int64 get pageSize => $_getI64(2);
   @$pb.TagNumber(4)
-  set pageSize($fixnum.Int64 v) { $_setInt64(3, v); }
+  set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasPageSize() => $_has(3);
+  $core.bool hasPageSize() => $_has(2);
   @$pb.TagNumber(4)
   void clearPageSize() => clearField(4);
 
   @$pb.TagNumber(10)
-  $core.String get dirEntryKey => $_getSZ(4);
+  $core.String get dirEntryKey => $_getSZ(3);
   @$pb.TagNumber(10)
-  set dirEntryKey($core.String v) { $_setString(4, v); }
+  set dirEntryKey($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(10)
-  $core.bool hasDirEntryKey() => $_has(4);
+  $core.bool hasDirEntryKey() => $_has(3);
   @$pb.TagNumber(10)
   void clearDirEntryKey() => clearField(10);
+
+  @$pb.TagNumber(11)
+  FileEntry get fileEntry => $_getN(4);
+  @$pb.TagNumber(11)
+  set fileEntry(FileEntry v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasFileEntry() => $_has(4);
+  @$pb.TagNumber(11)
+  void clearFileEntry() => clearField(11);
+  @$pb.TagNumber(11)
+  FileEntry ensureFileEntry() => $_ensure(4);
 }
 
 class GetFileResourceRequest extends $pb.GeneratedMessage {
   factory GetFileResourceRequest({
-    $core.String? path,
-    FileEntry? pathEntry,
+    $core.String? filePath,
+    FileEntry? fileEntry,
   }) {
     final $result = create();
-    if (path != null) {
-      $result.path = path;
+    if (filePath != null) {
+      $result.filePath = filePath;
     }
-    if (pathEntry != null) {
-      $result.pathEntry = pathEntry;
+    if (fileEntry != null) {
+      $result.fileEntry = fileEntry;
     }
     return $result;
   }
@@ -657,8 +657,8 @@ class GetFileResourceRequest extends $pb.GeneratedMessage {
   factory GetFileResourceRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFileResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'path')
-    ..aOM<FileEntry>(2, _omitFieldNames ? '' : 'pathEntry', subBuilder: FileEntry.create)
+    ..aOS(1, _omitFieldNames ? '' : 'filePath')
+    ..aOM<FileEntry>(10, _omitFieldNames ? '' : 'fileEntry', subBuilder: FileEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -684,24 +684,24 @@ class GetFileResourceRequest extends $pb.GeneratedMessage {
   static GetFileResourceRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get path => $_getSZ(0);
+  $core.String get filePath => $_getSZ(0);
   @$pb.TagNumber(1)
-  set path($core.String v) { $_setString(0, v); }
+  set filePath($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPath() => $_has(0);
+  $core.bool hasFilePath() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPath() => clearField(1);
+  void clearFilePath() => clearField(1);
 
-  @$pb.TagNumber(2)
-  FileEntry get pathEntry => $_getN(1);
-  @$pb.TagNumber(2)
-  set pathEntry(FileEntry v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasPathEntry() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearPathEntry() => clearField(2);
-  @$pb.TagNumber(2)
-  FileEntry ensurePathEntry() => $_ensure(1);
+  @$pb.TagNumber(10)
+  FileEntry get fileEntry => $_getN(1);
+  @$pb.TagNumber(10)
+  set fileEntry(FileEntry v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasFileEntry() => $_has(1);
+  @$pb.TagNumber(10)
+  void clearFileEntry() => clearField(10);
+  @$pb.TagNumber(10)
+  FileEntry ensureFileEntry() => $_ensure(1);
 }
 
 class FileResource_FileResourceData extends $pb.GeneratedMessage {
