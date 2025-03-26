@@ -117,15 +117,15 @@ const DirEntry$json = {
   '2': [
     {'1': 'file_entries', '3': 1, '4': 3, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntries'},
     {'1': 'dir_entry_key', '3': 10, '4': 1, '5': 9, '10': 'dirEntryKey'},
-    {'1': 'page_size', '3': 11, '4': 1, '5': 4, '10': 'pageSize'},
+    {'1': 'max_page_size', '3': 11, '4': 1, '5': 4, '10': 'maxPageSize'},
   ],
 };
 
 /// Descriptor for `DirEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List dirEntryDescriptor = $convert.base64Decode(
     'CghEaXJFbnRyeRI0CgxmaWxlX2VudHJpZXMYASADKAsyES5wbHVnaW4uRmlsZUVudHJ5UgtmaW'
-    'xlRW50cmllcxIiCg1kaXJfZW50cnlfa2V5GAogASgJUgtkaXJFbnRyeUtleRIbCglwYWdlX3Np'
-    'emUYCyABKARSCHBhZ2VTaXpl');
+    'xlRW50cmllcxIiCg1kaXJfZW50cnlfa2V5GAogASgJUgtkaXJFbnRyeUtleRIiCg1tYXhfcGFn'
+    'ZV9zaXplGAsgASgEUgttYXhQYWdlU2l6ZQ==');
 
 @$core.Deprecated('Use getDirEntryRequestDescriptor instead')
 const GetDirEntryRequest$json = {

@@ -50,7 +50,7 @@ message DirEntry {
     repeated FileEntry file_entries = 1;
 
     string dir_entry_key = 10;
-    uint64 page_size     = 11;
+    uint64 max_page_size = 11;
 }
 
 message GetDirEntryRequest {
