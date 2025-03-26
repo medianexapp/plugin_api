@@ -50,11 +50,13 @@ message DirEntry {
     repeated FileEntry file_entries = 1;
 
     string dir_entry_key = 10;
+    uint64 page_size     = 11;
 }
 
 message GetDirEntryRequest {
-    string path      = 1;
-    uint64 page      = 3;
+    string path = 1;
+    uint64 page = 3;
+    // if first req,page_size is 0,need return page_size on resp DirEntry
     uint64 page_size = 4;
 
     string    dir_entry_key = 10;  // dir entry key,may be help you to get multi page for one path

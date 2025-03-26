@@ -476,6 +476,7 @@ class DirEntry extends $pb.GeneratedMessage {
   factory DirEntry({
     $core.Iterable<FileEntry>? fileEntries,
     $core.String? dirEntryKey,
+    $fixnum.Int64? pageSize,
   }) {
     final $result = create();
     if (fileEntries != null) {
@@ -483,6 +484,9 @@ class DirEntry extends $pb.GeneratedMessage {
     }
     if (dirEntryKey != null) {
       $result.dirEntryKey = dirEntryKey;
+    }
+    if (pageSize != null) {
+      $result.pageSize = pageSize;
     }
     return $result;
   }
@@ -493,6 +497,7 @@ class DirEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DirEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..pc<FileEntry>(1, _omitFieldNames ? '' : 'fileEntries', $pb.PbFieldType.PM, subBuilder: FileEntry.create)
     ..aOS(10, _omitFieldNames ? '' : 'dirEntryKey')
+    ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -528,6 +533,15 @@ class DirEntry extends $pb.GeneratedMessage {
   $core.bool hasDirEntryKey() => $_has(1);
   @$pb.TagNumber(10)
   void clearDirEntryKey() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get pageSize => $_getI64(2);
+  @$pb.TagNumber(11)
+  set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasPageSize() => $_has(2);
+  @$pb.TagNumber(11)
+  void clearPageSize() => clearField(11);
 }
 
 class GetDirEntryRequest extends $pb.GeneratedMessage {
@@ -608,6 +622,7 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   void clearPage() => clearField(3);
 
+  /// if first req,page_size is 0,need return page_size on resp DirEntry
   @$pb.TagNumber(4)
   $fixnum.Int64 get pageSize => $_getI64(2);
   @$pb.TagNumber(4)
