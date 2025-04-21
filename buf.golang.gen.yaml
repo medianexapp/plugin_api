@@ -1,7 +1,7 @@
 version: v2
 plugins:
   - local: protoc-gen-go-lite
-    out: .
+    out: plugin
     opt:
       - paths=source_relative
 

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package plugin;
 option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
-import "plugin/wrappers.proto";
+import "wrappers.proto";
 
 message AuthMethod {
     message FormData {
