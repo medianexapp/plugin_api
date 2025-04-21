@@ -7,6 +7,7 @@ package plugin
 import (
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
+	json "github.com/aperturerobotics/protobuf-go-lite/json"
 	anypb "github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
 	io "io"
 	strconv "strconv"
@@ -1543,6 +1544,1226 @@ func (this *Token) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+
+// MarshalProtoJSON marshals the Auth_FormData_FormItem message to JSON.
+func (x *Auth_FormData_FormItem) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Name != "" || s.HasField("name") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("name")
+		s.WriteString(x.Name)
+	}
+	if x.Value != nil || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		x.Value.MarshalProtoJSON(s.WithField("value"))
+	}
+	if len(x.EnumValues) > 0 || s.HasField("enumValues") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("enumValues")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.EnumValues {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("enumValues"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Auth_FormData_FormItem to JSON.
+func (x *Auth_FormData_FormItem) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Auth_FormData_FormItem message from JSON.
+func (x *Auth_FormData_FormItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "name":
+			s.AddField("name")
+			x.Name = s.ReadString()
+		case "value":
+			if s.ReadNil() {
+				x.Value = nil
+				return
+			}
+			x.Value = &anypb.Any{}
+			x.Value.UnmarshalProtoJSON(s.WithField("value", true))
+		case "enum_values", "enumValues":
+			s.AddField("enum_values")
+			if s.ReadNil() {
+				x.EnumValues = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.EnumValues = append(x.EnumValues, nil)
+					return
+				}
+				v := &Auth_FormData_FormItem{}
+				v.UnmarshalProtoJSON(s.WithField("enum_values", false))
+				if s.Err() != nil {
+					return
+				}
+				x.EnumValues = append(x.EnumValues, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Auth_FormData_FormItem from JSON.
+func (x *Auth_FormData_FormItem) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Auth_FormData message to JSON.
+func (x *Auth_FormData) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.FormItems) > 0 || s.HasField("formItems") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("formItems")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.FormItems {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("formItems"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Auth_FormData to JSON.
+func (x *Auth_FormData) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Auth_FormData message from JSON.
+func (x *Auth_FormData) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "form_items", "formItems":
+			s.AddField("form_items")
+			if s.ReadNil() {
+				x.FormItems = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.FormItems = append(x.FormItems, nil)
+					return
+				}
+				v := &Auth_FormData_FormItem{}
+				v.UnmarshalProtoJSON(s.WithField("form_items", false))
+				if s.Err() != nil {
+					return
+				}
+				x.FormItems = append(x.FormItems, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Auth_FormData from JSON.
+func (x *Auth_FormData) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Auth_ScanQrcode message to JSON.
+func (x *Auth_ScanQrcode) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.QrcodeImage) > 0 || s.HasField("qrcodeImage") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("qrcodeImage")
+		s.WriteBytes(x.QrcodeImage)
+	}
+	if x.QrcodeImageParam != "" || s.HasField("qrcodeImageParam") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("qrcodeImageParam")
+		s.WriteString(x.QrcodeImageParam)
+	}
+	if x.QrcodeExpireTime != 0 || s.HasField("qrcodeExpireTime") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("qrcodeExpireTime")
+		s.WriteUint64(x.QrcodeExpireTime)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Auth_ScanQrcode to JSON.
+func (x *Auth_ScanQrcode) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Auth_ScanQrcode message from JSON.
+func (x *Auth_ScanQrcode) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "qrcode_image", "qrcodeImage":
+			s.AddField("qrcode_image")
+			x.QrcodeImage = s.ReadBytes()
+		case "qrcode_image_param", "qrcodeImageParam":
+			s.AddField("qrcode_image_param")
+			x.QrcodeImageParam = s.ReadString()
+		case "qrcode_expire_time", "qrcodeExpireTime":
+			s.AddField("qrcode_expire_time")
+			x.QrcodeExpireTime = s.ReadUint64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Auth_ScanQrcode from JSON.
+func (x *Auth_ScanQrcode) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Auth_Callback message to JSON.
+func (x *Auth_Callback) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.CallbackUrl != "" || s.HasField("callbackUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("callbackUrl")
+		s.WriteString(x.CallbackUrl)
+	}
+	if x.CallbackUrlParam != "" || s.HasField("callbackUrlParam") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("callbackUrlParam")
+		s.WriteString(x.CallbackUrlParam)
+	}
+	if x.CallbackUrlData != "" || s.HasField("callbackUrlData") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("callbackUrlData")
+		s.WriteString(x.CallbackUrlData)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Auth_Callback to JSON.
+func (x *Auth_Callback) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Auth_Callback message from JSON.
+func (x *Auth_Callback) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "callback_url", "callbackUrl":
+			s.AddField("callback_url")
+			x.CallbackUrl = s.ReadString()
+		case "callback_url_param", "callbackUrlParam":
+			s.AddField("callback_url_param")
+			x.CallbackUrlParam = s.ReadString()
+		case "callback_url_data", "callbackUrlData":
+			s.AddField("callback_url_data")
+			x.CallbackUrlData = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Auth_Callback from JSON.
+func (x *Auth_Callback) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Auth message to JSON.
+func (x *Auth) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.AuthMethods) > 0 || s.HasField("authMethods") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("authMethods")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.AuthMethods {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("authMethods"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Auth to JSON.
+func (x *Auth) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Auth message from JSON.
+func (x *Auth) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "auth_methods", "authMethods":
+			s.AddField("auth_methods")
+			if s.ReadNil() {
+				x.AuthMethods = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.AuthMethods = append(x.AuthMethods, nil)
+					return
+				}
+				v := &anypb.Any{}
+				v.UnmarshalProtoJSON(s.WithField("auth_methods", false))
+				if s.Err() != nil {
+					return
+				}
+				x.AuthMethods = append(x.AuthMethods, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Auth from JSON.
+func (x *Auth) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileEntry_FileType to JSON.
+func (x FileEntry_FileType) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), FileEntry_FileType_name)
+}
+
+// MarshalText marshals the FileEntry_FileType to text.
+func (x FileEntry_FileType) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), FileEntry_FileType_name)), nil
+}
+
+// MarshalJSON marshals the FileEntry_FileType to JSON.
+func (x FileEntry_FileType) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileEntry_FileType from JSON.
+func (x *FileEntry_FileType) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(FileEntry_FileType_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read FileType enum: %v", err)
+		return
+	}
+	*x = FileEntry_FileType(v)
+}
+
+// UnmarshalText unmarshals the FileEntry_FileType from text.
+func (x *FileEntry_FileType) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), FileEntry_FileType_value)
+	if err != nil {
+		return err
+	}
+	*x = FileEntry_FileType(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the FileEntry_FileType from JSON.
+func (x *FileEntry_FileType) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileEntry message to JSON.
+func (x *FileEntry) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Name != "" || s.HasField("name") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("name")
+		s.WriteString(x.Name)
+	}
+	if x.FileType != 0 || s.HasField("fileType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fileType")
+		x.FileType.MarshalProtoJSON(s)
+	}
+	if x.Size != 0 || s.HasField("size") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("size")
+		s.WriteUint64(x.Size)
+	}
+	if len(x.RawData) > 0 || s.HasField("rawData") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("rawData")
+		s.WriteBytes(x.RawData)
+	}
+	if x.CreatedTime != 0 || s.HasField("createdTime") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("createdTime")
+		s.WriteUint64(x.CreatedTime)
+	}
+	if x.ModifiedTime != 0 || s.HasField("modifiedTime") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("modifiedTime")
+		s.WriteUint64(x.ModifiedTime)
+	}
+	if x.AccessedTime != 0 || s.HasField("accessedTime") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("accessedTime")
+		s.WriteUint64(x.AccessedTime)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the FileEntry to JSON.
+func (x *FileEntry) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileEntry message from JSON.
+func (x *FileEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "name":
+			s.AddField("name")
+			x.Name = s.ReadString()
+		case "file_type", "fileType":
+			s.AddField("file_type")
+			x.FileType.UnmarshalProtoJSON(s)
+		case "size":
+			s.AddField("size")
+			x.Size = s.ReadUint64()
+		case "raw_data", "rawData":
+			s.AddField("raw_data")
+			x.RawData = s.ReadBytes()
+		case "created_time", "createdTime":
+			s.AddField("created_time")
+			x.CreatedTime = s.ReadUint64()
+		case "modified_time", "modifiedTime":
+			s.AddField("modified_time")
+			x.ModifiedTime = s.ReadUint64()
+		case "accessed_time", "accessedTime":
+			s.AddField("accessed_time")
+			x.AccessedTime = s.ReadUint64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the FileEntry from JSON.
+func (x *FileEntry) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the DirEntry message to JSON.
+func (x *DirEntry) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.FileEntries) > 0 || s.HasField("fileEntries") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fileEntries")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.FileEntries {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("fileEntries"))
+		}
+		s.WriteArrayEnd()
+	}
+	if x.DirEntryKey != "" || s.HasField("dirEntryKey") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("dirEntryKey")
+		s.WriteString(x.DirEntryKey)
+	}
+	if x.MaxPageSize != 0 || s.HasField("maxPageSize") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("maxPageSize")
+		s.WriteUint64(x.MaxPageSize)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the DirEntry to JSON.
+func (x *DirEntry) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the DirEntry message from JSON.
+func (x *DirEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "file_entries", "fileEntries":
+			s.AddField("file_entries")
+			if s.ReadNil() {
+				x.FileEntries = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.FileEntries = append(x.FileEntries, nil)
+					return
+				}
+				v := &FileEntry{}
+				v.UnmarshalProtoJSON(s.WithField("file_entries", false))
+				if s.Err() != nil {
+					return
+				}
+				x.FileEntries = append(x.FileEntries, v)
+			})
+		case "dir_entry_key", "dirEntryKey":
+			s.AddField("dir_entry_key")
+			x.DirEntryKey = s.ReadString()
+		case "max_page_size", "maxPageSize":
+			s.AddField("max_page_size")
+			x.MaxPageSize = s.ReadUint64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the DirEntry from JSON.
+func (x *DirEntry) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the GetDirEntryRequest message to JSON.
+func (x *GetDirEntryRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Path != "" || s.HasField("path") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("path")
+		s.WriteString(x.Path)
+	}
+	if x.Page != 0 || s.HasField("page") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("page")
+		s.WriteUint64(x.Page)
+	}
+	if x.PageSize != 0 || s.HasField("pageSize") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("pageSize")
+		s.WriteUint64(x.PageSize)
+	}
+	if x.DirEntryKey != "" || s.HasField("dirEntryKey") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("dirEntryKey")
+		s.WriteString(x.DirEntryKey)
+	}
+	if x.FileEntry != nil || s.HasField("fileEntry") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fileEntry")
+		x.FileEntry.MarshalProtoJSON(s.WithField("fileEntry"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the GetDirEntryRequest to JSON.
+func (x *GetDirEntryRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the GetDirEntryRequest message from JSON.
+func (x *GetDirEntryRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "path":
+			s.AddField("path")
+			x.Path = s.ReadString()
+		case "page":
+			s.AddField("page")
+			x.Page = s.ReadUint64()
+		case "page_size", "pageSize":
+			s.AddField("page_size")
+			x.PageSize = s.ReadUint64()
+		case "dir_entry_key", "dirEntryKey":
+			s.AddField("dir_entry_key")
+			x.DirEntryKey = s.ReadString()
+		case "file_entry", "fileEntry":
+			if s.ReadNil() {
+				x.FileEntry = nil
+				return
+			}
+			x.FileEntry = &FileEntry{}
+			x.FileEntry.UnmarshalProtoJSON(s.WithField("file_entry", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the GetDirEntryRequest from JSON.
+func (x *GetDirEntryRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the GetFileResourceRequest message to JSON.
+func (x *GetFileResourceRequest) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.FilePath != "" || s.HasField("filePath") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("filePath")
+		s.WriteString(x.FilePath)
+	}
+	if x.FileEntry != nil || s.HasField("fileEntry") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fileEntry")
+		x.FileEntry.MarshalProtoJSON(s.WithField("fileEntry"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the GetFileResourceRequest to JSON.
+func (x *GetFileResourceRequest) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the GetFileResourceRequest message from JSON.
+func (x *GetFileResourceRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "file_path", "filePath":
+			s.AddField("file_path")
+			x.FilePath = s.ReadString()
+		case "file_entry", "fileEntry":
+			if s.ReadNil() {
+				x.FileEntry = nil
+				return
+			}
+			x.FileEntry = &FileEntry{}
+			x.FileEntry.UnmarshalProtoJSON(s.WithField("file_entry", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the GetFileResourceRequest from JSON.
+func (x *GetFileResourceRequest) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileResource_Resolution to JSON.
+func (x FileResource_Resolution) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), FileResource_Resolution_name)
+}
+
+// MarshalText marshals the FileResource_Resolution to text.
+func (x FileResource_Resolution) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), FileResource_Resolution_name)), nil
+}
+
+// MarshalJSON marshals the FileResource_Resolution to JSON.
+func (x FileResource_Resolution) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileResource_Resolution from JSON.
+func (x *FileResource_Resolution) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(FileResource_Resolution_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read Resolution enum: %v", err)
+		return
+	}
+	*x = FileResource_Resolution(v)
+}
+
+// UnmarshalText unmarshals the FileResource_Resolution from text.
+func (x *FileResource_Resolution) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), FileResource_Resolution_value)
+	if err != nil {
+		return err
+	}
+	*x = FileResource_Resolution(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the FileResource_Resolution from JSON.
+func (x *FileResource_Resolution) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileResource_ResourceType to JSON.
+func (x FileResource_ResourceType) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), FileResource_ResourceType_name)
+}
+
+// MarshalText marshals the FileResource_ResourceType to text.
+func (x FileResource_ResourceType) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), FileResource_ResourceType_name)), nil
+}
+
+// MarshalJSON marshals the FileResource_ResourceType to JSON.
+func (x FileResource_ResourceType) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileResource_ResourceType from JSON.
+func (x *FileResource_ResourceType) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(FileResource_ResourceType_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read ResourceType enum: %v", err)
+		return
+	}
+	*x = FileResource_ResourceType(v)
+}
+
+// UnmarshalText unmarshals the FileResource_ResourceType from text.
+func (x *FileResource_ResourceType) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), FileResource_ResourceType_value)
+	if err != nil {
+		return err
+	}
+	*x = FileResource_ResourceType(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the FileResource_ResourceType from JSON.
+func (x *FileResource_ResourceType) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileResource_FileResourceData_HeaderEntry message to JSON.
+func (x *FileResource_FileResourceData_HeaderEntry) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Key != "" || s.HasField("key") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("key")
+		s.WriteString(x.Key)
+	}
+	if x.Value != "" || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteString(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the FileResource_FileResourceData_HeaderEntry to JSON.
+func (x *FileResource_FileResourceData_HeaderEntry) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileResource_FileResourceData_HeaderEntry message from JSON.
+func (x *FileResource_FileResourceData_HeaderEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "key":
+			s.AddField("key")
+			x.Key = s.ReadString()
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the FileResource_FileResourceData_HeaderEntry from JSON.
+func (x *FileResource_FileResourceData_HeaderEntry) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileResource_FileResourceData message to JSON.
+func (x *FileResource_FileResourceData) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Url != "" || s.HasField("url") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("url")
+		s.WriteString(x.Url)
+	}
+	if x.Resolution != 0 || s.HasField("resolution") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("resolution")
+		x.Resolution.MarshalProtoJSON(s)
+	}
+	if x.ExpireTime != 0 || s.HasField("expireTime") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("expireTime")
+		s.WriteUint64(x.ExpireTime)
+	}
+	if x.ResourceType != 0 || s.HasField("resourceType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("resourceType")
+		x.ResourceType.MarshalProtoJSON(s)
+	}
+	if x.Title != "" || s.HasField("title") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("title")
+		s.WriteString(x.Title)
+	}
+	if x.Header != nil || s.HasField("header") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("header")
+		s.WriteObjectStart()
+		var wroteElement bool
+		for k, v := range x.Header {
+			s.WriteMoreIf(&wroteElement)
+			s.WriteObjectStringField(k)
+			s.WriteString(v)
+		}
+		s.WriteObjectEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the FileResource_FileResourceData to JSON.
+func (x *FileResource_FileResourceData) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileResource_FileResourceData message from JSON.
+func (x *FileResource_FileResourceData) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "url":
+			s.AddField("url")
+			x.Url = s.ReadString()
+		case "resolution":
+			s.AddField("resolution")
+			x.Resolution.UnmarshalProtoJSON(s)
+		case "expire_time", "expireTime":
+			s.AddField("expire_time")
+			x.ExpireTime = s.ReadUint64()
+		case "resource_type", "resourceType":
+			s.AddField("resource_type")
+			x.ResourceType.UnmarshalProtoJSON(s)
+		case "title":
+			s.AddField("title")
+			x.Title = s.ReadString()
+		case "header":
+			s.AddField("header")
+			if s.ReadNil() {
+				x.Header = nil
+				return
+			}
+			x.Header = make(map[string]string)
+			s.ReadStringMap(func(key string) {
+				x.Header[key] = s.ReadString()
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the FileResource_FileResourceData from JSON.
+func (x *FileResource_FileResourceData) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FileResource message to JSON.
+func (x *FileResource) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.FileResourceData) > 0 || s.HasField("fileResourceData") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("fileResourceData")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.FileResourceData {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("fileResourceData"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the FileResource to JSON.
+func (x *FileResource) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FileResource message from JSON.
+func (x *FileResource) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "file_resource_data", "fileResourceData":
+			s.AddField("file_resource_data")
+			if s.ReadNil() {
+				x.FileResourceData = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.FileResourceData = append(x.FileResourceData, nil)
+					return
+				}
+				v := &FileResource_FileResourceData{}
+				v.UnmarshalProtoJSON(s.WithField("file_resource_data", false))
+				if s.Err() != nil {
+					return
+				}
+				x.FileResourceData = append(x.FileResourceData, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the FileResource from JSON.
+func (x *FileResource) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the AuthData message to JSON.
+func (x *AuthData) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.AuthDataBytes) > 0 || s.HasField("authDataBytes") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("authDataBytes")
+		s.WriteBytes(x.AuthDataBytes)
+	}
+	if x.AuthDataExpiredTime != 0 || s.HasField("authDataExpiredTime") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("authDataExpiredTime")
+		s.WriteUint64(x.AuthDataExpiredTime)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the AuthData to JSON.
+func (x *AuthData) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the AuthData message from JSON.
+func (x *AuthData) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "auth_data_bytes", "authDataBytes":
+			s.AddField("auth_data_bytes")
+			x.AuthDataBytes = s.ReadBytes()
+		case "auth_data_expired_time", "authDataExpiredTime":
+			s.AddField("auth_data_expired_time")
+			x.AuthDataExpiredTime = s.ReadUint64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the AuthData from JSON.
+func (x *AuthData) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the AuthRefresh message to JSON.
+func (x *AuthRefresh) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.AuthData != nil || s.HasField("authData") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("authData")
+		x.AuthData.MarshalProtoJSON(s.WithField("authData"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the AuthRefresh to JSON.
+func (x *AuthRefresh) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the AuthRefresh message from JSON.
+func (x *AuthRefresh) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "auth_data", "authData":
+			if s.ReadNil() {
+				x.AuthData = nil
+				return
+			}
+			x.AuthData = &AuthData{}
+			x.AuthData.UnmarshalProtoJSON(s.WithField("auth_data", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the AuthRefresh from JSON.
+func (x *AuthRefresh) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the OauthConfig message to JSON.
+func (x *OauthConfig) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.ClientId != "" || s.HasField("clientId") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("clientId")
+		s.WriteString(x.ClientId)
+	}
+	if x.ClientSecret != "" || s.HasField("clientSecret") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("clientSecret")
+		s.WriteString(x.ClientSecret)
+	}
+	if x.RedirectUri != "" || s.HasField("redirectUri") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("redirectUri")
+		s.WriteString(x.RedirectUri)
+	}
+	if len(x.Scopes) > 0 || s.HasField("scopes") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("scopes")
+		s.WriteStringArray(x.Scopes)
+	}
+	if x.AuthUrl != "" || s.HasField("authUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("authUrl")
+		s.WriteString(x.AuthUrl)
+	}
+	if x.QrcodeUrl != "" || s.HasField("qrcodeUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("qrcodeUrl")
+		s.WriteString(x.QrcodeUrl)
+	}
+	if x.TokenUrl != "" || s.HasField("tokenUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("tokenUrl")
+		s.WriteString(x.TokenUrl)
+	}
+	if x.TokenReqType != "" || s.HasField("tokenReqType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("tokenReqType")
+		s.WriteString(x.TokenReqType)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the OauthConfig to JSON.
+func (x *OauthConfig) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the OauthConfig message from JSON.
+func (x *OauthConfig) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "client_id", "clientId":
+			s.AddField("client_id")
+			x.ClientId = s.ReadString()
+		case "client_secret", "clientSecret":
+			s.AddField("client_secret")
+			x.ClientSecret = s.ReadString()
+		case "redirect_uri", "redirectUri":
+			s.AddField("redirect_uri")
+			x.RedirectUri = s.ReadString()
+		case "scopes":
+			s.AddField("scopes")
+			if s.ReadNil() {
+				x.Scopes = nil
+				return
+			}
+			x.Scopes = s.ReadStringArray()
+		case "auth_url", "authUrl":
+			s.AddField("auth_url")
+			x.AuthUrl = s.ReadString()
+		case "qrcode_url", "qrcodeUrl":
+			s.AddField("qrcode_url")
+			x.QrcodeUrl = s.ReadString()
+		case "token_url", "tokenUrl":
+			s.AddField("token_url")
+			x.TokenUrl = s.ReadString()
+		case "token_req_type", "tokenReqType":
+			s.AddField("token_req_type")
+			x.TokenReqType = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the OauthConfig from JSON.
+func (x *OauthConfig) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Token message to JSON.
+func (x *Token) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.TokenType != "" || s.HasField("tokenType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("tokenType")
+		s.WriteString(x.TokenType)
+	}
+	if x.AccessToken != "" || s.HasField("accessToken") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("accessToken")
+		s.WriteString(x.AccessToken)
+	}
+	if x.RefreshToken != "" || s.HasField("refreshToken") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("refreshToken")
+		s.WriteString(x.RefreshToken)
+	}
+	if x.ExpiresIn != 0 || s.HasField("expiresIn") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("expiresIn")
+		s.WriteUint64(x.ExpiresIn)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Token to JSON.
+func (x *Token) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Token message from JSON.
+func (x *Token) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "token_type", "tokenType":
+			s.AddField("token_type")
+			x.TokenType = s.ReadString()
+		case "access_token", "accessToken":
+			s.AddField("access_token")
+			x.AccessToken = s.ReadString()
+		case "refresh_token", "refreshToken":
+			s.AddField("refresh_token")
+			x.RefreshToken = s.ReadString()
+		case "expires_in", "expiresIn":
+			s.AddField("expires_in")
+			x.ExpiresIn = s.ReadUint64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Token from JSON.
+func (x *Token) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 func (m *Auth_FormData_FormItem) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil

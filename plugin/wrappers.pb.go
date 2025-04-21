@@ -8,6 +8,7 @@ import (
 	binary "encoding/binary"
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
+	json "github.com/aperturerobotics/protobuf-go-lite/json"
 	io "io"
 	math "math"
 )
@@ -426,6 +427,313 @@ func (this *FilePathValue) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
+
+// MarshalProtoJSON marshals the DoubleValue message to JSON.
+func (x *DoubleValue) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value != 0 || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteFloat64(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the DoubleValue to JSON.
+func (x *DoubleValue) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the DoubleValue message from JSON.
+func (x *DoubleValue) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadFloat64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the DoubleValue from JSON.
+func (x *DoubleValue) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the Int64Value message to JSON.
+func (x *Int64Value) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value != 0 || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteInt64(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the Int64Value to JSON.
+func (x *Int64Value) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Int64Value message from JSON.
+func (x *Int64Value) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadInt64()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the Int64Value from JSON.
+func (x *Int64Value) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the BoolValue message to JSON.
+func (x *BoolValue) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteBool(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the BoolValue to JSON.
+func (x *BoolValue) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the BoolValue message from JSON.
+func (x *BoolValue) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadBool()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the BoolValue from JSON.
+func (x *BoolValue) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the StringValue message to JSON.
+func (x *StringValue) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value != "" || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteString(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the StringValue to JSON.
+func (x *StringValue) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the StringValue message from JSON.
+func (x *StringValue) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the StringValue from JSON.
+func (x *StringValue) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the ObscureStringValue message to JSON.
+func (x *ObscureStringValue) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value != "" || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteString(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the ObscureStringValue to JSON.
+func (x *ObscureStringValue) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the ObscureStringValue message from JSON.
+func (x *ObscureStringValue) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the ObscureStringValue from JSON.
+func (x *ObscureStringValue) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the DirPathValue message to JSON.
+func (x *DirPathValue) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value != "" || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteString(x.Value)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the DirPathValue to JSON.
+func (x *DirPathValue) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the DirPathValue message from JSON.
+func (x *DirPathValue) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadString()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the DirPathValue from JSON.
+func (x *DirPathValue) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FilePathValue message to JSON.
+func (x *FilePathValue) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Value != "" || s.HasField("value") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("value")
+		s.WriteString(x.Value)
+	}
+	if len(x.AllowExt) > 0 || s.HasField("allowExt") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("allowExt")
+		s.WriteStringArray(x.AllowExt)
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the FilePathValue to JSON.
+func (x *FilePathValue) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FilePathValue message from JSON.
+func (x *FilePathValue) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "value":
+			s.AddField("value")
+			x.Value = s.ReadString()
+		case "allow_ext", "allowExt":
+			s.AddField("allow_ext")
+			if s.ReadNil() {
+				x.AllowExt = nil
+				return
+			}
+			x.AllowExt = s.ReadStringArray()
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the FilePathValue from JSON.
+func (x *FilePathValue) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 func (m *DoubleValue) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
