@@ -9,7 +9,6 @@ import (
 	fmt "fmt"
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
 	json "github.com/aperturerobotics/protobuf-go-lite/json"
-	anypb "github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
 	io "io"
 	strconv "strconv"
 	strings "strings"
@@ -146,9 +145,90 @@ func (x FileResource_ResourceType) String() string {
 	return strconv.Itoa(int(x))
 }
 
+type AuthMethod struct {
+	unknownFields []byte
+	// Types that are assignable to Method:
+	//
+	//	*AuthMethod_FormData_
+	//	*AuthMethod_ScanQrcode_
+	//	*AuthMethod_CallBack
+	//	*AuthMethod_Refresh_
+	Method isAuthMethod_Method `protobuf_oneof:"method"`
+}
+
+func (x *AuthMethod) Reset() {
+	*x = AuthMethod{}
+}
+
+func (*AuthMethod) ProtoMessage() {}
+
+func (m *AuthMethod) GetMethod() isAuthMethod_Method {
+	if m != nil {
+		return m.Method
+	}
+	return nil
+}
+
+func (x *AuthMethod) GetFormData() *AuthMethod_FormData {
+	if x, ok := x.GetMethod().(*AuthMethod_FormData_); ok {
+		return x.FormData
+	}
+	return nil
+}
+
+func (x *AuthMethod) GetScanQrcode() *AuthMethod_ScanQrcode {
+	if x, ok := x.GetMethod().(*AuthMethod_ScanQrcode_); ok {
+		return x.ScanQrcode
+	}
+	return nil
+}
+
+func (x *AuthMethod) GetCallBack() *AuthMethod_Callback {
+	if x, ok := x.GetMethod().(*AuthMethod_CallBack); ok {
+		return x.CallBack
+	}
+	return nil
+}
+
+func (x *AuthMethod) GetRefresh() *AuthMethod_Refresh {
+	if x, ok := x.GetMethod().(*AuthMethod_Refresh_); ok {
+		return x.Refresh
+	}
+	return nil
+}
+
+type isAuthMethod_Method interface {
+	isAuthMethod_Method()
+}
+
+type AuthMethod_FormData_ struct {
+	FormData *AuthMethod_FormData `protobuf:"bytes,1,opt,name=form_data,json=formData,proto3,oneof"`
+}
+
+type AuthMethod_ScanQrcode_ struct {
+	ScanQrcode *AuthMethod_ScanQrcode `protobuf:"bytes,2,opt,name=scan_qrcode,json=scanQrcode,proto3,oneof"`
+}
+
+type AuthMethod_CallBack struct {
+	CallBack *AuthMethod_Callback `protobuf:"bytes,3,opt,name=call_back,json=callBack,proto3,oneof"`
+}
+
+type AuthMethod_Refresh_ struct {
+	Refresh *AuthMethod_Refresh `protobuf:"bytes,4,opt,name=refresh,proto3,oneof"`
+}
+
+func (*AuthMethod_FormData_) isAuthMethod_Method() {}
+
+func (*AuthMethod_ScanQrcode_) isAuthMethod_Method() {}
+
+func (*AuthMethod_CallBack) isAuthMethod_Method() {}
+
+func (*AuthMethod_Refresh_) isAuthMethod_Method() {}
+
 type Auth struct {
 	unknownFields []byte
-	AuthMethods   []*anypb.Any `protobuf:"bytes,1,rep,name=auth_methods,json=authMethods,proto3" json:"authMethods,omitempty"` //
+	// form data input
+	AuthMethods []*AuthMethod `protobuf:"bytes,1,rep,name=auth_methods,json=authMethods,proto3" json:"authMethods,omitempty"` //
 }
 
 func (x *Auth) Reset() {
@@ -157,7 +237,7 @@ func (x *Auth) Reset() {
 
 func (*Auth) ProtoMessage() {}
 
-func (x *Auth) GetAuthMethods() []*anypb.Any {
+func (x *Auth) GetAuthMethods() []*AuthMethod {
 	if x != nil {
 		return x.AuthMethods
 	}
@@ -385,24 +465,6 @@ func (x *AuthData) GetAuthDataExpiredTime() uint64 {
 	return 0
 }
 
-type AuthRefresh struct {
-	unknownFields []byte
-	AuthData      *AuthData `protobuf:"bytes,1,opt,name=auth_data,json=authData,proto3" json:"authData,omitempty"`
-}
-
-func (x *AuthRefresh) Reset() {
-	*x = AuthRefresh{}
-}
-
-func (*AuthRefresh) ProtoMessage() {}
-
-func (x *AuthRefresh) GetAuthData() *AuthData {
-	if x != nil {
-		return x.AuthData
-	}
-	return nil
-}
-
 // oauth config
 type OauthConfig struct {
 	unknownFields []byte
@@ -523,126 +585,247 @@ func (x *Token) GetExpiresIn() uint64 {
 	return 0
 }
 
-// form data input
-type Auth_FormData struct {
+type AuthMethod_FormData struct {
 	unknownFields []byte
-	FormItems     []*Auth_FormData_FormItem `protobuf:"bytes,1,rep,name=form_items,json=formItems,proto3" json:"formItems,omitempty"`
+	FormItems     []*AuthMethod_FormData_FormItem `protobuf:"bytes,11,rep,name=form_items,json=formItems,proto3" json:"formItems,omitempty"`
 }
 
-func (x *Auth_FormData) Reset() {
-	*x = Auth_FormData{}
+func (x *AuthMethod_FormData) Reset() {
+	*x = AuthMethod_FormData{}
 }
 
-func (*Auth_FormData) ProtoMessage() {}
+func (*AuthMethod_FormData) ProtoMessage() {}
 
-func (x *Auth_FormData) GetFormItems() []*Auth_FormData_FormItem {
+func (x *AuthMethod_FormData) GetFormItems() []*AuthMethod_FormData_FormItem {
 	if x != nil {
 		return x.FormItems
 	}
 	return nil
 }
 
-type Auth_ScanQrcode struct {
+type AuthMethod_ScanQrcode struct {
 	unknownFields    []byte
 	QrcodeImage      []byte `protobuf:"bytes,1,opt,name=qrcode_image,json=qrcodeImage,proto3" json:"qrcodeImage,omitempty"`                  // qrcode image
 	QrcodeImageParam string `protobuf:"bytes,2,opt,name=qrcode_image_param,json=qrcodeImageParam,proto3" json:"qrcodeImageParam,omitempty"`  // qrcode image some param,like qrcode check key
 	QrcodeExpireTime uint64 `protobuf:"varint,3,opt,name=qrcode_expire_time,json=qrcodeExpireTime,proto3" json:"qrcodeExpireTime,omitempty"` // qrcode expire time
 }
 
-func (x *Auth_ScanQrcode) Reset() {
-	*x = Auth_ScanQrcode{}
+func (x *AuthMethod_ScanQrcode) Reset() {
+	*x = AuthMethod_ScanQrcode{}
 }
 
-func (*Auth_ScanQrcode) ProtoMessage() {}
+func (*AuthMethod_ScanQrcode) ProtoMessage() {}
 
-func (x *Auth_ScanQrcode) GetQrcodeImage() []byte {
+func (x *AuthMethod_ScanQrcode) GetQrcodeImage() []byte {
 	if x != nil {
 		return x.QrcodeImage
 	}
 	return nil
 }
 
-func (x *Auth_ScanQrcode) GetQrcodeImageParam() string {
+func (x *AuthMethod_ScanQrcode) GetQrcodeImageParam() string {
 	if x != nil {
 		return x.QrcodeImageParam
 	}
 	return ""
 }
 
-func (x *Auth_ScanQrcode) GetQrcodeExpireTime() uint64 {
+func (x *AuthMethod_ScanQrcode) GetQrcodeExpireTime() uint64 {
 	if x != nil {
 		return x.QrcodeExpireTime
 	}
 	return 0
 }
 
-type Auth_Callback struct {
+type AuthMethod_Callback struct {
 	unknownFields    []byte
 	CallbackUrl      string `protobuf:"bytes,1,opt,name=callback_url,json=callbackUrl,proto3" json:"callbackUrl,omitempty"`                 // callback url
 	CallbackUrlParam string `protobuf:"bytes,2,opt,name=callback_url_param,json=callbackUrlParam,proto3" json:"callbackUrlParam,omitempty"` // param for call back url
 	CallbackUrlData  string `protobuf:"bytes,3,opt,name=callback_url_data,json=callbackUrlData,proto3" json:"callbackUrlData,omitempty"`    // url callback data
 }
 
-func (x *Auth_Callback) Reset() {
-	*x = Auth_Callback{}
+func (x *AuthMethod_Callback) Reset() {
+	*x = AuthMethod_Callback{}
 }
 
-func (*Auth_Callback) ProtoMessage() {}
+func (*AuthMethod_Callback) ProtoMessage() {}
 
-func (x *Auth_Callback) GetCallbackUrl() string {
+func (x *AuthMethod_Callback) GetCallbackUrl() string {
 	if x != nil {
 		return x.CallbackUrl
 	}
 	return ""
 }
 
-func (x *Auth_Callback) GetCallbackUrlParam() string {
+func (x *AuthMethod_Callback) GetCallbackUrlParam() string {
 	if x != nil {
 		return x.CallbackUrlParam
 	}
 	return ""
 }
 
-func (x *Auth_Callback) GetCallbackUrlData() string {
+func (x *AuthMethod_Callback) GetCallbackUrlData() string {
 	if x != nil {
 		return x.CallbackUrlData
 	}
 	return ""
 }
 
-type Auth_FormData_FormItem struct {
+type AuthMethod_Refresh struct {
 	unknownFields []byte
-	Name          string                    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Value         *anypb.Any                `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	EnumValues    []*Auth_FormData_FormItem `protobuf:"bytes,3,rep,name=enum_values,json=enumValues,proto3" json:"enumValues,omitempty"` // for dropdown widget
+	AuthData      *AuthData `protobuf:"bytes,1,opt,name=auth_data,json=authData,proto3" json:"authData,omitempty"`
 }
 
-func (x *Auth_FormData_FormItem) Reset() {
-	*x = Auth_FormData_FormItem{}
+func (x *AuthMethod_Refresh) Reset() {
+	*x = AuthMethod_Refresh{}
 }
 
-func (*Auth_FormData_FormItem) ProtoMessage() {}
+func (*AuthMethod_Refresh) ProtoMessage() {}
 
-func (x *Auth_FormData_FormItem) GetName() string {
+func (x *AuthMethod_Refresh) GetAuthData() *AuthData {
+	if x != nil {
+		return x.AuthData
+	}
+	return nil
+}
+
+type AuthMethod_FormData_FormItem struct {
+	unknownFields []byte
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Types that are assignable to Value:
+	//
+	//	*AuthMethod_FormData_FormItem_DoubleValue
+	//	*AuthMethod_FormData_FormItem_Int64Value
+	//	*AuthMethod_FormData_FormItem_BoolValue
+	//	*AuthMethod_FormData_FormItem_StringValue
+	//	*AuthMethod_FormData_FormItem_ObscureStringValue
+	//	*AuthMethod_FormData_FormItem_DirPathValue
+	//	*AuthMethod_FormData_FormItem_FilePathValue
+	Value      isAuthMethod_FormData_FormItem_Value `protobuf_oneof:"Value"`
+	EnumValues []*AuthMethod_FormData_FormItem      `protobuf:"bytes,10,rep,name=enum_values,json=enumValues,proto3" json:"enumValues,omitempty"` // for dropdown widget
+}
+
+func (x *AuthMethod_FormData_FormItem) Reset() {
+	*x = AuthMethod_FormData_FormItem{}
+}
+
+func (*AuthMethod_FormData_FormItem) ProtoMessage() {}
+
+func (x *AuthMethod_FormData_FormItem) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *Auth_FormData_FormItem) GetValue() *anypb.Any {
-	if x != nil {
-		return x.Value
+func (m *AuthMethod_FormData_FormItem) GetValue() isAuthMethod_FormData_FormItem_Value {
+	if m != nil {
+		return m.Value
 	}
 	return nil
 }
 
-func (x *Auth_FormData_FormItem) GetEnumValues() []*Auth_FormData_FormItem {
+func (x *AuthMethod_FormData_FormItem) GetDoubleValue() *DoubleValue {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_DoubleValue); ok {
+		return x.DoubleValue
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetInt64Value() *Int64Value {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_Int64Value); ok {
+		return x.Int64Value
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetBoolValue() *BoolValue {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_BoolValue); ok {
+		return x.BoolValue
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetStringValue() *StringValue {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_StringValue); ok {
+		return x.StringValue
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetObscureStringValue() *ObscureStringValue {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_ObscureStringValue); ok {
+		return x.ObscureStringValue
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetDirPathValue() *DirPathValue {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_DirPathValue); ok {
+		return x.DirPathValue
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetFilePathValue() *FilePathValue {
+	if x, ok := x.GetValue().(*AuthMethod_FormData_FormItem_FilePathValue); ok {
+		return x.FilePathValue
+	}
+	return nil
+}
+
+func (x *AuthMethod_FormData_FormItem) GetEnumValues() []*AuthMethod_FormData_FormItem {
 	if x != nil {
 		return x.EnumValues
 	}
 	return nil
 }
+
+type isAuthMethod_FormData_FormItem_Value interface {
+	isAuthMethod_FormData_FormItem_Value()
+}
+
+type AuthMethod_FormData_FormItem_DoubleValue struct {
+	DoubleValue *DoubleValue `protobuf:"bytes,2,opt,name=double_value,json=doubleValue,proto3,oneof"`
+}
+
+type AuthMethod_FormData_FormItem_Int64Value struct {
+	Int64Value *Int64Value `protobuf:"bytes,3,opt,name=int64_value,json=int64Value,proto3,oneof"`
+}
+
+type AuthMethod_FormData_FormItem_BoolValue struct {
+	BoolValue *BoolValue `protobuf:"bytes,4,opt,name=bool_value,json=boolValue,proto3,oneof"`
+}
+
+type AuthMethod_FormData_FormItem_StringValue struct {
+	StringValue *StringValue `protobuf:"bytes,5,opt,name=string_value,json=stringValue,proto3,oneof"`
+}
+
+type AuthMethod_FormData_FormItem_ObscureStringValue struct {
+	ObscureStringValue *ObscureStringValue `protobuf:"bytes,6,opt,name=obscure_string_value,json=obscureStringValue,proto3,oneof"`
+}
+
+type AuthMethod_FormData_FormItem_DirPathValue struct {
+	DirPathValue *DirPathValue `protobuf:"bytes,7,opt,name=dir_path_value,json=dirPathValue,proto3,oneof"`
+}
+
+type AuthMethod_FormData_FormItem_FilePathValue struct {
+	FilePathValue *FilePathValue `protobuf:"bytes,8,opt,name=file_path_value,json=filePathValue,proto3,oneof"`
+}
+
+func (*AuthMethod_FormData_FormItem_DoubleValue) isAuthMethod_FormData_FormItem_Value() {}
+
+func (*AuthMethod_FormData_FormItem_Int64Value) isAuthMethod_FormData_FormItem_Value() {}
+
+func (*AuthMethod_FormData_FormItem_BoolValue) isAuthMethod_FormData_FormItem_Value() {}
+
+func (*AuthMethod_FormData_FormItem_StringValue) isAuthMethod_FormData_FormItem_Value() {}
+
+func (*AuthMethod_FormData_FormItem_ObscureStringValue) isAuthMethod_FormData_FormItem_Value() {}
+
+func (*AuthMethod_FormData_FormItem_DirPathValue) isAuthMethod_FormData_FormItem_Value() {}
+
+func (*AuthMethod_FormData_FormItem_FilePathValue) isAuthMethod_FormData_FormItem_Value() {}
 
 type FileResource_FileResourceData struct {
 	unknownFields []byte
@@ -728,17 +911,19 @@ func (x *FileResource_FileResourceData_HeaderEntry) GetValue() string {
 	return ""
 }
 
-func (m *Auth_FormData_FormItem) CloneVT() *Auth_FormData_FormItem {
+func (m *AuthMethod_FormData_FormItem) CloneVT() *AuthMethod_FormData_FormItem {
 	if m == nil {
-		return (*Auth_FormData_FormItem)(nil)
+		return (*AuthMethod_FormData_FormItem)(nil)
 	}
-	r := new(Auth_FormData_FormItem)
+	r := new(AuthMethod_FormData_FormItem)
 	r.Name = m.Name
-	if rhs := m.Value; rhs != nil {
-		r.Value = rhs.CloneVT()
+	if m.Value != nil {
+		r.Value = m.Value.(interface {
+			CloneOneofVT() isAuthMethod_FormData_FormItem_Value
+		}).CloneOneofVT()
 	}
 	if rhs := m.EnumValues; rhs != nil {
-		tmpContainer := make([]*Auth_FormData_FormItem, len(rhs))
+		tmpContainer := make([]*AuthMethod_FormData_FormItem, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
@@ -751,17 +936,108 @@ func (m *Auth_FormData_FormItem) CloneVT() *Auth_FormData_FormItem {
 	return r
 }
 
-func (m *Auth_FormData_FormItem) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *AuthMethod_FormData_FormItem) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *Auth_FormData) CloneVT() *Auth_FormData {
+func (m *AuthMethod_FormData_FormItem_DoubleValue) CloneVT() *AuthMethod_FormData_FormItem_DoubleValue {
 	if m == nil {
-		return (*Auth_FormData)(nil)
+		return (*AuthMethod_FormData_FormItem_DoubleValue)(nil)
 	}
-	r := new(Auth_FormData)
+	r := new(AuthMethod_FormData_FormItem_DoubleValue)
+	r.DoubleValue = m.DoubleValue.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_DoubleValue) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_FormItem_Int64Value) CloneVT() *AuthMethod_FormData_FormItem_Int64Value {
+	if m == nil {
+		return (*AuthMethod_FormData_FormItem_Int64Value)(nil)
+	}
+	r := new(AuthMethod_FormData_FormItem_Int64Value)
+	r.Int64Value = m.Int64Value.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_Int64Value) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_FormItem_BoolValue) CloneVT() *AuthMethod_FormData_FormItem_BoolValue {
+	if m == nil {
+		return (*AuthMethod_FormData_FormItem_BoolValue)(nil)
+	}
+	r := new(AuthMethod_FormData_FormItem_BoolValue)
+	r.BoolValue = m.BoolValue.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_BoolValue) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_FormItem_StringValue) CloneVT() *AuthMethod_FormData_FormItem_StringValue {
+	if m == nil {
+		return (*AuthMethod_FormData_FormItem_StringValue)(nil)
+	}
+	r := new(AuthMethod_FormData_FormItem_StringValue)
+	r.StringValue = m.StringValue.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_StringValue) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) CloneVT() *AuthMethod_FormData_FormItem_ObscureStringValue {
+	if m == nil {
+		return (*AuthMethod_FormData_FormItem_ObscureStringValue)(nil)
+	}
+	r := new(AuthMethod_FormData_FormItem_ObscureStringValue)
+	r.ObscureStringValue = m.ObscureStringValue.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_FormItem_DirPathValue) CloneVT() *AuthMethod_FormData_FormItem_DirPathValue {
+	if m == nil {
+		return (*AuthMethod_FormData_FormItem_DirPathValue)(nil)
+	}
+	r := new(AuthMethod_FormData_FormItem_DirPathValue)
+	r.DirPathValue = m.DirPathValue.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_DirPathValue) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_FormItem_FilePathValue) CloneVT() *AuthMethod_FormData_FormItem_FilePathValue {
+	if m == nil {
+		return (*AuthMethod_FormData_FormItem_FilePathValue)(nil)
+	}
+	r := new(AuthMethod_FormData_FormItem_FilePathValue)
+	r.FilePathValue = m.FilePathValue.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_FormItem_FilePathValue) CloneOneofVT() isAuthMethod_FormData_FormItem_Value {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData) CloneVT() *AuthMethod_FormData {
+	if m == nil {
+		return (*AuthMethod_FormData)(nil)
+	}
+	r := new(AuthMethod_FormData)
 	if rhs := m.FormItems; rhs != nil {
-		tmpContainer := make([]*Auth_FormData_FormItem, len(rhs))
+		tmpContainer := make([]*AuthMethod_FormData_FormItem, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
@@ -774,15 +1050,15 @@ func (m *Auth_FormData) CloneVT() *Auth_FormData {
 	return r
 }
 
-func (m *Auth_FormData) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *AuthMethod_FormData) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *Auth_ScanQrcode) CloneVT() *Auth_ScanQrcode {
+func (m *AuthMethod_ScanQrcode) CloneVT() *AuthMethod_ScanQrcode {
 	if m == nil {
-		return (*Auth_ScanQrcode)(nil)
+		return (*AuthMethod_ScanQrcode)(nil)
 	}
-	r := new(Auth_ScanQrcode)
+	r := new(AuthMethod_ScanQrcode)
 	r.QrcodeImageParam = m.QrcodeImageParam
 	r.QrcodeExpireTime = m.QrcodeExpireTime
 	if rhs := m.QrcodeImage; rhs != nil {
@@ -797,15 +1073,15 @@ func (m *Auth_ScanQrcode) CloneVT() *Auth_ScanQrcode {
 	return r
 }
 
-func (m *Auth_ScanQrcode) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *AuthMethod_ScanQrcode) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *Auth_Callback) CloneVT() *Auth_Callback {
+func (m *AuthMethod_Callback) CloneVT() *AuthMethod_Callback {
 	if m == nil {
-		return (*Auth_Callback)(nil)
+		return (*AuthMethod_Callback)(nil)
 	}
-	r := new(Auth_Callback)
+	r := new(AuthMethod_Callback)
 	r.CallbackUrl = m.CallbackUrl
 	r.CallbackUrlParam = m.CallbackUrlParam
 	r.CallbackUrlData = m.CallbackUrlData
@@ -816,7 +1092,95 @@ func (m *Auth_Callback) CloneVT() *Auth_Callback {
 	return r
 }
 
-func (m *Auth_Callback) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *AuthMethod_Callback) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_Refresh) CloneVT() *AuthMethod_Refresh {
+	if m == nil {
+		return (*AuthMethod_Refresh)(nil)
+	}
+	r := new(AuthMethod_Refresh)
+	r.AuthData = m.AuthData.CloneVT()
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *AuthMethod_Refresh) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod) CloneVT() *AuthMethod {
+	if m == nil {
+		return (*AuthMethod)(nil)
+	}
+	r := new(AuthMethod)
+	if m.Method != nil {
+		r.Method = m.Method.(interface{ CloneOneofVT() isAuthMethod_Method }).CloneOneofVT()
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *AuthMethod) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_FormData_) CloneVT() *AuthMethod_FormData_ {
+	if m == nil {
+		return (*AuthMethod_FormData_)(nil)
+	}
+	r := new(AuthMethod_FormData_)
+	r.FormData = m.FormData.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_FormData_) CloneOneofVT() isAuthMethod_Method {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_ScanQrcode_) CloneVT() *AuthMethod_ScanQrcode_ {
+	if m == nil {
+		return (*AuthMethod_ScanQrcode_)(nil)
+	}
+	r := new(AuthMethod_ScanQrcode_)
+	r.ScanQrcode = m.ScanQrcode.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_ScanQrcode_) CloneOneofVT() isAuthMethod_Method {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_CallBack) CloneVT() *AuthMethod_CallBack {
+	if m == nil {
+		return (*AuthMethod_CallBack)(nil)
+	}
+	r := new(AuthMethod_CallBack)
+	r.CallBack = m.CallBack.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_CallBack) CloneOneofVT() isAuthMethod_Method {
+	return m.CloneVT()
+}
+
+func (m *AuthMethod_Refresh_) CloneVT() *AuthMethod_Refresh_ {
+	if m == nil {
+		return (*AuthMethod_Refresh_)(nil)
+	}
+	r := new(AuthMethod_Refresh_)
+	r.Refresh = m.Refresh.CloneVT()
+	return r
+}
+
+func (m *AuthMethod_Refresh_) CloneOneofVT() isAuthMethod_Method {
 	return m.CloneVT()
 }
 
@@ -826,7 +1190,7 @@ func (m *Auth) CloneVT() *Auth {
 	}
 	r := new(Auth)
 	if rhs := m.AuthMethods; rhs != nil {
-		tmpContainer := make([]*anypb.Any, len(rhs))
+		tmpContainer := make([]*AuthMethod, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
@@ -1007,23 +1371,6 @@ func (m *AuthData) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *AuthRefresh) CloneVT() *AuthRefresh {
-	if m == nil {
-		return (*AuthRefresh)(nil)
-	}
-	r := new(AuthRefresh)
-	r.AuthData = m.AuthData.CloneVT()
-	if len(m.unknownFields) > 0 {
-		r.unknownFields = make([]byte, len(m.unknownFields))
-		copy(r.unknownFields, m.unknownFields)
-	}
-	return r
-}
-
-func (m *AuthRefresh) CloneMessageVT() protobuf_go_lite.CloneMessage {
-	return m.CloneVT()
-}
-
 func (m *OauthConfig) CloneVT() *OauthConfig {
 	if m == nil {
 		return (*OauthConfig)(nil)
@@ -1072,16 +1419,25 @@ func (m *Token) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (this *Auth_FormData_FormItem) EqualVT(that *Auth_FormData_FormItem) bool {
+func (this *AuthMethod_FormData_FormItem) EqualVT(that *AuthMethod_FormData_FormItem) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if this.Name != that.Name {
+	if this.Value == nil && that.Value != nil {
 		return false
+	} else if this.Value != nil {
+		if that.Value == nil {
+			return false
+		}
+		if !this.Value.(interface {
+			EqualVT(isAuthMethod_FormData_FormItem_Value) bool
+		}).EqualVT(that.Value) {
+			return false
+		}
 	}
-	if !this.Value.EqualVT(that.Value) {
+	if this.Name != that.Name {
 		return false
 	}
 	if len(this.EnumValues) != len(that.EnumValues) {
@@ -1091,10 +1447,10 @@ func (this *Auth_FormData_FormItem) EqualVT(that *Auth_FormData_FormItem) bool {
 		vy := that.EnumValues[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
-				p = &Auth_FormData_FormItem{}
+				p = &AuthMethod_FormData_FormItem{}
 			}
 			if q == nil {
-				q = &Auth_FormData_FormItem{}
+				q = &AuthMethod_FormData_FormItem{}
 			}
 			if !p.EqualVT(q) {
 				return false
@@ -1104,14 +1460,189 @@ func (this *Auth_FormData_FormItem) EqualVT(that *Auth_FormData_FormItem) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *Auth_FormData_FormItem) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*Auth_FormData_FormItem)
+func (this *AuthMethod_FormData_FormItem) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*AuthMethod_FormData_FormItem)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *Auth_FormData) EqualVT(that *Auth_FormData) bool {
+func (this *AuthMethod_FormData_FormItem_DoubleValue) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_DoubleValue)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DoubleValue, that.DoubleValue; p != q {
+		if p == nil {
+			p = &DoubleValue{}
+		}
+		if q == nil {
+			q = &DoubleValue{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData_FormItem_Int64Value) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_Int64Value)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.Int64Value, that.Int64Value; p != q {
+		if p == nil {
+			p = &Int64Value{}
+		}
+		if q == nil {
+			q = &Int64Value{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData_FormItem_BoolValue) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_BoolValue)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.BoolValue, that.BoolValue; p != q {
+		if p == nil {
+			p = &BoolValue{}
+		}
+		if q == nil {
+			q = &BoolValue{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData_FormItem_StringValue) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_StringValue)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.StringValue, that.StringValue; p != q {
+		if p == nil {
+			p = &StringValue{}
+		}
+		if q == nil {
+			q = &StringValue{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData_FormItem_ObscureStringValue) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_ObscureStringValue)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.ObscureStringValue, that.ObscureStringValue; p != q {
+		if p == nil {
+			p = &ObscureStringValue{}
+		}
+		if q == nil {
+			q = &ObscureStringValue{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData_FormItem_DirPathValue) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_DirPathValue)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.DirPathValue, that.DirPathValue; p != q {
+		if p == nil {
+			p = &DirPathValue{}
+		}
+		if q == nil {
+			q = &DirPathValue{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData_FormItem_FilePathValue) EqualVT(thatIface isAuthMethod_FormData_FormItem_Value) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_FormItem_FilePathValue)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.FilePathValue, that.FilePathValue; p != q {
+		if p == nil {
+			p = &FilePathValue{}
+		}
+		if q == nil {
+			q = &FilePathValue{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_FormData) EqualVT(that *AuthMethod_FormData) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -1124,10 +1655,10 @@ func (this *Auth_FormData) EqualVT(that *Auth_FormData) bool {
 		vy := that.FormItems[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
-				p = &Auth_FormData_FormItem{}
+				p = &AuthMethod_FormData_FormItem{}
 			}
 			if q == nil {
-				q = &Auth_FormData_FormItem{}
+				q = &AuthMethod_FormData_FormItem{}
 			}
 			if !p.EqualVT(q) {
 				return false
@@ -1137,14 +1668,14 @@ func (this *Auth_FormData) EqualVT(that *Auth_FormData) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *Auth_FormData) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*Auth_FormData)
+func (this *AuthMethod_FormData) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*AuthMethod_FormData)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *Auth_ScanQrcode) EqualVT(that *Auth_ScanQrcode) bool {
+func (this *AuthMethod_ScanQrcode) EqualVT(that *AuthMethod_ScanQrcode) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -1162,14 +1693,14 @@ func (this *Auth_ScanQrcode) EqualVT(that *Auth_ScanQrcode) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *Auth_ScanQrcode) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*Auth_ScanQrcode)
+func (this *AuthMethod_ScanQrcode) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*AuthMethod_ScanQrcode)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *Auth_Callback) EqualVT(that *Auth_Callback) bool {
+func (this *AuthMethod_Callback) EqualVT(that *AuthMethod_Callback) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -1187,13 +1718,160 @@ func (this *Auth_Callback) EqualVT(that *Auth_Callback) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *Auth_Callback) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*Auth_Callback)
+func (this *AuthMethod_Callback) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*AuthMethod_Callback)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
+func (this *AuthMethod_Refresh) EqualVT(that *AuthMethod_Refresh) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if !this.AuthData.EqualVT(that.AuthData) {
+		return false
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *AuthMethod_Refresh) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*AuthMethod_Refresh)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *AuthMethod) EqualVT(that *AuthMethod) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if this.Method == nil && that.Method != nil {
+		return false
+	} else if this.Method != nil {
+		if that.Method == nil {
+			return false
+		}
+		if !this.Method.(interface {
+			EqualVT(isAuthMethod_Method) bool
+		}).EqualVT(that.Method) {
+			return false
+		}
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *AuthMethod) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*AuthMethod)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *AuthMethod_FormData_) EqualVT(thatIface isAuthMethod_Method) bool {
+	that, ok := thatIface.(*AuthMethod_FormData_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.FormData, that.FormData; p != q {
+		if p == nil {
+			p = &AuthMethod_FormData{}
+		}
+		if q == nil {
+			q = &AuthMethod_FormData{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_ScanQrcode_) EqualVT(thatIface isAuthMethod_Method) bool {
+	that, ok := thatIface.(*AuthMethod_ScanQrcode_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.ScanQrcode, that.ScanQrcode; p != q {
+		if p == nil {
+			p = &AuthMethod_ScanQrcode{}
+		}
+		if q == nil {
+			q = &AuthMethod_ScanQrcode{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_CallBack) EqualVT(thatIface isAuthMethod_Method) bool {
+	that, ok := thatIface.(*AuthMethod_CallBack)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.CallBack, that.CallBack; p != q {
+		if p == nil {
+			p = &AuthMethod_Callback{}
+		}
+		if q == nil {
+			q = &AuthMethod_Callback{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
+func (this *AuthMethod_Refresh_) EqualVT(thatIface isAuthMethod_Method) bool {
+	that, ok := thatIface.(*AuthMethod_Refresh_)
+	if !ok {
+		return false
+	}
+	if this == that {
+		return true
+	}
+	if this == nil && that != nil || this != nil && that == nil {
+		return false
+	}
+	if p, q := this.Refresh, that.Refresh; p != q {
+		if p == nil {
+			p = &AuthMethod_Refresh{}
+		}
+		if q == nil {
+			q = &AuthMethod_Refresh{}
+		}
+		if !p.EqualVT(q) {
+			return false
+		}
+	}
+	return true
+}
+
 func (this *Auth) EqualVT(that *Auth) bool {
 	if this == that {
 		return true
@@ -1207,10 +1885,10 @@ func (this *Auth) EqualVT(that *Auth) bool {
 		vy := that.AuthMethods[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
-				p = &anypb.Any{}
+				p = &AuthMethod{}
 			}
 			if q == nil {
-				q = &anypb.Any{}
+				q = &AuthMethod{}
 			}
 			if !p.EqualVT(q) {
 				return false
@@ -1454,25 +2132,6 @@ func (this *AuthData) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
-func (this *AuthRefresh) EqualVT(that *AuthRefresh) bool {
-	if this == that {
-		return true
-	} else if this == nil || that == nil {
-		return false
-	}
-	if !this.AuthData.EqualVT(that.AuthData) {
-		return false
-	}
-	return string(this.unknownFields) == string(that.unknownFields)
-}
-
-func (this *AuthRefresh) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*AuthRefresh)
-	if !ok {
-		return false
-	}
-	return this.EqualVT(that)
-}
 func (this *OauthConfig) EqualVT(that *OauthConfig) bool {
 	if this == that {
 		return true
@@ -1548,8 +2207,8 @@ func (this *Token) EqualMessageVT(thatMsg any) bool {
 	return this.EqualVT(that)
 }
 
-// MarshalProtoJSON marshals the Auth_FormData_FormItem message to JSON.
-func (x *Auth_FormData_FormItem) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the AuthMethod_FormData_FormItem message to JSON.
+func (x *AuthMethod_FormData_FormItem) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
@@ -1561,10 +2220,37 @@ func (x *Auth_FormData_FormItem) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("name")
 		s.WriteString(x.Name)
 	}
-	if x.Value != nil || s.HasField("value") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("value")
-		x.Value.MarshalProtoJSON(s.WithField("value"))
+	if x.Value != nil {
+		switch ov := x.Value.(type) {
+		case *AuthMethod_FormData_FormItem_DoubleValue:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("doubleValue")
+			ov.DoubleValue.MarshalProtoJSON(s.WithField("doubleValue"))
+		case *AuthMethod_FormData_FormItem_Int64Value:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("int64Value")
+			ov.Int64Value.MarshalProtoJSON(s.WithField("int64Value"))
+		case *AuthMethod_FormData_FormItem_BoolValue:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("boolValue")
+			ov.BoolValue.MarshalProtoJSON(s.WithField("boolValue"))
+		case *AuthMethod_FormData_FormItem_StringValue:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("stringValue")
+			ov.StringValue.MarshalProtoJSON(s.WithField("stringValue"))
+		case *AuthMethod_FormData_FormItem_ObscureStringValue:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("obscureStringValue")
+			ov.ObscureStringValue.MarshalProtoJSON(s.WithField("obscureStringValue"))
+		case *AuthMethod_FormData_FormItem_DirPathValue:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("dirPathValue")
+			ov.DirPathValue.MarshalProtoJSON(s.WithField("dirPathValue"))
+		case *AuthMethod_FormData_FormItem_FilePathValue:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("filePathValue")
+			ov.FilePathValue.MarshalProtoJSON(s.WithField("filePathValue"))
+		}
 	}
 	if len(x.EnumValues) > 0 || s.HasField("enumValues") {
 		s.WriteMoreIf(&wroteField)
@@ -1580,13 +2266,13 @@ func (x *Auth_FormData_FormItem) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the Auth_FormData_FormItem to JSON.
-func (x *Auth_FormData_FormItem) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the AuthMethod_FormData_FormItem to JSON.
+func (x *AuthMethod_FormData_FormItem) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the Auth_FormData_FormItem message from JSON.
-func (x *Auth_FormData_FormItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the AuthMethod_FormData_FormItem message from JSON.
+func (x *AuthMethod_FormData_FormItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -1597,13 +2283,69 @@ func (x *Auth_FormData_FormItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "name":
 			s.AddField("name")
 			x.Name = s.ReadString()
-		case "value":
+		case "double_value", "doubleValue":
+			ov := &AuthMethod_FormData_FormItem_DoubleValue{}
+			x.Value = ov
 			if s.ReadNil() {
-				x.Value = nil
+				ov.DoubleValue = nil
 				return
 			}
-			x.Value = &anypb.Any{}
-			x.Value.UnmarshalProtoJSON(s.WithField("value", true))
+			ov.DoubleValue = &DoubleValue{}
+			ov.DoubleValue.UnmarshalProtoJSON(s.WithField("double_value", true))
+		case "int64_value", "int64Value":
+			ov := &AuthMethod_FormData_FormItem_Int64Value{}
+			x.Value = ov
+			if s.ReadNil() {
+				ov.Int64Value = nil
+				return
+			}
+			ov.Int64Value = &Int64Value{}
+			ov.Int64Value.UnmarshalProtoJSON(s.WithField("int64_value", true))
+		case "bool_value", "boolValue":
+			ov := &AuthMethod_FormData_FormItem_BoolValue{}
+			x.Value = ov
+			if s.ReadNil() {
+				ov.BoolValue = nil
+				return
+			}
+			ov.BoolValue = &BoolValue{}
+			ov.BoolValue.UnmarshalProtoJSON(s.WithField("bool_value", true))
+		case "string_value", "stringValue":
+			ov := &AuthMethod_FormData_FormItem_StringValue{}
+			x.Value = ov
+			if s.ReadNil() {
+				ov.StringValue = nil
+				return
+			}
+			ov.StringValue = &StringValue{}
+			ov.StringValue.UnmarshalProtoJSON(s.WithField("string_value", true))
+		case "obscure_string_value", "obscureStringValue":
+			ov := &AuthMethod_FormData_FormItem_ObscureStringValue{}
+			x.Value = ov
+			if s.ReadNil() {
+				ov.ObscureStringValue = nil
+				return
+			}
+			ov.ObscureStringValue = &ObscureStringValue{}
+			ov.ObscureStringValue.UnmarshalProtoJSON(s.WithField("obscure_string_value", true))
+		case "dir_path_value", "dirPathValue":
+			ov := &AuthMethod_FormData_FormItem_DirPathValue{}
+			x.Value = ov
+			if s.ReadNil() {
+				ov.DirPathValue = nil
+				return
+			}
+			ov.DirPathValue = &DirPathValue{}
+			ov.DirPathValue.UnmarshalProtoJSON(s.WithField("dir_path_value", true))
+		case "file_path_value", "filePathValue":
+			ov := &AuthMethod_FormData_FormItem_FilePathValue{}
+			x.Value = ov
+			if s.ReadNil() {
+				ov.FilePathValue = nil
+				return
+			}
+			ov.FilePathValue = &FilePathValue{}
+			ov.FilePathValue.UnmarshalProtoJSON(s.WithField("file_path_value", true))
 		case "enum_values", "enumValues":
 			s.AddField("enum_values")
 			if s.ReadNil() {
@@ -1615,7 +2357,7 @@ func (x *Auth_FormData_FormItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 					x.EnumValues = append(x.EnumValues, nil)
 					return
 				}
-				v := &Auth_FormData_FormItem{}
+				v := &AuthMethod_FormData_FormItem{}
 				v.UnmarshalProtoJSON(s.WithField("enum_values", false))
 				if s.Err() != nil {
 					return
@@ -1626,13 +2368,13 @@ func (x *Auth_FormData_FormItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the Auth_FormData_FormItem from JSON.
-func (x *Auth_FormData_FormItem) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the AuthMethod_FormData_FormItem from JSON.
+func (x *AuthMethod_FormData_FormItem) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the Auth_FormData message to JSON.
-func (x *Auth_FormData) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the AuthMethod_FormData message to JSON.
+func (x *AuthMethod_FormData) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
@@ -1653,13 +2395,13 @@ func (x *Auth_FormData) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the Auth_FormData to JSON.
-func (x *Auth_FormData) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the AuthMethod_FormData to JSON.
+func (x *AuthMethod_FormData) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the Auth_FormData message from JSON.
-func (x *Auth_FormData) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the AuthMethod_FormData message from JSON.
+func (x *AuthMethod_FormData) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -1678,7 +2420,7 @@ func (x *Auth_FormData) UnmarshalProtoJSON(s *json.UnmarshalState) {
 					x.FormItems = append(x.FormItems, nil)
 					return
 				}
-				v := &Auth_FormData_FormItem{}
+				v := &AuthMethod_FormData_FormItem{}
 				v.UnmarshalProtoJSON(s.WithField("form_items", false))
 				if s.Err() != nil {
 					return
@@ -1689,13 +2431,13 @@ func (x *Auth_FormData) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the Auth_FormData from JSON.
-func (x *Auth_FormData) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the AuthMethod_FormData from JSON.
+func (x *AuthMethod_FormData) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the Auth_ScanQrcode message to JSON.
-func (x *Auth_ScanQrcode) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the AuthMethod_ScanQrcode message to JSON.
+func (x *AuthMethod_ScanQrcode) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
@@ -1720,13 +2462,13 @@ func (x *Auth_ScanQrcode) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the Auth_ScanQrcode to JSON.
-func (x *Auth_ScanQrcode) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the AuthMethod_ScanQrcode to JSON.
+func (x *AuthMethod_ScanQrcode) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the Auth_ScanQrcode message from JSON.
-func (x *Auth_ScanQrcode) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the AuthMethod_ScanQrcode message from JSON.
+func (x *AuthMethod_ScanQrcode) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -1747,13 +2489,13 @@ func (x *Auth_ScanQrcode) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the Auth_ScanQrcode from JSON.
-func (x *Auth_ScanQrcode) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the AuthMethod_ScanQrcode from JSON.
+func (x *AuthMethod_ScanQrcode) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the Auth_Callback message to JSON.
-func (x *Auth_Callback) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the AuthMethod_Callback message to JSON.
+func (x *AuthMethod_Callback) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
@@ -1778,13 +2520,13 @@ func (x *Auth_Callback) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the Auth_Callback to JSON.
-func (x *Auth_Callback) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the AuthMethod_Callback to JSON.
+func (x *AuthMethod_Callback) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the Auth_Callback message from JSON.
-func (x *Auth_Callback) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the AuthMethod_Callback message from JSON.
+func (x *AuthMethod_Callback) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -1805,8 +2547,144 @@ func (x *Auth_Callback) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the Auth_Callback from JSON.
-func (x *Auth_Callback) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the AuthMethod_Callback from JSON.
+func (x *AuthMethod_Callback) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the AuthMethod_Refresh message to JSON.
+func (x *AuthMethod_Refresh) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.AuthData != nil || s.HasField("authData") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("authData")
+		x.AuthData.MarshalProtoJSON(s.WithField("authData"))
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the AuthMethod_Refresh to JSON.
+func (x *AuthMethod_Refresh) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the AuthMethod_Refresh message from JSON.
+func (x *AuthMethod_Refresh) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "auth_data", "authData":
+			if s.ReadNil() {
+				x.AuthData = nil
+				return
+			}
+			x.AuthData = &AuthData{}
+			x.AuthData.UnmarshalProtoJSON(s.WithField("auth_data", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the AuthMethod_Refresh from JSON.
+func (x *AuthMethod_Refresh) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the AuthMethod message to JSON.
+func (x *AuthMethod) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if x.Method != nil {
+		switch ov := x.Method.(type) {
+		case *AuthMethod_FormData_:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("formData")
+			ov.FormData.MarshalProtoJSON(s.WithField("formData"))
+		case *AuthMethod_ScanQrcode_:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("scanQrcode")
+			ov.ScanQrcode.MarshalProtoJSON(s.WithField("scanQrcode"))
+		case *AuthMethod_CallBack:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("callBack")
+			ov.CallBack.MarshalProtoJSON(s.WithField("callBack"))
+		case *AuthMethod_Refresh_:
+			s.WriteMoreIf(&wroteField)
+			s.WriteObjectField("refresh")
+			ov.Refresh.MarshalProtoJSON(s.WithField("refresh"))
+		}
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the AuthMethod to JSON.
+func (x *AuthMethod) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the AuthMethod message from JSON.
+func (x *AuthMethod) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "form_data", "formData":
+			ov := &AuthMethod_FormData_{}
+			x.Method = ov
+			if s.ReadNil() {
+				ov.FormData = nil
+				return
+			}
+			ov.FormData = &AuthMethod_FormData{}
+			ov.FormData.UnmarshalProtoJSON(s.WithField("form_data", true))
+		case "scan_qrcode", "scanQrcode":
+			ov := &AuthMethod_ScanQrcode_{}
+			x.Method = ov
+			if s.ReadNil() {
+				ov.ScanQrcode = nil
+				return
+			}
+			ov.ScanQrcode = &AuthMethod_ScanQrcode{}
+			ov.ScanQrcode.UnmarshalProtoJSON(s.WithField("scan_qrcode", true))
+		case "call_back", "callBack":
+			ov := &AuthMethod_CallBack{}
+			x.Method = ov
+			if s.ReadNil() {
+				ov.CallBack = nil
+				return
+			}
+			ov.CallBack = &AuthMethod_Callback{}
+			ov.CallBack.UnmarshalProtoJSON(s.WithField("call_back", true))
+		case "refresh":
+			ov := &AuthMethod_Refresh_{}
+			x.Method = ov
+			if s.ReadNil() {
+				ov.Refresh = nil
+				return
+			}
+			ov.Refresh = &AuthMethod_Refresh{}
+			ov.Refresh.UnmarshalProtoJSON(s.WithField("refresh", true))
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the AuthMethod from JSON.
+func (x *AuthMethod) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
@@ -1857,7 +2735,7 @@ func (x *Auth) UnmarshalProtoJSON(s *json.UnmarshalState) {
 					x.AuthMethods = append(x.AuthMethods, nil)
 					return
 				}
-				v := &anypb.Any{}
+				v := &AuthMethod{}
 				v.UnmarshalProtoJSON(s.WithField("auth_methods", false))
 				if s.Err() != nil {
 					return
@@ -2553,52 +3431,6 @@ func (x *AuthData) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the AuthRefresh message to JSON.
-func (x *AuthRefresh) MarshalProtoJSON(s *json.MarshalState) {
-	if x == nil {
-		s.WriteNil()
-		return
-	}
-	s.WriteObjectStart()
-	var wroteField bool
-	if x.AuthData != nil || s.HasField("authData") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("authData")
-		x.AuthData.MarshalProtoJSON(s.WithField("authData"))
-	}
-	s.WriteObjectEnd()
-}
-
-// MarshalJSON marshals the AuthRefresh to JSON.
-func (x *AuthRefresh) MarshalJSON() ([]byte, error) {
-	return json.DefaultMarshalerConfig.Marshal(x)
-}
-
-// UnmarshalProtoJSON unmarshals the AuthRefresh message from JSON.
-func (x *AuthRefresh) UnmarshalProtoJSON(s *json.UnmarshalState) {
-	if s.ReadNil() {
-		return
-	}
-	s.ReadObject(func(key string) {
-		switch key {
-		default:
-			s.Skip() // ignore unknown field
-		case "auth_data", "authData":
-			if s.ReadNil() {
-				x.AuthData = nil
-				return
-			}
-			x.AuthData = &AuthData{}
-			x.AuthData.UnmarshalProtoJSON(s.WithField("auth_data", true))
-		}
-	})
-}
-
-// UnmarshalJSON unmarshals the AuthRefresh from JSON.
-func (x *AuthRefresh) UnmarshalJSON(b []byte) error {
-	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
-}
-
 // MarshalProtoJSON marshals the OauthConfig message to JSON.
 func (x *OauthConfig) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
@@ -2767,7 +3599,7 @@ func (x *Token) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-func (m *Auth_FormData_FormItem) MarshalVT() (dAtA []byte, err error) {
+func (m *AuthMethod_FormData_FormItem) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -2780,12 +3612,12 @@ func (m *Auth_FormData_FormItem) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_FormData_FormItem) MarshalToVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData_FormItem) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Auth_FormData_FormItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData_FormItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -2797,6 +3629,15 @@ func (m *Auth_FormData_FormItem) MarshalToSizedBufferVT(dAtA []byte) (int, error
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if vtmsg, ok := m.Value.(interface {
+		MarshalToSizedBufferVT([]byte) (int, error)
+	}); ok {
+		size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
 	if len(m.EnumValues) > 0 {
 		for iNdEx := len(m.EnumValues) - 1; iNdEx >= 0; iNdEx-- {
 			size, err := m.EnumValues[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
@@ -2806,18 +3647,8 @@ func (m *Auth_FormData_FormItem) MarshalToSizedBufferVT(dAtA []byte) (int, error
 			i -= size
 			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x52
 		}
-	}
-	if m.Value != nil {
-		size, err := m.Value.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
@@ -2829,7 +3660,168 @@ func (m *Auth_FormData_FormItem) MarshalToSizedBufferVT(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_FormData) MarshalVT() (dAtA []byte, err error) {
+func (m *AuthMethod_FormData_FormItem_DoubleValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_DoubleValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DoubleValue != nil {
+		size, err := m.DoubleValue.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_Int64Value) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_Int64Value) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Int64Value != nil {
+		size, err := m.Int64Value.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x1a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_BoolValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_BoolValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.BoolValue != nil {
+		size, err := m.BoolValue.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x22
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x22
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_StringValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_StringValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.StringValue != nil {
+		size, err := m.StringValue.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x2a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x2a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ObscureStringValue != nil {
+		size, err := m.ObscureStringValue.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x32
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x32
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_DirPathValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_DirPathValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DirPathValue != nil {
+		size, err := m.DirPathValue.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x3a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x3a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_FilePathValue) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_FilePathValue) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.FilePathValue != nil {
+		size, err := m.FilePathValue.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x42
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x42
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -2842,12 +3834,12 @@ func (m *Auth_FormData) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_FormData) MarshalToVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Auth_FormData) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -2868,13 +3860,13 @@ func (m *Auth_FormData) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i -= size
 			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x5a
 		}
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_ScanQrcode) MarshalVT() (dAtA []byte, err error) {
+func (m *AuthMethod_ScanQrcode) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -2887,12 +3879,12 @@ func (m *Auth_ScanQrcode) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_ScanQrcode) MarshalToVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_ScanQrcode) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Auth_ScanQrcode) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_ScanQrcode) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -2926,7 +3918,7 @@ func (m *Auth_ScanQrcode) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_Callback) MarshalVT() (dAtA []byte, err error) {
+func (m *AuthMethod_Callback) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -2939,12 +3931,12 @@ func (m *Auth_Callback) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_Callback) MarshalToVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_Callback) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *Auth_Callback) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *AuthMethod_Callback) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -2980,6 +3972,183 @@ func (m *Auth_Callback) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *AuthMethod_Refresh) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AuthMethod_Refresh) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_Refresh) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.AuthData != nil {
+		size, err := m.AuthData.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AuthMethod) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AuthMethod) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if vtmsg, ok := m.Method.(interface {
+		MarshalToSizedBufferVT([]byte) (int, error)
+	}); ok {
+		size, err := vtmsg.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AuthMethod_FormData_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.FormData != nil {
+		size, err := m.FormData.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_ScanQrcode_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_ScanQrcode_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ScanQrcode != nil {
+		size, err := m.ScanQrcode.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_CallBack) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_CallBack) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.CallBack != nil {
+		size, err := m.CallBack.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x1a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_Refresh_) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *AuthMethod_Refresh_) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Refresh != nil {
+		size, err := m.Refresh.MarshalToSizedBufferVT(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x22
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x22
+	}
+	return len(dAtA) - i, nil
+}
 func (m *Auth) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -3442,49 +4611,6 @@ func (m *AuthData) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *AuthRefresh) MarshalVT() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AuthRefresh) MarshalToVT(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVT(dAtA[:size])
-}
-
-func (m *AuthRefresh) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.AuthData != nil {
-		size, err := m.AuthData.MarshalToSizedBufferVT(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *OauthConfig) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -3635,7 +4761,7 @@ func (m *Token) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_FormData_FormItem) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *AuthMethod_FormData_FormItem) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -3648,12 +4774,12 @@ func (m *Auth_FormData_FormItem) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_FormData_FormItem) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData_FormItem) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *Auth_FormData_FormItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData_FormItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -3674,18 +4800,57 @@ func (m *Auth_FormData_FormItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 			i -= size
 			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x52
 		}
 	}
-	if m.Value != nil {
-		size, err := m.Value.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_FilePathValue); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
 		i -= size
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0x12
+	}
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_DirPathValue); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_ObscureStringValue); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_StringValue); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_BoolValue); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_Int64Value); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Value.(*AuthMethod_FormData_FormItem_DoubleValue); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
@@ -3697,7 +4862,168 @@ func (m *Auth_FormData_FormItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_FormData) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *AuthMethod_FormData_FormItem_DoubleValue) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_DoubleValue) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DoubleValue != nil {
+		size, err := m.DoubleValue.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_Int64Value) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_Int64Value) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Int64Value != nil {
+		size, err := m.Int64Value.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x1a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_BoolValue) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_BoolValue) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.BoolValue != nil {
+		size, err := m.BoolValue.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x22
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x22
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_StringValue) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_StringValue) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.StringValue != nil {
+		size, err := m.StringValue.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x2a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x2a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ObscureStringValue != nil {
+		size, err := m.ObscureStringValue.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x32
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x32
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_DirPathValue) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_DirPathValue) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.DirPathValue != nil {
+		size, err := m.DirPathValue.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x3a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x3a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData_FormItem_FilePathValue) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_FormItem_FilePathValue) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.FilePathValue != nil {
+		size, err := m.FilePathValue.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x42
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x42
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_FormData) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -3710,12 +5036,12 @@ func (m *Auth_FormData) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_FormData) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *Auth_FormData) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_FormData) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -3736,13 +5062,13 @@ func (m *Auth_FormData) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 			i -= size
 			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x5a
 		}
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_ScanQrcode) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *AuthMethod_ScanQrcode) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -3755,12 +5081,12 @@ func (m *Auth_ScanQrcode) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_ScanQrcode) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_ScanQrcode) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *Auth_ScanQrcode) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_ScanQrcode) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -3794,7 +5120,7 @@ func (m *Auth_ScanQrcode) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_Callback) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *AuthMethod_Callback) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -3807,12 +5133,12 @@ func (m *Auth_Callback) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Auth_Callback) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_Callback) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *Auth_Callback) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *AuthMethod_Callback) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -3848,6 +5174,202 @@ func (m *Auth_Callback) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *AuthMethod_Refresh) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AuthMethod_Refresh) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_Refresh) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.AuthData != nil {
+		size, err := m.AuthData.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AuthMethod) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *AuthMethod) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if msg, ok := m.Method.(*AuthMethod_Refresh_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Method.(*AuthMethod_CallBack); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Method.(*AuthMethod_ScanQrcode_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	if msg, ok := m.Method.(*AuthMethod_FormData_); ok {
+		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *AuthMethod_FormData_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_FormData_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.FormData != nil {
+		size, err := m.FormData.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0xa
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_ScanQrcode_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_ScanQrcode_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.ScanQrcode != nil {
+		size, err := m.ScanQrcode.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x12
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x12
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_CallBack) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_CallBack) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.CallBack != nil {
+		size, err := m.CallBack.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x1a
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x1a
+	}
+	return len(dAtA) - i, nil
+}
+func (m *AuthMethod_Refresh_) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *AuthMethod_Refresh_) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	if m.Refresh != nil {
+		size, err := m.Refresh.MarshalToSizedBufferVTStrict(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+		i--
+		dAtA[i] = 0x22
+	} else {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, 0)
+		i--
+		dAtA[i] = 0x22
+	}
+	return len(dAtA) - i, nil
+}
 func (m *Auth) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -4310,49 +5832,6 @@ func (m *AuthData) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *AuthRefresh) MarshalVTStrict() (dAtA []byte, err error) {
-	if m == nil {
-		return nil, nil
-	}
-	size := m.SizeVT()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AuthRefresh) MarshalToVTStrict(dAtA []byte) (int, error) {
-	size := m.SizeVT()
-	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
-}
-
-func (m *AuthRefresh) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
-	if m == nil {
-		return 0, nil
-	}
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.unknownFields != nil {
-		i -= len(m.unknownFields)
-		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.AuthData != nil {
-		size, err := m.AuthData.MarshalToSizedBufferVTStrict(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
 func (m *OauthConfig) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -4503,7 +5982,7 @@ func (m *Token) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *Auth_FormData_FormItem) SizeVT() (n int) {
+func (m *AuthMethod_FormData_FormItem) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -4513,9 +5992,8 @@ func (m *Auth_FormData_FormItem) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if m.Value != nil {
-		l = m.Value.SizeVT()
-		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	if vtmsg, ok := m.Value.(interface{ SizeVT() int }); ok {
+		n += vtmsg.SizeVT()
 	}
 	if len(m.EnumValues) > 0 {
 		for _, e := range m.EnumValues {
@@ -4527,7 +6005,105 @@ func (m *Auth_FormData_FormItem) SizeVT() (n int) {
 	return n
 }
 
-func (m *Auth_FormData) SizeVT() (n int) {
+func (m *AuthMethod_FormData_FormItem_DoubleValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DoubleValue != nil {
+		l = m.DoubleValue.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData_FormItem_Int64Value) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Int64Value != nil {
+		l = m.Int64Value.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData_FormItem_BoolValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.BoolValue != nil {
+		l = m.BoolValue.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData_FormItem_StringValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.StringValue != nil {
+		l = m.StringValue.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData_FormItem_ObscureStringValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ObscureStringValue != nil {
+		l = m.ObscureStringValue.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData_FormItem_DirPathValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.DirPathValue != nil {
+		l = m.DirPathValue.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData_FormItem_FilePathValue) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.FilePathValue != nil {
+		l = m.FilePathValue.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_FormData) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -4543,7 +6119,7 @@ func (m *Auth_FormData) SizeVT() (n int) {
 	return n
 }
 
-func (m *Auth_ScanQrcode) SizeVT() (n int) {
+func (m *AuthMethod_ScanQrcode) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -4564,7 +6140,7 @@ func (m *Auth_ScanQrcode) SizeVT() (n int) {
 	return n
 }
 
-func (m *Auth_Callback) SizeVT() (n int) {
+func (m *AuthMethod_Callback) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -4586,6 +6162,89 @@ func (m *Auth_Callback) SizeVT() (n int) {
 	return n
 }
 
+func (m *AuthMethod_Refresh) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.AuthData != nil {
+		l = m.AuthData.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *AuthMethod) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if vtmsg, ok := m.Method.(interface{ SizeVT() int }); ok {
+		n += vtmsg.SizeVT()
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
+func (m *AuthMethod_FormData_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.FormData != nil {
+		l = m.FormData.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_ScanQrcode_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.ScanQrcode != nil {
+		l = m.ScanQrcode.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_CallBack) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.CallBack != nil {
+		l = m.CallBack.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
+func (m *AuthMethod_Refresh_) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Refresh != nil {
+		l = m.Refresh.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	} else {
+		n += 2
+	}
+	return n
+}
 func (m *Auth) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -4772,20 +6431,6 @@ func (m *AuthData) SizeVT() (n int) {
 	return n
 }
 
-func (m *AuthRefresh) SizeVT() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.AuthData != nil {
-		l = m.AuthData.SizeVT()
-		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
-	}
-	n += len(m.unknownFields)
-	return n
-}
-
 func (m *OauthConfig) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -4855,7 +6500,7 @@ func (m *Token) SizeVT() (n int) {
 	return n
 }
 
-func (x *Auth_FormData_FormItem) MarshalProtoText() string {
+func (x *AuthMethod_FormData_FormItem) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("FormItem {")
 	if x.Name != "" {
@@ -4865,12 +6510,63 @@ func (x *Auth_FormData_FormItem) MarshalProtoText() string {
 		sb.WriteString("name: ")
 		sb.WriteString(strconv.Quote(x.Name))
 	}
-	if x.Value != nil {
-		if sb.Len() > 10 {
-			sb.WriteString(" ")
+	switch body := x.Value.(type) {
+	case *AuthMethod_FormData_FormItem_DoubleValue:
+		if body.DoubleValue != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("double_value: ")
+			sb.WriteString(body.DoubleValue.MarshalProtoText())
 		}
-		sb.WriteString("value: ")
-		sb.WriteString(x.Value.MarshalProtoText())
+	case *AuthMethod_FormData_FormItem_Int64Value:
+		if body.Int64Value != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("int64_value: ")
+			sb.WriteString(body.Int64Value.MarshalProtoText())
+		}
+	case *AuthMethod_FormData_FormItem_BoolValue:
+		if body.BoolValue != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("bool_value: ")
+			sb.WriteString(body.BoolValue.MarshalProtoText())
+		}
+	case *AuthMethod_FormData_FormItem_StringValue:
+		if body.StringValue != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("string_value: ")
+			sb.WriteString(body.StringValue.MarshalProtoText())
+		}
+	case *AuthMethod_FormData_FormItem_ObscureStringValue:
+		if body.ObscureStringValue != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("obscure_string_value: ")
+			sb.WriteString(body.ObscureStringValue.MarshalProtoText())
+		}
+	case *AuthMethod_FormData_FormItem_DirPathValue:
+		if body.DirPathValue != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("dir_path_value: ")
+			sb.WriteString(body.DirPathValue.MarshalProtoText())
+		}
+	case *AuthMethod_FormData_FormItem_FilePathValue:
+		if body.FilePathValue != nil {
+			if sb.Len() > 10 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("file_path_value: ")
+			sb.WriteString(body.FilePathValue.MarshalProtoText())
+		}
 	}
 	if len(x.EnumValues) > 0 {
 		if sb.Len() > 10 {
@@ -4889,10 +6585,10 @@ func (x *Auth_FormData_FormItem) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *Auth_FormData_FormItem) String() string {
+func (x *AuthMethod_FormData_FormItem) String() string {
 	return x.MarshalProtoText()
 }
-func (x *Auth_FormData) MarshalProtoText() string {
+func (x *AuthMethod_FormData) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("FormData {")
 	if len(x.FormItems) > 0 {
@@ -4912,10 +6608,10 @@ func (x *Auth_FormData) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *Auth_FormData) String() string {
+func (x *AuthMethod_FormData) String() string {
 	return x.MarshalProtoText()
 }
-func (x *Auth_ScanQrcode) MarshalProtoText() string {
+func (x *AuthMethod_ScanQrcode) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("ScanQrcode {")
 	if x.QrcodeImage != nil {
@@ -4945,10 +6641,10 @@ func (x *Auth_ScanQrcode) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *Auth_ScanQrcode) String() string {
+func (x *AuthMethod_ScanQrcode) String() string {
 	return x.MarshalProtoText()
 }
-func (x *Auth_Callback) MarshalProtoText() string {
+func (x *AuthMethod_Callback) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("Callback {")
 	if x.CallbackUrl != "" {
@@ -4976,7 +6672,68 @@ func (x *Auth_Callback) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *Auth_Callback) String() string {
+func (x *AuthMethod_Callback) String() string {
+	return x.MarshalProtoText()
+}
+func (x *AuthMethod_Refresh) MarshalProtoText() string {
+	var sb strings.Builder
+	sb.WriteString("Refresh {")
+	if x.AuthData != nil {
+		if sb.Len() > 9 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("auth_data: ")
+		sb.WriteString(x.AuthData.MarshalProtoText())
+	}
+	sb.WriteString("}")
+	return sb.String()
+}
+
+func (x *AuthMethod_Refresh) String() string {
+	return x.MarshalProtoText()
+}
+func (x *AuthMethod) MarshalProtoText() string {
+	var sb strings.Builder
+	sb.WriteString("AuthMethod {")
+	switch body := x.Method.(type) {
+	case *AuthMethod_FormData_:
+		if body.FormData != nil {
+			if sb.Len() > 12 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("form_data: ")
+			sb.WriteString(body.FormData.MarshalProtoText())
+		}
+	case *AuthMethod_ScanQrcode_:
+		if body.ScanQrcode != nil {
+			if sb.Len() > 12 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("scan_qrcode: ")
+			sb.WriteString(body.ScanQrcode.MarshalProtoText())
+		}
+	case *AuthMethod_CallBack:
+		if body.CallBack != nil {
+			if sb.Len() > 12 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("call_back: ")
+			sb.WriteString(body.CallBack.MarshalProtoText())
+		}
+	case *AuthMethod_Refresh_:
+		if body.Refresh != nil {
+			if sb.Len() > 12 {
+				sb.WriteString(" ")
+			}
+			sb.WriteString("refresh: ")
+			sb.WriteString(body.Refresh.MarshalProtoText())
+		}
+	}
+	sb.WriteString("}")
+	return sb.String()
+}
+
+func (x *AuthMethod) String() string {
 	return x.MarshalProtoText()
 }
 func (x *Auth) MarshalProtoText() string {
@@ -5315,23 +7072,6 @@ func (x *AuthData) MarshalProtoText() string {
 func (x *AuthData) String() string {
 	return x.MarshalProtoText()
 }
-func (x *AuthRefresh) MarshalProtoText() string {
-	var sb strings.Builder
-	sb.WriteString("AuthRefresh {")
-	if x.AuthData != nil {
-		if sb.Len() > 13 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("auth_data: ")
-		sb.WriteString(x.AuthData.MarshalProtoText())
-	}
-	sb.WriteString("}")
-	return sb.String()
-}
-
-func (x *AuthRefresh) String() string {
-	return x.MarshalProtoText()
-}
 func (x *OauthConfig) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("OauthConfig {")
@@ -5442,7 +7182,7 @@ func (x *Token) MarshalProtoText() string {
 func (x *Token) String() string {
 	return x.MarshalProtoText()
 }
-func (m *Auth_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
+func (m *AuthMethod_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -5465,10 +7205,10 @@ func (m *Auth_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_FormData_FormItem: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_FormData_FormItem: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_FormData_FormItem: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_FormData_FormItem: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -5505,7 +7245,7 @@ func (m *Auth_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DoubleValue", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -5532,14 +7272,265 @@ func (m *Auth_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Value == nil {
-				m.Value = &anypb.Any{}
-			}
-			if err := m.Value.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_DoubleValue); ok {
+				if err := oneof.DoubleValue.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &DoubleValue{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_DoubleValue{DoubleValue: v}
 			}
 			iNdEx = postIndex
 		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int64Value", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_Int64Value); ok {
+				if err := oneof.Int64Value.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &Int64Value{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_Int64Value{Int64Value: v}
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BoolValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_BoolValue); ok {
+				if err := oneof.BoolValue.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &BoolValue{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_BoolValue{BoolValue: v}
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StringValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_StringValue); ok {
+				if err := oneof.StringValue.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &StringValue{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_StringValue{StringValue: v}
+			}
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ObscureStringValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_ObscureStringValue); ok {
+				if err := oneof.ObscureStringValue.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &ObscureStringValue{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_ObscureStringValue{ObscureStringValue: v}
+			}
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DirPathValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_DirPathValue); ok {
+				if err := oneof.DirPathValue.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &DirPathValue{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_DirPathValue{DirPathValue: v}
+			}
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FilePathValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_FilePathValue); ok {
+				if err := oneof.FilePathValue.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &FilePathValue{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_FilePathValue{FilePathValue: v}
+			}
+			iNdEx = postIndex
+		case 10:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field EnumValues", wireType)
 			}
@@ -5568,7 +7559,7 @@ func (m *Auth_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.EnumValues = append(m.EnumValues, &Auth_FormData_FormItem{})
+			m.EnumValues = append(m.EnumValues, &AuthMethod_FormData_FormItem{})
 			if err := m.EnumValues[len(m.EnumValues)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -5595,7 +7586,7 @@ func (m *Auth_FormData_FormItem) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_FormData) UnmarshalVT(dAtA []byte) error {
+func (m *AuthMethod_FormData) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -5618,13 +7609,13 @@ func (m *Auth_FormData) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_FormData: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_FormData: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_FormData: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_FormData: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
-		case 1:
+		case 11:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FormItems", wireType)
 			}
@@ -5653,7 +7644,7 @@ func (m *Auth_FormData) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FormItems = append(m.FormItems, &Auth_FormData_FormItem{})
+			m.FormItems = append(m.FormItems, &AuthMethod_FormData_FormItem{})
 			if err := m.FormItems[len(m.FormItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -5680,7 +7671,7 @@ func (m *Auth_FormData) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_ScanQrcode) UnmarshalVT(dAtA []byte) error {
+func (m *AuthMethod_ScanQrcode) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -5703,10 +7694,10 @@ func (m *Auth_ScanQrcode) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_ScanQrcode: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_ScanQrcode: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_ScanQrcode: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_ScanQrcode: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -5816,7 +7807,7 @@ func (m *Auth_ScanQrcode) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_Callback) UnmarshalVT(dAtA []byte) error {
+func (m *AuthMethod_Callback) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -5839,10 +7830,10 @@ func (m *Auth_Callback) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_Callback: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_Callback: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_Callback: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_Callback: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -5963,6 +7954,308 @@ func (m *Auth_Callback) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *AuthMethod_Refresh) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AuthMethod_Refresh: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AuthMethod_Refresh: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AuthData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.AuthData == nil {
+				m.AuthData = &AuthData{}
+			}
+			if err := m.AuthData.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AuthMethod) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AuthMethod: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AuthMethod: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FormData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_FormData_); ok {
+				if err := oneof.FormData.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_FormData{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_FormData_{FormData: v}
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ScanQrcode", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_ScanQrcode_); ok {
+				if err := oneof.ScanQrcode.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_ScanQrcode{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_ScanQrcode_{ScanQrcode: v}
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CallBack", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_CallBack); ok {
+				if err := oneof.CallBack.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_Callback{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_CallBack{CallBack: v}
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Refresh", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_Refresh_); ok {
+				if err := oneof.Refresh.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_Refresh{}
+				if err := v.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_Refresh_{Refresh: v}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *Auth) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -6021,7 +8314,7 @@ func (m *Auth) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.AuthMethods = append(m.AuthMethods, &anypb.Any{})
+			m.AuthMethods = append(m.AuthMethods, &AuthMethod{})
 			if err := m.AuthMethods[len(m.AuthMethods)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -7192,93 +9485,6 @@ func (m *AuthData) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *AuthRefresh) UnmarshalVT(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protobuf_go_lite.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: AuthRefresh: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: AuthRefresh: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AuthData", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.AuthData == nil {
-				m.AuthData = &AuthData{}
-			}
-			if err := m.AuthData.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
 func (m *OauthConfig) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -7752,7 +9958,7 @@ func (m *Token) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *AuthMethod_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -7775,10 +9981,10 @@ func (m *Auth_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_FormData_FormItem: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_FormData_FormItem: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_FormData_FormItem: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_FormData_FormItem: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -7819,7 +10025,7 @@ func (m *Auth_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DoubleValue", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -7846,14 +10052,265 @@ func (m *Auth_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Value == nil {
-				m.Value = &anypb.Any{}
-			}
-			if err := m.Value.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_DoubleValue); ok {
+				if err := oneof.DoubleValue.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &DoubleValue{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_DoubleValue{DoubleValue: v}
 			}
 			iNdEx = postIndex
 		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Int64Value", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_Int64Value); ok {
+				if err := oneof.Int64Value.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &Int64Value{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_Int64Value{Int64Value: v}
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field BoolValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_BoolValue); ok {
+				if err := oneof.BoolValue.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &BoolValue{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_BoolValue{BoolValue: v}
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field StringValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_StringValue); ok {
+				if err := oneof.StringValue.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &StringValue{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_StringValue{StringValue: v}
+			}
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ObscureStringValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_ObscureStringValue); ok {
+				if err := oneof.ObscureStringValue.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &ObscureStringValue{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_ObscureStringValue{ObscureStringValue: v}
+			}
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DirPathValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_DirPathValue); ok {
+				if err := oneof.DirPathValue.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &DirPathValue{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_DirPathValue{DirPathValue: v}
+			}
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FilePathValue", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Value.(*AuthMethod_FormData_FormItem_FilePathValue); ok {
+				if err := oneof.FilePathValue.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &FilePathValue{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Value = &AuthMethod_FormData_FormItem_FilePathValue{FilePathValue: v}
+			}
+			iNdEx = postIndex
+		case 10:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field EnumValues", wireType)
 			}
@@ -7882,7 +10339,7 @@ func (m *Auth_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.EnumValues = append(m.EnumValues, &Auth_FormData_FormItem{})
+			m.EnumValues = append(m.EnumValues, &AuthMethod_FormData_FormItem{})
 			if err := m.EnumValues[len(m.EnumValues)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -7909,7 +10366,7 @@ func (m *Auth_FormData_FormItem) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_FormData) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *AuthMethod_FormData) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -7932,13 +10389,13 @@ func (m *Auth_FormData) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_FormData: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_FormData: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_FormData: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_FormData: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
-		case 1:
+		case 11:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field FormItems", wireType)
 			}
@@ -7967,7 +10424,7 @@ func (m *Auth_FormData) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FormItems = append(m.FormItems, &Auth_FormData_FormItem{})
+			m.FormItems = append(m.FormItems, &AuthMethod_FormData_FormItem{})
 			if err := m.FormItems[len(m.FormItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -7994,7 +10451,7 @@ func (m *Auth_FormData) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_ScanQrcode) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *AuthMethod_ScanQrcode) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -8017,10 +10474,10 @@ func (m *Auth_ScanQrcode) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_ScanQrcode: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_ScanQrcode: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_ScanQrcode: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_ScanQrcode: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -8131,7 +10588,7 @@ func (m *Auth_ScanQrcode) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *Auth_Callback) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *AuthMethod_Callback) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -8154,10 +10611,10 @@ func (m *Auth_Callback) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Auth_Callback: wiretype end group for non-group")
+			return fmt.Errorf("proto: AuthMethod_Callback: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Auth_Callback: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: AuthMethod_Callback: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -8290,6 +10747,308 @@ func (m *Auth_Callback) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
+func (m *AuthMethod_Refresh) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AuthMethod_Refresh: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AuthMethod_Refresh: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AuthData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.AuthData == nil {
+				m.AuthData = &AuthData{}
+			}
+			if err := m.AuthData.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *AuthMethod) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: AuthMethod: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: AuthMethod: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field FormData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_FormData_); ok {
+				if err := oneof.FormData.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_FormData{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_FormData_{FormData: v}
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ScanQrcode", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_ScanQrcode_); ok {
+				if err := oneof.ScanQrcode.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_ScanQrcode{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_ScanQrcode_{ScanQrcode: v}
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CallBack", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_CallBack); ok {
+				if err := oneof.CallBack.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_Callback{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_CallBack{CallBack: v}
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Refresh", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if oneof, ok := m.Method.(*AuthMethod_Refresh_); ok {
+				if err := oneof.Refresh.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+			} else {
+				v := &AuthMethod_Refresh{}
+				if err := v.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+					return err
+				}
+				m.Method = &AuthMethod_Refresh_{Refresh: v}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
 func (m *Auth) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -8348,7 +11107,7 @@ func (m *Auth) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.AuthMethods = append(m.AuthMethods, &anypb.Any{})
+			m.AuthMethods = append(m.AuthMethods, &AuthMethod{})
 			if err := m.AuthMethods[len(m.AuthMethods)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -9527,93 +12286,6 @@ func (m *AuthData) UnmarshalVTUnsafe(dAtA []byte) error {
 					break
 				}
 			}
-		default:
-			iNdEx = preIndex
-			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *AuthRefresh) UnmarshalVTUnsafe(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return protobuf_go_lite.ErrIntOverflow
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: AuthRefresh: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: AuthRefresh: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AuthData", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.AuthData == nil {
-				m.AuthData = &AuthData{}
-			}
-			if err := m.AuthData.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

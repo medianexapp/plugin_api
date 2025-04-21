@@ -3,7 +3,6 @@ package plugin_api
 import (
 	"log/slog"
 
-	"github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
 	"github.com/labulakalia/plugin_api/plugin"
 )
 
@@ -22,7 +21,7 @@ type IPlugin interface {
 	// 		id scanned is successed,need return auth data
 	// if use oauth auth,CheckAuthType will call by oauth2 callback code,then need return auth data by code
 	// if authMethod Type is RefreshToken, this is func need refresh token
-	CheckAuthMethod(authMethod *anypb.Any) (authData *plugin.AuthData, err error)
+	CheckAuthMethod(authMethod *plugin.AuthMethod) (authData *plugin.AuthData, err error)
 	// check auth is success by raw auth data
 	//  if authData is error, will return error,then need auth again
 	CheckAuthData(authDataBytes []byte) (err error)

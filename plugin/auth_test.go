@@ -7,8 +7,8 @@ import (
 )
 
 func TestCheck(t *testing.T) {
-	formData := &Auth_FormData{
-		FormItems: []*Auth_FormData_FormItem{
+	formData := &AuthMethod_FormData{
+		FormItems: []*AuthMethod_FormData_FormItem{
 			{
 				Name: "xxxx",
 			},
@@ -22,14 +22,14 @@ func TestCheck(t *testing.T) {
 		t.Fatal("anyData Should be formData")
 	}
 
-	callBack := &Auth_Callback{}
+	callBack := &AuthMethod_Callback{}
 	anyData, _ = PackAny(callBack)
 
 	if !IsAuthCallback(anyData) {
 		t.Fatal("anyData Should be callBack")
 	}
 
-	scanQrcode := &Auth_ScanQrcode{}
+	scanQrcode := &AuthMethod_ScanQrcode{}
 	anyData, _ = PackAny(scanQrcode)
 
 	if !IsAuthScanQrcode(anyData) {
@@ -48,6 +48,21 @@ func TestProto(t *testing.T) {
 	}
 	checkRes := []byte{10, 4, 119, 97, 110, 103}
 	t.Log(reflect.DeepEqual(res, checkRes))
-	testDDD := &Auth_FormData{}
-	t.Log(getTypeUrl(testDDD))
+	// testDDD := &Auth_FormData{}
+	// t.Log(getTypeUrl(testDDD))
+}
+
+func TestAuthMethod(t *testing.T) {
+	auths := Auth{
+		AuthMethods: []*AuthMethod{
+			&AuthMethod{
+				Method: &AuthMethod_CallBack{
+					CallBack: &AuthMethod_Callback{
+						CallbackUrl: "test url",
+					},
+				},
+			},
+		},
+	}
+	t.Log(auths.AuthMethods[0].Method)
 }

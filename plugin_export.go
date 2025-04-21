@@ -4,7 +4,6 @@ import (
 	"errors"
 	"runtime/debug"
 
-	"github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
 	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
 )
@@ -75,12 +74,15 @@ func _check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
 		}
 	}()
 	data := util.PtrToBytes(uint32(authPtr), uint32(authLenPtr))
-	anyData := &anypb.Any{}
-	err := anyData.UnmarshalVT(data)
+	// anyData := &anypb.Any{}
+	// err := anyData.UnmarshalVT(data)
+
+	authMethod := &plugin.AuthMethod{}
+	err := authMethod.UnmarshalVT(data)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	authData, err := pluginExport.CheckAuthMethod(anyData)
+	authData, err := pluginExport.CheckAuthMethod(authMethod)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}

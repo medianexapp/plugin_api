@@ -2,17 +2,24 @@ syntax = "proto3";
 
 package plugin;
 option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
-import "google/protobuf/any.proto";
+import "plugin/wrappers.proto";
 
-message Auth {
-    // form data input
+message AuthMethod {
     message FormData {
         message FormItem {
-            string              name        = 1;
-            google.protobuf.Any value       = 2;
-            repeated FormItem   enum_values = 3;  // for dropdown widget
+            string name = 1;
+            oneof  Value {
+                plugin.DoubleValue        double_value         = 2;
+                plugin.Int64Value         int64_value          = 3;
+                plugin.BoolValue          bool_value           = 4;
+                plugin.StringValue        string_value         = 5;
+                plugin.ObscureStringValue obscure_string_value = 6;
+                plugin.DirPathValue       dir_path_value       = 7;
+                plugin.FilePathValue      file_path_value      = 8;
+            }
+            repeated FormItem enum_values = 10;  // for dropdown widget
         }
-        repeated FormItem form_items = 1;
+        repeated FormItem form_items = 11;
     }
 
     message ScanQrcode {
@@ -26,7 +33,22 @@ message Auth {
         string callback_url_param = 2;  // param for call back url
         string callback_url_data  = 3;  // url callback data
     }
-    repeated google.protobuf.Any auth_methods = 1;  //
+
+    message Refresh {
+        AuthData auth_data = 1;
+    }
+
+    oneof method {
+        FormData   form_data   = 1;
+        ScanQrcode scan_qrcode = 2;
+        Callback   call_back   = 3;
+        Refresh    refresh     = 4;
+    }
+}
+
+message Auth {
+    // form data input
+    repeated AuthMethod auth_methods = 1;  //
 }
 
 message FileEntry {
@@ -102,10 +124,6 @@ message FileResource {
 message AuthData {
     bytes  auth_data_bytes        = 1;
     uint64 auth_data_expired_time = 2;
-}
-
-message AuthRefresh {
-    AuthData auth_data = 1;
 }
 
 // oauth config
