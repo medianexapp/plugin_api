@@ -1,19 +1,21 @@
 package plugin
 
-import "google.golang.org/protobuf/types/known/anypb"
+import (
+	anypb "github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
+)
 
 func IsAuthFormData(authMethod *anypb.Any) bool {
-	return authMethod.MessageIs(&Auth_FormData{})
+	return authMethod.MessageIs(getTypeUrl(&Auth_FormData{}))
 }
 
 func IsAuthCallback(authMethod *anypb.Any) bool {
-	return authMethod.MessageIs(&Auth_Callback{})
+	return authMethod.MessageIs(getTypeUrl(&Auth_Callback{}))
 }
 
 func IsAuthScanQrcode(authMethod *anypb.Any) bool {
-	return authMethod.MessageIs(&Auth_ScanQrcode{})
+	return authMethod.MessageIs(getTypeUrl(&Auth_ScanQrcode{}))
 }
 
 func IsAuthRefresh(authMethod *anypb.Any) bool {
-	return authMethod.MessageIs(&AuthRefresh{})
+	return authMethod.MessageIs(getTypeUrl(&AuthRefresh{}))
 }
