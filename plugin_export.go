@@ -6,7 +6,6 @@ import (
 
 	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
-	_ "github.com/labulakalia/wazero_net/wasi/malloc"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )

@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	userAgent = "Mediagate/plugin_api"
+	userAgent = "Medianex/plugin_api"
 )
 
 func GetUserAgent() string {

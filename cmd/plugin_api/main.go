@@ -27,6 +27,28 @@ type pluginConfig struct {
 }
 
 func main() {
+	args := os.Args[1:]
+	if len(args) == 0 || args[0] == "help" {
+		showHelp()
+	} else if args[1] == "build" {
+		buildPlugin()
+	} else if args[1] == "init" {
+		panic("not impl")
+	} else {
+		showHelp()
+	}
+}
+
+func showHelp() {
+	fmt.Print(`Usage: plugin_api <commands> [arguments]
+commands:
+	build:    	compile plugin
+	init:    	init new plugin temp dir
+	help:		show usage
+`)
+}
+
+func buildPlugin() {
 	pluginTomlFile := "plugin.toml"
 	pluginFile, err := os.Open("plugin.toml")
 	if err != nil {
@@ -65,8 +87,7 @@ func main() {
 
 	buildWasmFile := fmt.Sprintf("dist/%s.wasm", pluginConfig.Id)
 	defer os.Remove(buildWasmFile)
-	cmd := exec.Command("go", "build", "-buildmode=c-shared", "-o", buildWasmFile, ".")
-	cmd.Env = append(os.Environ(), "GOOS=wasip1", "GOARCH=wasm")
+	cmd := exec.Command("tinygo", "build", "-x", "-target=wasip1", "-buildmode=c-shared", "-o", buildWasmFile, ".")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
