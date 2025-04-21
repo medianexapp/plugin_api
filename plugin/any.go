@@ -2,6 +2,7 @@ package plugin
 
 import (
 	"reflect"
+	"strings"
 
 	protobuf_go_lite "github.com/aperturerobotics/protobuf-go-lite"
 	anypb "github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
@@ -14,7 +15,7 @@ func getTypeUrl(src protobuf_go_lite.Message) string {
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()
 	}
-	return preUrl + t.String()
+	return preUrl + strings.ReplaceAll(t.String(), "_", ".")
 }
 
 func PackAny(src protobuf_go_lite.Message) (*anypb.Any, error) {
