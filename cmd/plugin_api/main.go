@@ -30,9 +30,9 @@ func main() {
 	args := os.Args[1:]
 	if len(args) == 0 || args[0] == "help" {
 		showHelp()
-	} else if args[1] == "build" {
+	} else if args[0] == "build" {
 		buildPlugin()
-	} else if args[1] == "init" {
+	} else if args[0] == "init" {
 		panic("not impl")
 	} else {
 		showHelp()
