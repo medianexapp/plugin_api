@@ -4,10 +4,9 @@ import (
 	"errors"
 	"runtime/debug"
 
+	"github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
 	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
-	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/types/known/anypb"
 )
 
 var pluginExport IPluginExport
@@ -26,13 +25,13 @@ type IPluginExport interface {
 }
 
 //go:wasmexport plugin_api_schema
-func plugin_api_schema() uint64 {
+func _plugin_api_schema() uint64 {
 	apiSchema, _ := pluginExport.PluginAPISchema()
 	return apiSchema
 }
 
 //go:wasmexport plugin_id
-func plugin_id() (ret uint64) {
+func _plugin_id() (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -49,7 +48,7 @@ func plugin_id() (ret uint64) {
 }
 
 //go:wasmexport get_auth
-func get_auth() (ret uint64) {
+func _get_auth() (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -60,7 +59,7 @@ func get_auth() (ret uint64) {
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	data, err := proto.Marshal(authType)
+	data, err := authType.MarshalVT()
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -68,7 +67,7 @@ func get_auth() (ret uint64) {
 }
 
 //go:wasmexport check_auth_method
-func check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
+func _check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -77,7 +76,7 @@ func check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
 	}()
 	data := util.PtrToBytes(uint32(authPtr), uint32(authLenPtr))
 	anyData := &anypb.Any{}
-	err := proto.Unmarshal(data, anyData)
+	err := anyData.UnmarshalVT(data)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -85,7 +84,7 @@ func check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	bytes, err := proto.Marshal(authData)
+	bytes, err := authData.MarshalVT()
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -93,7 +92,7 @@ func check_auth_method(authPtr, authLenPtr uint64) (ret uint64) {
 }
 
 //go:wasmexport check_auth_data
-func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) (ret uint64) {
+func _check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -109,7 +108,7 @@ func check_auth_data(raw_auth_dataPtr, raw_auth_dataLen uint64) (ret uint64) {
 }
 
 //go:wasmexport plugin_auth_id
-func plugin_auth_id() (ret uint64) {
+func _plugin_auth_id() (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -124,7 +123,7 @@ func plugin_auth_id() (ret uint64) {
 }
 
 //go:wasmexport get_dir_entry
-func get_dir_entry(reqPtr, reqLen uint64) (ret uint64) {
+func _get_dir_entry(reqPtr, reqLen uint64) (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -133,7 +132,7 @@ func get_dir_entry(reqPtr, reqLen uint64) (ret uint64) {
 	}()
 	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
 	req := &plugin.GetDirEntryRequest{}
-	err := proto.Unmarshal(bytes, req)
+	err := req.UnmarshalVT(bytes)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -141,7 +140,7 @@ func get_dir_entry(reqPtr, reqLen uint64) (ret uint64) {
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	dirEntryData, err := proto.Marshal(dirEntry)
+	dirEntryData, err := dirEntry.MarshalVT()
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -149,7 +148,7 @@ func get_dir_entry(reqPtr, reqLen uint64) (ret uint64) {
 }
 
 //go:wasmexport get_file_resource
-func get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
+func _get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
 	defer func() {
 		if r := recover(); r != nil {
 			stack := debug.Stack()
@@ -158,7 +157,7 @@ func get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
 	}()
 	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
 	req := &plugin.GetFileResourceRequest{}
-	err := proto.Unmarshal(bytes, req)
+	err := req.UnmarshalVT(bytes)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -166,7 +165,7 @@ func get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	fileResourceData, err := proto.Marshal(fileResource)
+	fileResourceData, err := fileResource.MarshalVT()
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}

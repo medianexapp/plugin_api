@@ -3,8 +3,8 @@ package plugin_api
 import (
 	"log/slog"
 
+	"github.com/aperturerobotics/protobuf-go-lite/types/known/anypb"
 	"github.com/labulakalia/plugin_api/plugin"
-	"google.golang.org/protobuf/types/known/anypb"
 )
 
 type IPlugin interface {

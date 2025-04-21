@@ -2,13 +2,9 @@ package plugin_api
 
 import (
 	"errors"
-	"log/slog"
-	"os"
 	"testing"
 
-	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
-	"google.golang.org/protobuf/proto"
 )
 
 // & 与 0 & 1 = 0  1 & 1 = 1
@@ -32,21 +28,5 @@ func TestError(t *testing.T) {
 	if util.Uint64HasError(ret) == true {
 		t.Fatal("ret should no error")
 	}
-
-}
-
-func TestLo(t *testing.T) {
-
-	handlder := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
-	})
-	slog.SetDefault(slog.New(handlder).With("plugin", "ftp"))
-	slog.SetLogLoggerLevel(slog.LevelDebug)
-	slog.Error("isisisiss")
-
-	entry := plugin.DirEntry{
-		FileEntries: []*plugin.FileEntry{},
-	}
-	t.Log(proto.Marshal(&entry))
 
 }
