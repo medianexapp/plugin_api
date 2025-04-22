@@ -4,45 +4,45 @@ package plugin;
 option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
 import "plugin/wrappers.proto";
 
-message AuthMethod {
-    message FormData {
-        message FormItem {
-            string name = 1;
-            oneof  Value {
-                plugin.DoubleValue        double_value         = 2;
-                plugin.Int64Value         int64_value          = 3;
-                plugin.BoolValue          bool_value           = 4;
-                plugin.StringValue        string_value         = 5;
-                plugin.ObscureStringValue obscure_string_value = 6;
-                plugin.DirPathValue       dir_path_value       = 7;
-                plugin.FilePathValue      file_path_value      = 8;
-            }
-            repeated FormItem enum_values = 10;  // for dropdown widget
+message Formdata {
+    message FormItem {
+        string name = 1;
+        oneof  Value {
+            plugin.DoubleValue        double_value         = 2;
+            plugin.Int64Value         int64_value          = 3;
+            plugin.BoolValue          bool_value           = 4;
+            plugin.StringValue        string_value         = 5;
+            plugin.ObscureStringValue obscure_string_value = 6;
+            plugin.DirPathValue       dir_path_value       = 7;
+            plugin.FilePathValue      file_path_value      = 8;
         }
-        repeated FormItem form_items = 11;
+        repeated FormItem enum_values = 10;  // for dropdown widget
     }
+    repeated FormItem form_items = 11;
+}
 
-    message ScanQrcode {
-        bytes  qrcode_image       = 1;  // qrcode image
-        string qrcode_image_param = 2;  // qrcode image some param,like qrcode check key
-        uint64 qrcode_expire_time = 3;  // qrcode expire time
-    }
+message Scanqrcode {
+    bytes  qrcode_image       = 1;  // qrcode image
+    string qrcode_image_param = 2;  // qrcode image some param,like qrcode check key
+    uint64 qrcode_expire_time = 3;  // qrcode expire time
+}
 
-    message Callback {
-        string callback_url       = 1;  // callback url
-        string callback_url_param = 2;  // param for call back url
-        string callback_url_data  = 3;  // url callback data
-    }
+message Callback {
+    string callback_url       = 1;  // callback url
+    string callback_url_param = 2;  // param for call back url
+    string callback_url_data  = 3;  // url callback data
+}
 
-    message Refresh {
-        AuthData auth_data = 1;
-    }
+message Refresh {
+    AuthData auth_data = 1;
+}
 
+message AuthMethod {
     oneof method {
-        FormData   form_data   = 1;
-        ScanQrcode scan_qrcode = 2;
-        Callback   call_back   = 3;
-        Refresh    refresh     = 4;
+        Formdata   formdata   = 1;
+        Scanqrcode scanqrcode = 2;
+        Callback   callback   = 3;
+        Refresh    refresh    = 4;
     }
 }
 

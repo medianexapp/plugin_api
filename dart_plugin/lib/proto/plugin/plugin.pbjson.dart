@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: plugin.proto
+//  source: plugin/plugin.proto
 //
 // @dart = 2.12
 
@@ -13,32 +13,17 @@ import 'dart:convert' as $convert;
 import 'dart:core' as $core;
 import 'dart:typed_data' as $typed_data;
 
-@$core.Deprecated('Use authMethodDescriptor instead')
-const AuthMethod$json = {
-  '1': 'AuthMethod',
+@$core.Deprecated('Use formdataDescriptor instead')
+const Formdata$json = {
+  '1': 'Formdata',
   '2': [
-    {'1': 'form_data', '3': 1, '4': 1, '5': 11, '6': '.plugin.AuthMethod.FormData', '9': 0, '10': 'formData'},
-    {'1': 'scan_qrcode', '3': 2, '4': 1, '5': 11, '6': '.plugin.AuthMethod.ScanQrcode', '9': 0, '10': 'scanQrcode'},
-    {'1': 'call_back', '3': 3, '4': 1, '5': 11, '6': '.plugin.AuthMethod.Callback', '9': 0, '10': 'callBack'},
-    {'1': 'refresh', '3': 4, '4': 1, '5': 11, '6': '.plugin.AuthMethod.Refresh', '9': 0, '10': 'refresh'},
+    {'1': 'form_items', '3': 11, '4': 3, '5': 11, '6': '.plugin.Formdata.FormItem', '10': 'formItems'},
   ],
-  '3': [AuthMethod_FormData$json, AuthMethod_ScanQrcode$json, AuthMethod_Callback$json, AuthMethod_Refresh$json],
-  '8': [
-    {'1': 'method'},
-  ],
+  '3': [Formdata_FormItem$json],
 };
 
-@$core.Deprecated('Use authMethodDescriptor instead')
-const AuthMethod_FormData$json = {
-  '1': 'FormData',
-  '2': [
-    {'1': 'form_items', '3': 11, '4': 3, '5': 11, '6': '.plugin.AuthMethod.FormData.FormItem', '10': 'formItems'},
-  ],
-  '3': [AuthMethod_FormData_FormItem$json],
-};
-
-@$core.Deprecated('Use authMethodDescriptor instead')
-const AuthMethod_FormData_FormItem$json = {
+@$core.Deprecated('Use formdataDescriptor instead')
+const Formdata_FormItem$json = {
   '1': 'FormItem',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
@@ -49,16 +34,30 @@ const AuthMethod_FormData_FormItem$json = {
     {'1': 'obscure_string_value', '3': 6, '4': 1, '5': 11, '6': '.plugin.ObscureStringValue', '9': 0, '10': 'obscureStringValue'},
     {'1': 'dir_path_value', '3': 7, '4': 1, '5': 11, '6': '.plugin.DirPathValue', '9': 0, '10': 'dirPathValue'},
     {'1': 'file_path_value', '3': 8, '4': 1, '5': 11, '6': '.plugin.FilePathValue', '9': 0, '10': 'filePathValue'},
-    {'1': 'enum_values', '3': 10, '4': 3, '5': 11, '6': '.plugin.AuthMethod.FormData.FormItem', '10': 'enumValues'},
+    {'1': 'enum_values', '3': 10, '4': 3, '5': 11, '6': '.plugin.Formdata.FormItem', '10': 'enumValues'},
   ],
   '8': [
     {'1': 'Value'},
   ],
 };
 
-@$core.Deprecated('Use authMethodDescriptor instead')
-const AuthMethod_ScanQrcode$json = {
-  '1': 'ScanQrcode',
+/// Descriptor for `Formdata`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List formdataDescriptor = $convert.base64Decode(
+    'CghGb3JtZGF0YRI4Cgpmb3JtX2l0ZW1zGAsgAygLMhkucGx1Z2luLkZvcm1kYXRhLkZvcm1JdG'
+    'VtUglmb3JtSXRlbXMakQQKCEZvcm1JdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSOAoMZG91Ymxl'
+    'X3ZhbHVlGAIgASgLMhMucGx1Z2luLkRvdWJsZVZhbHVlSABSC2RvdWJsZVZhbHVlEjUKC2ludD'
+    'Y0X3ZhbHVlGAMgASgLMhIucGx1Z2luLkludDY0VmFsdWVIAFIKaW50NjRWYWx1ZRIyCgpib29s'
+    'X3ZhbHVlGAQgASgLMhEucGx1Z2luLkJvb2xWYWx1ZUgAUglib29sVmFsdWUSOAoMc3RyaW5nX3'
+    'ZhbHVlGAUgASgLMhMucGx1Z2luLlN0cmluZ1ZhbHVlSABSC3N0cmluZ1ZhbHVlEk4KFG9ic2N1'
+    'cmVfc3RyaW5nX3ZhbHVlGAYgASgLMhoucGx1Z2luLk9ic2N1cmVTdHJpbmdWYWx1ZUgAUhJvYn'
+    'NjdXJlU3RyaW5nVmFsdWUSPAoOZGlyX3BhdGhfdmFsdWUYByABKAsyFC5wbHVnaW4uRGlyUGF0'
+    'aFZhbHVlSABSDGRpclBhdGhWYWx1ZRI/Cg9maWxlX3BhdGhfdmFsdWUYCCABKAsyFS5wbHVnaW'
+    '4uRmlsZVBhdGhWYWx1ZUgAUg1maWxlUGF0aFZhbHVlEjoKC2VudW1fdmFsdWVzGAogAygLMhku'
+    'cGx1Z2luLkZvcm1kYXRhLkZvcm1JdGVtUgplbnVtVmFsdWVzQgcKBVZhbHVl');
+
+@$core.Deprecated('Use scanqrcodeDescriptor instead')
+const Scanqrcode$json = {
+  '1': 'Scanqrcode',
   '2': [
     {'1': 'qrcode_image', '3': 1, '4': 1, '5': 12, '10': 'qrcodeImage'},
     {'1': 'qrcode_image_param', '3': 2, '4': 1, '5': 9, '10': 'qrcodeImageParam'},
@@ -66,8 +65,14 @@ const AuthMethod_ScanQrcode$json = {
   ],
 };
 
-@$core.Deprecated('Use authMethodDescriptor instead')
-const AuthMethod_Callback$json = {
+/// Descriptor for `Scanqrcode`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List scanqrcodeDescriptor = $convert.base64Decode(
+    'CgpTY2FucXJjb2RlEiEKDHFyY29kZV9pbWFnZRgBIAEoDFILcXJjb2RlSW1hZ2USLAoScXJjb2'
+    'RlX2ltYWdlX3BhcmFtGAIgASgJUhBxcmNvZGVJbWFnZVBhcmFtEiwKEnFyY29kZV9leHBpcmVf'
+    'dGltZRgDIAEoBFIQcXJjb2RlRXhwaXJlVGltZQ==');
+
+@$core.Deprecated('Use callbackDescriptor instead')
+const Callback$json = {
   '1': 'Callback',
   '2': [
     {'1': 'callback_url', '3': 1, '4': 1, '5': 9, '10': 'callbackUrl'},
@@ -76,39 +81,45 @@ const AuthMethod_Callback$json = {
   ],
 };
 
-@$core.Deprecated('Use authMethodDescriptor instead')
-const AuthMethod_Refresh$json = {
+/// Descriptor for `Callback`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List callbackDescriptor = $convert.base64Decode(
+    'CghDYWxsYmFjaxIhCgxjYWxsYmFja191cmwYASABKAlSC2NhbGxiYWNrVXJsEiwKEmNhbGxiYW'
+    'NrX3VybF9wYXJhbRgCIAEoCVIQY2FsbGJhY2tVcmxQYXJhbRIqChFjYWxsYmFja191cmxfZGF0'
+    'YRgDIAEoCVIPY2FsbGJhY2tVcmxEYXRh');
+
+@$core.Deprecated('Use refreshDescriptor instead')
+const Refresh$json = {
   '1': 'Refresh',
   '2': [
     {'1': 'auth_data', '3': 1, '4': 1, '5': 11, '6': '.plugin.AuthData', '10': 'authData'},
   ],
 };
 
+/// Descriptor for `Refresh`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List refreshDescriptor = $convert.base64Decode(
+    'CgdSZWZyZXNoEi0KCWF1dGhfZGF0YRgBIAEoCzIQLnBsdWdpbi5BdXRoRGF0YVIIYXV0aERhdG'
+    'E=');
+
+@$core.Deprecated('Use authMethodDescriptor instead')
+const AuthMethod$json = {
+  '1': 'AuthMethod',
+  '2': [
+    {'1': 'formdata', '3': 1, '4': 1, '5': 11, '6': '.plugin.Formdata', '9': 0, '10': 'formdata'},
+    {'1': 'scanqrcode', '3': 2, '4': 1, '5': 11, '6': '.plugin.Scanqrcode', '9': 0, '10': 'scanqrcode'},
+    {'1': 'callback', '3': 3, '4': 1, '5': 11, '6': '.plugin.Callback', '9': 0, '10': 'callback'},
+    {'1': 'refresh', '3': 4, '4': 1, '5': 11, '6': '.plugin.Refresh', '9': 0, '10': 'refresh'},
+  ],
+  '8': [
+    {'1': 'method'},
+  ],
+};
+
 /// Descriptor for `AuthMethod`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authMethodDescriptor = $convert.base64Decode(
-    'CgpBdXRoTWV0aG9kEjoKCWZvcm1fZGF0YRgBIAEoCzIbLnBsdWdpbi5BdXRoTWV0aG9kLkZvcm'
-    '1EYXRhSABSCGZvcm1EYXRhEkAKC3NjYW5fcXJjb2RlGAIgASgLMh0ucGx1Z2luLkF1dGhNZXRo'
-    'b2QuU2NhblFyY29kZUgAUgpzY2FuUXJjb2RlEjoKCWNhbGxfYmFjaxgDIAEoCzIbLnBsdWdpbi'
-    '5BdXRoTWV0aG9kLkNhbGxiYWNrSABSCGNhbGxCYWNrEjYKB3JlZnJlc2gYBCABKAsyGi5wbHVn'
-    'aW4uQXV0aE1ldGhvZC5SZWZyZXNoSABSB3JlZnJlc2ga7gQKCEZvcm1EYXRhEkMKCmZvcm1faX'
-    'RlbXMYCyADKAsyJC5wbHVnaW4uQXV0aE1ldGhvZC5Gb3JtRGF0YS5Gb3JtSXRlbVIJZm9ybUl0'
-    'ZW1zGpwECghGb3JtSXRlbRISCgRuYW1lGAEgASgJUgRuYW1lEjgKDGRvdWJsZV92YWx1ZRgCIA'
-    'EoCzITLnBsdWdpbi5Eb3VibGVWYWx1ZUgAUgtkb3VibGVWYWx1ZRI1CgtpbnQ2NF92YWx1ZRgD'
-    'IAEoCzISLnBsdWdpbi5JbnQ2NFZhbHVlSABSCmludDY0VmFsdWUSMgoKYm9vbF92YWx1ZRgEIA'
-    'EoCzIRLnBsdWdpbi5Cb29sVmFsdWVIAFIJYm9vbFZhbHVlEjgKDHN0cmluZ192YWx1ZRgFIAEo'
-    'CzITLnBsdWdpbi5TdHJpbmdWYWx1ZUgAUgtzdHJpbmdWYWx1ZRJOChRvYnNjdXJlX3N0cmluZ1'
-    '92YWx1ZRgGIAEoCzIaLnBsdWdpbi5PYnNjdXJlU3RyaW5nVmFsdWVIAFISb2JzY3VyZVN0cmlu'
-    'Z1ZhbHVlEjwKDmRpcl9wYXRoX3ZhbHVlGAcgASgLMhQucGx1Z2luLkRpclBhdGhWYWx1ZUgAUg'
-    'xkaXJQYXRoVmFsdWUSPwoPZmlsZV9wYXRoX3ZhbHVlGAggASgLMhUucGx1Z2luLkZpbGVQYXRo'
-    'VmFsdWVIAFINZmlsZVBhdGhWYWx1ZRJFCgtlbnVtX3ZhbHVlcxgKIAMoCzIkLnBsdWdpbi5BdX'
-    'RoTWV0aG9kLkZvcm1EYXRhLkZvcm1JdGVtUgplbnVtVmFsdWVzQgcKBVZhbHVlGosBCgpTY2Fu'
-    'UXJjb2RlEiEKDHFyY29kZV9pbWFnZRgBIAEoDFILcXJjb2RlSW1hZ2USLAoScXJjb2RlX2ltYW'
-    'dlX3BhcmFtGAIgASgJUhBxcmNvZGVJbWFnZVBhcmFtEiwKEnFyY29kZV9leHBpcmVfdGltZRgD'
-    'IAEoBFIQcXJjb2RlRXhwaXJlVGltZRqHAQoIQ2FsbGJhY2sSIQoMY2FsbGJhY2tfdXJsGAEgAS'
-    'gJUgtjYWxsYmFja1VybBIsChJjYWxsYmFja191cmxfcGFyYW0YAiABKAlSEGNhbGxiYWNrVXJs'
-    'UGFyYW0SKgoRY2FsbGJhY2tfdXJsX2RhdGEYAyABKAlSD2NhbGxiYWNrVXJsRGF0YRo4CgdSZW'
-    'ZyZXNoEi0KCWF1dGhfZGF0YRgBIAEoCzIQLnBsdWdpbi5BdXRoRGF0YVIIYXV0aERhdGFCCAoG'
-    'bWV0aG9k');
+    'CgpBdXRoTWV0aG9kEi4KCGZvcm1kYXRhGAEgASgLMhAucGx1Z2luLkZvcm1kYXRhSABSCGZvcm'
+    '1kYXRhEjQKCnNjYW5xcmNvZGUYAiABKAsyEi5wbHVnaW4uU2NhbnFyY29kZUgAUgpzY2FucXJj'
+    'b2RlEi4KCGNhbGxiYWNrGAMgASgLMhAucGx1Z2luLkNhbGxiYWNrSABSCGNhbGxiYWNrEisKB3'
+    'JlZnJlc2gYBCABKAsyDy5wbHVnaW4uUmVmcmVzaEgAUgdyZWZyZXNoQggKBm1ldGhvZA==');
 
 @$core.Deprecated('Use authDescriptor instead')
 const Auth$json = {

@@ -1,41 +1,9 @@
 package plugin
 
 import (
-	"encoding/json"
 	"reflect"
 	"testing"
 )
-
-func TestCheck(t *testing.T) {
-	formData := &AuthMethod_FormData{
-		FormItems: []*AuthMethod_FormData_FormItem{
-			{
-				Name: "xxxx",
-			},
-		},
-	}
-
-	anyData, _ := PackAny(formData)
-	res, _ := json.Marshal(anyData)
-	t.Log(anyData, string(res))
-	if !IsAuthFormData(anyData) {
-		t.Fatal("anyData Should be formData")
-	}
-
-	callBack := &AuthMethod_Callback{}
-	anyData, _ = PackAny(callBack)
-
-	if !IsAuthCallback(anyData) {
-		t.Fatal("anyData Should be callBack")
-	}
-
-	scanQrcode := &AuthMethod_ScanQrcode{}
-	anyData, _ = PackAny(scanQrcode)
-
-	if !IsAuthScanQrcode(anyData) {
-		t.Fatal("anyData Should be scanQrcode")
-	}
-}
 
 func TestProto(t *testing.T) {
 	formData := &Token{
@@ -56,13 +24,18 @@ func TestAuthMethod(t *testing.T) {
 	auths := Auth{
 		AuthMethods: []*AuthMethod{
 			&AuthMethod{
-				Method: &AuthMethod_CallBack{
-					CallBack: &AuthMethod_Callback{
-						CallbackUrl: "test url",
-					},
+				Method: &AuthMethod_Callback{
+					Callback: &Callback{},
 				},
 			},
 		},
 	}
-	t.Log(auths.AuthMethods[0].Method)
+	_, ok := auths.AuthMethods[0].Method.(*AuthMethod_Formdata)
+	t.Log(ok)
+	_, ok = auths.AuthMethods[0].Method.(*AuthMethod_Scanqrcode)
+	t.Log(ok)
+	_, ok = auths.AuthMethods[0].Method.(*AuthMethod_Refresh)
+	t.Log(ok)
+	_, ok = auths.AuthMethods[0].Method.(*AuthMethod_Callback)
+	t.Log(ok)
 }

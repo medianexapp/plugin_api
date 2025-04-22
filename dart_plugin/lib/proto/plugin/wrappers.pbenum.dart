@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: wrappers.proto
+//  source: plugin/wrappers.proto
 //
 // @dart = 2.12
 

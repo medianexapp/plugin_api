@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: plugin.proto
+//  source: plugin/plugin.proto
 //
 // @dart = 2.12
 
