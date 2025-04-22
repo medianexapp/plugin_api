@@ -1,7 +1,6 @@
 version: v2
 modules:
-  - path: plugin
-    name: buf.build/labulakalia/pluginapi
+  - name: buf.build/labulakalia/pluginapi
 lint:
   use:
     - STANDARD
