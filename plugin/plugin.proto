@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package plugin;
-option  go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
+option  go_package = "github.com/medianexapp/plugin_api/plugin;plugin";
 import "plugin/wrappers.proto";
 
 message Formdata {

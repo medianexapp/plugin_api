@@ -4,8 +4,8 @@ import (
 	"errors"
 	"runtime/debug"
 
-	"github.com/labulakalia/plugin_api/plugin"
 	"github.com/labulakalia/wazero_net/util"
+	"github.com/medianexapp/plugin_api/plugin"
 )
 
 var pluginExport IPluginExport

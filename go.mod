@@ -1,4 +1,4 @@
-module github.com/labulakalia/plugin_api
+module github.com/medianexapp/plugin_api
 
 go 1.24.0
 

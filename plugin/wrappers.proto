@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package plugin;
-option go_package = "github.com/labulakalia/plugin_api/plugin;plugin";
+option  go_package = "github.com/medianexapp/plugin_api/plugin;plugin";
 
 // Wrapper message for `double`.
 message DoubleValue {
@@ -42,6 +42,6 @@ message DirPathValue {
 // Wrapper message for select local path
 message FilePathValue {
     // local path value
-    string value              = 1;
+    string          value     = 1;
     repeated string allow_ext = 2;
 }

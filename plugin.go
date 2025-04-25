@@ -3,7 +3,7 @@ package plugin_api
 import (
 	"log/slog"
 
-	"github.com/labulakalia/plugin_api/plugin"
+	"github.com/medianexapp/plugin_api/plugin"
 )
 
 type IPlugin interface {
