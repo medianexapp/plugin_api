@@ -175,35 +175,31 @@ const DirEntry$json = {
   '1': 'DirEntry',
   '2': [
     {'1': 'file_entries', '3': 1, '4': 3, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntries'},
-    {'1': 'dir_path_key', '3': 10, '4': 1, '5': 9, '10': 'dirPathKey'},
-    {'1': 'page_size', '3': 11, '4': 1, '5': 4, '10': 'pageSize'},
+    {'1': 'page_size', '3': 2, '4': 1, '5': 4, '10': 'pageSize'},
   ],
 };
 
 /// Descriptor for `DirEntry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List dirEntryDescriptor = $convert.base64Decode(
     'CghEaXJFbnRyeRI0CgxmaWxlX2VudHJpZXMYASADKAsyES5wbHVnaW4uRmlsZUVudHJ5UgtmaW'
-    'xlRW50cmllcxIgCgxkaXJfcGF0aF9rZXkYCiABKAlSCmRpclBhdGhLZXkSGwoJcGFnZV9zaXpl'
-    'GAsgASgEUghwYWdlU2l6ZQ==');
+    'xlRW50cmllcxIbCglwYWdlX3NpemUYAiABKARSCHBhZ2VTaXpl');
 
 @$core.Deprecated('Use getDirEntryRequestDescriptor instead')
 const GetDirEntryRequest$json = {
   '1': 'GetDirEntryRequest',
   '2': [
     {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
-    {'1': 'page', '3': 3, '4': 1, '5': 4, '10': 'page'},
-    {'1': 'page_size', '3': 4, '4': 1, '5': 4, '10': 'pageSize'},
-    {'1': 'dir_path_key', '3': 10, '4': 1, '5': 9, '10': 'dirPathKey'},
-    {'1': 'file_entry', '3': 11, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntry'},
+    {'1': 'page', '3': 2, '4': 1, '5': 4, '10': 'page'},
+    {'1': 'page_size', '3': 3, '4': 1, '5': 4, '10': 'pageSize'},
+    {'1': 'file_entry', '3': 10, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntry'},
   ],
 };
 
 /// Descriptor for `GetDirEntryRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getDirEntryRequestDescriptor = $convert.base64Decode(
-    'ChJHZXREaXJFbnRyeVJlcXVlc3QSEgoEcGF0aBgBIAEoCVIEcGF0aBISCgRwYWdlGAMgASgEUg'
-    'RwYWdlEhsKCXBhZ2Vfc2l6ZRgEIAEoBFIIcGFnZVNpemUSIAoMZGlyX3BhdGhfa2V5GAogASgJ'
-    'UgpkaXJQYXRoS2V5EjAKCmZpbGVfZW50cnkYCyABKAsyES5wbHVnaW4uRmlsZUVudHJ5UglmaW'
-    'xlRW50cnk=');
+    'ChJHZXREaXJFbnRyeVJlcXVlc3QSEgoEcGF0aBgBIAEoCVIEcGF0aBISCgRwYWdlGAIgASgEUg'
+    'RwYWdlEhsKCXBhZ2Vfc2l6ZRgDIAEoBFIIcGFnZVNpemUSMAoKZmlsZV9lbnRyeRgKIAEoCzIR'
+    'LnBsdWdpbi5GaWxlRW50cnlSCWZpbGVFbnRyeQ==');
 
 @$core.Deprecated('Use getFileResourceRequestDescriptor instead')
 const GetFileResourceRequest$json = {

@@ -767,15 +767,11 @@ class FileEntry extends $pb.GeneratedMessage {
 class DirEntry extends $pb.GeneratedMessage {
   factory DirEntry({
     $core.Iterable<FileEntry>? fileEntries,
-    $core.String? dirPathKey,
     $fixnum.Int64? pageSize,
   }) {
     final $result = create();
     if (fileEntries != null) {
       $result.fileEntries.addAll(fileEntries);
-    }
-    if (dirPathKey != null) {
-      $result.dirPathKey = dirPathKey;
     }
     if (pageSize != null) {
       $result.pageSize = pageSize;
@@ -788,8 +784,7 @@ class DirEntry extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DirEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..pc<FileEntry>(1, _omitFieldNames ? '' : 'fileEntries', $pb.PbFieldType.PM, subBuilder: FileEntry.create)
-    ..aOS(10, _omitFieldNames ? '' : 'dirPathKey')
-    ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -817,23 +812,14 @@ class DirEntry extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.List<FileEntry> get fileEntries => $_getList(0);
 
-  @$pb.TagNumber(10)
-  $core.String get dirPathKey => $_getSZ(1);
-  @$pb.TagNumber(10)
-  set dirPathKey($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasDirPathKey() => $_has(1);
-  @$pb.TagNumber(10)
-  void clearDirPathKey() => clearField(10);
-
-  @$pb.TagNumber(11)
-  $fixnum.Int64 get pageSize => $_getI64(2);
-  @$pb.TagNumber(11)
-  set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasPageSize() => $_has(2);
-  @$pb.TagNumber(11)
-  void clearPageSize() => clearField(11);
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get pageSize => $_getI64(1);
+  @$pb.TagNumber(2)
+  set pageSize($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPageSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageSize() => clearField(2);
 }
 
 class GetDirEntryRequest extends $pb.GeneratedMessage {
@@ -841,7 +827,6 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
     $core.String? path,
     $fixnum.Int64? page,
     $fixnum.Int64? pageSize,
-    $core.String? dirPathKey,
     FileEntry? fileEntry,
   }) {
     final $result = create();
@@ -854,9 +839,6 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
     if (pageSize != null) {
       $result.pageSize = pageSize;
     }
-    if (dirPathKey != null) {
-      $result.dirPathKey = dirPathKey;
-    }
     if (fileEntry != null) {
       $result.fileEntry = fileEntry;
     }
@@ -868,10 +850,9 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetDirEntryRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'path')
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(4, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(10, _omitFieldNames ? '' : 'dirPathKey')
-    ..aOM<FileEntry>(11, _omitFieldNames ? '' : 'fileEntry', subBuilder: FileEntry.create)
+    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOM<FileEntry>(10, _omitFieldNames ? '' : 'fileEntry', subBuilder: FileEntry.create)
     ..hasRequiredFields = false
   ;
 
@@ -905,44 +886,35 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearPath() => clearField(1);
 
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   $fixnum.Int64 get page => $_getI64(1);
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   set page($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   $core.bool hasPage() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearPage() => clearField(3);
+  @$pb.TagNumber(2)
+  void clearPage() => clearField(2);
 
   /// default page_size is 100,if this not for you,change is on DirEntry.PageSize
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
   $fixnum.Int64 get pageSize => $_getI64(2);
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
   set pageSize($fixnum.Int64 v) { $_setInt64(2, v); }
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
   $core.bool hasPageSize() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearPageSize() => clearField(4);
+  @$pb.TagNumber(3)
+  void clearPageSize() => clearField(3);
 
   @$pb.TagNumber(10)
-  $core.String get dirPathKey => $_getSZ(3);
+  FileEntry get fileEntry => $_getN(3);
   @$pb.TagNumber(10)
-  set dirPathKey($core.String v) { $_setString(3, v); }
+  set fileEntry(FileEntry v) { setField(10, v); }
   @$pb.TagNumber(10)
-  $core.bool hasDirPathKey() => $_has(3);
+  $core.bool hasFileEntry() => $_has(3);
   @$pb.TagNumber(10)
-  void clearDirPathKey() => clearField(10);
-
-  @$pb.TagNumber(11)
-  FileEntry get fileEntry => $_getN(4);
-  @$pb.TagNumber(11)
-  set fileEntry(FileEntry v) { setField(11, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasFileEntry() => $_has(4);
-  @$pb.TagNumber(11)
-  void clearFileEntry() => clearField(11);
-  @$pb.TagNumber(11)
-  FileEntry ensureFileEntry() => $_ensure(4);
+  void clearFileEntry() => clearField(10);
+  @$pb.TagNumber(10)
+  FileEntry ensureFileEntry() => $_ensure(3);
 }
 
 class GetFileResourceRequest extends $pb.GeneratedMessage {

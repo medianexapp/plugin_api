@@ -70,24 +70,20 @@ message FileEntry {
 
 message DirEntry {
     repeated FileEntry file_entries = 1;
-
-    string dir_path_key = 10;
-    uint64 page_size    = 11;
+    uint64             page_size    = 2;
 }
 
 message GetDirEntryRequest {
     string path = 1;
-    uint64 page = 3;
+    uint64 page = 2;
     // default page_size is 100,if this not for you,change is on DirEntry.PageSize
-    uint64 page_size = 4;
+    uint64 page_size = 3;
 
-    string    dir_path_key = 10;  // dir entry key,may be help you to get multi page for one path
-    FileEntry file_entry   = 11;
+    FileEntry file_entry = 10;
 }
 
 message GetFileResourceRequest {
-    string file_path = 1;
-
+    string    file_path  = 1;
     FileEntry file_entry = 10;
 }
 
