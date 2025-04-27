@@ -169,13 +169,13 @@ func TestPluginImpl(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, file := range resp.FileEntries {
-		if file.FileType != plugin.FileEntry_FileTypeFile {
+	for _, fileEntry := range resp.FileEntries {
+		if fileEntry.FileType != plugin.FileEntry_FileTypeFile {
 			continue
 		}
+		t.Log("file entry name", fileEntry.Name)
 		// if is movie get file resource
-		if strings.HasSuffix(file.Name, "mp4") || strings.HasSuffix(file.Name, "mkv") {
-			fileEntry := resp.FileEntries[3]
+		if strings.HasSuffix(fileEntry.Name, "mp4") || strings.HasSuffix(fileEntry.Name, "mkv") {
 			fileResource, err := p.GetFileResource(&plugin.GetFileResourceRequest{
 				FilePath:  "/" + fileEntry.Name,
 				FileEntry: fileEntry,
@@ -183,7 +183,7 @@ func TestPluginImpl(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			t.Logf("get file %s fileResource %+v", file.Name, fileResource.FileResourceData)
+			t.Logf("get file %s fileResource %+v", fileEntry.Name, fileResource.FileResourceData)
 		}
 	}
 	return
