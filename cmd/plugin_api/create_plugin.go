@@ -135,6 +135,62 @@ changelog = ["{{.Id}} plugin init"]
 		Content:  pluginImplTemplate,
 	},
 	{
+		FileName: "plugin_impl_test.go",
+		Content: `package main
+
+import (
+			"strings"
+			"testing"
+
+			"github.com/medianexapp/plugin_api/plugin"
+)
+
+func TestPluginImpl(t *testing.T) {
+			p := NewPluginImpl()
+			auth, _ := p.GetAuth()
+			method := auth.AuthMethods[0].Method
+			method = method // <= save auth data
+			 
+			authData, err := p.CheckAuthMethod(&plugin.AuthMethod{
+				Method: auth.AuthMethods[0].Method,
+			})
+			if err != nil {
+				t.Fatal(err)
+			}
+			err = p.CheckAuthData(authData.AuthDataBytes)
+			if err != nil {
+				t.Fatal(err)
+			}
+			resp, err := p.GetDirEntry(&plugin.GetDirEntryRequest{
+				Path:     "/",
+				Page:     1,
+				PageSize: 100,
+			})
+			if err != nil {
+				t.Fatal(err)
+			}
+			for _, file := range resp.FileEntries {
+				if file.FileType != plugin.FileEntry_FileTypeFile {
+					continue
+				}
+				// if is movie get file resource
+				if strings.HasSuffix(file.Name, "mp4") || strings.HasSuffix(file.Name, "mkv") {
+					fileEntry := resp.FileEntries[3]
+					fileResource, err := p.GetFileResource(&plugin.GetFileResourceRequest{
+						FilePath:  "/" + fileEntry.Name,
+						FileEntry: fileEntry,
+					})
+					if err != nil {
+						t.Fatal(err)
+					}
+					t.Logf("get file %s fileResource %+v", file.Name, fileResource.FileResourceData)
+				}
+			}
+			return
+}
+`,
+	},
+	{
 		FileName: "go.mod",
 		Content: `module testplugin
 
@@ -143,7 +199,7 @@ go 1.24.0
 require (
 			github.com/aperturerobotics/json-iterator-lite v1.0.0 // indirect
 			github.com/aperturerobotics/protobuf-go-lite v0.9.1 // indirect
-			github.com/labulakalia/wazero_net v0.0.9-0.20250421115310-78b37f91b28a // indirect
+			github.com/labulakalia/wazero_net v0.0.9-0.20250427091815-5eb06e3a5aa6 // indirect
 			github.com/medianexapp/plugin_api v0.0.25-0.20250427042910-f3bb62ff570f // indirect
 			github.com/tetratelabs/wazero v1.9.0 // indirect
 )
