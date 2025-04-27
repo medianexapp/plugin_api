@@ -2,8 +2,10 @@ package main
 
 import (
 	"archive/zip"
+	"bytes"
 	"compress/flate"
 	"errors"
+	"html/template"
 
 	"fmt"
 	"io"
@@ -33,14 +35,52 @@ func main() {
 	} else if args[0] == "build" {
 		buildPlugin()
 	} else if args[0] == "init" {
-		panic("not impl")
+		if len(args) == 1 {
+			fmt.Println("command init need argument eg: plugin_api init newName")
+			os.Exit(1)
+		}
+		pluginName := args[1]
+		_, err := os.Stat(pluginName)
+		if err == nil {
+			fmt.Printf("plugin %s exist", pluginName)
+			os.Exit(1)
+		}
+		pluginConfig := pluginConfig{
+			Id: pluginName,
+		}
+		_ = os.Mkdir(pluginName, 0755)
+		for _, fileTemplate := range fileTemplates {
+			fileNameTmp, err := template.New("").Parse(fileTemplate.FileName)
+			if err != nil {
+				fmt.Printf("parse template failed: %v\n", err)
+				os.Exit(1)
+			}
+			var buf bytes.Buffer
+			fileNameTmp.Execute(&buf, pluginConfig)
+			fileName := buf.String()
+
+			tmp, err := template.New(fileName).Parse(fileTemplate.Content)
+			if err != nil {
+				fmt.Printf("parse template failed: %v\n", err)
+				os.Exit(1)
+			}
+			file, err := os.Create(filepath.Join(pluginName, fileName))
+			if err != nil {
+				fmt.Printf("open file failed: %v\n", err)
+				os.Exit(1)
+			}
+
+			tmp.Execute(file, pluginConfig)
+			file.Close()
+		}
+		fmt.Printf("plugin %s init success\n", pluginName)
 	} else {
 		showHelp()
 	}
 }
 
 func showHelp() {
-	fmt.Print(`Usage: plugin_api <commands> [arguments]
+	fmt.Print(`Usage: plugin_api <commands> [argument]
 commands:
 	build:    	compile plugin
 	init:    	init new plugin temp dir
