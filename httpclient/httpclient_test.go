@@ -24,7 +24,7 @@ func TestHttp(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if respData["user-agent"] != userAgent {
-		t.Fatal("user agent not equal actual", string(body), "expected", userAgent)
+	if respData["user-agent"] != defaultUserAgent {
+		t.Fatal("user agent not equal actual", string(body), "expected", defaultUserAgent)
 	}
 }
