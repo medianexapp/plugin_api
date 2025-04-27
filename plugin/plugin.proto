@@ -71,6 +71,7 @@ message FileEntry {
 message DirEntry {
     repeated FileEntry file_entries = 1;
     uint64             page_size    = 2;
+    string             dir_page_key = 10;
 }
 
 message GetDirEntryRequest {
@@ -79,7 +80,8 @@ message GetDirEntryRequest {
     // default page_size is 100,if this not for you,change is on DirEntry.PageSize
     uint64 page_size = 3;
 
-    FileEntry file_entry = 10;
+    FileEntry file_entry   = 10;
+    string    dir_page_key = 12;
 }
 
 message GetFileResourceRequest {

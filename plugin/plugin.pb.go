@@ -418,6 +418,7 @@ type DirEntry struct {
 	unknownFields []byte
 	FileEntries   []*FileEntry `protobuf:"bytes,1,rep,name=file_entries,json=fileEntries,proto3" json:"fileEntries,omitempty"`
 	PageSize      uint64       `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"pageSize,omitempty"`
+	DirPageKey    string       `protobuf:"bytes,10,opt,name=dir_page_key,json=dirPageKey,proto3" json:"dirPageKey,omitempty"`
 }
 
 func (x *DirEntry) Reset() {
@@ -440,13 +441,21 @@ func (x *DirEntry) GetPageSize() uint64 {
 	return 0
 }
 
+func (x *DirEntry) GetDirPageKey() string {
+	if x != nil {
+		return x.DirPageKey
+	}
+	return ""
+}
+
 type GetDirEntryRequest struct {
 	unknownFields []byte
 	Path          string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	Page          uint64 `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	// default page_size is 100,if this not for you,change is on DirEntry.PageSize
-	PageSize  uint64     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"pageSize,omitempty"`
-	FileEntry *FileEntry `protobuf:"bytes,10,opt,name=file_entry,json=fileEntry,proto3" json:"fileEntry,omitempty"`
+	PageSize   uint64     `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"pageSize,omitempty"`
+	FileEntry  *FileEntry `protobuf:"bytes,10,opt,name=file_entry,json=fileEntry,proto3" json:"fileEntry,omitempty"`
+	DirPageKey string     `protobuf:"bytes,12,opt,name=dir_page_key,json=dirPageKey,proto3" json:"dirPageKey,omitempty"`
 }
 
 func (x *GetDirEntryRequest) Reset() {
@@ -481,6 +490,13 @@ func (x *GetDirEntryRequest) GetFileEntry() *FileEntry {
 		return x.FileEntry
 	}
 	return nil
+}
+
+func (x *GetDirEntryRequest) GetDirPageKey() string {
+	if x != nil {
+		return x.DirPageKey
+	}
+	return ""
 }
 
 type GetFileResourceRequest struct {
@@ -1224,6 +1240,7 @@ func (m *DirEntry) CloneVT() *DirEntry {
 	}
 	r := new(DirEntry)
 	r.PageSize = m.PageSize
+	r.DirPageKey = m.DirPageKey
 	if rhs := m.FileEntries; rhs != nil {
 		tmpContainer := make([]*FileEntry, len(rhs))
 		for k, v := range rhs {
@@ -1251,6 +1268,7 @@ func (m *GetDirEntryRequest) CloneVT() *GetDirEntryRequest {
 	r.Page = m.Page
 	r.PageSize = m.PageSize
 	r.FileEntry = m.FileEntry.CloneVT()
+	r.DirPageKey = m.DirPageKey
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -1950,6 +1968,9 @@ func (this *DirEntry) EqualVT(that *DirEntry) bool {
 	if this.PageSize != that.PageSize {
 		return false
 	}
+	if this.DirPageKey != that.DirPageKey {
+		return false
+	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
@@ -1976,6 +1997,9 @@ func (this *GetDirEntryRequest) EqualVT(that *GetDirEntryRequest) bool {
 		return false
 	}
 	if !this.FileEntry.EqualVT(that.FileEntry) {
+		return false
+	}
+	if this.DirPageKey != that.DirPageKey {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -2881,6 +2905,11 @@ func (x *DirEntry) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("pageSize")
 		s.WriteUint64(x.PageSize)
 	}
+	if x.DirPageKey != "" || s.HasField("dirPageKey") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("dirPageKey")
+		s.WriteString(x.DirPageKey)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -2919,6 +2948,9 @@ func (x *DirEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "page_size", "pageSize":
 			s.AddField("page_size")
 			x.PageSize = s.ReadUint64()
+		case "dir_page_key", "dirPageKey":
+			s.AddField("dir_page_key")
+			x.DirPageKey = s.ReadString()
 		}
 	})
 }
@@ -2956,6 +2988,11 @@ func (x *GetDirEntryRequest) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("fileEntry")
 		x.FileEntry.MarshalProtoJSON(s.WithField("fileEntry"))
 	}
+	if x.DirPageKey != "" || s.HasField("dirPageKey") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("dirPageKey")
+		s.WriteString(x.DirPageKey)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -2989,6 +3026,9 @@ func (x *GetDirEntryRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 			}
 			x.FileEntry = &FileEntry{}
 			x.FileEntry.UnmarshalProtoJSON(s.WithField("file_entry", true))
+		case "dir_page_key", "dirPageKey":
+			s.AddField("dir_page_key")
+			x.DirPageKey = s.ReadString()
 		}
 	})
 }
@@ -4256,6 +4296,13 @@ func (m *DirEntry) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.DirPageKey) > 0 {
+		i -= len(m.DirPageKey)
+		copy(dAtA[i:], m.DirPageKey)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.DirPageKey)))
+		i--
+		dAtA[i] = 0x52
+	}
 	if m.PageSize != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PageSize))
 		i--
@@ -4305,6 +4352,13 @@ func (m *GetDirEntryRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.DirPageKey) > 0 {
+		i -= len(m.DirPageKey)
+		copy(dAtA[i:], m.DirPageKey)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.DirPageKey)))
+		i--
+		dAtA[i] = 0x62
 	}
 	if m.FileEntry != nil {
 		size, err := m.FileEntry.MarshalToSizedBufferVT(dAtA[:i])
@@ -5463,6 +5517,13 @@ func (m *DirEntry) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.DirPageKey) > 0 {
+		i -= len(m.DirPageKey)
+		copy(dAtA[i:], m.DirPageKey)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.DirPageKey)))
+		i--
+		dAtA[i] = 0x52
+	}
 	if m.PageSize != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PageSize))
 		i--
@@ -5512,6 +5573,13 @@ func (m *GetDirEntryRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.DirPageKey) > 0 {
+		i -= len(m.DirPageKey)
+		copy(dAtA[i:], m.DirPageKey)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.DirPageKey)))
+		i--
+		dAtA[i] = 0x62
 	}
 	if m.FileEntry != nil {
 		size, err := m.FileEntry.MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -6241,6 +6309,10 @@ func (m *DirEntry) SizeVT() (n int) {
 	if m.PageSize != 0 {
 		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.PageSize))
 	}
+	l = len(m.DirPageKey)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -6263,6 +6335,10 @@ func (m *GetDirEntryRequest) SizeVT() (n int) {
 	}
 	if m.FileEntry != nil {
 		l = m.FileEntry.SizeVT()
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.DirPageKey)
+	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
@@ -6772,6 +6848,13 @@ func (x *DirEntry) MarshalProtoText() string {
 		sb.WriteString("page_size: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.PageSize), 10))
 	}
+	if x.DirPageKey != "" {
+		if sb.Len() > 10 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("dir_page_key: ")
+		sb.WriteString(strconv.Quote(x.DirPageKey))
+	}
 	sb.WriteString("}")
 	return sb.String()
 }
@@ -6809,6 +6892,13 @@ func (x *GetDirEntryRequest) MarshalProtoText() string {
 		}
 		sb.WriteString("file_entry: ")
 		sb.WriteString(x.FileEntry.MarshalProtoText())
+	}
+	if x.DirPageKey != "" {
+		if sb.Len() > 20 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("dir_page_key: ")
+		sb.WriteString(strconv.Quote(x.DirPageKey))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -8545,6 +8635,38 @@ func (m *DirEntry) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DirPageKey", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DirPageKey = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -8701,6 +8823,38 @@ func (m *GetDirEntryRequest) UnmarshalVT(dAtA []byte) error {
 			if err := m.FileEntry.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		case 12:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DirPageKey", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DirPageKey = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -11275,6 +11429,42 @@ func (m *DirEntry) UnmarshalVTUnsafe(dAtA []byte) error {
 					break
 				}
 			}
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DirPageKey", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.DirPageKey = stringValue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -11435,6 +11625,42 @@ func (m *GetDirEntryRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if err := m.FileEntry.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		case 12:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DirPageKey", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.DirPageKey = stringValue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

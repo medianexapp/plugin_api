@@ -768,6 +768,7 @@ class DirEntry extends $pb.GeneratedMessage {
   factory DirEntry({
     $core.Iterable<FileEntry>? fileEntries,
     $fixnum.Int64? pageSize,
+    $core.String? dirPageKey,
   }) {
     final $result = create();
     if (fileEntries != null) {
@@ -775,6 +776,9 @@ class DirEntry extends $pb.GeneratedMessage {
     }
     if (pageSize != null) {
       $result.pageSize = pageSize;
+    }
+    if (dirPageKey != null) {
+      $result.dirPageKey = dirPageKey;
     }
     return $result;
   }
@@ -785,6 +789,7 @@ class DirEntry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DirEntry', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..pc<FileEntry>(1, _omitFieldNames ? '' : 'fileEntries', $pb.PbFieldType.PM, subBuilder: FileEntry.create)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(10, _omitFieldNames ? '' : 'dirPageKey')
     ..hasRequiredFields = false
   ;
 
@@ -820,6 +825,15 @@ class DirEntry extends $pb.GeneratedMessage {
   $core.bool hasPageSize() => $_has(1);
   @$pb.TagNumber(2)
   void clearPageSize() => clearField(2);
+
+  @$pb.TagNumber(10)
+  $core.String get dirPageKey => $_getSZ(2);
+  @$pb.TagNumber(10)
+  set dirPageKey($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasDirPageKey() => $_has(2);
+  @$pb.TagNumber(10)
+  void clearDirPageKey() => clearField(10);
 }
 
 class GetDirEntryRequest extends $pb.GeneratedMessage {
@@ -828,6 +842,7 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
     $fixnum.Int64? page,
     $fixnum.Int64? pageSize,
     FileEntry? fileEntry,
+    $core.String? dirPageKey,
   }) {
     final $result = create();
     if (path != null) {
@@ -842,6 +857,9 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
     if (fileEntry != null) {
       $result.fileEntry = fileEntry;
     }
+    if (dirPageKey != null) {
+      $result.dirPageKey = dirPageKey;
+    }
     return $result;
   }
   GetDirEntryRequest._() : super();
@@ -853,6 +871,7 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'pageSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOM<FileEntry>(10, _omitFieldNames ? '' : 'fileEntry', subBuilder: FileEntry.create)
+    ..aOS(12, _omitFieldNames ? '' : 'dirPageKey')
     ..hasRequiredFields = false
   ;
 
@@ -915,6 +934,15 @@ class GetDirEntryRequest extends $pb.GeneratedMessage {
   void clearFileEntry() => clearField(10);
   @$pb.TagNumber(10)
   FileEntry ensureFileEntry() => $_ensure(3);
+
+  @$pb.TagNumber(12)
+  $core.String get dirPageKey => $_getSZ(4);
+  @$pb.TagNumber(12)
+  set dirPageKey($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasDirPageKey() => $_has(4);
+  @$pb.TagNumber(12)
+  void clearDirPageKey() => clearField(12);
 }
 
 class GetFileResourceRequest extends $pb.GeneratedMessage {
