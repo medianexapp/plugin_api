@@ -11,40 +11,43 @@ const (
 	defaultUserAgent = "Medianex/plugin_api"
 )
 
-func GetUserAgent() string {
+func GetDefaultUserAgent() string {
 	return defaultUserAgent
 }
 
 func (c *Client) setUserAgent(req *http.Request) {
-	req.Header.Set("User-Agent", defaultUserAgent)
+	req.Header.Set("User-Agent", c.userAgent)
 	return
 }
 
 type Client struct {
 	*http.Client
+	userAgent string
 }
 
 type Option struct {
-	UserAgent string
+	userAgent string
 }
 
 type FuncOption func(*Option)
 
 func WithUserAgent(userAgent string) FuncOption {
 	return func(o *Option) {
-		o.UserAgent = userAgent
+		o.userAgent = userAgent
 	}
 }
 
 func NewClient(opts ...FuncOption) *Client {
 	option := &Option{
-		UserAgent: defaultUserAgent,
+		userAgent: defaultUserAgent,
 	}
 	for _, opt := range opts {
 		opt(option)
 	}
+
 	return &Client{
-		Client: http.DefaultClient,
+		Client:    http.DefaultClient,
+		userAgent: option.userAgent,
 	}
 }
 
