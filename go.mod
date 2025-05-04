@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/BurntSushi/toml v1.4.0
 	github.com/aperturerobotics/protobuf-go-lite v0.9.1
-	github.com/labulakalia/wazero_net v0.0.9-0.20250427091815-5eb06e3a5aa6
+	github.com/labulakalia/wazero_net v0.0.9-0.20250504090249-31e0ba862963
 )
 
 require (
