@@ -127,7 +127,7 @@ func buildPlugin() {
 
 	buildWasmFile := fmt.Sprintf("dist/%s.wasm", pluginConfig.Id)
 	defer os.Remove(buildWasmFile)
-	cmd := exec.Command("tinygo", "build", "-p", "16", "-x", "-no-debug", "-target=wasip1", "-buildmode=c-shared", "-o", buildWasmFile, ".")
+	cmd := exec.Command("tinygo", "build", "-p", "16", "-x", "--no-debug", "-target=wasip1", "-buildmode=c-shared", "-o", buildWasmFile, ".")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
