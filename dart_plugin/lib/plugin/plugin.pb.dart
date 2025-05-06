@@ -588,18 +588,14 @@ class AuthMethod extends $pb.GeneratedMessage {
 class Auth extends $pb.GeneratedMessage {
   factory Auth({
     $core.Iterable<AuthMethod>? authMethods,
-    $fixnum.Int64? requestPerSecond,
-    $fixnum.Int64? fileCacheTime,
+    $fixnum.Int64? fileMetadataCacheTime,
   }) {
     final $result = create();
     if (authMethods != null) {
       $result.authMethods.addAll(authMethods);
     }
-    if (requestPerSecond != null) {
-      $result.requestPerSecond = requestPerSecond;
-    }
-    if (fileCacheTime != null) {
-      $result.fileCacheTime = fileCacheTime;
+    if (fileMetadataCacheTime != null) {
+      $result.fileMetadataCacheTime = fileMetadataCacheTime;
     }
     return $result;
   }
@@ -609,8 +605,7 @@ class Auth extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..pc<AuthMethod>(1, _omitFieldNames ? '' : 'authMethods', $pb.PbFieldType.PM, subBuilder: AuthMethod.create)
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'requestPerSecond', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'fileCacheTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'fileMetadataCacheTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -639,25 +634,15 @@ class Auth extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   $core.List<AuthMethod> get authMethods => $_getList(0);
 
-  /// request per limit
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get requestPerSecond => $_getI64(1);
-  @$pb.TagNumber(2)
-  set requestPerSecond($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasRequestPerSecond() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearRequestPerSecond() => clearField(2);
-
-  /// file cache time
+  /// file metadata cache time
   @$pb.TagNumber(3)
-  $fixnum.Int64 get fileCacheTime => $_getI64(2);
+  $fixnum.Int64 get fileMetadataCacheTime => $_getI64(1);
   @$pb.TagNumber(3)
-  set fileCacheTime($fixnum.Int64 v) { $_setInt64(2, v); }
+  set fileMetadataCacheTime($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasFileCacheTime() => $_has(2);
+  $core.bool hasFileMetadataCacheTime() => $_has(1);
   @$pb.TagNumber(3)
-  void clearFileCacheTime() => clearField(3);
+  void clearFileMetadataCacheTime() => clearField(3);
 }
 
 class FileEntry extends $pb.GeneratedMessage {

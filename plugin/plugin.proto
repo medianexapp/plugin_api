@@ -49,10 +49,8 @@ message AuthMethod {
 message Auth {
     // valid auth methods
     repeated AuthMethod auth_methods = 1;  //
-    // request per limit
-    uint64 request_per_second = 2;  // Query Per Second
-    // file cache time
-    uint64 file_cache_time = 3;  //
+    // file metadata cache time
+    uint64 file_metadata_cache_time = 3;  //
 }
 
 message FileEntry {

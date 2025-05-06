@@ -333,10 +333,8 @@ type Auth struct {
 	unknownFields []byte
 	// valid auth methods
 	AuthMethods []*AuthMethod `protobuf:"bytes,1,rep,name=auth_methods,json=authMethods,proto3" json:"authMethods,omitempty"` //
-	// request per limit
-	RequestPerSecond uint64 `protobuf:"varint,2,opt,name=request_per_second,json=requestPerSecond,proto3" json:"requestPerSecond,omitempty"` // Query Per Second
-	// file cache time
-	FileCacheTime uint64 `protobuf:"varint,3,opt,name=file_cache_time,json=fileCacheTime,proto3" json:"fileCacheTime,omitempty"` //
+	// file metadata cache time
+	FileMetadataCacheTime uint64 `protobuf:"varint,3,opt,name=file_metadata_cache_time,json=fileMetadataCacheTime,proto3" json:"fileMetadataCacheTime,omitempty"` //
 }
 
 func (x *Auth) Reset() {
@@ -352,16 +350,9 @@ func (x *Auth) GetAuthMethods() []*AuthMethod {
 	return nil
 }
 
-func (x *Auth) GetRequestPerSecond() uint64 {
+func (x *Auth) GetFileMetadataCacheTime() uint64 {
 	if x != nil {
-		return x.RequestPerSecond
-	}
-	return 0
-}
-
-func (x *Auth) GetFileCacheTime() uint64 {
-	if x != nil {
-		return x.FileCacheTime
+		return x.FileMetadataCacheTime
 	}
 	return 0
 }
@@ -1207,8 +1198,7 @@ func (m *Auth) CloneVT() *Auth {
 		return (*Auth)(nil)
 	}
 	r := new(Auth)
-	r.RequestPerSecond = m.RequestPerSecond
-	r.FileCacheTime = m.FileCacheTime
+	r.FileMetadataCacheTime = m.FileMetadataCacheTime
 	if rhs := m.AuthMethods; rhs != nil {
 		tmpContainer := make([]*AuthMethod, len(rhs))
 		for k, v := range rhs {
@@ -1915,10 +1905,7 @@ func (this *Auth) EqualVT(that *Auth) bool {
 			}
 		}
 	}
-	if this.RequestPerSecond != that.RequestPerSecond {
-		return false
-	}
-	if this.FileCacheTime != that.FileCacheTime {
+	if this.FileMetadataCacheTime != that.FileMetadataCacheTime {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -2733,15 +2720,10 @@ func (x *Auth) MarshalProtoJSON(s *json.MarshalState) {
 		}
 		s.WriteArrayEnd()
 	}
-	if x.RequestPerSecond != 0 || s.HasField("requestPerSecond") {
+	if x.FileMetadataCacheTime != 0 || s.HasField("fileMetadataCacheTime") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("requestPerSecond")
-		s.WriteUint64(x.RequestPerSecond)
-	}
-	if x.FileCacheTime != 0 || s.HasField("fileCacheTime") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("fileCacheTime")
-		s.WriteUint64(x.FileCacheTime)
+		s.WriteObjectField("fileMetadataCacheTime")
+		s.WriteUint64(x.FileMetadataCacheTime)
 	}
 	s.WriteObjectEnd()
 }
@@ -2778,12 +2760,9 @@ func (x *Auth) UnmarshalProtoJSON(s *json.UnmarshalState) {
 				}
 				x.AuthMethods = append(x.AuthMethods, v)
 			})
-		case "request_per_second", "requestPerSecond":
-			s.AddField("request_per_second")
-			x.RequestPerSecond = s.ReadUint64()
-		case "file_cache_time", "fileCacheTime":
-			s.AddField("file_cache_time")
-			x.FileCacheTime = s.ReadUint64()
+		case "file_metadata_cache_time", "fileMetadataCacheTime":
+			s.AddField("file_metadata_cache_time")
+			x.FileMetadataCacheTime = s.ReadUint64()
 		}
 	})
 }
@@ -4221,15 +4200,10 @@ func (m *Auth) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.FileCacheTime != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.FileCacheTime))
+	if m.FileMetadataCacheTime != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.FileMetadataCacheTime))
 		i--
 		dAtA[i] = 0x18
-	}
-	if m.RequestPerSecond != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.RequestPerSecond))
-		i--
-		dAtA[i] = 0x10
 	}
 	if len(m.AuthMethods) > 0 {
 		for iNdEx := len(m.AuthMethods) - 1; iNdEx >= 0; iNdEx-- {
@@ -5452,15 +5426,10 @@ func (m *Auth) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.FileCacheTime != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.FileCacheTime))
+	if m.FileMetadataCacheTime != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.FileMetadataCacheTime))
 		i--
 		dAtA[i] = 0x18
-	}
-	if m.RequestPerSecond != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.RequestPerSecond))
-		i--
-		dAtA[i] = 0x10
 	}
 	if len(m.AuthMethods) > 0 {
 		for iNdEx := len(m.AuthMethods) - 1; iNdEx >= 0; iNdEx-- {
@@ -6319,11 +6288,8 @@ func (m *Auth) SizeVT() (n int) {
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
 	}
-	if m.RequestPerSecond != 0 {
-		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.RequestPerSecond))
-	}
-	if m.FileCacheTime != 0 {
-		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.FileCacheTime))
+	if m.FileMetadataCacheTime != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.FileMetadataCacheTime))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -6820,19 +6786,12 @@ func (x *Auth) MarshalProtoText() string {
 		}
 		sb.WriteString("]")
 	}
-	if x.RequestPerSecond != 0 {
+	if x.FileMetadataCacheTime != 0 {
 		if sb.Len() > 6 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("request_per_second: ")
-		sb.WriteString(strconv.FormatUint(uint64(x.RequestPerSecond), 10))
-	}
-	if x.FileCacheTime != 0 {
-		if sb.Len() > 6 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("file_cache_time: ")
-		sb.WriteString(strconv.FormatUint(uint64(x.FileCacheTime), 10))
+		sb.WriteString("file_metadata_cache_time: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.FileMetadataCacheTime), 10))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -8401,30 +8360,11 @@ func (m *Auth) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RequestPerSecond", wireType)
-			}
-			m.RequestPerSecond = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.RequestPerSecond |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		case 3:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FileCacheTime", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field FileMetadataCacheTime", wireType)
 			}
-			m.FileCacheTime = 0
+			m.FileMetadataCacheTime = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -8434,7 +8374,7 @@ func (m *Auth) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.FileCacheTime |= uint64(b&0x7F) << shift
+				m.FileMetadataCacheTime |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -11232,30 +11172,11 @@ func (m *Auth) UnmarshalVTUnsafe(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field RequestPerSecond", wireType)
-			}
-			m.RequestPerSecond = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.RequestPerSecond |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		case 3:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FileCacheTime", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field FileMetadataCacheTime", wireType)
 			}
-			m.FileCacheTime = 0
+			m.FileMetadataCacheTime = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -11265,7 +11186,7 @@ func (m *Auth) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.FileCacheTime |= uint64(b&0x7F) << shift
+				m.FileMetadataCacheTime |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}

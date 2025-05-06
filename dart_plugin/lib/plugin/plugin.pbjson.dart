@@ -126,16 +126,15 @@ const Auth$json = {
   '1': 'Auth',
   '2': [
     {'1': 'auth_methods', '3': 1, '4': 3, '5': 11, '6': '.plugin.AuthMethod', '10': 'authMethods'},
-    {'1': 'request_per_second', '3': 2, '4': 1, '5': 4, '10': 'requestPerSecond'},
-    {'1': 'file_cache_time', '3': 3, '4': 1, '5': 4, '10': 'fileCacheTime'},
+    {'1': 'file_metadata_cache_time', '3': 3, '4': 1, '5': 4, '10': 'fileMetadataCacheTime'},
   ],
 };
 
 /// Descriptor for `Auth`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authDescriptor = $convert.base64Decode(
     'CgRBdXRoEjUKDGF1dGhfbWV0aG9kcxgBIAMoCzISLnBsdWdpbi5BdXRoTWV0aG9kUgthdXRoTW'
-    'V0aG9kcxIsChJyZXF1ZXN0X3Blcl9zZWNvbmQYAiABKARSEHJlcXVlc3RQZXJTZWNvbmQSJgoP'
-    'ZmlsZV9jYWNoZV90aW1lGAMgASgEUg1maWxlQ2FjaGVUaW1l');
+    'V0aG9kcxI3ChhmaWxlX21ldGFkYXRhX2NhY2hlX3RpbWUYAyABKARSFWZpbGVNZXRhZGF0YUNh'
+    'Y2hlVGltZQ==');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {
