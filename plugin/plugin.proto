@@ -47,8 +47,12 @@ message AuthMethod {
 }
 
 message Auth {
-    // form data input
+    // valid auth methods
     repeated AuthMethod auth_methods = 1;  //
+    // request per limit
+    uint64 request_per_second = 2;  // Query Per Second
+    // file cache time
+    uint64 file_cache_time = 3;  //
 }
 
 message FileEntry {
