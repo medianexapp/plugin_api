@@ -1034,6 +1034,8 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     FileResource_ResourceType? resourceType,
     $core.String? title,
     $core.Map<$core.String, $core.String>? header,
+    $fixnum.Int64? size,
+    $fixnum.Int64? partSize,
   }) {
     final $result = create();
     if (url != null) {
@@ -1054,6 +1056,12 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     if (header != null) {
       $result.header.addAll(header);
     }
+    if (size != null) {
+      $result.size = size;
+    }
+    if (partSize != null) {
+      $result.partSize = partSize;
+    }
     return $result;
   }
   FileResource_FileResourceData._() : super();
@@ -1067,6 +1075,8 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     ..e<FileResource_ResourceType>(4, _omitFieldNames ? '' : 'resourceType', $pb.PbFieldType.OE, defaultOrMaker: FileResource_ResourceType.ResourceTypeUNSPECIFIED, valueOf: FileResource_ResourceType.valueOf, enumValues: FileResource_ResourceType.values)
     ..aOS(5, _omitFieldNames ? '' : 'title')
     ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'header', entryClassName: 'FileResource.FileResourceData.HeaderEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('plugin'))
+    ..a<$fixnum.Int64>(7, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'partSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -1138,6 +1148,24 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(6)
   $core.Map<$core.String, $core.String> get header => $_getMap(5);
+
+  @$pb.TagNumber(7)
+  $fixnum.Int64 get size => $_getI64(6);
+  @$pb.TagNumber(7)
+  set size($fixnum.Int64 v) { $_setInt64(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasSize() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearSize() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $fixnum.Int64 get partSize => $_getI64(7);
+  @$pb.TagNumber(8)
+  set partSize($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasPartSize() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPartSize() => clearField(8);
 }
 
 class FileResource extends $pb.GeneratedMessage {

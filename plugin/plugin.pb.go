@@ -844,6 +844,8 @@ type FileResource_FileResourceData struct {
 	ResourceType  FileResource_ResourceType `protobuf:"varint,4,opt,name=resource_type,json=resourceType,proto3" json:"resourceType,omitempty"`
 	Title         string                    `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
 	Header        map[string]string         `protobuf:"bytes,6,rep,name=header,proto3" json:"header,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Size          uint64                    `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`                        // file total size
+	PartSize      uint64                    `protobuf:"varint,8,opt,name=part_size,json=partSize,proto3" json:"partSize,omitempty"` // file part size
 }
 
 func (x *FileResource_FileResourceData) Reset() {
@@ -892,6 +894,20 @@ func (x *FileResource_FileResourceData) GetHeader() map[string]string {
 		return x.Header
 	}
 	return nil
+}
+
+func (x *FileResource_FileResourceData) GetSize() uint64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *FileResource_FileResourceData) GetPartSize() uint64 {
+	if x != nil {
+		return x.PartSize
+	}
+	return 0
 }
 
 type FileResource_FileResourceData_HeaderEntry struct {
@@ -1318,6 +1334,8 @@ func (m *FileResource_FileResourceData) CloneVT() *FileResource_FileResourceData
 	r.ExpireTime = m.ExpireTime
 	r.ResourceType = m.ResourceType
 	r.Title = m.Title
+	r.Size = m.Size
+	r.PartSize = m.PartSize
 	if rhs := m.Header; rhs != nil {
 		tmpContainer := make(map[string]string, len(rhs))
 		for k, v := range rhs {
@@ -2079,6 +2097,12 @@ func (this *FileResource_FileResourceData) EqualVT(that *FileResource_FileResour
 		if vx != vy {
 			return false
 		}
+	}
+	if this.Size != that.Size {
+		return false
+	}
+	if this.PartSize != that.PartSize {
+		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
@@ -3288,6 +3312,16 @@ func (x *FileResource_FileResourceData) MarshalProtoJSON(s *json.MarshalState) {
 		}
 		s.WriteObjectEnd()
 	}
+	if x.Size != 0 || s.HasField("size") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("size")
+		s.WriteUint64(x.Size)
+	}
+	if x.PartSize != 0 || s.HasField("partSize") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("partSize")
+		s.WriteUint64(x.PartSize)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -3330,6 +3364,12 @@ func (x *FileResource_FileResourceData) UnmarshalProtoJSON(s *json.UnmarshalStat
 			s.ReadStringMap(func(key string) {
 				x.Header[key] = s.ReadString()
 			})
+		case "size":
+			s.AddField("size")
+			x.Size = s.ReadUint64()
+		case "part_size", "partSize":
+			s.AddField("part_size")
+			x.PartSize = s.ReadUint64()
 		}
 	})
 }
@@ -4495,6 +4535,16 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVT(dAtA []byte) (int
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.PartSize != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PartSize))
+		i--
+		dAtA[i] = 0x40
+	}
+	if m.Size != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Size))
+		i--
+		dAtA[i] = 0x38
 	}
 	if len(m.Header) > 0 {
 		for k := range m.Header {
@@ -5722,6 +5772,16 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVTStrict(dAtA []byte
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.PartSize != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PartSize))
+		i--
+		dAtA[i] = 0x40
+	}
+	if m.Size != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Size))
+		i--
+		dAtA[i] = 0x38
+	}
 	if len(m.Header) > 0 {
 		for k := range m.Header {
 			v := m.Header[k]
@@ -6428,6 +6488,12 @@ func (m *FileResource_FileResourceData) SizeVT() (n int) {
 			n += mapEntrySize + 1 + protobuf_go_lite.SizeOfVarint(uint64(mapEntrySize))
 		}
 	}
+	if m.Size != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.Size))
+	}
+	if m.PartSize != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.PartSize))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -7056,6 +7122,20 @@ func (x *FileResource_FileResourceData) MarshalProtoText() string {
 			sb.WriteString(strconv.Quote(v))
 		}
 		sb.WriteString(" }")
+	}
+	if x.Size != 0 {
+		if sb.Len() > 18 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("size: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.Size), 10))
+	}
+	if x.PartSize != 0 {
+		if sb.Len() > 18 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("part_size: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.PartSize), 10))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -9334,6 +9414,44 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Header[mapkey] = mapvalue
 			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Size", wireType)
+			}
+			m.Size = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Size |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PartSize", wireType)
+			}
+			m.PartSize = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.PartSize |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -12179,6 +12297,44 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.Header[mapkey] = mapvalue
 			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Size", wireType)
+			}
+			m.Size = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Size |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PartSize", wireType)
+			}
+			m.PartSize = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.PartSize |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

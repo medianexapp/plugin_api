@@ -117,6 +117,8 @@ message FileResource {
         ResourceType        resource_type = 4;
         string              title         = 5;
         map<string, string> header        = 6;
+        uint64              size          = 7;  // file total size
+        uint64              part_size     = 8;  // file part size
     }
     repeated FileResourceData file_resource_data = 1;
 }
