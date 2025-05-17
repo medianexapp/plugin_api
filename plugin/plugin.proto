@@ -111,14 +111,16 @@ message FileResource {
     }
 
     message FileResourceData {
-        string              url           = 1;
-        Resolution          resolution    = 2;
-        uint64              expire_time   = 3;
-        ResourceType        resource_type = 4;
-        string              title         = 5;
-        map<string, string> header        = 6;
-        uint64              size          = 7;  // file total size
-        uint64              part_size     = 8;  // file part size
+        string              url              = 1;
+        Resolution          resolution       = 2;
+        uint64              expire_time      = 3;
+        ResourceType        resource_type    = 4;
+        string              title            = 5;
+        map<string, string> header           = 6;
+        uint64              size             = 7;                      // file total size
+        uint64              part_size        = 8 [deprecated = true];  // file part size
+        bool                proxy            = 9;                      // proxy download
+        bool                proxy_chunk_size = 10;                     // proxy download chunk size
     }
     repeated FileResourceData file_resource_data = 1;
 }

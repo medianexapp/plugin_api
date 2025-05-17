@@ -1035,7 +1035,10 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     $core.String? title,
     $core.Map<$core.String, $core.String>? header,
     $fixnum.Int64? size,
+  @$core.Deprecated('This field is deprecated.')
     $fixnum.Int64? partSize,
+    $core.bool? proxy,
+    $core.bool? proxyChunkSize,
   }) {
     final $result = create();
     if (url != null) {
@@ -1060,7 +1063,14 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
       $result.size = size;
     }
     if (partSize != null) {
+      // ignore: deprecated_member_use_from_same_package
       $result.partSize = partSize;
+    }
+    if (proxy != null) {
+      $result.proxy = proxy;
+    }
+    if (proxyChunkSize != null) {
+      $result.proxyChunkSize = proxyChunkSize;
     }
     return $result;
   }
@@ -1077,6 +1087,8 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'header', entryClassName: 'FileResource.FileResourceData.HeaderEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('plugin'))
     ..a<$fixnum.Int64>(7, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'partSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(9, _omitFieldNames ? '' : 'proxy')
+    ..aOB(10, _omitFieldNames ? '' : 'proxyChunkSize')
     ..hasRequiredFields = false
   ;
 
@@ -1158,14 +1170,36 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearSize() => clearField(7);
 
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   $fixnum.Int64 get partSize => $_getI64(7);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   set partSize($fixnum.Int64 v) { $_setInt64(7, v); }
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   $core.bool hasPartSize() => $_has(7);
+  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
   void clearPartSize() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.bool get proxy => $_getBF(8);
+  @$pb.TagNumber(9)
+  set proxy($core.bool v) { $_setBool(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasProxy() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearProxy() => clearField(9);
+
+  @$pb.TagNumber(10)
+  $core.bool get proxyChunkSize => $_getBF(9);
+  @$pb.TagNumber(10)
+  set proxyChunkSize($core.bool v) { $_setBool(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasProxyChunkSize() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearProxyChunkSize() => clearField(10);
 }
 
 class FileResource extends $pb.GeneratedMessage {
