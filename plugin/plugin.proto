@@ -119,8 +119,8 @@ message FileResource {
         map<string, string> header           = 6;
         uint64              size             = 7;                      // file total size
         uint64              part_size        = 8 [deprecated = true];  // file part size
-        bool                proxy            = 9;                      // proxy download
-        bool                proxy_chunk_size = 10;                     // proxy download chunk size
+        bool                proxy            = 9;                      // proxy
+        uint64              proxy_chunk_size = 10;                     // proxy  chunk size
     }
     repeated FileResourceData file_resource_data = 1;
 }

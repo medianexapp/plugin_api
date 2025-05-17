@@ -847,8 +847,8 @@ type FileResource_FileResourceData struct {
 	Size          uint64                    `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"` // file total size
 	// Deprecated: Marked as deprecated in plugin/plugin.proto.
 	PartSize       uint64 `protobuf:"varint,8,opt,name=part_size,json=partSize,proto3" json:"partSize,omitempty"`                     // file part size
-	Proxy          bool   `protobuf:"varint,9,opt,name=proxy,proto3" json:"proxy,omitempty"`                                          // proxy download
-	ProxyChunkSize bool   `protobuf:"varint,10,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"` // proxy download chunk size
+	Proxy          bool   `protobuf:"varint,9,opt,name=proxy,proto3" json:"proxy,omitempty"`                                          // proxy
+	ProxyChunkSize uint64 `protobuf:"varint,10,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"` // proxy  chunk size
 }
 
 func (x *FileResource_FileResourceData) Reset() {
@@ -921,11 +921,11 @@ func (x *FileResource_FileResourceData) GetProxy() bool {
 	return false
 }
 
-func (x *FileResource_FileResourceData) GetProxyChunkSize() bool {
+func (x *FileResource_FileResourceData) GetProxyChunkSize() uint64 {
 	if x != nil {
 		return x.ProxyChunkSize
 	}
-	return false
+	return 0
 }
 
 type FileResource_FileResourceData_HeaderEntry struct {
@@ -3353,10 +3353,10 @@ func (x *FileResource_FileResourceData) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("proxy")
 		s.WriteBool(x.Proxy)
 	}
-	if x.ProxyChunkSize || s.HasField("proxyChunkSize") {
+	if x.ProxyChunkSize != 0 || s.HasField("proxyChunkSize") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("proxyChunkSize")
-		s.WriteBool(x.ProxyChunkSize)
+		s.WriteUint64(x.ProxyChunkSize)
 	}
 	s.WriteObjectEnd()
 }
@@ -3411,7 +3411,7 @@ func (x *FileResource_FileResourceData) UnmarshalProtoJSON(s *json.UnmarshalStat
 			x.Proxy = s.ReadBool()
 		case "proxy_chunk_size", "proxyChunkSize":
 			s.AddField("proxy_chunk_size")
-			x.ProxyChunkSize = s.ReadBool()
+			x.ProxyChunkSize = s.ReadUint64()
 		}
 	})
 }
@@ -4578,13 +4578,8 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVT(dAtA []byte) (int
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.ProxyChunkSize {
-		i--
-		if m.ProxyChunkSize {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
+	if m.ProxyChunkSize != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.ProxyChunkSize))
 		i--
 		dAtA[i] = 0x50
 	}
@@ -5834,13 +5829,8 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVTStrict(dAtA []byte
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.ProxyChunkSize {
-		i--
-		if m.ProxyChunkSize {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
+	if m.ProxyChunkSize != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.ProxyChunkSize))
 		i--
 		dAtA[i] = 0x50
 	}
@@ -6579,8 +6569,8 @@ func (m *FileResource_FileResourceData) SizeVT() (n int) {
 	if m.Proxy {
 		n += 2
 	}
-	if m.ProxyChunkSize {
-		n += 2
+	if m.ProxyChunkSize != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.ProxyChunkSize))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -7232,12 +7222,12 @@ func (x *FileResource_FileResourceData) MarshalProtoText() string {
 		sb.WriteString("proxy: ")
 		sb.WriteString(strconv.FormatBool(x.Proxy))
 	}
-	if x.ProxyChunkSize != false {
+	if x.ProxyChunkSize != 0 {
 		if sb.Len() > 18 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("proxy_chunk_size: ")
-		sb.WriteString(strconv.FormatBool(x.ProxyChunkSize))
+		sb.WriteString(strconv.FormatUint(uint64(x.ProxyChunkSize), 10))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -9578,7 +9568,7 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ProxyChunkSize", wireType)
 			}
-			var v int
+			m.ProxyChunkSize = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -9588,12 +9578,11 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= int(b&0x7F) << shift
+				m.ProxyChunkSize |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.ProxyChunkSize = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -12501,7 +12490,7 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ProxyChunkSize", wireType)
 			}
-			var v int
+			m.ProxyChunkSize = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -12511,12 +12500,11 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= int(b&0x7F) << shift
+				m.ProxyChunkSize |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.ProxyChunkSize = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
