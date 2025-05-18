@@ -16,7 +16,10 @@ func GetDefaultUserAgent() string {
 }
 
 func (c *Client) setUserAgent(req *http.Request) {
-	req.Header.Set("User-Agent", c.userAgent)
+	if req.Header.Get("User-Agent") == "" {
+		req.Header.Set("User-Agent", c.userAgent)
+	}
+
 	return
 }
 
