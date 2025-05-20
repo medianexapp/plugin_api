@@ -1035,10 +1035,9 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     $core.String? title,
     $core.Map<$core.String, $core.String>? header,
     $fixnum.Int64? size,
-  @$core.Deprecated('This field is deprecated.')
-    $fixnum.Int64? partSize,
     $core.bool? proxy,
     $fixnum.Int64? proxyChunkSize,
+    $fixnum.Int64? proxyChunkParallel,
   }) {
     final $result = create();
     if (url != null) {
@@ -1062,15 +1061,14 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     if (size != null) {
       $result.size = size;
     }
-    if (partSize != null) {
-      // ignore: deprecated_member_use_from_same_package
-      $result.partSize = partSize;
-    }
     if (proxy != null) {
       $result.proxy = proxy;
     }
     if (proxyChunkSize != null) {
       $result.proxyChunkSize = proxyChunkSize;
+    }
+    if (proxyChunkParallel != null) {
+      $result.proxyChunkParallel = proxyChunkParallel;
     }
     return $result;
   }
@@ -1086,9 +1084,9 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'title')
     ..m<$core.String, $core.String>(6, _omitFieldNames ? '' : 'header', entryClassName: 'FileResource.FileResourceData.HeaderEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('plugin'))
     ..a<$fixnum.Int64>(7, _omitFieldNames ? '' : 'size', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(8, _omitFieldNames ? '' : 'partSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOB(9, _omitFieldNames ? '' : 'proxy')
-    ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'proxyChunkSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOB(8, _omitFieldNames ? '' : 'proxy')
+    ..a<$fixnum.Int64>(9, _omitFieldNames ? '' : 'proxyChunkSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'proxyChunkParallel', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -1170,36 +1168,32 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   void clearSize() => clearField(7);
 
-  @$core.Deprecated('This field is deprecated.')
   @$pb.TagNumber(8)
-  $fixnum.Int64 get partSize => $_getI64(7);
-  @$core.Deprecated('This field is deprecated.')
+  $core.bool get proxy => $_getBF(7);
   @$pb.TagNumber(8)
-  set partSize($fixnum.Int64 v) { $_setInt64(7, v); }
-  @$core.Deprecated('This field is deprecated.')
+  set proxy($core.bool v) { $_setBool(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasPartSize() => $_has(7);
-  @$core.Deprecated('This field is deprecated.')
+  $core.bool hasProxy() => $_has(7);
   @$pb.TagNumber(8)
-  void clearPartSize() => clearField(8);
+  void clearProxy() => clearField(8);
 
   @$pb.TagNumber(9)
-  $core.bool get proxy => $_getBF(8);
+  $fixnum.Int64 get proxyChunkSize => $_getI64(8);
   @$pb.TagNumber(9)
-  set proxy($core.bool v) { $_setBool(8, v); }
+  set proxyChunkSize($fixnum.Int64 v) { $_setInt64(8, v); }
   @$pb.TagNumber(9)
-  $core.bool hasProxy() => $_has(8);
+  $core.bool hasProxyChunkSize() => $_has(8);
   @$pb.TagNumber(9)
-  void clearProxy() => clearField(9);
+  void clearProxyChunkSize() => clearField(9);
 
   @$pb.TagNumber(10)
-  $fixnum.Int64 get proxyChunkSize => $_getI64(9);
+  $fixnum.Int64 get proxyChunkParallel => $_getI64(9);
   @$pb.TagNumber(10)
-  set proxyChunkSize($fixnum.Int64 v) { $_setInt64(9, v); }
+  set proxyChunkParallel($fixnum.Int64 v) { $_setInt64(9, v); }
   @$pb.TagNumber(10)
-  $core.bool hasProxyChunkSize() => $_has(9);
+  $core.bool hasProxyChunkParallel() => $_has(9);
   @$pb.TagNumber(10)
-  void clearProxyChunkSize() => clearField(10);
+  void clearProxyChunkParallel() => clearField(10);
 }
 
 class FileResource extends $pb.GeneratedMessage {

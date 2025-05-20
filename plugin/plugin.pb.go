@@ -837,18 +837,17 @@ func (*Formdata_FormItem_DirPathValue) isFormdata_FormItem_Value() {}
 func (*Formdata_FormItem_FilePathValue) isFormdata_FormItem_Value() {}
 
 type FileResource_FileResourceData struct {
-	unknownFields []byte
-	Url           string                    `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Resolution    FileResource_Resolution   `protobuf:"varint,2,opt,name=resolution,proto3" json:"resolution,omitempty"`
-	ExpireTime    uint64                    `protobuf:"varint,3,opt,name=expire_time,json=expireTime,proto3" json:"expireTime,omitempty"`
-	ResourceType  FileResource_ResourceType `protobuf:"varint,4,opt,name=resource_type,json=resourceType,proto3" json:"resourceType,omitempty"`
-	Title         string                    `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
-	Header        map[string]string         `protobuf:"bytes,6,rep,name=header,proto3" json:"header,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Size          uint64                    `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"` // file total size
-	// Deprecated: Marked as deprecated in plugin/plugin.proto.
-	PartSize       uint64 `protobuf:"varint,8,opt,name=part_size,json=partSize,proto3" json:"partSize,omitempty"`                     // file part size
-	Proxy          bool   `protobuf:"varint,9,opt,name=proxy,proto3" json:"proxy,omitempty"`                                          // proxy
-	ProxyChunkSize uint64 `protobuf:"varint,10,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"` // proxy  chunk size
+	unknownFields      []byte
+	Url                string                    `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Resolution         FileResource_Resolution   `protobuf:"varint,2,opt,name=resolution,proto3" json:"resolution,omitempty"`
+	ExpireTime         uint64                    `protobuf:"varint,3,opt,name=expire_time,json=expireTime,proto3" json:"expireTime,omitempty"`
+	ResourceType       FileResource_ResourceType `protobuf:"varint,4,opt,name=resource_type,json=resourceType,proto3" json:"resourceType,omitempty"`
+	Title              string                    `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
+	Header             map[string]string         `protobuf:"bytes,6,rep,name=header,proto3" json:"header,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Size               uint64                    `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`   // file total size
+	Proxy              bool                      `protobuf:"varint,8,opt,name=proxy,proto3" json:"proxy,omitempty"` // proxy
+	ProxyChunkSize     uint64                    `protobuf:"varint,9,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"`
+	ProxyChunkParallel uint64                    `protobuf:"varint,10,opt,name=proxy_chunk_parallel,json=proxyChunkParallel,proto3" json:"proxyChunkParallel,omitempty"`
 }
 
 func (x *FileResource_FileResourceData) Reset() {
@@ -906,14 +905,6 @@ func (x *FileResource_FileResourceData) GetSize() uint64 {
 	return 0
 }
 
-// Deprecated: Marked as deprecated in plugin/plugin.proto.
-func (x *FileResource_FileResourceData) GetPartSize() uint64 {
-	if x != nil {
-		return x.PartSize
-	}
-	return 0
-}
-
 func (x *FileResource_FileResourceData) GetProxy() bool {
 	if x != nil {
 		return x.Proxy
@@ -924,6 +915,13 @@ func (x *FileResource_FileResourceData) GetProxy() bool {
 func (x *FileResource_FileResourceData) GetProxyChunkSize() uint64 {
 	if x != nil {
 		return x.ProxyChunkSize
+	}
+	return 0
+}
+
+func (x *FileResource_FileResourceData) GetProxyChunkParallel() uint64 {
+	if x != nil {
+		return x.ProxyChunkParallel
 	}
 	return 0
 }
@@ -1353,9 +1351,9 @@ func (m *FileResource_FileResourceData) CloneVT() *FileResource_FileResourceData
 	r.ResourceType = m.ResourceType
 	r.Title = m.Title
 	r.Size = m.Size
-	r.PartSize = m.PartSize
 	r.Proxy = m.Proxy
 	r.ProxyChunkSize = m.ProxyChunkSize
+	r.ProxyChunkParallel = m.ProxyChunkParallel
 	if rhs := m.Header; rhs != nil {
 		tmpContainer := make(map[string]string, len(rhs))
 		for k, v := range rhs {
@@ -2121,13 +2119,13 @@ func (this *FileResource_FileResourceData) EqualVT(that *FileResource_FileResour
 	if this.Size != that.Size {
 		return false
 	}
-	if this.PartSize != that.PartSize {
-		return false
-	}
 	if this.Proxy != that.Proxy {
 		return false
 	}
 	if this.ProxyChunkSize != that.ProxyChunkSize {
+		return false
+	}
+	if this.ProxyChunkParallel != that.ProxyChunkParallel {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -3343,11 +3341,6 @@ func (x *FileResource_FileResourceData) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("size")
 		s.WriteUint64(x.Size)
 	}
-	if x.PartSize != 0 || s.HasField("partSize") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("partSize")
-		s.WriteUint64(x.PartSize)
-	}
 	if x.Proxy || s.HasField("proxy") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("proxy")
@@ -3357,6 +3350,11 @@ func (x *FileResource_FileResourceData) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("proxyChunkSize")
 		s.WriteUint64(x.ProxyChunkSize)
+	}
+	if x.ProxyChunkParallel != 0 || s.HasField("proxyChunkParallel") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("proxyChunkParallel")
+		s.WriteUint64(x.ProxyChunkParallel)
 	}
 	s.WriteObjectEnd()
 }
@@ -3403,15 +3401,15 @@ func (x *FileResource_FileResourceData) UnmarshalProtoJSON(s *json.UnmarshalStat
 		case "size":
 			s.AddField("size")
 			x.Size = s.ReadUint64()
-		case "part_size", "partSize":
-			s.AddField("part_size")
-			x.PartSize = s.ReadUint64()
 		case "proxy":
 			s.AddField("proxy")
 			x.Proxy = s.ReadBool()
 		case "proxy_chunk_size", "proxyChunkSize":
 			s.AddField("proxy_chunk_size")
 			x.ProxyChunkSize = s.ReadUint64()
+		case "proxy_chunk_parallel", "proxyChunkParallel":
+			s.AddField("proxy_chunk_parallel")
+			x.ProxyChunkParallel = s.ReadUint64()
 		}
 	})
 }
@@ -4578,10 +4576,15 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVT(dAtA []byte) (int
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.ProxyChunkParallel != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.ProxyChunkParallel))
+		i--
+		dAtA[i] = 0x50
+	}
 	if m.ProxyChunkSize != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.ProxyChunkSize))
 		i--
-		dAtA[i] = 0x50
+		dAtA[i] = 0x48
 	}
 	if m.Proxy {
 		i--
@@ -4590,11 +4593,6 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVT(dAtA []byte) (int
 		} else {
 			dAtA[i] = 0
 		}
-		i--
-		dAtA[i] = 0x48
-	}
-	if m.PartSize != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PartSize))
 		i--
 		dAtA[i] = 0x40
 	}
@@ -5829,10 +5827,15 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVTStrict(dAtA []byte
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.ProxyChunkParallel != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.ProxyChunkParallel))
+		i--
+		dAtA[i] = 0x50
+	}
 	if m.ProxyChunkSize != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.ProxyChunkSize))
 		i--
-		dAtA[i] = 0x50
+		dAtA[i] = 0x48
 	}
 	if m.Proxy {
 		i--
@@ -5841,11 +5844,6 @@ func (m *FileResource_FileResourceData) MarshalToSizedBufferVTStrict(dAtA []byte
 		} else {
 			dAtA[i] = 0
 		}
-		i--
-		dAtA[i] = 0x48
-	}
-	if m.PartSize != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PartSize))
 		i--
 		dAtA[i] = 0x40
 	}
@@ -6563,14 +6561,14 @@ func (m *FileResource_FileResourceData) SizeVT() (n int) {
 	if m.Size != 0 {
 		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.Size))
 	}
-	if m.PartSize != 0 {
-		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.PartSize))
-	}
 	if m.Proxy {
 		n += 2
 	}
 	if m.ProxyChunkSize != 0 {
 		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.ProxyChunkSize))
+	}
+	if m.ProxyChunkParallel != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.ProxyChunkParallel))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -7208,13 +7206,6 @@ func (x *FileResource_FileResourceData) MarshalProtoText() string {
 		sb.WriteString("size: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.Size), 10))
 	}
-	if x.PartSize != 0 {
-		if sb.Len() > 18 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("part_size: ")
-		sb.WriteString(strconv.FormatUint(uint64(x.PartSize), 10))
-	}
 	if x.Proxy != false {
 		if sb.Len() > 18 {
 			sb.WriteString(" ")
@@ -7228,6 +7219,13 @@ func (x *FileResource_FileResourceData) MarshalProtoText() string {
 		}
 		sb.WriteString("proxy_chunk_size: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.ProxyChunkSize), 10))
+	}
+	if x.ProxyChunkParallel != 0 {
+		if sb.Len() > 18 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("proxy_chunk_parallel: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.ProxyChunkParallel), 10))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -9527,25 +9525,6 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 			}
 		case 8:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PartSize", wireType)
-			}
-			m.PartSize = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.PartSize |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 9:
-			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Proxy", wireType)
 			}
 			var v int
@@ -9564,7 +9543,7 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.Proxy = bool(v != 0)
-		case 10:
+		case 9:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ProxyChunkSize", wireType)
 			}
@@ -9579,6 +9558,25 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.ProxyChunkSize |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProxyChunkParallel", wireType)
+			}
+			m.ProxyChunkParallel = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProxyChunkParallel |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -12449,25 +12447,6 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 		case 8:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PartSize", wireType)
-			}
-			m.PartSize = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.PartSize |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 9:
-			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Proxy", wireType)
 			}
 			var v int
@@ -12486,7 +12465,7 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 			}
 			m.Proxy = bool(v != 0)
-		case 10:
+		case 9:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ProxyChunkSize", wireType)
 			}
@@ -12501,6 +12480,25 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 				b := dAtA[iNdEx]
 				iNdEx++
 				m.ProxyChunkSize |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 10:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProxyChunkParallel", wireType)
+			}
+			m.ProxyChunkParallel = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.ProxyChunkParallel |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
