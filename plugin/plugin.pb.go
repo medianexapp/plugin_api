@@ -512,6 +512,7 @@ type GetFileResourceRequest struct {
 	unknownFields []byte
 	FilePath      string     `protobuf:"bytes,1,opt,name=file_path,json=filePath,proto3" json:"filePath,omitempty"`
 	FileEntry     *FileEntry `protobuf:"bytes,10,opt,name=file_entry,json=fileEntry,proto3" json:"fileEntry,omitempty"`
+	IsMedia       bool       `protobuf:"varint,11,opt,name=is_media,json=isMedia,proto3" json:"isMedia,omitempty"` // media file
 }
 
 func (x *GetFileResourceRequest) Reset() {
@@ -532,6 +533,13 @@ func (x *GetFileResourceRequest) GetFileEntry() *FileEntry {
 		return x.FileEntry
 	}
 	return nil
+}
+
+func (x *GetFileResourceRequest) GetIsMedia() bool {
+	if x != nil {
+		return x.IsMedia
+	}
+	return false
 }
 
 type FileResource struct {
@@ -1329,6 +1337,7 @@ func (m *GetFileResourceRequest) CloneVT() *GetFileResourceRequest {
 	r := new(GetFileResourceRequest)
 	r.FilePath = m.FilePath
 	r.FileEntry = m.FileEntry.CloneVT()
+	r.IsMedia = m.IsMedia
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -2071,6 +2080,9 @@ func (this *GetFileResourceRequest) EqualVT(that *GetFileResourceRequest) bool {
 		return false
 	}
 	if !this.FileEntry.EqualVT(that.FileEntry) {
+		return false
+	}
+	if this.IsMedia != that.IsMedia {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -3125,6 +3137,11 @@ func (x *GetFileResourceRequest) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("fileEntry")
 		x.FileEntry.MarshalProtoJSON(s.WithField("fileEntry"))
 	}
+	if x.IsMedia || s.HasField("isMedia") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("isMedia")
+		s.WriteBool(x.IsMedia)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -3152,6 +3169,9 @@ func (x *GetFileResourceRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 			}
 			x.FileEntry = &FileEntry{}
 			x.FileEntry.UnmarshalProtoJSON(s.WithField("file_entry", true))
+		case "is_media", "isMedia":
+			s.AddField("is_media")
+			x.IsMedia = s.ReadBool()
 		}
 	})
 }
@@ -4526,6 +4546,16 @@ func (m *GetFileResourceRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.IsMedia {
+		i--
+		if m.IsMedia {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x58
+	}
 	if m.FileEntry != nil {
 		size, err := m.FileEntry.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
@@ -5777,6 +5807,16 @@ func (m *GetFileResourceRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.IsMedia {
+		i--
+		if m.IsMedia {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x58
+	}
 	if m.FileEntry != nil {
 		size, err := m.FileEntry.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
@@ -6523,6 +6563,9 @@ func (m *GetFileResourceRequest) SizeVT() (n int) {
 		l = m.FileEntry.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
+	if m.IsMedia {
+		n += 2
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -7106,6 +7149,13 @@ func (x *GetFileResourceRequest) MarshalProtoText() string {
 		}
 		sb.WriteString("file_entry: ")
 		sb.WriteString(x.FileEntry.MarshalProtoText())
+	}
+	if x.IsMedia != false {
+		if sb.Len() > 24 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("is_media: ")
+		sb.WriteString(strconv.FormatBool(x.IsMedia))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -9205,6 +9255,26 @@ func (m *GetFileResourceRequest) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 11:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field IsMedia", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.IsMedia = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -12111,6 +12181,26 @@ func (m *GetFileResourceRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 11:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field IsMedia", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.IsMedia = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

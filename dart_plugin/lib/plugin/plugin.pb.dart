@@ -964,6 +964,7 @@ class GetFileResourceRequest extends $pb.GeneratedMessage {
   factory GetFileResourceRequest({
     $core.String? filePath,
     FileEntry? fileEntry,
+    $core.bool? isMedia,
   }) {
     final $result = create();
     if (filePath != null) {
@@ -971,6 +972,9 @@ class GetFileResourceRequest extends $pb.GeneratedMessage {
     }
     if (fileEntry != null) {
       $result.fileEntry = fileEntry;
+    }
+    if (isMedia != null) {
+      $result.isMedia = isMedia;
     }
     return $result;
   }
@@ -981,6 +985,7 @@ class GetFileResourceRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFileResourceRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'filePath')
     ..aOM<FileEntry>(10, _omitFieldNames ? '' : 'fileEntry', subBuilder: FileEntry.create)
+    ..aOB(11, _omitFieldNames ? '' : 'isMedia')
     ..hasRequiredFields = false
   ;
 
@@ -1024,6 +1029,15 @@ class GetFileResourceRequest extends $pb.GeneratedMessage {
   void clearFileEntry() => clearField(10);
   @$pb.TagNumber(10)
   FileEntry ensureFileEntry() => $_ensure(1);
+
+  @$pb.TagNumber(11)
+  $core.bool get isMedia => $_getBF(2);
+  @$pb.TagNumber(11)
+  set isMedia($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasIsMedia() => $_has(2);
+  @$pb.TagNumber(11)
+  void clearIsMedia() => clearField(11);
 }
 
 class FileResource_FileResourceData extends $pb.GeneratedMessage {

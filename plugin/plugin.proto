@@ -89,6 +89,7 @@ message GetDirEntryRequest {
 message GetFileResourceRequest {
     string    file_path  = 1;
     FileEntry file_entry = 10;
+    bool      is_media   = 11;  // media file
 }
 
 message FileResource {

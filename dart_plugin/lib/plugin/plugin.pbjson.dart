@@ -213,13 +213,15 @@ const GetFileResourceRequest$json = {
   '2': [
     {'1': 'file_path', '3': 1, '4': 1, '5': 9, '10': 'filePath'},
     {'1': 'file_entry', '3': 10, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntry'},
+    {'1': 'is_media', '3': 11, '4': 1, '5': 8, '10': 'isMedia'},
   ],
 };
 
 /// Descriptor for `GetFileResourceRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getFileResourceRequestDescriptor = $convert.base64Decode(
     'ChZHZXRGaWxlUmVzb3VyY2VSZXF1ZXN0EhsKCWZpbGVfcGF0aBgBIAEoCVIIZmlsZVBhdGgSMA'
-    'oKZmlsZV9lbnRyeRgKIAEoCzIRLnBsdWdpbi5GaWxlRW50cnlSCWZpbGVFbnRyeQ==');
+    'oKZmlsZV9lbnRyeRgKIAEoCzIRLnBsdWdpbi5GaWxlRW50cnlSCWZpbGVFbnRyeRIZCghpc19t'
+    'ZWRpYRgLIAEoCFIHaXNNZWRpYQ==');
 
 @$core.Deprecated('Use fileResourceDescriptor instead')
 const FileResource$json = {
