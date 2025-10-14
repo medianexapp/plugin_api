@@ -22,9 +22,11 @@ message Formdata {
 }
 
 message Scanqrcode {
-    bytes  qrcode_image       = 1;  // qrcode image
-    string qrcode_image_param = 2;  // qrcode image some param,like qrcode check key
-    uint64 qrcode_expire_time = 3;  // qrcode expire time
+    bytes  qrcode_image         = 1;  // qrcode image bytes
+    string qrcode_image_param   = 2;  // qrcode image some param,like qrcode check key
+    uint64 qrcode_expire_time   = 3;  // qrcode expire time
+    string qrcode_image_url     = 4;  // qrcode image url
+    string qrcode_image_content = 5;  // qrcode content
 }
 
 message Callback {

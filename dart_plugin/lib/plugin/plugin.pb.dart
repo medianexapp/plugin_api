@@ -263,6 +263,8 @@ class Scanqrcode extends $pb.GeneratedMessage {
     $core.List<$core.int>? qrcodeImage,
     $core.String? qrcodeImageParam,
     $fixnum.Int64? qrcodeExpireTime,
+    $core.String? qrcodeImageUrl,
+    $core.String? qrcodeImageContent,
   }) {
     final $result = create();
     if (qrcodeImage != null) {
@@ -274,6 +276,12 @@ class Scanqrcode extends $pb.GeneratedMessage {
     if (qrcodeExpireTime != null) {
       $result.qrcodeExpireTime = qrcodeExpireTime;
     }
+    if (qrcodeImageUrl != null) {
+      $result.qrcodeImageUrl = qrcodeImageUrl;
+    }
+    if (qrcodeImageContent != null) {
+      $result.qrcodeImageContent = qrcodeImageContent;
+    }
     return $result;
   }
   Scanqrcode._() : super();
@@ -284,6 +292,8 @@ class Scanqrcode extends $pb.GeneratedMessage {
     ..a<$core.List<$core.int>>(1, _omitFieldNames ? '' : 'qrcodeImage', $pb.PbFieldType.OY)
     ..aOS(2, _omitFieldNames ? '' : 'qrcodeImageParam')
     ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'qrcodeExpireTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(4, _omitFieldNames ? '' : 'qrcodeImageUrl')
+    ..aOS(5, _omitFieldNames ? '' : 'qrcodeImageContent')
     ..hasRequiredFields = false
   ;
 
@@ -334,6 +344,24 @@ class Scanqrcode extends $pb.GeneratedMessage {
   $core.bool hasQrcodeExpireTime() => $_has(2);
   @$pb.TagNumber(3)
   void clearQrcodeExpireTime() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get qrcodeImageUrl => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set qrcodeImageUrl($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasQrcodeImageUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearQrcodeImageUrl() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get qrcodeImageContent => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set qrcodeImageContent($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasQrcodeImageContent() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearQrcodeImageContent() => clearField(5);
 }
 
 class Callback extends $pb.GeneratedMessage {

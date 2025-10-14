@@ -62,6 +62,8 @@ const Scanqrcode$json = {
     {'1': 'qrcode_image', '3': 1, '4': 1, '5': 12, '10': 'qrcodeImage'},
     {'1': 'qrcode_image_param', '3': 2, '4': 1, '5': 9, '10': 'qrcodeImageParam'},
     {'1': 'qrcode_expire_time', '3': 3, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
+    {'1': 'qrcode_image_url', '3': 4, '4': 1, '5': 9, '10': 'qrcodeImageUrl'},
+    {'1': 'qrcode_image_content', '3': 5, '4': 1, '5': 9, '10': 'qrcodeImageContent'},
   ],
 };
 
@@ -69,7 +71,9 @@ const Scanqrcode$json = {
 final $typed_data.Uint8List scanqrcodeDescriptor = $convert.base64Decode(
     'CgpTY2FucXJjb2RlEiEKDHFyY29kZV9pbWFnZRgBIAEoDFILcXJjb2RlSW1hZ2USLAoScXJjb2'
     'RlX2ltYWdlX3BhcmFtGAIgASgJUhBxcmNvZGVJbWFnZVBhcmFtEiwKEnFyY29kZV9leHBpcmVf'
-    'dGltZRgDIAEoBFIQcXJjb2RlRXhwaXJlVGltZQ==');
+    'dGltZRgDIAEoBFIQcXJjb2RlRXhwaXJlVGltZRIoChBxcmNvZGVfaW1hZ2VfdXJsGAQgASgJUg'
+    '5xcmNvZGVJbWFnZVVybBIwChRxcmNvZGVfaW1hZ2VfY29udGVudBgFIAEoCVIScXJjb2RlSW1h'
+    'Z2VDb250ZW50');
 
 @$core.Deprecated('Use callbackDescriptor instead')
 const Callback$json = {

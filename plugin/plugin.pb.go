@@ -164,10 +164,12 @@ func (x *Formdata) GetFormItems() []*Formdata_FormItem {
 }
 
 type Scanqrcode struct {
-	unknownFields    []byte
-	QrcodeImage      []byte `protobuf:"bytes,1,opt,name=qrcode_image,json=qrcodeImage,proto3" json:"qrcodeImage,omitempty"`                  // qrcode image
-	QrcodeImageParam string `protobuf:"bytes,2,opt,name=qrcode_image_param,json=qrcodeImageParam,proto3" json:"qrcodeImageParam,omitempty"`  // qrcode image some param,like qrcode check key
-	QrcodeExpireTime uint64 `protobuf:"varint,3,opt,name=qrcode_expire_time,json=qrcodeExpireTime,proto3" json:"qrcodeExpireTime,omitempty"` // qrcode expire time
+	unknownFields      []byte
+	QrcodeImage        []byte `protobuf:"bytes,1,opt,name=qrcode_image,json=qrcodeImage,proto3" json:"qrcodeImage,omitempty"`                       // qrcode image bytes
+	QrcodeImageParam   string `protobuf:"bytes,2,opt,name=qrcode_image_param,json=qrcodeImageParam,proto3" json:"qrcodeImageParam,omitempty"`       // qrcode image some param,like qrcode check key
+	QrcodeExpireTime   uint64 `protobuf:"varint,3,opt,name=qrcode_expire_time,json=qrcodeExpireTime,proto3" json:"qrcodeExpireTime,omitempty"`      // qrcode expire time
+	QrcodeImageUrl     string `protobuf:"bytes,4,opt,name=qrcode_image_url,json=qrcodeImageUrl,proto3" json:"qrcodeImageUrl,omitempty"`             // qrcode image url
+	QrcodeImageContent string `protobuf:"bytes,5,opt,name=qrcode_image_content,json=qrcodeImageContent,proto3" json:"qrcodeImageContent,omitempty"` // qrcode content
 }
 
 func (x *Scanqrcode) Reset() {
@@ -195,6 +197,20 @@ func (x *Scanqrcode) GetQrcodeExpireTime() uint64 {
 		return x.QrcodeExpireTime
 	}
 	return 0
+}
+
+func (x *Scanqrcode) GetQrcodeImageUrl() string {
+	if x != nil {
+		return x.QrcodeImageUrl
+	}
+	return ""
+}
+
+func (x *Scanqrcode) GetQrcodeImageContent() string {
+	if x != nil {
+		return x.QrcodeImageContent
+	}
+	return ""
 }
 
 type Callback struct {
@@ -1110,6 +1126,8 @@ func (m *Scanqrcode) CloneVT() *Scanqrcode {
 	r := new(Scanqrcode)
 	r.QrcodeImageParam = m.QrcodeImageParam
 	r.QrcodeExpireTime = m.QrcodeExpireTime
+	r.QrcodeImageUrl = m.QrcodeImageUrl
+	r.QrcodeImageContent = m.QrcodeImageContent
 	if rhs := m.QrcodeImage; rhs != nil {
 		tmpBytes := make([]byte, len(rhs))
 		copy(tmpBytes, rhs)
@@ -1743,6 +1761,12 @@ func (this *Scanqrcode) EqualVT(that *Scanqrcode) bool {
 		return false
 	}
 	if this.QrcodeExpireTime != that.QrcodeExpireTime {
+		return false
+	}
+	if this.QrcodeImageUrl != that.QrcodeImageUrl {
+		return false
+	}
+	if this.QrcodeImageContent != that.QrcodeImageContent {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -2532,6 +2556,16 @@ func (x *Scanqrcode) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("qrcodeExpireTime")
 		s.WriteUint64(x.QrcodeExpireTime)
 	}
+	if x.QrcodeImageUrl != "" || s.HasField("qrcodeImageUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("qrcodeImageUrl")
+		s.WriteString(x.QrcodeImageUrl)
+	}
+	if x.QrcodeImageContent != "" || s.HasField("qrcodeImageContent") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("qrcodeImageContent")
+		s.WriteString(x.QrcodeImageContent)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -2558,6 +2592,12 @@ func (x *Scanqrcode) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "qrcode_expire_time", "qrcodeExpireTime":
 			s.AddField("qrcode_expire_time")
 			x.QrcodeExpireTime = s.ReadUint64()
+		case "qrcode_image_url", "qrcodeImageUrl":
+			s.AddField("qrcode_image_url")
+			x.QrcodeImageUrl = s.ReadString()
+		case "qrcode_image_content", "qrcodeImageContent":
+			s.AddField("qrcode_image_content")
+			x.QrcodeImageContent = s.ReadString()
 		}
 	})
 }
@@ -4017,6 +4057,20 @@ func (m *Scanqrcode) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.QrcodeImageContent) > 0 {
+		i -= len(m.QrcodeImageContent)
+		copy(dAtA[i:], m.QrcodeImageContent)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.QrcodeImageContent)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.QrcodeImageUrl) > 0 {
+		i -= len(m.QrcodeImageUrl)
+		copy(dAtA[i:], m.QrcodeImageUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.QrcodeImageUrl)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if m.QrcodeExpireTime != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.QrcodeExpireTime))
 		i--
@@ -5259,6 +5313,20 @@ func (m *Scanqrcode) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.QrcodeImageContent) > 0 {
+		i -= len(m.QrcodeImageContent)
+		copy(dAtA[i:], m.QrcodeImageContent)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.QrcodeImageContent)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.QrcodeImageUrl) > 0 {
+		i -= len(m.QrcodeImageUrl)
+		copy(dAtA[i:], m.QrcodeImageUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.QrcodeImageUrl)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if m.QrcodeExpireTime != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.QrcodeExpireTime))
 		i--
@@ -6337,6 +6405,14 @@ func (m *Scanqrcode) SizeVT() (n int) {
 	if m.QrcodeExpireTime != 0 {
 		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.QrcodeExpireTime))
 	}
+	l = len(m.QrcodeImageUrl)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.QrcodeImageContent)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -6855,6 +6931,20 @@ func (x *Scanqrcode) MarshalProtoText() string {
 		}
 		sb.WriteString("qrcode_expire_time: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.QrcodeExpireTime), 10))
+	}
+	if x.QrcodeImageUrl != "" {
+		if sb.Len() > 12 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("qrcode_image_url: ")
+		sb.WriteString(strconv.Quote(x.QrcodeImageUrl))
+	}
+	if x.QrcodeImageContent != "" {
+		if sb.Len() > 12 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("qrcode_image_content: ")
+		sb.WriteString(strconv.Quote(x.QrcodeImageContent))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -8046,6 +8136,70 @@ func (m *Scanqrcode) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field QrcodeImageUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.QrcodeImageUrl = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field QrcodeImageContent", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.QrcodeImageContent = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -10943,6 +11097,78 @@ func (m *Scanqrcode) UnmarshalVTUnsafe(dAtA []byte) error {
 					break
 				}
 			}
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field QrcodeImageUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.QrcodeImageUrl = stringValue
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field QrcodeImageContent", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.QrcodeImageContent = stringValue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
