@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 )
 
 const (
@@ -30,8 +31,9 @@ type Client struct {
 }
 
 type Option struct {
-	userAgent string
-	retry     int
+	userAgent string        // default defaultUserAgent
+	retry     int           // default 1
+	timeout   time.Duration // default 3s
 }
 
 type FuncOption func(*Option)
@@ -48,10 +50,17 @@ func WithRetry(retry int) FuncOption {
 	}
 }
 
+func WithTimeout(timeout time.Duration) FuncOption {
+	return func(o *Option) {
+		o.timeout = timeout
+	}
+}
+
 func NewClient(opts ...FuncOption) *Client {
 	option := &Option{
 		userAgent: defaultUserAgent,
-		retry:     3,
+		retry:     1,
+		timeout:   3 * time.Second,
 	}
 	for _, opt := range opts {
 		opt(option)
@@ -65,6 +74,7 @@ func NewClient(opts ...FuncOption) *Client {
 func (c *Client) Do(req *http.Request) (resp *http.Response, err error) {
 	c.setUserAgent(req)
 	for range c.option.retry {
+		c.client.Timeout = c.option.timeout
 		resp, err = c.client.Do(req)
 		if err != nil {
 			slog.Error("client do failed", "err", err)
