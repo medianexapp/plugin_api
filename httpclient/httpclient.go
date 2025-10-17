@@ -65,6 +65,7 @@ func NewClient(opts ...FuncOption) *Client {
 	for _, opt := range opts {
 		opt(option)
 	}
+	http.DefaultClient.Timeout = option.timeout
 	return &Client{
 		client: http.DefaultClient,
 		option: option,
@@ -74,7 +75,6 @@ func NewClient(opts ...FuncOption) *Client {
 func (c *Client) Do(req *http.Request) (resp *http.Response, err error) {
 	c.setUserAgent(req)
 	for range c.option.retry {
-		c.client.Timeout = c.option.timeout
 		resp, err = c.client.Do(req)
 		if err != nil {
 			slog.Error("client do failed", "err", err)

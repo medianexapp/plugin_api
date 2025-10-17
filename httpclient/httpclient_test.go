@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"io"
 	"testing"
+	"time"
 )
 
 func TestHttp(t *testing.T) {
-	client := NewClient()
-	response, err := client.Get("https://httpbin.io/user-agent")
+	client := NewClient(WithTimeout(time.Minute))
+	response, err := client.Get("https://www.google.com")
 	if err != nil {
 		t.Fatal(err)
 	}
