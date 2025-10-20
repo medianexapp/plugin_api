@@ -8,8 +8,8 @@ import (
 )
 
 func TestHttp(t *testing.T) {
-	client := NewClient(WithTimeout(time.Minute))
-	response, err := client.Get("https://www.google.com")
+	client := NewClient(WithTimeout(time.Second * 3))
+	response, err := client.Get("http://127.0.0.1:19971")
 	if err != nil {
 		t.Fatal(err)
 	}

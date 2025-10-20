@@ -92,7 +92,6 @@ func (c *Client) Get(url string) (resp *http.Response, err error) {
 	if err != nil {
 		return nil, err
 	}
-	c.setUserAgent(req)
 	return c.Do(req)
 }
 func (c *Client) Head(url string) (resp *http.Response, err error) {
@@ -100,7 +99,6 @@ func (c *Client) Head(url string) (resp *http.Response, err error) {
 	if err != nil {
 		return nil, err
 	}
-	c.setUserAgent(req)
 	return c.Do(req)
 }
 func (c *Client) Post(url string, contentType string, body io.Reader) (resp *http.Response, err error) {
@@ -109,8 +107,6 @@ func (c *Client) Post(url string, contentType string, body io.Reader) (resp *htt
 		return nil, err
 	}
 	req.Header.Set("Content-Type", contentType)
-	c.setUserAgent(req)
-
 	return c.Do(req)
 }
 func (c *Client) PostForm(url string, data url.Values) (resp *http.Response, err error) {
