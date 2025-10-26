@@ -273,7 +273,8 @@ type AuthMethod struct {
 	//	*AuthMethod_Scanqrcode
 	//	*AuthMethod_Callback
 	//	*AuthMethod_Refresh
-	Method isAuthMethod_Method `protobuf_oneof:"method"`
+	Method     isAuthMethod_Method `protobuf_oneof:"method"`
+	HelpDocUrl string              `protobuf:"bytes,5,opt,name=help_doc_url,json=helpDocUrl,proto3" json:"helpDocUrl,omitempty"` // help document
 }
 
 func (x *AuthMethod) Reset() {
@@ -317,6 +318,13 @@ func (x *AuthMethod) GetRefresh() *Refresh {
 	return nil
 }
 
+func (x *AuthMethod) GetHelpDocUrl() string {
+	if x != nil {
+		return x.HelpDocUrl
+	}
+	return ""
+}
+
 type isAuthMethod_Method interface {
 	isAuthMethod_Method()
 }
@@ -348,9 +356,7 @@ func (*AuthMethod_Refresh) isAuthMethod_Method() {}
 type Auth struct {
 	unknownFields []byte
 	// valid auth methods
-	AuthMethods []*AuthMethod `protobuf:"bytes,1,rep,name=auth_methods,json=authMethods,proto3" json:"authMethods,omitempty"` //
-	// file metadata cache time
-	FileMetadataCacheTime uint64 `protobuf:"varint,3,opt,name=file_metadata_cache_time,json=fileMetadataCacheTime,proto3" json:"fileMetadataCacheTime,omitempty"` //
+	AuthMethods []*AuthMethod `protobuf:"bytes,1,rep,name=auth_methods,json=authMethods,proto3" json:"authMethods,omitempty"`
 }
 
 func (x *Auth) Reset() {
@@ -364,13 +370,6 @@ func (x *Auth) GetAuthMethods() []*AuthMethod {
 		return x.AuthMethods
 	}
 	return nil
-}
-
-func (x *Auth) GetFileMetadataCacheTime() uint64 {
-	if x != nil {
-		return x.FileMetadataCacheTime
-	}
-	return 0
 }
 
 type FileEntry struct {
@@ -1185,6 +1184,7 @@ func (m *AuthMethod) CloneVT() *AuthMethod {
 		return (*AuthMethod)(nil)
 	}
 	r := new(AuthMethod)
+	r.HelpDocUrl = m.HelpDocUrl
 	if m.Method != nil {
 		r.Method = m.Method.(interface{ CloneOneofVT() isAuthMethod_Method }).CloneOneofVT()
 	}
@@ -1256,7 +1256,6 @@ func (m *Auth) CloneVT() *Auth {
 		return (*Auth)(nil)
 	}
 	r := new(Auth)
-	r.FileMetadataCacheTime = m.FileMetadataCacheTime
 	if rhs := m.AuthMethods; rhs != nil {
 		tmpContainer := make([]*AuthMethod, len(rhs))
 		for k, v := range rhs {
@@ -1841,6 +1840,9 @@ func (this *AuthMethod) EqualVT(that *AuthMethod) bool {
 			return false
 		}
 	}
+	if this.HelpDocUrl != that.HelpDocUrl {
+		return false
+	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
@@ -1973,9 +1975,6 @@ func (this *Auth) EqualVT(that *Auth) bool {
 				return false
 			}
 		}
-	}
-	if this.FileMetadataCacheTime != that.FileMetadataCacheTime {
-		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
@@ -2739,6 +2738,11 @@ func (x *AuthMethod) MarshalProtoJSON(s *json.MarshalState) {
 			ov.Refresh.MarshalProtoJSON(s.WithField("refresh"))
 		}
 	}
+	if x.HelpDocUrl != "" || s.HasField("helpDocUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("helpDocUrl")
+		s.WriteString(x.HelpDocUrl)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -2792,6 +2796,9 @@ func (x *AuthMethod) UnmarshalProtoJSON(s *json.UnmarshalState) {
 			}
 			ov.Refresh = &Refresh{}
 			ov.Refresh.UnmarshalProtoJSON(s.WithField("refresh", true))
+		case "help_doc_url", "helpDocUrl":
+			s.AddField("help_doc_url")
+			x.HelpDocUrl = s.ReadString()
 		}
 	})
 }
@@ -2819,11 +2826,6 @@ func (x *Auth) MarshalProtoJSON(s *json.MarshalState) {
 			element.MarshalProtoJSON(s.WithField("authMethods"))
 		}
 		s.WriteArrayEnd()
-	}
-	if x.FileMetadataCacheTime != 0 || s.HasField("fileMetadataCacheTime") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("fileMetadataCacheTime")
-		s.WriteUint64(x.FileMetadataCacheTime)
 	}
 	s.WriteObjectEnd()
 }
@@ -2860,9 +2862,6 @@ func (x *Auth) UnmarshalProtoJSON(s *json.UnmarshalState) {
 				}
 				x.AuthMethods = append(x.AuthMethods, v)
 			})
-		case "file_metadata_cache_time", "fileMetadataCacheTime":
-			s.AddField("file_metadata_cache_time")
-			x.FileMetadataCacheTime = s.ReadUint64()
 		}
 	})
 }
@@ -4229,6 +4228,13 @@ func (m *AuthMethod) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		}
 		i -= size
 	}
+	if len(m.HelpDocUrl) > 0 {
+		i -= len(m.HelpDocUrl)
+		copy(dAtA[i:], m.HelpDocUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.HelpDocUrl)))
+		i--
+		dAtA[i] = 0x2a
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -4353,11 +4359,6 @@ func (m *Auth) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.FileMetadataCacheTime != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.FileMetadataCacheTime))
-		i--
-		dAtA[i] = 0x18
 	}
 	if len(m.AuthMethods) > 0 {
 		for iNdEx := len(m.AuthMethods) - 1; iNdEx >= 0; iNdEx-- {
@@ -5476,6 +5477,13 @@ func (m *AuthMethod) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.HelpDocUrl) > 0 {
+		i -= len(m.HelpDocUrl)
+		copy(dAtA[i:], m.HelpDocUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.HelpDocUrl)))
+		i--
+		dAtA[i] = 0x2a
+	}
 	if msg, ok := m.Method.(*AuthMethod_Refresh); ok {
 		size, err := msg.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
@@ -5628,11 +5636,6 @@ func (m *Auth) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
-	}
-	if m.FileMetadataCacheTime != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.FileMetadataCacheTime))
-		i--
-		dAtA[i] = 0x18
 	}
 	if len(m.AuthMethods) > 0 {
 		for iNdEx := len(m.AuthMethods) - 1; iNdEx >= 0; iNdEx-- {
@@ -6462,6 +6465,10 @@ func (m *AuthMethod) SizeVT() (n int) {
 	if vtmsg, ok := m.Method.(interface{ SizeVT() int }); ok {
 		n += vtmsg.SizeVT()
 	}
+	l = len(m.HelpDocUrl)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -6533,9 +6540,6 @@ func (m *Auth) SizeVT() (n int) {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
-	}
-	if m.FileMetadataCacheTime != 0 {
-		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.FileMetadataCacheTime))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -7038,6 +7042,13 @@ func (x *AuthMethod) MarshalProtoText() string {
 			sb.WriteString(body.Refresh.MarshalProtoText())
 		}
 	}
+	if x.HelpDocUrl != "" {
+		if sb.Len() > 12 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("help_doc_url: ")
+		sb.WriteString(strconv.Quote(x.HelpDocUrl))
+	}
 	sb.WriteString("}")
 	return sb.String()
 }
@@ -7060,13 +7071,6 @@ func (x *Auth) MarshalProtoText() string {
 			sb.WriteString(v.MarshalProtoText())
 		}
 		sb.WriteString("]")
-	}
-	if x.FileMetadataCacheTime != 0 {
-		if sb.Len() > 6 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("file_metadata_cache_time: ")
-		sb.WriteString(strconv.FormatUint(uint64(x.FileMetadataCacheTime), 10))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -8649,6 +8653,38 @@ func (m *AuthMethod) UnmarshalVT(dAtA []byte) error {
 				m.Method = &AuthMethod_Refresh{Refresh: v}
 			}
 			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HelpDocUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.HelpDocUrl = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -8734,25 +8770,6 @@ func (m *Auth) UnmarshalVT(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FileMetadataCacheTime", wireType)
-			}
-			m.FileMetadataCacheTime = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.FileMetadataCacheTime |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -11630,6 +11647,42 @@ func (m *AuthMethod) UnmarshalVTUnsafe(dAtA []byte) error {
 				m.Method = &AuthMethod_Refresh{Refresh: v}
 			}
 			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HelpDocUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.HelpDocUrl = stringValue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -11715,25 +11768,6 @@ func (m *Auth) UnmarshalVTUnsafe(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FileMetadataCacheTime", wireType)
-			}
-			m.FileMetadataCacheTime = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.FileMetadataCacheTime |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

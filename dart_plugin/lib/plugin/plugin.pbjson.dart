@@ -112,6 +112,7 @@ const AuthMethod$json = {
     {'1': 'scanqrcode', '3': 2, '4': 1, '5': 11, '6': '.plugin.Scanqrcode', '9': 0, '10': 'scanqrcode'},
     {'1': 'callback', '3': 3, '4': 1, '5': 11, '6': '.plugin.Callback', '9': 0, '10': 'callback'},
     {'1': 'refresh', '3': 4, '4': 1, '5': 11, '6': '.plugin.Refresh', '9': 0, '10': 'refresh'},
+    {'1': 'help_doc_url', '3': 5, '4': 1, '5': 9, '10': 'helpDocUrl'},
   ],
   '8': [
     {'1': 'method'},
@@ -123,22 +124,21 @@ final $typed_data.Uint8List authMethodDescriptor = $convert.base64Decode(
     'CgpBdXRoTWV0aG9kEi4KCGZvcm1kYXRhGAEgASgLMhAucGx1Z2luLkZvcm1kYXRhSABSCGZvcm'
     '1kYXRhEjQKCnNjYW5xcmNvZGUYAiABKAsyEi5wbHVnaW4uU2NhbnFyY29kZUgAUgpzY2FucXJj'
     'b2RlEi4KCGNhbGxiYWNrGAMgASgLMhAucGx1Z2luLkNhbGxiYWNrSABSCGNhbGxiYWNrEisKB3'
-    'JlZnJlc2gYBCABKAsyDy5wbHVnaW4uUmVmcmVzaEgAUgdyZWZyZXNoQggKBm1ldGhvZA==');
+    'JlZnJlc2gYBCABKAsyDy5wbHVnaW4uUmVmcmVzaEgAUgdyZWZyZXNoEiAKDGhlbHBfZG9jX3Vy'
+    'bBgFIAEoCVIKaGVscERvY1VybEIICgZtZXRob2Q=');
 
 @$core.Deprecated('Use authDescriptor instead')
 const Auth$json = {
   '1': 'Auth',
   '2': [
     {'1': 'auth_methods', '3': 1, '4': 3, '5': 11, '6': '.plugin.AuthMethod', '10': 'authMethods'},
-    {'1': 'file_metadata_cache_time', '3': 3, '4': 1, '5': 4, '10': 'fileMetadataCacheTime'},
   ],
 };
 
 /// Descriptor for `Auth`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List authDescriptor = $convert.base64Decode(
     'CgRBdXRoEjUKDGF1dGhfbWV0aG9kcxgBIAMoCzISLnBsdWdpbi5BdXRoTWV0aG9kUgthdXRoTW'
-    'V0aG9kcxI3ChhmaWxlX21ldGFkYXRhX2NhY2hlX3RpbWUYAyABKARSFWZpbGVNZXRhZGF0YUNh'
-    'Y2hlVGltZQ==');
+    'V0aG9kcw==');
 
 @$core.Deprecated('Use fileEntryDescriptor instead')
 const FileEntry$json = {

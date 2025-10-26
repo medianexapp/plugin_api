@@ -508,6 +508,7 @@ class AuthMethod extends $pb.GeneratedMessage {
     Scanqrcode? scanqrcode,
     Callback? callback,
     Refresh? refresh,
+    $core.String? helpDocUrl,
   }) {
     final $result = create();
     if (formdata != null) {
@@ -521,6 +522,9 @@ class AuthMethod extends $pb.GeneratedMessage {
     }
     if (refresh != null) {
       $result.refresh = refresh;
+    }
+    if (helpDocUrl != null) {
+      $result.helpDocUrl = helpDocUrl;
     }
     return $result;
   }
@@ -541,6 +545,7 @@ class AuthMethod extends $pb.GeneratedMessage {
     ..aOM<Scanqrcode>(2, _omitFieldNames ? '' : 'scanqrcode', subBuilder: Scanqrcode.create)
     ..aOM<Callback>(3, _omitFieldNames ? '' : 'callback', subBuilder: Callback.create)
     ..aOM<Refresh>(4, _omitFieldNames ? '' : 'refresh', subBuilder: Refresh.create)
+    ..aOS(5, _omitFieldNames ? '' : 'helpDocUrl')
     ..hasRequiredFields = false
   ;
 
@@ -611,19 +616,24 @@ class AuthMethod extends $pb.GeneratedMessage {
   void clearRefresh() => clearField(4);
   @$pb.TagNumber(4)
   Refresh ensureRefresh() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.String get helpDocUrl => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set helpDocUrl($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasHelpDocUrl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearHelpDocUrl() => clearField(5);
 }
 
 class Auth extends $pb.GeneratedMessage {
   factory Auth({
     $core.Iterable<AuthMethod>? authMethods,
-    $fixnum.Int64? fileMetadataCacheTime,
   }) {
     final $result = create();
     if (authMethods != null) {
       $result.authMethods.addAll(authMethods);
-    }
-    if (fileMetadataCacheTime != null) {
-      $result.fileMetadataCacheTime = fileMetadataCacheTime;
     }
     return $result;
   }
@@ -633,7 +643,6 @@ class Auth extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Auth', package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'), createEmptyInstance: create)
     ..pc<AuthMethod>(1, _omitFieldNames ? '' : 'authMethods', $pb.PbFieldType.PM, subBuilder: AuthMethod.create)
-    ..a<$fixnum.Int64>(3, _omitFieldNames ? '' : 'fileMetadataCacheTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false
   ;
 
@@ -661,16 +670,6 @@ class Auth extends $pb.GeneratedMessage {
   /// valid auth methods
   @$pb.TagNumber(1)
   $core.List<AuthMethod> get authMethods => $_getList(0);
-
-  /// file metadata cache time
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get fileMetadataCacheTime => $_getI64(1);
-  @$pb.TagNumber(3)
-  set fileMetadataCacheTime($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasFileMetadataCacheTime() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearFileMetadataCacheTime() => clearField(3);
 }
 
 class FileEntry extends $pb.GeneratedMessage {

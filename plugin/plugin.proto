@@ -46,13 +46,12 @@ message AuthMethod {
         Callback   callback   = 3;
         Refresh    refresh    = 4;
     }
+    string help_doc_url = 5;  // help document
 }
 
 message Auth {
     // valid auth methods
-    repeated AuthMethod auth_methods = 1;  //
-    // file metadata cache time
-    uint64 file_metadata_cache_time = 3;  //
+    repeated AuthMethod auth_methods = 1;
 }
 
 message FileEntry {
