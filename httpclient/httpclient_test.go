@@ -29,3 +29,12 @@ func TestHttp(t *testing.T) {
 		t.Fatal("user agent not equal actual", string(body), "expected", defaultUserAgent)
 	}
 }
+
+func TestBuilder(t *testing.T) {
+	builder := NewBuilder()
+	data, err := builder.Get("https://www.baidu.com").BytesResponse()
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(string(data))
+}
