@@ -126,8 +126,17 @@ func (rb *Builder) SetBasicAuth(username, password string) *Builder {
 	return rb.clone()
 }
 
-func (rb *Builder) SetQueryParams(k, v string) *Builder {
+func (rb *Builder) SetQueryParam(k, v string) *Builder {
 	rb.urlParams.Add(k, v)
+	return rb.clone()
+}
+
+func (rb *Builder) SetQueryParams(params url.Values) *Builder {
+	for k, v := range params {
+		for _, vv := range v {
+			rb.urlParams.Add(k, vv)
+		}
+	}
 	return rb.clone()
 }
 
