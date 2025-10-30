@@ -5,7 +5,9 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -32,6 +34,7 @@ type Builder struct {
 	timeout     time.Duration
 	retry       int
 	unmarshaler Unmarshaler
+	debug       bool
 }
 
 func NewBuilder() *Builder {
@@ -51,6 +54,7 @@ func (rb *Builder) clone() *Builder {
 		retry:       rb.retry,
 		unmarshaler: rb.unmarshaler,
 		body:        rb.body,
+		debug:       rb.debug,
 	}
 	if rb.urlParams != nil {
 		urlParams := url.Values{}
@@ -189,18 +193,28 @@ func (rb *Builder) SetUnmarshaler(unmarshaler Unmarshaler) *Builder {
 	return rb
 }
 
+func (rb *Builder) Debug() *Builder {
+	rb.debug = true
+	return rb.clone()
+}
+
 func (rb *Builder) callReq() (*http.Response, error) {
 	if rb.url == "" {
 		return nil, ErrMissUrl
 	}
+
 	if rb.method == "" {
 		rb.method = http.MethodGet
+	}
+	if rb.urlParams != nil {
+		rb.url += "?" + rb.urlParams.Encode()
 	}
 	req, err := http.NewRequest(rb.method, rb.url, rb.body)
 	if err != nil {
 		return nil, err
 	}
 	req.Header = rb.header
+	now := time.Now()
 	opts := []FuncOption{}
 	if rb.retry > 0 {
 		opts = append(opts, WithRetry(rb.retry))
@@ -209,7 +223,35 @@ func (rb *Builder) callReq() (*http.Response, error) {
 		opts = append(opts, WithTimeout(rb.timeout))
 	}
 	client := NewClient(opts...)
-	return client.Do(req)
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if rb.debug {
+		args := []any{
+			"url", req.URL,
+			"method", req.Method,
+			"header", req.Header,
+			"duration(ms)", time.Since(now).Milliseconds(),
+			"status_code", resp.StatusCode,
+		}
+		contentType := resp.Header.Get("Content-Type")
+		fmt.Println(resp.ContentLength, contentType)
+		if strings.Contains(contentType, "json") ||
+			strings.Contains(contentType, "text") {
+			respBodyData, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return nil, err
+			}
+			resp.Body = io.NopCloser(bytes.NewBuffer(respBodyData))
+			args = append(args, "resp_body", string(respBodyData))
+		}
+
+		slog.Debug("client builder request",
+			args...,
+		)
+	}
+	return resp, nil
 }
 
 func (rb *Builder) RawResponse() (*http.Response, error) {

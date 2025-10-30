@@ -3,6 +3,7 @@ package httpclient
 import (
 	"encoding/json"
 	"io"
+	"log/slog"
 	"testing"
 	"time"
 )
@@ -32,9 +33,15 @@ func TestHttp(t *testing.T) {
 
 func TestBuilder(t *testing.T) {
 	builder := NewBuilder()
-	data, err := builder.Get("https://www.baidu.com").BytesResponse()
+	slog.SetLogLoggerLevel(slog.LevelDebug)
+	// slog.Debug("test builder")
+	data, err := builder.Get("https://www.baidu.com").Debug().
+		SetQueryParam("a", "b").
+		SetBasicAuth("auth", "passwd").
+		SetUserAgent("testagebt").
+		BytesResponse()
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(string(data))
+	t.Log(len(data))
 }
