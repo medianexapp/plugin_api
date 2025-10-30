@@ -230,7 +230,7 @@ func (rb *Builder) CallBackResponse(callback func([]byte) error) error {
 }
 
 func (rb *Builder) JSONResponse(data any) error {
-	if reflect.TypeOf(data).Kind() == reflect.Pointer {
+	if reflect.TypeOf(data).Kind() != reflect.Pointer {
 		return ErrInvalidData
 	}
 	respBytes, err := rb.BytesResponse()
@@ -245,7 +245,7 @@ func (rb *Builder) JSONResponse(data any) error {
 }
 
 func (rb *Builder) UnmarshalResponse(data any) error {
-	if reflect.TypeOf(data).Kind() == reflect.Pointer {
+	if reflect.TypeOf(data).Kind() != reflect.Pointer {
 		return ErrInvalidData
 	}
 	respBytes, err := rb.BytesResponse()
