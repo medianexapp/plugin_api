@@ -136,7 +136,7 @@ func buildPlugin() {
 		os.Exit(1)
 	}
 
-	outCompressFile := filepath.Join("./dist", fmt.Sprintf("%s_%s.zip", pluginConfig.Id, pluginConfig.Version))
+	outCompressFile := filepath.Join("./dist", fmt.Sprintf("%s.zip", pluginConfig.Id))
 	outFile, err := os.Create(outCompressFile)
 	if err != nil {
 		slog.Error("create file failed", "file", outCompressFile, "err", err)
