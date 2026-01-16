@@ -2,6 +2,7 @@ package httpclient
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log/slog"
 	"testing"
@@ -35,13 +36,11 @@ func TestBuilder(t *testing.T) {
 	builder := NewBuilder()
 	slog.SetLogLoggerLevel(slog.LevelDebug)
 	// slog.Debug("test builder")
-	data, err := builder.Get("https://www.baidu.com").Debug().
-		SetQueryParam("a", "b").
-		SetBasicAuth("auth", "passwd").
-		SetUserAgent("testagebt").
-		BytesResponse()
-	if err != nil {
-		t.Fatal(err)
+	b := builder.Get("https://www.baidu.com").Debug()
+	for i := 0; i < 10; i++ {
+		_, err := b.SetHeader(fmt.Sprint(i), fmt.Sprint(i)).BytesResponse()
+		if err != nil {
+			t.Fatal(err)
+		}
 	}
-	t.Log(len(data))
 }

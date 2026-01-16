@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -16,7 +15,7 @@ import (
 )
 
 var (
-	ErrInvalidData     = errors.New("data must be pointer")
+	ErrInvalidPointer  = errors.New("data must be pointer")
 	ErrMissUrl         = errors.New("miss set url")
 	ErrMissUnmarshaler = errors.New("miss set Unmarshaler")
 )
@@ -64,19 +63,24 @@ func (rb *Builder) clone() *Builder {
 		sp.urlParams = urlParams
 	}
 	if rb.header != nil {
-		sp.header = rb.header.Clone()
+		sp.header = make(map[string][]string)
+		for k, v := range rb.header {
+			sp.header[k] = append(sp.header[k], v...)
+		}
 	}
 	return sp
 }
 
 func (rb *Builder) Request(url string) *Builder {
-	rb.url = url
-	return rb.clone()
+	nb := rb.clone()
+	nb.url = url
+	return nb
 }
 
 func (rb *Builder) SetMethod(method string) *Builder {
-	rb.method = method
-	return rb.clone()
+	nb := rb.clone()
+	nb.method = method
+	return nb
 }
 
 func (rb *Builder) Get(url string) *Builder {
@@ -112,36 +116,41 @@ func (rb *Builder) Trace(url string) *Builder {
 }
 
 func (rb *Builder) SetHeaders(headers http.Header) *Builder {
+	nb := rb.clone()
 	for k, v := range headers {
 		for _, vv := range v {
-			rb.header.Add(k, vv)
+			nb.header.Add(k, vv)
 		}
 	}
-	return rb.clone()
+	return nb
 }
 
 func (rb *Builder) SetHeader(k, v string) *Builder {
-	rb.header.Add(k, v)
-	return rb.clone()
+	nb := rb.clone()
+	nb.header.Add(k, v)
+	return nb
 }
 
 func (rb *Builder) SetBasicAuth(username, password string) *Builder {
-	rb.header.Set("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(username+":"+password)))
-	return rb.clone()
+	nb := rb.clone()
+	nb.header.Set("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(username+":"+password)))
+	return nb
 }
 
 func (rb *Builder) SetQueryParam(k, v string) *Builder {
-	rb.urlParams.Add(k, v)
-	return rb.clone()
+	nb := rb.clone()
+	nb.urlParams.Add(k, v)
+	return nb
 }
 
 func (rb *Builder) SetQueryParams(params url.Values) *Builder {
+	nb := rb.clone()
 	for k, v := range params {
 		for _, vv := range v {
-			rb.urlParams.Add(k, vv)
+			nb.urlParams.Add(k, vv)
 		}
 	}
-	return rb.clone()
+	return nb
 }
 
 // Set request body,support
@@ -153,49 +162,55 @@ func (rb *Builder) SetQueryParams(params url.Values) *Builder {
 //
 // note body not copy
 func (rb *Builder) SetBody(body any) *Builder {
+	nb := rb.clone()
 	switch v := body.(type) {
 	case string:
-		rb.body = strings.NewReader(v)
+		nb.body = strings.NewReader(v)
 	case []byte:
-		rb.body = bytes.NewReader(v)
+		nb.body = bytes.NewReader(v)
 	case io.Reader:
-		rb.body = v
+		nb.body = v
 	case url.Values:
-		rb.body = strings.NewReader(v.Encode())
-		rb.header.Set("Content-Type", "application/x-www-form-urlencoded")
+		nb.body = strings.NewReader(v.Encode())
+		nb.header.Set("Content-Type", "application/x-www-form-urlencoded")
 	default:
 		data, err := json.Marshal(body)
 		if err == nil {
-			rb.body = bytes.NewReader(data)
+			nb.body = bytes.NewReader(data)
 		}
-		rb.header.Set("Content-Type", "application/json")
+		nb.header.Set("Content-Type", "application/json")
 	}
-	return rb.clone()
+	return nb
 }
 
 func (rb *Builder) SetTimeout(timeout time.Duration) *Builder {
+	nb := rb.clone()
 	rb.timeout = timeout
-	return rb.clone()
+	return nb
 }
 
 func (rb *Builder) SetUserAgent(userAgent string) *Builder {
-	rb.header.Set("User-Agent", userAgent)
-	return rb.clone()
+	nb := rb.clone()
+	nb.header.Set("User-Agent", userAgent)
+	return nb
 }
 
 func (rb *Builder) SetRetry(retry int) *Builder {
-	rb.retry = retry
-	return rb.clone()
+	nb := rb.clone()
+	nb.retry = retry
+	return nb
 }
 
 func (rb *Builder) SetUnmarshaler(unmarshaler Unmarshaler) *Builder {
-	rb.unmarshaler = unmarshaler
-	return rb
+	nb := rb.clone()
+	nb.unmarshaler = unmarshaler
+	return nb
 }
 
 func (rb *Builder) Debug() *Builder {
-	rb.debug = true
-	return rb.clone()
+	nb := rb.clone()
+	nb.debug = true
+	return nb
 }
 
 func (rb *Builder) callReq() (*http.Response, error) {
@@ -234,17 +249,7 @@ func (rb *Builder) callReq() (*http.Response, error) {
 			"header", req.Header,
 			"duration(ms)", time.Since(now).Milliseconds(),
 			"status_code", resp.StatusCode,
-		}
-		contentType := resp.Header.Get("Content-Type")
-		fmt.Println(resp.ContentLength, contentType)
-		if strings.Contains(contentType, "json") ||
-			strings.Contains(contentType, "text") {
-			respBodyData, err := io.ReadAll(resp.Body)
-			if err != nil {
-				return nil, err
-			}
-			resp.Body = io.NopCloser(bytes.NewBuffer(respBodyData))
-			args = append(args, "resp_body", string(respBodyData))
+			"resp_header", resp.Header,
 		}
 
 		slog.Debug("client builder request",
@@ -273,7 +278,7 @@ func (rb *Builder) CallBackResponse(callback func([]byte) error) error {
 
 func (rb *Builder) JSONResponse(data any) error {
 	if reflect.TypeOf(data).Kind() != reflect.Pointer {
-		return ErrInvalidData
+		return ErrInvalidPointer
 	}
 	respBytes, err := rb.BytesResponse()
 	if err != nil {
@@ -288,7 +293,7 @@ func (rb *Builder) JSONResponse(data any) error {
 
 func (rb *Builder) UnmarshalResponse(data any) error {
 	if reflect.TypeOf(data).Kind() != reflect.Pointer {
-		return ErrInvalidData
+		return ErrInvalidPointer
 	}
 	respBytes, err := rb.BytesResponse()
 	if err != nil {
