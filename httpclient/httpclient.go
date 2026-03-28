@@ -87,6 +87,7 @@ func (c *Client) Do(req *http.Request) (resp *http.Response, err error) {
 	}
 	return
 }
+
 func (c *Client) Get(url string) (resp *http.Response, err error) {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -94,6 +95,7 @@ func (c *Client) Get(url string) (resp *http.Response, err error) {
 	}
 	return c.Do(req)
 }
+
 func (c *Client) Head(url string) (resp *http.Response, err error) {
 	req, err := http.NewRequest("HEAD", url, nil)
 	if err != nil {
@@ -101,6 +103,7 @@ func (c *Client) Head(url string) (resp *http.Response, err error) {
 	}
 	return c.Do(req)
 }
+
 func (c *Client) Post(url string, contentType string, body io.Reader) (resp *http.Response, err error) {
 	req, err := http.NewRequest("POST", url, body)
 	if err != nil {
@@ -109,6 +112,11 @@ func (c *Client) Post(url string, contentType string, body io.Reader) (resp *htt
 	req.Header.Set("Content-Type", contentType)
 	return c.Do(req)
 }
+
 func (c *Client) PostForm(url string, data url.Values) (resp *http.Response, err error) {
 	return c.Post(url, "application/x-www-form-urlencoded", strings.NewReader(data.Encode()))
+}
+
+func (c *Client) Client() *http.Client {
+	return c.client
 }
