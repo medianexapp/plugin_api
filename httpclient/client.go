@@ -56,6 +56,7 @@ func (rb *Builder) clone() *Builder {
 		unmarshaler: rb.unmarshaler,
 		body:        rb.body,
 		debug:       rb.debug,
+		cookies:     rb.cookies,
 	}
 	if rb.urlParams != nil {
 		urlParams := url.Values{}
@@ -121,7 +122,11 @@ func cookieKey(c *http.Cookie) string {
 	return fmt.Sprintf("%s%s%s", c.Name, c.Domain, c.Path)
 }
 
-func (rb *Builder) SetCookie(cookies []*http.Cookie) {
+func (rb *Builder) GetCookies() []*http.Cookie {
+	return rb.cookies
+}
+
+func (rb *Builder) SetCookies(cookies []*http.Cookie) {
 	rb.cookies = cookies
 }
 
