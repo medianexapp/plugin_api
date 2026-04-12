@@ -1079,6 +1079,8 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     $core.bool? proxy,
     $fixnum.Int64? proxyChunkSize,
     $fixnum.Int64? proxyChunkParallel,
+    $fixnum.Int64? modTime,
+    $core.String? name,
   }) {
     final $result = create();
     if (url != null) {
@@ -1111,6 +1113,12 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     if (proxyChunkParallel != null) {
       $result.proxyChunkParallel = proxyChunkParallel;
     }
+    if (modTime != null) {
+      $result.modTime = modTime;
+    }
+    if (name != null) {
+      $result.name = name;
+    }
     return $result;
   }
   FileResource_FileResourceData._() : super();
@@ -1128,6 +1136,8 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     ..aOB(8, _omitFieldNames ? '' : 'proxy')
     ..a<$fixnum.Int64>(9, _omitFieldNames ? '' : 'proxyChunkSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'proxyChunkParallel', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'modTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aOS(12, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false
   ;
 
@@ -1235,6 +1245,24 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
   $core.bool hasProxyChunkParallel() => $_has(9);
   @$pb.TagNumber(10)
   void clearProxyChunkParallel() => clearField(10);
+
+  @$pb.TagNumber(11)
+  $fixnum.Int64 get modTime => $_getI64(10);
+  @$pb.TagNumber(11)
+  set modTime($fixnum.Int64 v) { $_setInt64(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasModTime() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearModTime() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get name => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set name($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasName() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearName() => clearField(12);
 }
 
 class FileResource extends $pb.GeneratedMessage {

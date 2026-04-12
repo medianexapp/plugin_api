@@ -251,6 +251,8 @@ const FileResource_FileResourceData$json = {
     {'1': 'proxy', '3': 8, '4': 1, '5': 8, '10': 'proxy'},
     {'1': 'proxy_chunk_size', '3': 9, '4': 1, '5': 4, '10': 'proxyChunkSize'},
     {'1': 'proxy_chunk_parallel', '3': 10, '4': 1, '5': 4, '10': 'proxyChunkParallel'},
+    {'1': 'mod_time', '3': 11, '4': 1, '5': 4, '10': 'modTime'},
+    {'1': 'name', '3': 12, '4': 1, '5': 9, '10': 'name'},
   ],
   '3': [FileResource_FileResourceData_HeaderEntry$json],
 };
@@ -294,7 +296,7 @@ const FileResource_ResourceType$json = {
 /// Descriptor for `FileResource`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
     'CgxGaWxlUmVzb3VyY2USUwoSZmlsZV9yZXNvdXJjZV9kYXRhGAEgAygLMiUucGx1Z2luLkZpbG'
-    'VSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhUhBmaWxlUmVzb3VyY2VEYXRhGvADChBGaWxlUmVz'
+    'VSZXNvdXJjZS5GaWxlUmVzb3VyY2VEYXRhUhBmaWxlUmVzb3VyY2VEYXRhGp8EChBGaWxlUmVz'
     'b3VyY2VEYXRhEhAKA3VybBgBIAEoCVIDdXJsEj8KCnJlc29sdXRpb24YAiABKA4yHy5wbHVnaW'
     '4uRmlsZVJlc291cmNlLlJlc29sdXRpb25SCnJlc29sdXRpb24SHwoLZXhwaXJlX3RpbWUYAyAB'
     'KARSCmV4cGlyZVRpbWUSRgoNcmVzb3VyY2VfdHlwZRgEIAEoDjIhLnBsdWdpbi5GaWxlUmVzb3'
@@ -302,12 +304,13 @@ final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
     'BmhlYWRlchgGIAMoCzIxLnBsdWdpbi5GaWxlUmVzb3VyY2UuRmlsZVJlc291cmNlRGF0YS5IZW'
     'FkZXJFbnRyeVIGaGVhZGVyEhIKBHNpemUYByABKARSBHNpemUSFAoFcHJveHkYCCABKAhSBXBy'
     'b3h5EigKEHByb3h5X2NodW5rX3NpemUYCSABKARSDnByb3h5Q2h1bmtTaXplEjAKFHByb3h5X2'
-    'NodW5rX3BhcmFsbGVsGAogASgEUhJwcm94eUNodW5rUGFyYWxsZWwaOQoLSGVhZGVyRW50cnkS'
-    'EAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4ASJoCgpSZXNvbHV0aW'
-    '9uEhkKFVJlc29sdXRpb25VTlNQRUNJRklFRBAAEgwKCE9yaWdpbmFsEAESBgoCTEQQAhIGCgJT'
-    'RBADEgYKAkhEEAQSBwoDRkhEEAUSBwoDUUhEEAYSBwoDVUhEEAciTwoMUmVzb3VyY2VUeXBlEh'
-    'sKF1Jlc291cmNlVHlwZVVOU1BFQ0lGSUVEEAASCQoFVmlkZW8QARIMCghTdWJ0aXRsZRACEgkK'
-    'BUF1ZGlvEAM=');
+    'NodW5rX3BhcmFsbGVsGAogASgEUhJwcm94eUNodW5rUGFyYWxsZWwSGQoIbW9kX3RpbWUYCyAB'
+    'KARSB21vZFRpbWUSEgoEbmFtZRgMIAEoCVIEbmFtZRo5CgtIZWFkZXJFbnRyeRIQCgNrZXkYAS'
+    'ABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBImgKClJlc29sdXRpb24SGQoVUmVz'
+    'b2x1dGlvblVOU1BFQ0lGSUVEEAASDAoIT3JpZ2luYWwQARIGCgJMRBACEgYKAlNEEAMSBgoCSE'
+    'QQBBIHCgNGSEQQBRIHCgNRSEQQBhIHCgNVSEQQByJPCgxSZXNvdXJjZVR5cGUSGwoXUmVzb3Vy'
+    'Y2VUeXBlVU5TUEVDSUZJRUQQABIJCgVWaWRlbxABEgwKCFN1YnRpdGxlEAISCQoFQXVkaW8QAw'
+    '==');
 
 @$core.Deprecated('Use authDataDescriptor instead')
 const AuthData$json = {
