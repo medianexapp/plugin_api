@@ -66,33 +66,19 @@ func TestSetCookie(t *testing.T) {
 	builder := NewBuilder().
 		SetUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36").
 		Get("https://www.baidu.com").Debug()
-	h, err := builder.RawResponse()
+	header := http.Header{}
+	_, err := builder.GetRespHeader(&header).BytesResponse()
 	if err != nil {
 		t.Fatal(err)
 	}
-	builder.ParseCookie(h)
+	builder.ParseCookie(header)
 	if len(builder.cookies) == 0 {
 		t.Fatal("set cookie failed")
 	}
 	for _, cookie := range builder.cookies {
 		fmt.Println("cookie", cookie)
-	}
-	h, err = builder.RawResponse()
-	if err != nil {
-		t.Fatal(err)
-	}
-	builder.ParseCookie(h)
-	if len(builder.cookies) == 0 {
-		t.Fatal("set cookie failed")
-	}
-	for _, cookie := range builder.cookies {
-		fmt.Println("cookie", cookie)
-		fmt.Println(cookie.MaxAge)
 	}
 
-	hh := http.Header{}
-	Setheader(hh)
-	fmt.Println(hh)
 }
 
 func Setheader(h http.Header) {

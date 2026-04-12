@@ -145,7 +145,10 @@ func (rb *Builder) SetCookies(cookies []*http.Cookie) {
 	rb.cookies = cookies
 }
 
-func (rb *Builder) ParseCookie(resp *http.Response) {
+func (rb *Builder) ParseCookie(header http.Header) {
+	resp := &http.Response{
+		Header: header,
+	}
 	oldCookieMap := map[string]int{}
 	for index, oldCookie := range rb.cookies {
 		oldCookieMap[cookieKey(oldCookie)] = index
