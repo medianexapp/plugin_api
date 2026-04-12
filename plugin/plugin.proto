@@ -119,10 +119,10 @@ message FileResource {
         ResourceType        resource_type        = 4;
         string              title                = 5;
         map<string, string> header               = 6;
-        uint64              size                 = 7;  // file total size
-        bool                proxy                = 8;  // proxy
-        uint64              proxy_chunk_size     = 9;
-        uint64              proxy_chunk_parallel = 10;
+        uint64              size                 = 7;   // file total size
+        bool                proxy                = 8;   // proxy
+        uint64              proxy_chunk_size     = 9;   // url proxy size
+        uint64              proxy_chunk_parallel = 10;  // url proxy parallel
     }
     repeated FileResourceData file_resource_data = 1;
 }

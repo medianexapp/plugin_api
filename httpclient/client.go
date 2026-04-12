@@ -141,8 +141,10 @@ func (rb *Builder) GetCookies() []*http.Cookie {
 	return rb.cookies
 }
 
-func (rb *Builder) SetCookies(cookies []*http.Cookie) {
-	rb.cookies = cookies
+func (rb *Builder) SetCookies(cookies []*http.Cookie) *Builder {
+	rbb := rb.clone()
+	rbb.cookies = cookies
+	return rbb
 }
 
 func (rb *Builder) ParseCookie(header http.Header) {

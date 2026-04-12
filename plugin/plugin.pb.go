@@ -867,10 +867,10 @@ type FileResource_FileResourceData struct {
 	ResourceType       FileResource_ResourceType `protobuf:"varint,4,opt,name=resource_type,json=resourceType,proto3" json:"resourceType,omitempty"`
 	Title              string                    `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
 	Header             map[string]string         `protobuf:"bytes,6,rep,name=header,proto3" json:"header,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Size               uint64                    `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`   // file total size
-	Proxy              bool                      `protobuf:"varint,8,opt,name=proxy,proto3" json:"proxy,omitempty"` // proxy
-	ProxyChunkSize     uint64                    `protobuf:"varint,9,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"`
-	ProxyChunkParallel uint64                    `protobuf:"varint,10,opt,name=proxy_chunk_parallel,json=proxyChunkParallel,proto3" json:"proxyChunkParallel,omitempty"`
+	Size               uint64                    `protobuf:"varint,7,opt,name=size,proto3" json:"size,omitempty"`                                                        // file total size
+	Proxy              bool                      `protobuf:"varint,8,opt,name=proxy,proto3" json:"proxy,omitempty"`                                                      // proxy
+	ProxyChunkSize     uint64                    `protobuf:"varint,9,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"`              // url proxy size
+	ProxyChunkParallel uint64                    `protobuf:"varint,10,opt,name=proxy_chunk_parallel,json=proxyChunkParallel,proto3" json:"proxyChunkParallel,omitempty"` // url proxy parallel
 }
 
 func (x *FileResource_FileResourceData) Reset() {
