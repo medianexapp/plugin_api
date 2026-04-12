@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"net/http"
 	"testing"
 	"time"
 )
@@ -38,12 +39,27 @@ func TestBuilder(t *testing.T) {
 	// slog.Debug("test builder")
 	b := builder.Get("https://www.baidu.com").Debug()
 	for i := 0; i < 10; i++ {
-		_, err := b.SetHeader(fmt.Sprint(i), fmt.Sprint(i)).BytesResponse()
+		respHeader := http.Header{}
+		respStatusCode := 0
+		_, err := b.SetHeader(fmt.Sprint(i), fmt.Sprint(i)).GetRespHeader(&respHeader).GetRespStatusCode(&respStatusCode).BytesResponse()
 		if err != nil {
 			t.Fatal(err)
 		}
+		if len(respHeader) == 0 {
+			t.Fatal("can get resp header")
+		}
+		if respStatusCode == 0 {
+			t.Fatal("can get status code")
+		}
 	}
-
+	_, err := b.ExpectRespStatusCode([]int{http.StatusBadRequest}).BytesResponse()
+	if err != nil {
+		t.Error(err)
+	}
+	_, err = b.ExpectRespHeaderNames([]string{"tette"}).BytesResponse()
+	if err != nil {
+		t.Error(err)
+	}
 }
 
 func TestSetCookie(t *testing.T) {
@@ -74,4 +90,14 @@ func TestSetCookie(t *testing.T) {
 		fmt.Println(cookie.MaxAge)
 	}
 
+	hh := http.Header{}
+	Setheader(hh)
+	fmt.Println(hh)
+}
+
+func Setheader(h http.Header) {
+	h.Add("xxx", "yyy")
+	for i := 0; i < 30; i++ {
+		h.Add(fmt.Sprint(i), fmt.Sprint(i))
+	}
 }

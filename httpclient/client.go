@@ -8,9 +8,11 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"maps"
 	"net/http"
 	"net/url"
 	"reflect"
+	"slices"
 	"strings"
 	"time"
 )
@@ -36,6 +38,14 @@ type Builder struct {
 	unmarshaler Unmarshaler
 	debug       bool
 	cookies     []*http.Cookie
+
+	// http resp status must be equal value
+	execptStatusCode []int
+	// http resp header must exist this header
+	exceptRespHeader []string
+
+	respHeader     *http.Header
+	respStatusCode *int
 }
 
 func NewBuilder() *Builder {
@@ -57,6 +67,11 @@ func (rb *Builder) clone() *Builder {
 		body:        rb.body,
 		debug:       rb.debug,
 		cookies:     rb.cookies,
+
+		execptStatusCode: rb.execptStatusCode,
+
+		respHeader:     rb.respHeader,
+		respStatusCode: rb.respStatusCode,
 	}
 	if rb.urlParams != nil {
 		urlParams := url.Values{}
@@ -162,6 +177,18 @@ func (rb *Builder) SetHeader(k, v string) *Builder {
 	return nb
 }
 
+func (rb *Builder) ExpectRespStatusCode(statucCodes []int) *Builder {
+	rbb := rb.clone()
+	rbb.execptStatusCode = statucCodes
+	return rbb
+}
+
+func (rb *Builder) ExpectRespHeaderNames(headerNames []string) *Builder {
+	rbb := rb.clone()
+	rbb.exceptRespHeader = headerNames
+	return rbb
+}
+
 func (rb *Builder) SetBasicAuth(username, password string) *Builder {
 	nb := rb.clone()
 	nb.header.Set("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(username+":"+password)))
@@ -248,7 +275,6 @@ func (rb *Builder) callReq() (*http.Response, error) {
 	if rb.url == "" {
 		return nil, ErrMissUrl
 	}
-
 	if rb.method == "" {
 		rb.method = http.MethodGet
 	}
@@ -285,12 +311,48 @@ func (rb *Builder) callReq() (*http.Response, error) {
 			"status_code", resp.StatusCode,
 			"resp_header", resp.Header,
 		}
-
 		slog.Debug("client builder request",
 			args...,
 		)
 	}
+
+	if len(rb.execptStatusCode) > 0 {
+		if !slices.Contains(rb.execptStatusCode, resp.StatusCode) {
+			return nil, fmt.Errorf("expect status code %+v,got status code %d", rb.execptStatusCode, resp.StatusCode)
+		}
+	}
+
+	if len(rb.exceptRespHeader) > 0 {
+		keys := map[string]bool{}
+		for name := range resp.Header {
+			keys[name] = true
+		}
+		for _, name := range rb.exceptRespHeader {
+			if !keys[name] {
+				return nil, fmt.Errorf("expect header %+v,got header names %v", name, resp.Header)
+			}
+		}
+	}
+	if rb.respHeader != nil {
+		maps.Copy((*rb.respHeader), resp.Header)
+	}
+	if rb.respStatusCode != nil {
+		*rb.respStatusCode = resp.StatusCode
+	}
+
 	return resp, nil
+}
+
+func (rb *Builder) GetRespHeader(h *http.Header) *Builder {
+	rb = rb.clone()
+	rb.respHeader = h
+	return rb
+}
+
+func (rb *Builder) GetRespStatusCode(statusCode *int) *Builder {
+	rb = rb.clone()
+	rb.respStatusCode = statusCode
+	return rb
 }
 
 func (rb *Builder) RawResponse() (*http.Response, error) {
