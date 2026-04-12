@@ -123,7 +123,7 @@ message FileResource {
         bool                proxy                = 8;   // proxy
         uint64              proxy_chunk_size     = 9;   // url proxy size
         uint64              proxy_chunk_parallel = 10;  // url proxy parallel
-        int64               mod_time             = 11;  // file mod time
+        uint64              mod_time             = 11;  // file mod time
         string              name                 = 12;  // filename
     }
     repeated FileResourceData file_resource_data = 1;

@@ -1136,7 +1136,7 @@ class FileResource_FileResourceData extends $pb.GeneratedMessage {
     ..aOB(8, _omitFieldNames ? '' : 'proxy')
     ..a<$fixnum.Int64>(9, _omitFieldNames ? '' : 'proxyChunkSize', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'proxyChunkParallel', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aInt64(11, _omitFieldNames ? '' : 'modTime')
+    ..a<$fixnum.Int64>(11, _omitFieldNames ? '' : 'modTime', $pb.PbFieldType.OU6, defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(12, _omitFieldNames ? '' : 'name')
     ..hasRequiredFields = false
   ;

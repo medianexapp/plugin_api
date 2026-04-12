@@ -251,7 +251,7 @@ const FileResource_FileResourceData$json = {
     {'1': 'proxy', '3': 8, '4': 1, '5': 8, '10': 'proxy'},
     {'1': 'proxy_chunk_size', '3': 9, '4': 1, '5': 4, '10': 'proxyChunkSize'},
     {'1': 'proxy_chunk_parallel', '3': 10, '4': 1, '5': 4, '10': 'proxyChunkParallel'},
-    {'1': 'mod_time', '3': 11, '4': 1, '5': 3, '10': 'modTime'},
+    {'1': 'mod_time', '3': 11, '4': 1, '5': 4, '10': 'modTime'},
     {'1': 'name', '3': 12, '4': 1, '5': 9, '10': 'name'},
   ],
   '3': [FileResource_FileResourceData_HeaderEntry$json],
@@ -305,7 +305,7 @@ final $typed_data.Uint8List fileResourceDescriptor = $convert.base64Decode(
     'FkZXJFbnRyeVIGaGVhZGVyEhIKBHNpemUYByABKARSBHNpemUSFAoFcHJveHkYCCABKAhSBXBy'
     'b3h5EigKEHByb3h5X2NodW5rX3NpemUYCSABKARSDnByb3h5Q2h1bmtTaXplEjAKFHByb3h5X2'
     'NodW5rX3BhcmFsbGVsGAogASgEUhJwcm94eUNodW5rUGFyYWxsZWwSGQoIbW9kX3RpbWUYCyAB'
-    'KANSB21vZFRpbWUSEgoEbmFtZRgMIAEoCVIEbmFtZRo5CgtIZWFkZXJFbnRyeRIQCgNrZXkYAS'
+    'KARSB21vZFRpbWUSEgoEbmFtZRgMIAEoCVIEbmFtZRo5CgtIZWFkZXJFbnRyeRIQCgNrZXkYAS'
     'ABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBImgKClJlc29sdXRpb24SGQoVUmVz'
     'b2x1dGlvblVOU1BFQ0lGSUVEEAASDAoIT3JpZ2luYWwQARIGCgJMRBACEgYKAlNEEAMSBgoCSE'
     'QQBBIHCgNGSEQQBRIHCgNRSEQQBhIHCgNVSEQQByJPCgxSZXNvdXJjZVR5cGUSGwoXUmVzb3Vy'

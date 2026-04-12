@@ -871,7 +871,7 @@ type FileResource_FileResourceData struct {
 	Proxy              bool                      `protobuf:"varint,8,opt,name=proxy,proto3" json:"proxy,omitempty"`                                                      // proxy
 	ProxyChunkSize     uint64                    `protobuf:"varint,9,opt,name=proxy_chunk_size,json=proxyChunkSize,proto3" json:"proxyChunkSize,omitempty"`              // url proxy size
 	ProxyChunkParallel uint64                    `protobuf:"varint,10,opt,name=proxy_chunk_parallel,json=proxyChunkParallel,proto3" json:"proxyChunkParallel,omitempty"` // url proxy parallel
-	ModTime            int64                     `protobuf:"varint,11,opt,name=mod_time,json=modTime,proto3" json:"modTime,omitempty"`                                   // file mod time
+	ModTime            uint64                    `protobuf:"varint,11,opt,name=mod_time,json=modTime,proto3" json:"modTime,omitempty"`                                   // file mod time
 	Name               string                    `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`                                                        // filename
 }
 
@@ -951,7 +951,7 @@ func (x *FileResource_FileResourceData) GetProxyChunkParallel() uint64 {
 	return 0
 }
 
-func (x *FileResource_FileResourceData) GetModTime() int64 {
+func (x *FileResource_FileResourceData) GetModTime() uint64 {
 	if x != nil {
 		return x.ModTime
 	}
@@ -3442,7 +3442,7 @@ func (x *FileResource_FileResourceData) MarshalProtoJSON(s *json.MarshalState) {
 	if x.ModTime != 0 || s.HasField("modTime") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("modTime")
-		s.WriteInt64(x.ModTime)
+		s.WriteUint64(x.ModTime)
 	}
 	if x.Name != "" || s.HasField("name") {
 		s.WriteMoreIf(&wroteField)
@@ -3505,7 +3505,7 @@ func (x *FileResource_FileResourceData) UnmarshalProtoJSON(s *json.UnmarshalStat
 			x.ProxyChunkParallel = s.ReadUint64()
 		case "mod_time", "modTime":
 			s.AddField("mod_time")
-			x.ModTime = s.ReadInt64()
+			x.ModTime = s.ReadUint64()
 		case "name":
 			s.AddField("name")
 			x.Name = s.ReadString()
@@ -7447,7 +7447,7 @@ func (x *FileResource_FileResourceData) MarshalProtoText() string {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("mod_time: ")
-		sb.WriteString(strconv.FormatInt(int64(x.ModTime), 10))
+		sb.WriteString(strconv.FormatUint(uint64(x.ModTime), 10))
 	}
 	if x.Name != "" {
 		if sb.Len() > 18 {
@@ -9921,7 +9921,7 @@ func (m *FileResource_FileResourceData) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ModTime |= int64(b&0x7F) << shift
+				m.ModTime |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -13003,7 +13003,7 @@ func (m *FileResource_FileResourceData) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.ModTime |= int64(b&0x7F) << shift
+				m.ModTime |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
