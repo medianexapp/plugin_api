@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -34,6 +35,7 @@ type Builder struct {
 	retry       int
 	unmarshaler Unmarshaler
 	debug       bool
+	cookies     []*http.Cookie
 }
 
 func NewBuilder() *Builder {
@@ -113,6 +115,33 @@ func (rb *Builder) Options(url string) *Builder {
 
 func (rb *Builder) Trace(url string) *Builder {
 	return rb.SetMethod(http.MethodTrace).Request(url)
+}
+
+func cookieKey(c *http.Cookie) string {
+	return fmt.Sprintf("%s%s%s", c.Name, c.Domain, c.Path)
+}
+
+func (rb *Builder) SetCookie(cookies []*http.Cookie) {
+	rb.cookies = cookies
+}
+
+func (rb *Builder) ParseSetCookie(header http.Header) {
+	oldCookieMap := map[string]int{}
+	for index, oldCookie := range rb.cookies {
+		oldCookieMap[cookieKey(oldCookie)] = index
+	}
+	for _, line := range header["Set-Cookie"] {
+		cookie, err := http.ParseSetCookie(line)
+		if err != nil {
+			continue
+		}
+		index, ok := oldCookieMap[cookieKey(cookie)]
+		if ok {
+			rb.cookies[index] = cookie
+		} else {
+			rb.cookies = append(rb.cookies, cookie)
+		}
+	}
 }
 
 func (rb *Builder) SetHeaders(headers http.Header) *Builder {
@@ -229,6 +258,9 @@ func (rb *Builder) callReq() (*http.Response, error) {
 		return nil, err
 	}
 	req.Header = rb.header
+	for _, cookie := range rb.cookies {
+		req.AddCookie(cookie)
+	}
 	now := time.Now()
 	opts := []FuncOption{}
 	if rb.retry > 0 {
