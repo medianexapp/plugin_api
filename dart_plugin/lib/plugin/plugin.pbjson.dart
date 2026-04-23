@@ -1,13 +1,15 @@
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: plugin/plugin.proto
-//
-// @dart = 2.12
+// Generated from plugin/plugin.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -17,7 +19,14 @@ import 'dart:typed_data' as $typed_data;
 const Formdata$json = {
   '1': 'Formdata',
   '2': [
-    {'1': 'form_items', '3': 11, '4': 3, '5': 11, '6': '.plugin.Formdata.FormItem', '10': 'formItems'},
+    {
+      '1': 'form_items',
+      '3': 11,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.Formdata.FormItem',
+      '10': 'formItems'
+    },
   ],
   '3': [Formdata_FormItem$json],
 };
@@ -27,14 +36,77 @@ const Formdata_FormItem$json = {
   '1': 'FormItem',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'double_value', '3': 2, '4': 1, '5': 11, '6': '.plugin.DoubleValue', '9': 0, '10': 'doubleValue'},
-    {'1': 'int64_value', '3': 3, '4': 1, '5': 11, '6': '.plugin.Int64Value', '9': 0, '10': 'int64Value'},
-    {'1': 'bool_value', '3': 4, '4': 1, '5': 11, '6': '.plugin.BoolValue', '9': 0, '10': 'boolValue'},
-    {'1': 'string_value', '3': 5, '4': 1, '5': 11, '6': '.plugin.StringValue', '9': 0, '10': 'stringValue'},
-    {'1': 'obscure_string_value', '3': 6, '4': 1, '5': 11, '6': '.plugin.ObscureStringValue', '9': 0, '10': 'obscureStringValue'},
-    {'1': 'dir_path_value', '3': 7, '4': 1, '5': 11, '6': '.plugin.DirPathValue', '9': 0, '10': 'dirPathValue'},
-    {'1': 'file_path_value', '3': 8, '4': 1, '5': 11, '6': '.plugin.FilePathValue', '9': 0, '10': 'filePathValue'},
-    {'1': 'enum_values', '3': 10, '4': 3, '5': 11, '6': '.plugin.Formdata.FormItem', '10': 'enumValues'},
+    {
+      '1': 'double_value',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.DoubleValue',
+      '9': 0,
+      '10': 'doubleValue'
+    },
+    {
+      '1': 'int64_value',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.Int64Value',
+      '9': 0,
+      '10': 'int64Value'
+    },
+    {
+      '1': 'bool_value',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.BoolValue',
+      '9': 0,
+      '10': 'boolValue'
+    },
+    {
+      '1': 'string_value',
+      '3': 5,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.StringValue',
+      '9': 0,
+      '10': 'stringValue'
+    },
+    {
+      '1': 'obscure_string_value',
+      '3': 6,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.ObscureStringValue',
+      '9': 0,
+      '10': 'obscureStringValue'
+    },
+    {
+      '1': 'dir_path_value',
+      '3': 7,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.DirPathValue',
+      '9': 0,
+      '10': 'dirPathValue'
+    },
+    {
+      '1': 'file_path_value',
+      '3': 8,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.FilePathValue',
+      '9': 0,
+      '10': 'filePathValue'
+    },
+    {
+      '1': 'enum_values',
+      '3': 10,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.Formdata.FormItem',
+      '10': 'enumValues'
+    },
   ],
   '8': [
     {'1': 'Value'},
@@ -60,10 +132,28 @@ const Scanqrcode$json = {
   '1': 'Scanqrcode',
   '2': [
     {'1': 'qrcode_image', '3': 1, '4': 1, '5': 12, '10': 'qrcodeImage'},
-    {'1': 'qrcode_image_param', '3': 2, '4': 1, '5': 9, '10': 'qrcodeImageParam'},
-    {'1': 'qrcode_expire_time', '3': 3, '4': 1, '5': 4, '10': 'qrcodeExpireTime'},
+    {
+      '1': 'qrcode_image_param',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '10': 'qrcodeImageParam'
+    },
+    {
+      '1': 'qrcode_expire_time',
+      '3': 3,
+      '4': 1,
+      '5': 4,
+      '10': 'qrcodeExpireTime'
+    },
     {'1': 'qrcode_image_url', '3': 4, '4': 1, '5': 9, '10': 'qrcodeImageUrl'},
-    {'1': 'qrcode_image_content', '3': 5, '4': 1, '5': 9, '10': 'qrcodeImageContent'},
+    {
+      '1': 'qrcode_image_content',
+      '3': 5,
+      '4': 1,
+      '5': 9,
+      '10': 'qrcodeImageContent'
+    },
   ],
 };
 
@@ -80,7 +170,13 @@ const Callback$json = {
   '1': 'Callback',
   '2': [
     {'1': 'callback_url', '3': 1, '4': 1, '5': 9, '10': 'callbackUrl'},
-    {'1': 'callback_url_param', '3': 2, '4': 1, '5': 9, '10': 'callbackUrlParam'},
+    {
+      '1': 'callback_url_param',
+      '3': 2,
+      '4': 1,
+      '5': 9,
+      '10': 'callbackUrlParam'
+    },
     {'1': 'callback_url_data', '3': 3, '4': 1, '5': 9, '10': 'callbackUrlData'},
   ],
 };
@@ -95,7 +191,14 @@ final $typed_data.Uint8List callbackDescriptor = $convert.base64Decode(
 const Refresh$json = {
   '1': 'Refresh',
   '2': [
-    {'1': 'auth_data', '3': 1, '4': 1, '5': 11, '6': '.plugin.AuthData', '10': 'authData'},
+    {
+      '1': 'auth_data',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.AuthData',
+      '10': 'authData'
+    },
   ],
 };
 
@@ -108,10 +211,42 @@ final $typed_data.Uint8List refreshDescriptor = $convert.base64Decode(
 const AuthMethod$json = {
   '1': 'AuthMethod',
   '2': [
-    {'1': 'formdata', '3': 1, '4': 1, '5': 11, '6': '.plugin.Formdata', '9': 0, '10': 'formdata'},
-    {'1': 'scanqrcode', '3': 2, '4': 1, '5': 11, '6': '.plugin.Scanqrcode', '9': 0, '10': 'scanqrcode'},
-    {'1': 'callback', '3': 3, '4': 1, '5': 11, '6': '.plugin.Callback', '9': 0, '10': 'callback'},
-    {'1': 'refresh', '3': 4, '4': 1, '5': 11, '6': '.plugin.Refresh', '9': 0, '10': 'refresh'},
+    {
+      '1': 'formdata',
+      '3': 1,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.Formdata',
+      '9': 0,
+      '10': 'formdata'
+    },
+    {
+      '1': 'scanqrcode',
+      '3': 2,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.Scanqrcode',
+      '9': 0,
+      '10': 'scanqrcode'
+    },
+    {
+      '1': 'callback',
+      '3': 3,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.Callback',
+      '9': 0,
+      '10': 'callback'
+    },
+    {
+      '1': 'refresh',
+      '3': 4,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.Refresh',
+      '9': 0,
+      '10': 'refresh'
+    },
     {'1': 'help_doc_url', '3': 5, '4': 1, '5': 9, '10': 'helpDocUrl'},
   ],
   '8': [
@@ -131,7 +266,14 @@ final $typed_data.Uint8List authMethodDescriptor = $convert.base64Decode(
 const Auth$json = {
   '1': 'Auth',
   '2': [
-    {'1': 'auth_methods', '3': 1, '4': 3, '5': 11, '6': '.plugin.AuthMethod', '10': 'authMethods'},
+    {
+      '1': 'auth_methods',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.AuthMethod',
+      '10': 'authMethods'
+    },
   ],
 };
 
@@ -145,7 +287,14 @@ const FileEntry$json = {
   '1': 'FileEntry',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'file_type', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileEntry.FileType', '10': 'fileType'},
+    {
+      '1': 'file_type',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.plugin.FileEntry.FileType',
+      '10': 'fileType'
+    },
     {'1': 'size', '3': 3, '4': 1, '5': 4, '10': 'size'},
     {'1': 'raw_data', '3': 4, '4': 1, '5': 12, '10': 'rawData'},
     {'1': 'created_time', '3': 10, '4': 1, '5': 4, '10': 'createdTime'},
@@ -180,7 +329,14 @@ final $typed_data.Uint8List fileEntryDescriptor = $convert.base64Decode(
 const DirEntry$json = {
   '1': 'DirEntry',
   '2': [
-    {'1': 'file_entries', '3': 1, '4': 3, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntries'},
+    {
+      '1': 'file_entries',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.FileEntry',
+      '10': 'fileEntries'
+    },
     {'1': 'page_size', '3': 2, '4': 1, '5': 4, '10': 'pageSize'},
     {'1': 'dir_page_key', '3': 10, '4': 1, '5': 9, '10': 'dirPageKey'},
   ],
@@ -199,7 +355,14 @@ const GetDirEntryRequest$json = {
     {'1': 'path', '3': 1, '4': 1, '5': 9, '10': 'path'},
     {'1': 'page', '3': 2, '4': 1, '5': 4, '10': 'page'},
     {'1': 'page_size', '3': 3, '4': 1, '5': 4, '10': 'pageSize'},
-    {'1': 'file_entry', '3': 10, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntry'},
+    {
+      '1': 'file_entry',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.FileEntry',
+      '10': 'fileEntry'
+    },
     {'1': 'dir_page_key', '3': 12, '4': 1, '5': 9, '10': 'dirPageKey'},
   ],
 };
@@ -216,7 +379,14 @@ const GetFileResourceRequest$json = {
   '1': 'GetFileResourceRequest',
   '2': [
     {'1': 'file_path', '3': 1, '4': 1, '5': 9, '10': 'filePath'},
-    {'1': 'file_entry', '3': 10, '4': 1, '5': 11, '6': '.plugin.FileEntry', '10': 'fileEntry'},
+    {
+      '1': 'file_entry',
+      '3': 10,
+      '4': 1,
+      '5': 11,
+      '6': '.plugin.FileEntry',
+      '10': 'fileEntry'
+    },
     {'1': 'is_media', '3': 11, '4': 1, '5': 8, '10': 'isMedia'},
   ],
 };
@@ -231,7 +401,14 @@ final $typed_data.Uint8List getFileResourceRequestDescriptor = $convert.base64De
 const FileResource$json = {
   '1': 'FileResource',
   '2': [
-    {'1': 'file_resource_data', '3': 1, '4': 3, '5': 11, '6': '.plugin.FileResource.FileResourceData', '10': 'fileResourceData'},
+    {
+      '1': 'file_resource_data',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.FileResource.FileResourceData',
+      '10': 'fileResourceData'
+    },
   ],
   '3': [FileResource_FileResourceData$json],
   '4': [FileResource_Resolution$json, FileResource_ResourceType$json],
@@ -242,15 +419,42 @@ const FileResource_FileResourceData$json = {
   '1': 'FileResourceData',
   '2': [
     {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
-    {'1': 'resolution', '3': 2, '4': 1, '5': 14, '6': '.plugin.FileResource.Resolution', '10': 'resolution'},
+    {
+      '1': 'resolution',
+      '3': 2,
+      '4': 1,
+      '5': 14,
+      '6': '.plugin.FileResource.Resolution',
+      '10': 'resolution'
+    },
     {'1': 'expire_time', '3': 3, '4': 1, '5': 4, '10': 'expireTime'},
-    {'1': 'resource_type', '3': 4, '4': 1, '5': 14, '6': '.plugin.FileResource.ResourceType', '10': 'resourceType'},
+    {
+      '1': 'resource_type',
+      '3': 4,
+      '4': 1,
+      '5': 14,
+      '6': '.plugin.FileResource.ResourceType',
+      '10': 'resourceType'
+    },
     {'1': 'title', '3': 5, '4': 1, '5': 9, '10': 'title'},
-    {'1': 'header', '3': 6, '4': 3, '5': 11, '6': '.plugin.FileResource.FileResourceData.HeaderEntry', '10': 'header'},
+    {
+      '1': 'header',
+      '3': 6,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.FileResource.FileResourceData.HeaderEntry',
+      '10': 'header'
+    },
     {'1': 'size', '3': 7, '4': 1, '5': 4, '10': 'size'},
     {'1': 'proxy', '3': 8, '4': 1, '5': 8, '10': 'proxy'},
     {'1': 'proxy_chunk_size', '3': 9, '4': 1, '5': 4, '10': 'proxyChunkSize'},
-    {'1': 'proxy_chunk_parallel', '3': 10, '4': 1, '5': 4, '10': 'proxyChunkParallel'},
+    {
+      '1': 'proxy_chunk_parallel',
+      '3': 10,
+      '4': 1,
+      '5': 4,
+      '10': 'proxyChunkParallel'
+    },
   ],
   '3': [FileResource_FileResourceData_HeaderEntry$json],
 };
@@ -314,7 +518,13 @@ const AuthData$json = {
   '1': 'AuthData',
   '2': [
     {'1': 'auth_data_bytes', '3': 1, '4': 1, '5': 12, '10': 'authDataBytes'},
-    {'1': 'auth_data_expired_time', '3': 2, '4': 1, '5': 4, '10': 'authDataExpiredTime'},
+    {
+      '1': 'auth_data_expired_time',
+      '3': 2,
+      '4': 1,
+      '5': 4,
+      '10': 'authDataExpiredTime'
+    },
   ],
 };
 
@@ -362,4 +572,3 @@ final $typed_data.Uint8List tokenDescriptor = $convert.base64Decode(
     'CgVUb2tlbhIdCgp0b2tlbl90eXBlGAEgASgJUgl0b2tlblR5cGUSIQoMYWNjZXNzX3Rva2VuGA'
     'IgASgJUgthY2Nlc3NUb2tlbhIjCg1yZWZyZXNoX3Rva2VuGAMgASgJUgxyZWZyZXNoVG9rZW4S'
     'HQoKZXhwaXJlc19pbhgEIAEoBFIJZXhwaXJlc0lu');
-

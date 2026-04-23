@@ -1,13 +1,15 @@
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: plugin/wrappers.proto
-//
-// @dart = 2.12
+// Generated from plugin/wrappers.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -22,8 +24,8 @@ const DoubleValue$json = {
 };
 
 /// Descriptor for `DoubleValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List doubleValueDescriptor = $convert.base64Decode(
-    'CgtEb3VibGVWYWx1ZRIUCgV2YWx1ZRgBIAEoAVIFdmFsdWU=');
+final $typed_data.Uint8List doubleValueDescriptor =
+    $convert.base64Decode('CgtEb3VibGVWYWx1ZRIUCgV2YWx1ZRgBIAEoAVIFdmFsdWU=');
 
 @$core.Deprecated('Use int64ValueDescriptor instead')
 const Int64Value$json = {
@@ -34,8 +36,8 @@ const Int64Value$json = {
 };
 
 /// Descriptor for `Int64Value`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List int64ValueDescriptor = $convert.base64Decode(
-    'CgpJbnQ2NFZhbHVlEhQKBXZhbHVlGAEgASgDUgV2YWx1ZQ==');
+final $typed_data.Uint8List int64ValueDescriptor =
+    $convert.base64Decode('CgpJbnQ2NFZhbHVlEhQKBXZhbHVlGAEgASgDUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use boolValueDescriptor instead')
 const BoolValue$json = {
@@ -46,8 +48,8 @@ const BoolValue$json = {
 };
 
 /// Descriptor for `BoolValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List boolValueDescriptor = $convert.base64Decode(
-    'CglCb29sVmFsdWUSFAoFdmFsdWUYASABKAhSBXZhbHVl');
+final $typed_data.Uint8List boolValueDescriptor =
+    $convert.base64Decode('CglCb29sVmFsdWUSFAoFdmFsdWUYASABKAhSBXZhbHVl');
 
 @$core.Deprecated('Use stringValueDescriptor instead')
 const StringValue$json = {
@@ -58,8 +60,8 @@ const StringValue$json = {
 };
 
 /// Descriptor for `StringValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stringValueDescriptor = $convert.base64Decode(
-    'CgtTdHJpbmdWYWx1ZRIUCgV2YWx1ZRgBIAEoCVIFdmFsdWU=');
+final $typed_data.Uint8List stringValueDescriptor =
+    $convert.base64Decode('CgtTdHJpbmdWYWx1ZRIUCgV2YWx1ZRgBIAEoCVIFdmFsdWU=');
 
 @$core.Deprecated('Use obscureStringValueDescriptor instead')
 const ObscureStringValue$json = {
@@ -70,8 +72,8 @@ const ObscureStringValue$json = {
 };
 
 /// Descriptor for `ObscureStringValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List obscureStringValueDescriptor = $convert.base64Decode(
-    'ChJPYnNjdXJlU3RyaW5nVmFsdWUSFAoFdmFsdWUYASABKAlSBXZhbHVl');
+final $typed_data.Uint8List obscureStringValueDescriptor = $convert
+    .base64Decode('ChJPYnNjdXJlU3RyaW5nVmFsdWUSFAoFdmFsdWUYASABKAlSBXZhbHVl');
 
 @$core.Deprecated('Use dirPathValueDescriptor instead')
 const DirPathValue$json = {
@@ -82,8 +84,8 @@ const DirPathValue$json = {
 };
 
 /// Descriptor for `DirPathValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List dirPathValueDescriptor = $convert.base64Decode(
-    'CgxEaXJQYXRoVmFsdWUSFAoFdmFsdWUYASABKAlSBXZhbHVl');
+final $typed_data.Uint8List dirPathValueDescriptor =
+    $convert.base64Decode('CgxEaXJQYXRoVmFsdWUSFAoFdmFsdWUYASABKAlSBXZhbHVl');
 
 @$core.Deprecated('Use filePathValueDescriptor instead')
 const FilePathValue$json = {
@@ -98,4 +100,3 @@ const FilePathValue$json = {
 final $typed_data.Uint8List filePathValueDescriptor = $convert.base64Decode(
     'Cg1GaWxlUGF0aFZhbHVlEhQKBXZhbHVlGAEgASgJUgV2YWx1ZRIbCglhbGxvd19leHQYAiADKA'
     'lSCGFsbG93RXh0');
-

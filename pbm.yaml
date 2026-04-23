@@ -1,0 +1,10 @@
+version: v1
+gen:
+  - plugin: go-lite
+    out: .
+    opt:
+      - paths=source_relative
+  - plugin: dart
+    out: dart_plugin/lib
+input:
+  - local: plugin

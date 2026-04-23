@@ -166,7 +166,7 @@ func (x *Formdata) GetFormItems() []*Formdata_FormItem {
 type Scanqrcode struct {
 	unknownFields      []byte
 	QrcodeImage        []byte `protobuf:"bytes,1,opt,name=qrcode_image,json=qrcodeImage,proto3" json:"qrcodeImage,omitempty"`                       // qrcode image bytes
-	QrcodeImageParam   string `protobuf:"bytes,2,opt,name=qrcode_image_param,json=qrcodeImageParam,proto3" json:"qrcodeImageParam,omitempty"`       // qrcode image some param,like qrcode check key
+	QrcodeImageParam   string `protobuf:"bytes,2,opt,name=qrcode_image_param,json=qrcodeImageParam,proto3" json:"qrcodeImageParam,omitempty"`       // qrcode image some param
 	QrcodeExpireTime   uint64 `protobuf:"varint,3,opt,name=qrcode_expire_time,json=qrcodeExpireTime,proto3" json:"qrcodeExpireTime,omitempty"`      // qrcode expire time
 	QrcodeImageUrl     string `protobuf:"bytes,4,opt,name=qrcode_image_url,json=qrcodeImageUrl,proto3" json:"qrcodeImageUrl,omitempty"`             // qrcode image url
 	QrcodeImageContent string `protobuf:"bytes,5,opt,name=qrcode_image_content,json=qrcodeImageContent,proto3" json:"qrcodeImageContent,omitempty"` // qrcode content
