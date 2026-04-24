@@ -31,6 +31,7 @@ type IPlugin interface {
 	GetDirEntry(req *plugin.GetDirEntryRequest) (dirEntry *plugin.DirEntry, err error)
 	// get file entry resource from driver plugin
 	GetFileResource(req *plugin.GetFileResourceRequest) (fileResource *plugin.FileResource, err error)
+	AuthDataSaveID(id uint64)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {

@@ -126,3 +126,8 @@ func _get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
 	}
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(fileResourceData)), uint32(len(fileResourceData)))
 }
+
+//go:wasmexport plugin_auth_data_save_id
+func _plugin_auth_data_save_id(id uint64) {
+	pluginExport.AuthDataSaveID(id)
+}
