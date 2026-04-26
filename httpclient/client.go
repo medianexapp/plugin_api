@@ -46,6 +46,8 @@ type Builder struct {
 
 	respHeader     *http.Header
 	respStatusCode *int
+
+	client *http.Client
 }
 
 func NewBuilder() *Builder {
@@ -72,6 +74,7 @@ func (rb *Builder) clone() *Builder {
 
 		respHeader:     rb.respHeader,
 		respStatusCode: rb.respStatusCode,
+		client:         rb.client,
 	}
 	if rb.urlParams != nil {
 		urlParams := url.Values{}
@@ -179,6 +182,12 @@ func (rb *Builder) SetHeaders(headers http.Header) *Builder {
 func (rb *Builder) SetHeader(k, v string) *Builder {
 	nb := rb.clone()
 	nb.header.Add(k, v)
+	return nb
+}
+
+func (rb *Builder) SetClient(client *http.Client) *Builder {
+	nb := rb.clone()
+	nb.client = client
 	return nb
 }
 

@@ -34,6 +34,7 @@ type Option struct {
 	userAgent string        // default defaultUserAgent
 	retry     int           // default 1
 	timeout   time.Duration // default 3s
+	client    *http.Client
 }
 
 type FuncOption func(*Option)
@@ -56,18 +57,25 @@ func WithTimeout(timeout time.Duration) FuncOption {
 	}
 }
 
+func WithClient(client *http.Client) FuncOption {
+	return func(o *Option) {
+		o.client = client
+	}
+}
+
 func NewClient(opts ...FuncOption) *Client {
 	option := &Option{
 		userAgent: defaultUserAgent,
 		retry:     1,
 		timeout:   3 * time.Second,
+		client:    http.DefaultClient,
 	}
 	for _, opt := range opts {
 		opt(option)
 	}
-	http.DefaultClient.Timeout = option.timeout
+	option.client.Timeout = option.timeout
 	return &Client{
-		client: http.DefaultClient,
+		client: option.client,
 		option: option,
 	}
 }
