@@ -311,6 +311,9 @@ func (rb *Builder) callReq() (*http.Response, error) {
 	if rb.timeout > 0 {
 		opts = append(opts, WithTimeout(rb.timeout))
 	}
+	if rb.client != nil {
+		opts = append(opts, WithClient(rb.client))
+	}
 	client := NewClient(opts...)
 	resp, err := client.Do(req)
 	if err != nil {
