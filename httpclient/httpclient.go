@@ -21,8 +21,6 @@ func (c *Client) setUserAgent(req *http.Request) {
 	if req.Header.Get("User-Agent") == "" {
 		req.Header.Set("User-Agent", c.option.userAgent)
 	}
-
-	return
 }
 
 type Client struct {
