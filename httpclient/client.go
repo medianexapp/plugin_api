@@ -292,7 +292,7 @@ func (rb *Builder) callReq() (*http.Response, error) {
 	if rb.method == "" {
 		rb.method = http.MethodGet
 	}
-	if rb.urlParams != nil {
+	if rb.urlParams.Encode() != "" {
 		rb.url += "?" + rb.urlParams.Encode()
 	}
 	req, err := http.NewRequest(rb.method, rb.url, rb.body)
