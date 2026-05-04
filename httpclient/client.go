@@ -96,7 +96,7 @@ func (rb *Builder) clone() *Builder {
 	return sp
 }
 
-func (rb *Builder) Request(url string) *Builder {
+func (rb *Builder) SetURL(url string) *Builder {
 	nb := rb.clone()
 	nb.url = url
 	nb.baseURL = ""
@@ -131,35 +131,35 @@ func (rb *Builder) SetMethod(method string) *Builder {
 }
 
 func (rb *Builder) Get(url string) *Builder {
-	return rb.SetMethod(http.MethodGet).Request(url)
+	return rb.SetMethod(http.MethodGet).SetURL(url)
 }
 
 func (rb *Builder) Post(url string) *Builder {
-	return rb.SetMethod(http.MethodPost).Request(url)
+	return rb.SetMethod(http.MethodPost).SetURL(url)
 }
 
 func (rb *Builder) Put(url string) *Builder {
-	return rb.SetMethod(http.MethodPut).Request(url)
+	return rb.SetMethod(http.MethodPut).SetURL(url)
 }
 
 func (rb *Builder) Patch(url string) *Builder {
-	return rb.SetMethod(http.MethodPatch).Request(url)
+	return rb.SetMethod(http.MethodPatch).SetURL(url)
 }
 
 func (rb *Builder) Delete(url string) *Builder {
-	return rb.SetMethod(http.MethodDelete).Request(url)
+	return rb.SetMethod(http.MethodDelete).SetURL(url)
 }
 
 func (rb *Builder) Connect(url string) *Builder {
-	return rb.SetMethod(http.MethodConnect).Request(url)
+	return rb.SetMethod(http.MethodConnect).SetURL(url)
 }
 
 func (rb *Builder) Options(url string) *Builder {
-	return rb.SetMethod(http.MethodOptions).Request(url)
+	return rb.SetMethod(http.MethodOptions).SetURL(url)
 }
 
 func (rb *Builder) Trace(url string) *Builder {
-	return rb.SetMethod(http.MethodTrace).Request(url)
+	return rb.SetMethod(http.MethodTrace).SetURL(url)
 }
 
 func cookieKey(c *http.Cookie) string {
