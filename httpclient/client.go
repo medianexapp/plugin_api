@@ -30,6 +30,8 @@ type Unmarshaler interface {
 type Builder struct {
 	method      string
 	url         string
+	baseURL     string
+	uri         string
 	header      http.Header
 	urlParams   url.Values
 	body        io.Reader
@@ -63,6 +65,8 @@ func (rb *Builder) clone() *Builder {
 	sp := &Builder{
 		method:      rb.method,
 		url:         rb.url,
+		baseURL:     rb.baseURL,
+		uri:         rb.uri,
 		timeout:     rb.timeout,
 		retry:       rb.retry,
 		unmarshaler: rb.unmarshaler,
@@ -95,6 +99,28 @@ func (rb *Builder) clone() *Builder {
 func (rb *Builder) Request(url string) *Builder {
 	nb := rb.clone()
 	nb.url = url
+	nb.baseURL = ""
+	nb.uri = ""
+	return nb
+}
+
+// SetBaseURL sets the base URL for the request. Calling this method will clear
+// any full URL previously set by Request(). Use together with SetURI() to
+// construct the full request URL from baseURL + uri.
+func (rb *Builder) SetBaseURL(baseURL string) *Builder {
+	nb := rb.clone()
+	nb.baseURL = baseURL
+	nb.url = ""
+	return nb
+}
+
+// SetURI sets the URI path for the request. Calling this method will clear
+// any full URL previously set by Request(). Use together with SetBaseURL() to
+// construct the full request URL from baseURL + uri.
+func (rb *Builder) SetURI(uri string) *Builder {
+	nb := rb.clone()
+	nb.uri = uri
+	nb.url = ""
 	return nb
 }
 
@@ -287,7 +313,14 @@ func (rb *Builder) Debug() *Builder {
 
 func (rb *Builder) callReq() (*http.Response, error) {
 	if rb.url == "" {
-		return nil, ErrMissUrl
+		if rb.baseURL != "" {
+			rb.url = rb.baseURL
+			if rb.uri != "" {
+				rb.url = strings.TrimRight(rb.baseURL, "/") + "/" + strings.TrimLeft(rb.uri, "/")
+			}
+		} else {
+			return nil, ErrMissUrl
+		}
 	}
 	if rb.method == "" {
 		rb.method = http.MethodGet
