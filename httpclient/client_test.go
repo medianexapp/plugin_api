@@ -26,11 +26,11 @@ func TestBuilder(t *testing.T) {
 			t.Fatal("can get status code")
 		}
 	}
-	_, err := b.ExpectRespStatusCode([]int{http.StatusBadRequest}).BytesResponse()
+	_, err := b.CheckRespStatusCode(http.StatusBadRequest).BytesResponse()
 	if err != nil {
 		t.Error(err)
 	}
-	_, err = b.ExpectRespHeaderNames([]string{"tette"}).BytesResponse()
+	_, err = b.CheckRespHeader("test", "data").BytesResponse()
 	if err != nil {
 		t.Error(err)
 	}

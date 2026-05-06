@@ -44,7 +44,7 @@ type Builder struct {
 	// http resp status must be equal value
 	execptStatusCode []int
 	// http resp header must exist this header
-	exceptRespHeader []string
+	exceptRespHeader map[string]string
 
 	respHeader     *http.Header
 	respStatusCode *int
@@ -217,15 +217,18 @@ func (rb *Builder) SetClient(client *http.Client) *Builder {
 	return nb
 }
 
-func (rb *Builder) ExpectRespStatusCode(statucCodes []int) *Builder {
+func (rb *Builder) CheckRespStatusCode(code int) *Builder {
 	rbb := rb.clone()
-	rbb.execptStatusCode = statucCodes
+	rbb.execptStatusCode = append(rbb.execptStatusCode, code)
 	return rbb
 }
 
-func (rb *Builder) ExpectRespHeaderNames(headerNames []string) *Builder {
+func (rb *Builder) CheckRespHeader(k, v string) *Builder {
 	rbb := rb.clone()
-	rbb.exceptRespHeader = headerNames
+	if rbb.exceptRespHeader == nil {
+		rbb.exceptRespHeader = make(map[string]string)
+	}
+	rbb.exceptRespHeader[k] = v
 	return rbb
 }
 
@@ -368,7 +371,7 @@ func (rb *Builder) callReq() (*http.Response, error) {
 
 	if len(rb.execptStatusCode) > 0 {
 		if !slices.Contains(rb.execptStatusCode, resp.StatusCode) {
-			return nil, fmt.Errorf("expect status code %+v,got status code %d", rb.execptStatusCode, resp.StatusCode)
+			return nil, fmt.Errorf("expect status code %+v not found,got status code %d", rb.execptStatusCode, resp.StatusCode)
 		}
 	}
 
@@ -377,9 +380,10 @@ func (rb *Builder) callReq() (*http.Response, error) {
 		for name := range resp.Header {
 			keys[name] = true
 		}
-		for _, name := range rb.exceptRespHeader {
-			if !keys[name] {
-				return nil, fmt.Errorf("expect header %+v,got header names %v", name, resp.Header)
+
+		for k, v := range rb.exceptRespHeader {
+			if resp.Header.Get(k) != v {
+				return nil, fmt.Errorf("expect header %s:%s not found", k, v)
 			}
 		}
 	}
