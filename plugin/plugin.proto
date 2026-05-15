@@ -154,3 +154,45 @@ message Token {
     string refresh_token = 3;
     uint64 expires_in    = 4;
 }
+
+// stream sub menu
+message MediaStramMenu {
+    message MenuItem {
+        string name  = 1;
+        string value = 2;
+    }
+    repeated MenuItem menu_items = 1;
+}
+
+// media stream
+message MediaStream {
+    string media_stream_id = 1;
+    enum MediaStreamType {
+        MEDIA_STREAM_UNSPECIFIED = 0;
+        MEDIA_STREAM_SERIES      = 1;
+        MEDIA_STREAM_INFO        = 2;
+        MEDIA_STREAM_PLAY_ITEM   = 3;
+    }
+    MediaStreamType media_stream_type = 2;
+}
+
+message ListMediaStreamRequest {
+    map<string, string> filter_menu = 1;
+    uint64              page        = 2;
+    uint64              page_size   = 3;
+}
+
+message ListMediaStreamResponse {
+    // filter menu
+    repeated MediaStream media_streams = 1;
+}
+
+message GetMediaStreamRequest {
+    string media_stream_id = 1;
+}
+
+message GetMediaStreamResponse {
+    MediaStream          media_stream_serie      = 1;
+    MediaStream          media_stream_info       = 2;
+    repeated MediaStream media_stream_play_items = 3;
+}
