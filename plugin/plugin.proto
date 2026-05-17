@@ -4,6 +4,12 @@ package plugin;
 option  go_package = "github.com/medianexapp/plugin_api/plugin;plugin";
 import "plugin/wrappers.proto";
 
+enum PluginType {
+    PLUGIN_TYPE_UNSPECIFIED  = 0;
+    PLUGIN_TYPE_DRIVER       = 1;
+    PLUGIN_TYPE_MEDIA_STREAM = 2;
+}
+
 message Formdata {
     message FormItem {
         string name = 1;
@@ -91,6 +97,9 @@ message GetFileResourceRequest {
     string    file_path  = 1;
     FileEntry file_entry = 10;
     bool      is_media   = 11;  // media file
+
+    // media stream play item id
+    string media_stream_play_item_id = 20;
 }
 
 message FileResource {
@@ -155,44 +164,85 @@ message Token {
     uint64 expires_in    = 4;
 }
 
-// stream sub menu
-message MediaStramMenu {
-    message MenuItem {
-        string name  = 1;
-        string value = 2;
-    }
-    repeated MenuItem menu_items = 1;
+message Item {
+    string name  = 1;
+    string value = 2;
+}
+
+// right sub menu
+message SubMenu {
+    repeated Item sub_menu = 1;
+}
+
+message FilterItem {
+    string        name  = 1;
+    repeated Item items = 2;
 }
 
 // media stream
 message MediaStream {
-    string media_stream_id = 1;
+    string media_stream_id = 1;  // media stream id
     enum MediaStreamType {
         MEDIA_STREAM_UNSPECIFIED = 0;
         MEDIA_STREAM_SERIES      = 1;
         MEDIA_STREAM_INFO        = 2;
         MEDIA_STREAM_PLAY_ITEM   = 3;
     }
-    MediaStreamType media_stream_type = 2;
+    MediaStreamType media_stream_type      = 2;
+    string          name                   = 3;
+    string          desc                   = 4;
+    string          parent_media_stream_id = 5;
+    // media info
+    string          release_date      = 13;
+    uint64          year              = 14;
+    repeated string genres            = 15;  // media video genres for media stream info
+    string          backdrop_url      = 16;  // media video backdrop image for media stream info
+    string          poster_url        = 17;  // media video poster image for media stream info
+    string          original_name     = 18;
+    string          original_language = 19;
+    enum CreditType {
+        CreditUNSPECIFIED    = 0;
+        CreditActor          = 1;  // Actor
+        CreditCastDirecting  = 2;  // Directing
+        CreditCastProduction = 3;  // Production
+        CreditCastWriting    = 4;  // Writing
+    }
+    message Credit {
+        string     name        = 1;  // credit name
+        CreditType credit_type = 2;  // credit type
+    }
+    repeated Credit     credit   = 20;  // media credits
+    map<string, string> metadata = 21;  // media metadata
+    // media play item
+    uint64 play_item_index = 30;  // play item indx
+    uint64 duration        = 31;  // video duration unit: s
+    string still_url       = 32;  // media video poster image for media stream play item
 }
 
 message ListMediaStreamRequest {
-    map<string, string> filter_menu = 1;
-    uint64              page        = 2;
-    uint64              page_size   = 3;
+    Item                menu_item    = 1;  // menu sub item
+    repeated FilterItem filter_items = 2;  // sub page filter
+    string              search_name  = 3;  // name search
+
+    uint64 page      = 10;
+    uint64 page_size = 11;
+    string page_key  = 12;
 }
 
 message ListMediaStreamResponse {
-    // filter menu
-    repeated MediaStream media_streams = 1;
+    repeated MediaStream media_stream_infos = 1;
+
+    bool                support_search_name = 10;
+    repeated FilterItem all_filter_items    = 11;  // sub page filter
+    string              next_page_key       = 12;
 }
 
 message GetMediaStreamRequest {
-    string media_stream_id = 1;
+    string media_stream_info_id = 1;
 }
 
 message GetMediaStreamResponse {
-    MediaStream          media_stream_serie      = 1;
+    MediaStream          media_stream_series     = 1;
     MediaStream          media_stream_info       = 2;
     repeated MediaStream media_stream_play_items = 3;
 }

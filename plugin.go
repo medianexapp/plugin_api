@@ -7,6 +7,7 @@ import (
 )
 
 type IPlugin interface {
+	PluginType() (plugin.PluginType, error)
 	// plugin id
 	PluginId() (pluginId string, err error)
 	// get auth like form edit,qrcode,oauth2
@@ -33,8 +34,13 @@ type IPlugin interface {
 	GetFileResource(req *plugin.GetFileResourceRequest) (fileResource *plugin.FileResource, err error)
 	// ListStramMediaData
 	// support filter by multi column
-	ListStreamMedia() (any, error)
-	GetStreamMediaInfo() (any, error)
+	GetSubMenu() ([]*plugin.Item, error)
+	// get page filter items
+	GetFilterItems(subMenu *plugin.Item) ([]*plugin.FilterItem, error)
+	// list media stream
+	ListMediaStream(req *plugin.ListMediaStreamRequest) (*plugin.ListMediaStreamResponse, error)
+	// get media stream by id
+	GetMediaStream(req *plugin.GetMediaStreamRequest) (*plugin.GetMediaStreamResponse, error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {

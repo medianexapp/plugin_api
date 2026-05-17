@@ -26,6 +26,12 @@ func _plugin_api_schema() uint64 {
 	return apiSchema
 }
 
+//go:wasmexport plugin_type
+func _plugin_type() uint64 {
+	pluginType, _ := pluginExport.PluginType()
+	return uint64(pluginType)
+}
+
 //go:wasmexport plugin_id
 func _plugin_id() (ret uint64) {
 	id, err := pluginExport.PluginId()
