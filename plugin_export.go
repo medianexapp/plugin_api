@@ -132,3 +132,73 @@ func _get_file_resource(reqPtr, reqLen uint64) (ret uint64) {
 	}
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(fileResourceData)), uint32(len(fileResourceData)))
 }
+
+//go:wasmexport get_media_menu
+func _get_media_menu() (ret uint64) {
+	mediaMenu, err := pluginExport.GetMediaMenu()
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	mediaMenuData, err := mediaMenu.MarshalVT()
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	return util.Uint32ToUint64(uint32(util.BytesToPtr(mediaMenuData)), uint32(len(mediaMenuData)))
+}
+
+//go:wasmexport get_filter_items
+func _get_filter_items(reqPtr, reqLen uint64) (ret uint64) {
+	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
+	subItem := &plugin.Item{}
+	err := subItem.UnmarshalVT(bytes)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	filterItems, err := pluginExport.GetFilterItems(subItem)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	filterItemsData, err := filterItems.MarshalVT()
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	return util.Uint32ToUint64(uint32(util.BytesToPtr(filterItemsData)), uint32(len(filterItemsData)))
+}
+
+//go:wasmexport list_media_item
+func _list_media_item(reqPtr, reqLen uint64) (ret uint64) {
+	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
+	req := &plugin.ListMediaItemRequest{}
+	err := req.UnmarshalVT(bytes)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	resp, err := pluginExport.ListMediaItem(req)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	respData, err := resp.MarshalVT()
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	return util.Uint32ToUint64(uint32(util.BytesToPtr(respData)), uint32(len(respData)))
+}
+
+//go:wasmexport get_media_item
+func _get_media_item(reqPtr, reqLen uint64) (ret uint64) {
+	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
+	req := &plugin.GetMediaItemRequest{}
+	err := req.UnmarshalVT(bytes)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	resp, err := pluginExport.GetMediaItem(req)
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	respData, err := resp.MarshalVT()
+	if err != nil {
+		return util.ErrorToUint64(err)
+	}
+	return util.Uint32ToUint64(uint32(util.BytesToPtr(respData)), uint32(len(respData)))
+}

@@ -21,14 +21,14 @@ const PluginType$json = {
   '2': [
     {'1': 'PLUGIN_TYPE_UNSPECIFIED', '2': 0},
     {'1': 'PLUGIN_TYPE_DRIVER', '2': 1},
-    {'1': 'PLUGIN_TYPE_MEDIA_STREAM', '2': 2},
+    {'1': 'PLUGIN_TYPE_MEDIA_Item', '2': 2},
   ],
 };
 
 /// Descriptor for `PluginType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List pluginTypeDescriptor = $convert.base64Decode(
     'CgpQbHVnaW5UeXBlEhsKF1BMVUdJTl9UWVBFX1VOU1BFQ0lGSUVEEAASFgoSUExVR0lOX1RZUE'
-    'VfRFJJVkVSEAESHAoYUExVR0lOX1RZUEVfTUVESUFfU1RSRUFNEAI=');
+    'VfRFJJVkVSEAESGgoWUExVR0lOX1RZUEVfTUVESUFfSXRlbRAC');
 
 @$core.Deprecated('Use formdataDescriptor instead')
 const Formdata$json = {
@@ -404,11 +404,11 @@ const GetFileResourceRequest$json = {
     },
     {'1': 'is_media', '3': 11, '4': 1, '5': 8, '10': 'isMedia'},
     {
-      '1': 'media_stream_play_item_id',
+      '1': 'media_Item_play_item_id',
       '3': 20,
       '4': 1,
       '5': 9,
-      '10': 'mediaStreamPlayItemId'
+      '10': 'mediaItemPlayItemId'
     },
   ],
 };
@@ -417,8 +417,8 @@ const GetFileResourceRequest$json = {
 final $typed_data.Uint8List getFileResourceRequestDescriptor = $convert.base64Decode(
     'ChZHZXRGaWxlUmVzb3VyY2VSZXF1ZXN0EhsKCWZpbGVfcGF0aBgBIAEoCVIIZmlsZVBhdGgSMA'
     'oKZmlsZV9lbnRyeRgKIAEoCzIRLnBsdWdpbi5GaWxlRW50cnlSCWZpbGVFbnRyeRIZCghpc19t'
-    'ZWRpYRgLIAEoCFIHaXNNZWRpYRI4ChltZWRpYV9zdHJlYW1fcGxheV9pdGVtX2lkGBQgASgJUh'
-    'VtZWRpYVN0cmVhbVBsYXlJdGVtSWQ=');
+    'ZWRpYRgLIAEoCFIHaXNNZWRpYRI0ChdtZWRpYV9JdGVtX3BsYXlfaXRlbV9pZBgUIAEoCVITbW'
+    'VkaWFJdGVtUGxheUl0ZW1JZA==');
 
 @$core.Deprecated('Use fileResourceDescriptor instead')
 const FileResource$json = {
@@ -609,80 +609,70 @@ const Item$json = {
 final $typed_data.Uint8List itemDescriptor = $convert.base64Decode(
     'CgRJdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSFAoFdmFsdWUYAiABKAlSBXZhbHVl');
 
-@$core.Deprecated('Use subMenuDescriptor instead')
-const SubMenu$json = {
-  '1': 'SubMenu',
+@$core.Deprecated('Use mediaMenuDescriptor instead')
+const MediaMenu$json = {
+  '1': 'MediaMenu',
   '2': [
-    {
-      '1': 'sub_menu',
-      '3': 1,
-      '4': 3,
-      '5': 11,
-      '6': '.plugin.Item',
-      '10': 'subMenu'
-    },
+    {'1': 'menus', '3': 1, '4': 3, '5': 11, '6': '.plugin.Item', '10': 'menus'},
   ],
 };
 
-/// Descriptor for `SubMenu`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List subMenuDescriptor = $convert.base64Decode(
-    'CgdTdWJNZW51EicKCHN1Yl9tZW51GAEgAygLMgwucGx1Z2luLkl0ZW1SB3N1Yk1lbnU=');
-
-@$core.Deprecated('Use filterItemDescriptor instead')
-const FilterItem$json = {
-  '1': 'FilterItem',
-  '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'items', '3': 2, '4': 3, '5': 11, '6': '.plugin.Item', '10': 'items'},
-  ],
-};
-
-/// Descriptor for `FilterItem`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List filterItemDescriptor = $convert.base64Decode(
-    'CgpGaWx0ZXJJdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSIgoFaXRlbXMYAiADKAsyDC5wbHVnaW'
-    '4uSXRlbVIFaXRlbXM=');
+/// Descriptor for `MediaMenu`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mediaMenuDescriptor = $convert.base64Decode(
+    'CglNZWRpYU1lbnUSIgoFbWVudXMYASADKAsyDC5wbHVnaW4uSXRlbVIFbWVudXM=');
 
 @$core.Deprecated('Use filterItemsDescriptor instead')
 const FilterItems$json = {
   '1': 'FilterItems',
   '2': [
     {
-      '1': 'items',
+      '1': 'filter_items',
       '3': 1,
       '4': 3,
       '5': 11,
-      '6': '.plugin.FilterItem',
-      '10': 'items'
+      '6': '.plugin.FilterItems.Filter',
+      '10': 'filterItems'
     },
+  ],
+  '3': [FilterItems_Filter$json],
+};
+
+@$core.Deprecated('Use filterItemsDescriptor instead')
+const FilterItems_Filter$json = {
+  '1': 'Filter',
+  '2': [
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'items', '3': 2, '4': 3, '5': 11, '6': '.plugin.Item', '10': 'items'},
   ],
 };
 
 /// Descriptor for `FilterItems`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List filterItemsDescriptor = $convert.base64Decode(
-    'CgtGaWx0ZXJJdGVtcxIoCgVpdGVtcxgBIAMoCzISLnBsdWdpbi5GaWx0ZXJJdGVtUgVpdGVtcw'
-    '==');
+    'CgtGaWx0ZXJJdGVtcxI9CgxmaWx0ZXJfaXRlbXMYASADKAsyGi5wbHVnaW4uRmlsdGVySXRlbX'
+    'MuRmlsdGVyUgtmaWx0ZXJJdGVtcxpACgZGaWx0ZXISEgoEbmFtZRgBIAEoCVIEbmFtZRIiCgVp'
+    'dGVtcxgCIAMoCzIMLnBsdWdpbi5JdGVtUgVpdGVtcw==');
 
-@$core.Deprecated('Use mediaStreamDescriptor instead')
-const MediaStream$json = {
-  '1': 'MediaStream',
+@$core.Deprecated('Use mediaItemDescriptor instead')
+const MediaItem$json = {
+  '1': 'MediaItem',
   '2': [
-    {'1': 'media_stream_id', '3': 1, '4': 1, '5': 9, '10': 'mediaStreamId'},
+    {'1': 'media_item_id', '3': 1, '4': 1, '5': 9, '10': 'mediaItemId'},
     {
-      '1': 'media_stream_type',
+      '1': 'media_item_type',
       '3': 2,
       '4': 1,
       '5': 14,
-      '6': '.plugin.MediaStream.MediaStreamType',
-      '10': 'mediaStreamType'
+      '6': '.plugin.MediaItem.MediaItemType',
+      '10': 'mediaItemType'
     },
     {'1': 'name', '3': 3, '4': 1, '5': 9, '10': 'name'},
     {'1': 'desc', '3': 4, '4': 1, '5': 9, '10': 'desc'},
     {
-      '1': 'parent_media_stream_id',
+      '1': 'parent_media_item_id',
       '3': 5,
       '4': 1,
       '5': 9,
-      '10': 'parentMediaStreamId'
+      '10': 'parentMediaItemId'
     },
     {'1': 'release_date', '3': 13, '4': 1, '5': 9, '10': 'releaseDate'},
     {'1': 'year', '3': 14, '4': 1, '5': 4, '10': 'year'},
@@ -702,7 +692,7 @@ const MediaStream$json = {
       '3': 20,
       '4': 3,
       '5': 11,
-      '6': '.plugin.MediaStream.Credit',
+      '6': '.plugin.MediaItem.Credit',
       '10': 'credit'
     },
     {
@@ -710,19 +700,19 @@ const MediaStream$json = {
       '3': 21,
       '4': 3,
       '5': 11,
-      '6': '.plugin.MediaStream.MetadataEntry',
+      '6': '.plugin.MediaItem.MetadataEntry',
       '10': 'metadata'
     },
     {'1': 'play_item_index', '3': 30, '4': 1, '5': 4, '10': 'playItemIndex'},
     {'1': 'duration', '3': 31, '4': 1, '5': 4, '10': 'duration'},
     {'1': 'still_url', '3': 32, '4': 1, '5': 9, '10': 'stillUrl'},
   ],
-  '3': [MediaStream_Credit$json, MediaStream_MetadataEntry$json],
-  '4': [MediaStream_MediaStreamType$json, MediaStream_CreditType$json],
+  '3': [MediaItem_Credit$json, MediaItem_MetadataEntry$json],
+  '4': [MediaItem_MediaItemType$json, MediaItem_CreditType$json],
 };
 
-@$core.Deprecated('Use mediaStreamDescriptor instead')
-const MediaStream_Credit$json = {
+@$core.Deprecated('Use mediaItemDescriptor instead')
+const MediaItem_Credit$json = {
   '1': 'Credit',
   '2': [
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
@@ -731,14 +721,14 @@ const MediaStream_Credit$json = {
       '3': 2,
       '4': 1,
       '5': 14,
-      '6': '.plugin.MediaStream.CreditType',
+      '6': '.plugin.MediaItem.CreditType',
       '10': 'creditType'
     },
   ],
 };
 
-@$core.Deprecated('Use mediaStreamDescriptor instead')
-const MediaStream_MetadataEntry$json = {
+@$core.Deprecated('Use mediaItemDescriptor instead')
+const MediaItem_MetadataEntry$json = {
   '1': 'MetadataEntry',
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
@@ -747,19 +737,19 @@ const MediaStream_MetadataEntry$json = {
   '7': {'7': true},
 };
 
-@$core.Deprecated('Use mediaStreamDescriptor instead')
-const MediaStream_MediaStreamType$json = {
-  '1': 'MediaStreamType',
+@$core.Deprecated('Use mediaItemDescriptor instead')
+const MediaItem_MediaItemType$json = {
+  '1': 'MediaItemType',
   '2': [
-    {'1': 'MEDIA_STREAM_UNSPECIFIED', '2': 0},
-    {'1': 'MEDIA_STREAM_SERIES', '2': 1},
-    {'1': 'MEDIA_STREAM_INFO', '2': 2},
-    {'1': 'MEDIA_STREAM_PLAY_ITEM', '2': 3},
+    {'1': 'MEDIA_ITEM_UNSPECIFIED', '2': 0},
+    {'1': 'MEDIA_ITEM_SERIES', '2': 1},
+    {'1': 'MEDIA_ITEM_INFO', '2': 2},
+    {'1': 'MEDIA_ITEM_PLAY_ITEM', '2': 3},
   ],
 };
 
-@$core.Deprecated('Use mediaStreamDescriptor instead')
-const MediaStream_CreditType$json = {
+@$core.Deprecated('Use mediaItemDescriptor instead')
+const MediaItem_CreditType$json = {
   '1': 'CreditType',
   '2': [
     {'1': 'CreditUNSPECIFIED', '2': 0},
@@ -770,32 +760,31 @@ const MediaStream_CreditType$json = {
   ],
 };
 
-/// Descriptor for `MediaStream`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List mediaStreamDescriptor = $convert.base64Decode(
-    'CgtNZWRpYVN0cmVhbRImCg9tZWRpYV9zdHJlYW1faWQYASABKAlSDW1lZGlhU3RyZWFtSWQSTw'
-    'oRbWVkaWFfc3RyZWFtX3R5cGUYAiABKA4yIy5wbHVnaW4uTWVkaWFTdHJlYW0uTWVkaWFTdHJl'
-    'YW1UeXBlUg9tZWRpYVN0cmVhbVR5cGUSEgoEbmFtZRgDIAEoCVIEbmFtZRISCgRkZXNjGAQgAS'
-    'gJUgRkZXNjEjMKFnBhcmVudF9tZWRpYV9zdHJlYW1faWQYBSABKAlSE3BhcmVudE1lZGlhU3Ry'
-    'ZWFtSWQSIQoMcmVsZWFzZV9kYXRlGA0gASgJUgtyZWxlYXNlRGF0ZRISCgR5ZWFyGA4gASgEUg'
-    'R5ZWFyEhYKBmdlbnJlcxgPIAMoCVIGZ2VucmVzEiEKDGJhY2tkcm9wX3VybBgQIAEoCVILYmFj'
-    'a2Ryb3BVcmwSHQoKcG9zdGVyX3VybBgRIAEoCVIJcG9zdGVyVXJsEiMKDW9yaWdpbmFsX25hbW'
-    'UYEiABKAlSDG9yaWdpbmFsTmFtZRIrChFvcmlnaW5hbF9sYW5ndWFnZRgTIAEoCVIQb3JpZ2lu'
-    'YWxMYW5ndWFnZRIyCgZjcmVkaXQYFCADKAsyGi5wbHVnaW4uTWVkaWFTdHJlYW0uQ3JlZGl0Ug'
-    'ZjcmVkaXQSPQoIbWV0YWRhdGEYFSADKAsyIS5wbHVnaW4uTWVkaWFTdHJlYW0uTWV0YWRhdGFF'
-    'bnRyeVIIbWV0YWRhdGESJgoPcGxheV9pdGVtX2luZGV4GB4gASgEUg1wbGF5SXRlbUluZGV4Eh'
-    'oKCGR1cmF0aW9uGB8gASgEUghkdXJhdGlvbhIbCglzdGlsbF91cmwYICABKAlSCHN0aWxsVXJs'
-    'Gl0KBkNyZWRpdBISCgRuYW1lGAEgASgJUgRuYW1lEj8KC2NyZWRpdF90eXBlGAIgASgOMh4ucG'
-    'x1Z2luLk1lZGlhU3RyZWFtLkNyZWRpdFR5cGVSCmNyZWRpdFR5cGUaOwoNTWV0YWRhdGFFbnRy'
-    'eRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBInsKD01lZGlhU3'
-    'RyZWFtVHlwZRIcChhNRURJQV9TVFJFQU1fVU5TUEVDSUZJRUQQABIXChNNRURJQV9TVFJFQU1f'
-    'U0VSSUVTEAESFQoRTUVESUFfU1RSRUFNX0lORk8QAhIaChZNRURJQV9TVFJFQU1fUExBWV9JVE'
-    'VNEAMifgoKQ3JlZGl0VHlwZRIVChFDcmVkaXRVTlNQRUNJRklFRBAAEg8KC0NyZWRpdEFjdG9y'
-    'EAESFwoTQ3JlZGl0Q2FzdERpcmVjdGluZxACEhgKFENyZWRpdENhc3RQcm9kdWN0aW9uEAMSFQ'
-    'oRQ3JlZGl0Q2FzdFdyaXRpbmcQBA==');
+/// Descriptor for `MediaItem`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List mediaItemDescriptor = $convert.base64Decode(
+    'CglNZWRpYUl0ZW0SIgoNbWVkaWFfaXRlbV9pZBgBIAEoCVILbWVkaWFJdGVtSWQSRwoPbWVkaW'
+    'FfaXRlbV90eXBlGAIgASgOMh8ucGx1Z2luLk1lZGlhSXRlbS5NZWRpYUl0ZW1UeXBlUg1tZWRp'
+    'YUl0ZW1UeXBlEhIKBG5hbWUYAyABKAlSBG5hbWUSEgoEZGVzYxgEIAEoCVIEZGVzYxIvChRwYX'
+    'JlbnRfbWVkaWFfaXRlbV9pZBgFIAEoCVIRcGFyZW50TWVkaWFJdGVtSWQSIQoMcmVsZWFzZV9k'
+    'YXRlGA0gASgJUgtyZWxlYXNlRGF0ZRISCgR5ZWFyGA4gASgEUgR5ZWFyEhYKBmdlbnJlcxgPIA'
+    'MoCVIGZ2VucmVzEiEKDGJhY2tkcm9wX3VybBgQIAEoCVILYmFja2Ryb3BVcmwSHQoKcG9zdGVy'
+    'X3VybBgRIAEoCVIJcG9zdGVyVXJsEiMKDW9yaWdpbmFsX25hbWUYEiABKAlSDG9yaWdpbmFsTm'
+    'FtZRIrChFvcmlnaW5hbF9sYW5ndWFnZRgTIAEoCVIQb3JpZ2luYWxMYW5ndWFnZRIwCgZjcmVk'
+    'aXQYFCADKAsyGC5wbHVnaW4uTWVkaWFJdGVtLkNyZWRpdFIGY3JlZGl0EjsKCG1ldGFkYXRhGB'
+    'UgAygLMh8ucGx1Z2luLk1lZGlhSXRlbS5NZXRhZGF0YUVudHJ5UghtZXRhZGF0YRImCg9wbGF5'
+    'X2l0ZW1faW5kZXgYHiABKARSDXBsYXlJdGVtSW5kZXgSGgoIZHVyYXRpb24YHyABKARSCGR1cm'
+    'F0aW9uEhsKCXN0aWxsX3VybBggIAEoCVIIc3RpbGxVcmwaWwoGQ3JlZGl0EhIKBG5hbWUYASAB'
+    'KAlSBG5hbWUSPQoLY3JlZGl0X3R5cGUYAiABKA4yHC5wbHVnaW4uTWVkaWFJdGVtLkNyZWRpdF'
+    'R5cGVSCmNyZWRpdFR5cGUaOwoNTWV0YWRhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2'
+    'YWx1ZRgCIAEoCVIFdmFsdWU6AjgBInEKDU1lZGlhSXRlbVR5cGUSGgoWTUVESUFfSVRFTV9VTl'
+    'NQRUNJRklFRBAAEhUKEU1FRElBX0lURU1fU0VSSUVTEAESEwoPTUVESUFfSVRFTV9JTkZPEAIS'
+    'GAoUTUVESUFfSVRFTV9QTEFZX0lURU0QAyJ+CgpDcmVkaXRUeXBlEhUKEUNyZWRpdFVOU1BFQ0'
+    'lGSUVEEAASDwoLQ3JlZGl0QWN0b3IQARIXChNDcmVkaXRDYXN0RGlyZWN0aW5nEAISGAoUQ3Jl'
+    'ZGl0Q2FzdFByb2R1Y3Rpb24QAxIVChFDcmVkaXRDYXN0V3JpdGluZxAE');
 
-@$core.Deprecated('Use listMediaStreamRequestDescriptor instead')
-const ListMediaStreamRequest$json = {
-  '1': 'ListMediaStreamRequest',
+@$core.Deprecated('Use listMediaItemRequestDescriptor instead')
+const ListMediaItemRequest$json = {
+  '1': 'ListMediaItemRequest',
   '2': [
     {
       '1': 'menu_item',
@@ -808,9 +797,9 @@ const ListMediaStreamRequest$json = {
     {
       '1': 'filter_items',
       '3': 2,
-      '4': 3,
+      '4': 1,
       '5': 11,
-      '6': '.plugin.FilterItem',
+      '6': '.plugin.FilterItems',
       '10': 'filterItems'
     },
     {'1': 'search_name', '3': 3, '4': 1, '5': 9, '10': 'searchName'},
@@ -820,25 +809,25 @@ const ListMediaStreamRequest$json = {
   ],
 };
 
-/// Descriptor for `ListMediaStreamRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMediaStreamRequestDescriptor = $convert.base64Decode(
-    'ChZMaXN0TWVkaWFTdHJlYW1SZXF1ZXN0EikKCW1lbnVfaXRlbRgBIAEoCzIMLnBsdWdpbi5JdG'
-    'VtUghtZW51SXRlbRI1CgxmaWx0ZXJfaXRlbXMYAiADKAsyEi5wbHVnaW4uRmlsdGVySXRlbVIL'
-    'ZmlsdGVySXRlbXMSHwoLc2VhcmNoX25hbWUYAyABKAlSCnNlYXJjaE5hbWUSEgoEcGFnZRgKIA'
-    'EoBFIEcGFnZRIbCglwYWdlX3NpemUYCyABKARSCHBhZ2VTaXplEhkKCHBhZ2Vfa2V5GAwgASgJ'
-    'UgdwYWdlS2V5');
+/// Descriptor for `ListMediaItemRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMediaItemRequestDescriptor = $convert.base64Decode(
+    'ChRMaXN0TWVkaWFJdGVtUmVxdWVzdBIpCgltZW51X2l0ZW0YASABKAsyDC5wbHVnaW4uSXRlbV'
+    'IIbWVudUl0ZW0SNgoMZmlsdGVyX2l0ZW1zGAIgASgLMhMucGx1Z2luLkZpbHRlckl0ZW1zUgtm'
+    'aWx0ZXJJdGVtcxIfCgtzZWFyY2hfbmFtZRgDIAEoCVIKc2VhcmNoTmFtZRISCgRwYWdlGAogAS'
+    'gEUgRwYWdlEhsKCXBhZ2Vfc2l6ZRgLIAEoBFIIcGFnZVNpemUSGQoIcGFnZV9rZXkYDCABKAlS'
+    'B3BhZ2VLZXk=');
 
-@$core.Deprecated('Use listMediaStreamResponseDescriptor instead')
-const ListMediaStreamResponse$json = {
-  '1': 'ListMediaStreamResponse',
+@$core.Deprecated('Use listMediaItemResponseDescriptor instead')
+const ListMediaItemResponse$json = {
+  '1': 'ListMediaItemResponse',
   '2': [
     {
-      '1': 'media_stream_infos',
+      '1': 'media_Item_infos',
       '3': 1,
       '4': 3,
       '5': 11,
-      '6': '.plugin.MediaStream',
-      '10': 'mediaStreamInfos'
+      '6': '.plugin.MediaItem',
+      '10': 'mediaItemInfos'
     },
     {
       '1': 'support_search_name',
@@ -850,77 +839,76 @@ const ListMediaStreamResponse$json = {
     {
       '1': 'all_filter_items',
       '3': 11,
-      '4': 3,
+      '4': 1,
       '5': 11,
-      '6': '.plugin.FilterItem',
+      '6': '.plugin.FilterItems',
       '10': 'allFilterItems'
     },
     {'1': 'next_page_key', '3': 12, '4': 1, '5': 9, '10': 'nextPageKey'},
   ],
 };
 
-/// Descriptor for `ListMediaStreamResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listMediaStreamResponseDescriptor = $convert.base64Decode(
-    'ChdMaXN0TWVkaWFTdHJlYW1SZXNwb25zZRJBChJtZWRpYV9zdHJlYW1faW5mb3MYASADKAsyEy'
-    '5wbHVnaW4uTWVkaWFTdHJlYW1SEG1lZGlhU3RyZWFtSW5mb3MSLgoTc3VwcG9ydF9zZWFyY2hf'
-    'bmFtZRgKIAEoCFIRc3VwcG9ydFNlYXJjaE5hbWUSPAoQYWxsX2ZpbHRlcl9pdGVtcxgLIAMoCz'
-    'ISLnBsdWdpbi5GaWx0ZXJJdGVtUg5hbGxGaWx0ZXJJdGVtcxIiCg1uZXh0X3BhZ2Vfa2V5GAwg'
-    'ASgJUgtuZXh0UGFnZUtleQ==');
+/// Descriptor for `ListMediaItemResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listMediaItemResponseDescriptor = $convert.base64Decode(
+    'ChVMaXN0TWVkaWFJdGVtUmVzcG9uc2USOwoQbWVkaWFfSXRlbV9pbmZvcxgBIAMoCzIRLnBsdW'
+    'dpbi5NZWRpYUl0ZW1SDm1lZGlhSXRlbUluZm9zEi4KE3N1cHBvcnRfc2VhcmNoX25hbWUYCiAB'
+    'KAhSEXN1cHBvcnRTZWFyY2hOYW1lEj0KEGFsbF9maWx0ZXJfaXRlbXMYCyABKAsyEy5wbHVnaW'
+    '4uRmlsdGVySXRlbXNSDmFsbEZpbHRlckl0ZW1zEiIKDW5leHRfcGFnZV9rZXkYDCABKAlSC25l'
+    'eHRQYWdlS2V5');
 
-@$core.Deprecated('Use getMediaStreamRequestDescriptor instead')
-const GetMediaStreamRequest$json = {
-  '1': 'GetMediaStreamRequest',
+@$core.Deprecated('Use getMediaItemRequestDescriptor instead')
+const GetMediaItemRequest$json = {
+  '1': 'GetMediaItemRequest',
   '2': [
     {
-      '1': 'media_stream_info_id',
+      '1': 'media_Item_info_id',
       '3': 1,
       '4': 1,
       '5': 9,
-      '10': 'mediaStreamInfoId'
+      '10': 'mediaItemInfoId'
     },
   ],
 };
 
-/// Descriptor for `GetMediaStreamRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMediaStreamRequestDescriptor = $convert.base64Decode(
-    'ChVHZXRNZWRpYVN0cmVhbVJlcXVlc3QSLwoUbWVkaWFfc3RyZWFtX2luZm9faWQYASABKAlSEW'
-    '1lZGlhU3RyZWFtSW5mb0lk');
+/// Descriptor for `GetMediaItemRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMediaItemRequestDescriptor = $convert.base64Decode(
+    'ChNHZXRNZWRpYUl0ZW1SZXF1ZXN0EisKEm1lZGlhX0l0ZW1faW5mb19pZBgBIAEoCVIPbWVkaW'
+    'FJdGVtSW5mb0lk');
 
-@$core.Deprecated('Use getMediaStreamResponseDescriptor instead')
-const GetMediaStreamResponse$json = {
-  '1': 'GetMediaStreamResponse',
+@$core.Deprecated('Use getMediaItemResponseDescriptor instead')
+const GetMediaItemResponse$json = {
+  '1': 'GetMediaItemResponse',
   '2': [
     {
-      '1': 'media_stream_series',
+      '1': 'media_Item_series',
       '3': 1,
       '4': 1,
       '5': 11,
-      '6': '.plugin.MediaStream',
-      '10': 'mediaStreamSeries'
+      '6': '.plugin.MediaItem',
+      '10': 'mediaItemSeries'
     },
     {
-      '1': 'media_stream_info',
+      '1': 'media_Item_info',
       '3': 2,
       '4': 1,
       '5': 11,
-      '6': '.plugin.MediaStream',
-      '10': 'mediaStreamInfo'
+      '6': '.plugin.MediaItem',
+      '10': 'mediaItemInfo'
     },
     {
-      '1': 'media_stream_play_items',
+      '1': 'media_Item_play_items',
       '3': 3,
       '4': 3,
       '5': 11,
-      '6': '.plugin.MediaStream',
-      '10': 'mediaStreamPlayItems'
+      '6': '.plugin.MediaItem',
+      '10': 'mediaItemPlayItems'
     },
   ],
 };
 
-/// Descriptor for `GetMediaStreamResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List getMediaStreamResponseDescriptor = $convert.base64Decode(
-    'ChZHZXRNZWRpYVN0cmVhbVJlc3BvbnNlEkMKE21lZGlhX3N0cmVhbV9zZXJpZXMYASABKAsyEy'
-    '5wbHVnaW4uTWVkaWFTdHJlYW1SEW1lZGlhU3RyZWFtU2VyaWVzEj8KEW1lZGlhX3N0cmVhbV9p'
-    'bmZvGAIgASgLMhMucGx1Z2luLk1lZGlhU3RyZWFtUg9tZWRpYVN0cmVhbUluZm8SSgoXbWVkaW'
-    'Ffc3RyZWFtX3BsYXlfaXRlbXMYAyADKAsyEy5wbHVnaW4uTWVkaWFTdHJlYW1SFG1lZGlhU3Ry'
-    'ZWFtUGxheUl0ZW1z');
+/// Descriptor for `GetMediaItemResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getMediaItemResponseDescriptor = $convert.base64Decode(
+    'ChRHZXRNZWRpYUl0ZW1SZXNwb25zZRI9ChFtZWRpYV9JdGVtX3NlcmllcxgBIAEoCzIRLnBsdW'
+    'dpbi5NZWRpYUl0ZW1SD21lZGlhSXRlbVNlcmllcxI5Cg9tZWRpYV9JdGVtX2luZm8YAiABKAsy'
+    'ES5wbHVnaW4uTWVkaWFJdGVtUg1tZWRpYUl0ZW1JbmZvEkQKFW1lZGlhX0l0ZW1fcGxheV9pdG'
+    'VtcxgDIAMoCzIRLnBsdWdpbi5NZWRpYUl0ZW1SEm1lZGlhSXRlbVBsYXlJdGVtcw==');

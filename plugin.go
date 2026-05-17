@@ -32,15 +32,15 @@ type IPlugin interface {
 	GetDirEntry(req *plugin.GetDirEntryRequest) (dirEntry *plugin.DirEntry, err error)
 	// get file entry resource from driver plugin
 	GetFileResource(req *plugin.GetFileResourceRequest) (fileResource *plugin.FileResource, err error)
-	// ListStramMediaData
+
 	// support filter by multi column
-	GetSubMenu() (*plugin.SubMenu, error)
+	GetMediaMenu() (*plugin.MediaMenu, error)
 	// get page filter items
-	GetFilterItems(subMenu *plugin.Item) (*plugin.FilterItems, error)
-	// list media stream
-	ListMediaStream(req *plugin.ListMediaStreamRequest) (*plugin.ListMediaStreamResponse, error)
-	// get media stream by id
-	GetMediaStream(req *plugin.GetMediaStreamRequest) (*plugin.GetMediaStreamResponse, error)
+	GetFilterItems(subItem *plugin.Item) (*plugin.FilterItems, error)
+	// list media item info
+	ListMediaItem(req *plugin.ListMediaItemRequest) (*plugin.ListMediaItemResponse, error)
+	// get media item info by id
+	GetMediaItem(req *plugin.GetMediaItemRequest) (*plugin.GetMediaItemResponse, error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {
