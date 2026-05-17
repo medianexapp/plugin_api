@@ -19,20 +19,20 @@ type PluginType int32
 
 const (
 	PluginType_PLUGIN_TYPE_UNSPECIFIED PluginType = 0
-	PluginType_PLUGIN_TYPE_DRIVER      PluginType = 1
-	PluginType_PLUGIN_TYPE_MEDIA       PluginType = 2
+	PluginType_PLUGIN_TYPE_FILE_SYSTEM PluginType = 1 // plugin connect file system, like smb,webdav,cloud driver,this is default plugin type
+	PluginType_PLUGIN_TYPE_MEDIA       PluginType = 2 // plugin connect media server,like plex,emby,youtube
 )
 
 // Enum value maps for PluginType.
 var (
 	PluginType_name = map[int32]string{
 		0: "PLUGIN_TYPE_UNSPECIFIED",
-		1: "PLUGIN_TYPE_DRIVER",
+		1: "PLUGIN_TYPE_FILE_SYSTEM",
 		2: "PLUGIN_TYPE_MEDIA",
 	}
 	PluginType_value = map[string]int32{
 		"PLUGIN_TYPE_UNSPECIFIED": 0,
-		"PLUGIN_TYPE_DRIVER":      1,
+		"PLUGIN_TYPE_FILE_SYSTEM": 1,
 		"PLUGIN_TYPE_MEDIA":       2,
 	}
 )

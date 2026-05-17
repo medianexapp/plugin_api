@@ -6,8 +6,8 @@ import "plugin/wrappers.proto";
 
 enum PluginType {
     PLUGIN_TYPE_UNSPECIFIED = 0;
-    PLUGIN_TYPE_DRIVER      = 1;
-    PLUGIN_TYPE_MEDIA       = 2;
+    PLUGIN_TYPE_FILE_SYSTEM = 1;  // plugin connect file system, like smb,webdav,cloud driver,this is default plugin type
+    PLUGIN_TYPE_MEDIA       = 2;  // plugin connect media server,like plex,emby,youtube
 }
 
 message Formdata {

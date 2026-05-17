@@ -20,15 +20,15 @@ const PluginType$json = {
   '1': 'PluginType',
   '2': [
     {'1': 'PLUGIN_TYPE_UNSPECIFIED', '2': 0},
-    {'1': 'PLUGIN_TYPE_DRIVER', '2': 1},
+    {'1': 'PLUGIN_TYPE_FILE_SYSTEM', '2': 1},
     {'1': 'PLUGIN_TYPE_MEDIA', '2': 2},
   ],
 };
 
 /// Descriptor for `PluginType`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List pluginTypeDescriptor = $convert.base64Decode(
-    'CgpQbHVnaW5UeXBlEhsKF1BMVUdJTl9UWVBFX1VOU1BFQ0lGSUVEEAASFgoSUExVR0lOX1RZUE'
-    'VfRFJJVkVSEAESFQoRUExVR0lOX1RZUEVfTUVESUEQAg==');
+    'CgpQbHVnaW5UeXBlEhsKF1BMVUdJTl9UWVBFX1VOU1BFQ0lGSUVEEAASGwoXUExVR0lOX1RZUE'
+    'VfRklMRV9TWVNURU0QARIVChFQTFVHSU5fVFlQRV9NRURJQRAC');
 
 @$core.Deprecated('Use formdataDescriptor instead')
 const Formdata$json = {

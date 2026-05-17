@@ -17,14 +17,14 @@ import 'package:protobuf/protobuf.dart' as $pb;
 class PluginType extends $pb.ProtobufEnum {
   static const PluginType PLUGIN_TYPE_UNSPECIFIED =
       PluginType._(0, _omitEnumNames ? '' : 'PLUGIN_TYPE_UNSPECIFIED');
-  static const PluginType PLUGIN_TYPE_DRIVER =
-      PluginType._(1, _omitEnumNames ? '' : 'PLUGIN_TYPE_DRIVER');
+  static const PluginType PLUGIN_TYPE_FILE_SYSTEM =
+      PluginType._(1, _omitEnumNames ? '' : 'PLUGIN_TYPE_FILE_SYSTEM');
   static const PluginType PLUGIN_TYPE_MEDIA =
       PluginType._(2, _omitEnumNames ? '' : 'PLUGIN_TYPE_MEDIA');
 
   static const $core.List<PluginType> values = <PluginType>[
     PLUGIN_TYPE_UNSPECIFIED,
-    PLUGIN_TYPE_DRIVER,
+    PLUGIN_TYPE_FILE_SYSTEM,
     PLUGIN_TYPE_MEDIA,
   ];
 
