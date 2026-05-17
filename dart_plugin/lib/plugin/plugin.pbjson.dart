@@ -642,6 +642,26 @@ final $typed_data.Uint8List filterItemDescriptor = $convert.base64Decode(
     'CgpGaWx0ZXJJdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSIgoFaXRlbXMYAiADKAsyDC5wbHVnaW'
     '4uSXRlbVIFaXRlbXM=');
 
+@$core.Deprecated('Use filterItemsDescriptor instead')
+const FilterItems$json = {
+  '1': 'FilterItems',
+  '2': [
+    {
+      '1': 'items',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.FilterItem',
+      '10': 'items'
+    },
+  ],
+};
+
+/// Descriptor for `FilterItems`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List filterItemsDescriptor = $convert.base64Decode(
+    'CgtGaWx0ZXJJdGVtcxIoCgVpdGVtcxgBIAMoCzISLnBsdWdpbi5GaWx0ZXJJdGVtUgVpdGVtcw'
+    '==');
+
 @$core.Deprecated('Use mediaStreamDescriptor instead')
 const MediaStream$json = {
   '1': 'MediaStream',

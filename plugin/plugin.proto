@@ -179,6 +179,10 @@ message FilterItem {
     repeated Item items = 2;
 }
 
+message FilterItems {
+    repeated FilterItem items = 1;
+}
+
 // media stream
 message MediaStream {
     string media_stream_id = 1;  // media stream id

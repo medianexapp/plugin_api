@@ -918,6 +918,24 @@ func (x *FilterItem) GetItems() []*Item {
 	return nil
 }
 
+type FilterItems struct {
+	unknownFields []byte
+	Items         []*FilterItem `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+}
+
+func (x *FilterItems) Reset() {
+	*x = FilterItems{}
+}
+
+func (*FilterItems) ProtoMessage() {}
+
+func (x *FilterItems) GetItems() []*FilterItem {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
 // media stream
 type MediaStream struct {
 	unknownFields       []byte
@@ -2107,6 +2125,29 @@ func (m *FilterItem) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
+func (m *FilterItems) CloneVT() *FilterItems {
+	if m == nil {
+		return (*FilterItems)(nil)
+	}
+	r := new(FilterItems)
+	if rhs := m.Items; rhs != nil {
+		tmpContainer := make([]*FilterItem, len(rhs))
+		for k, v := range rhs {
+			tmpContainer[k] = v.CloneVT()
+		}
+		r.Items = tmpContainer
+	}
+	if len(m.unknownFields) > 0 {
+		r.unknownFields = make([]byte, len(m.unknownFields))
+		copy(r.unknownFields, m.unknownFields)
+	}
+	return r
+}
+
+func (m *FilterItems) CloneMessageVT() protobuf_go_lite.CloneMessage {
+	return m.CloneVT()
+}
+
 func (m *MediaStream_Credit) CloneVT() *MediaStream_Credit {
 	if m == nil {
 		return (*MediaStream_Credit)(nil)
@@ -3176,6 +3217,39 @@ func (this *FilterItem) EqualVT(that *FilterItem) bool {
 
 func (this *FilterItem) EqualMessageVT(thatMsg any) bool {
 	that, ok := thatMsg.(*FilterItem)
+	if !ok {
+		return false
+	}
+	return this.EqualVT(that)
+}
+func (this *FilterItems) EqualVT(that *FilterItems) bool {
+	if this == that {
+		return true
+	} else if this == nil || that == nil {
+		return false
+	}
+	if len(this.Items) != len(that.Items) {
+		return false
+	}
+	for i, vx := range this.Items {
+		vy := that.Items[i]
+		if p, q := vx, vy; p != q {
+			if p == nil {
+				p = &FilterItem{}
+			}
+			if q == nil {
+				q = &FilterItem{}
+			}
+			if !p.EqualVT(q) {
+				return false
+			}
+		}
+	}
+	return string(this.unknownFields) == string(that.unknownFields)
+}
+
+func (this *FilterItems) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*FilterItems)
 	if !ok {
 		return false
 	}
@@ -5147,6 +5221,69 @@ func (x *FilterItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 
 // UnmarshalJSON unmarshals the FilterItem from JSON.
 func (x *FilterItem) UnmarshalJSON(b []byte) error {
+	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
+// MarshalProtoJSON marshals the FilterItems message to JSON.
+func (x *FilterItems) MarshalProtoJSON(s *json.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.Items) > 0 || s.HasField("items") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("items")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.Items {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("items"))
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the FilterItems to JSON.
+func (x *FilterItems) MarshalJSON() ([]byte, error) {
+	return json.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the FilterItems message from JSON.
+func (x *FilterItems) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.Skip() // ignore unknown field
+		case "items":
+			s.AddField("items")
+			if s.ReadNil() {
+				x.Items = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.Items = append(x.Items, nil)
+					return
+				}
+				v := &FilterItem{}
+				v.UnmarshalProtoJSON(s.WithField("items", false))
+				if s.Err() != nil {
+					return
+				}
+				x.Items = append(x.Items, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the FilterItems from JSON.
+func (x *FilterItems) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
@@ -7254,6 +7391,51 @@ func (m *FilterItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *FilterItems) MarshalVT() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVT(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *FilterItems) MarshalToVT(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVT(dAtA[:size])
+}
+
+func (m *FilterItems) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Items) > 0 {
+		for iNdEx := len(m.Items) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Items[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *MediaStream_Credit) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -9168,6 +9350,51 @@ func (m *FilterItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *FilterItems) MarshalVTStrict() (dAtA []byte, err error) {
+	if m == nil {
+		return nil, nil
+	}
+	size := m.SizeVT()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBufferVTStrict(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *FilterItems) MarshalToVTStrict(dAtA []byte) (int, error) {
+	size := m.SizeVT()
+	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
+}
+
+func (m *FilterItems) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+	if m == nil {
+		return 0, nil
+	}
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.unknownFields != nil {
+		i -= len(m.unknownFields)
+		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.Items) > 0 {
+		for iNdEx := len(m.Items) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Items[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func (m *MediaStream_Credit) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
@@ -10255,6 +10482,22 @@ func (m *FilterItem) SizeVT() (n int) {
 	return n
 }
 
+func (m *FilterItems) SizeVT() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.Items) > 0 {
+		for _, e := range m.Items {
+			l = e.SizeVT()
+			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+		}
+	}
+	n += len(m.unknownFields)
+	return n
+}
+
 func (m *MediaStream_Credit) SizeVT() (n int) {
 	if m == nil {
 		return 0
@@ -11278,6 +11521,29 @@ func (x *FilterItem) MarshalProtoText() string {
 }
 
 func (x *FilterItem) String() string {
+	return x.MarshalProtoText()
+}
+func (x *FilterItems) MarshalProtoText() string {
+	var sb strings.Builder
+	sb.WriteString("FilterItems {")
+	if len(x.Items) > 0 {
+		if sb.Len() > 13 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("items: [")
+		for i, v := range x.Items {
+			if i > 0 {
+				sb.WriteString(", ")
+			}
+			sb.WriteString(v.MarshalProtoText())
+		}
+		sb.WriteString("]")
+	}
+	sb.WriteString("}")
+	return sb.String()
+}
+
+func (x *FilterItems) String() string {
 	return x.MarshalProtoText()
 }
 func (x MediaStream_MediaStreamType) MarshalProtoText() string {
@@ -14939,6 +15205,91 @@ func (m *FilterItem) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Items = append(m.Items, &Item{})
+			if err := m.Items[len(m.Items)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *FilterItems) UnmarshalVT(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: FilterItems: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: FilterItems: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Items", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Items = append(m.Items, &FilterItem{})
 			if err := m.Items[len(m.Items)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -19752,6 +20103,91 @@ func (m *FilterItem) UnmarshalVTUnsafe(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Items = append(m.Items, &Item{})
+			if err := m.Items[len(m.Items)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.unknownFields = append(m.unknownFields, dAtA[iNdEx:iNdEx+skippy]...)
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *FilterItems) UnmarshalVTUnsafe(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return protobuf_go_lite.ErrIntOverflow
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: FilterItems: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: FilterItems: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Items", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Items = append(m.Items, &FilterItem{})
 			if err := m.Items[len(m.Items)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}

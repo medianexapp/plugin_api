@@ -1806,6 +1806,55 @@ class FilterItem extends $pb.GeneratedMessage {
   $pb.PbList<Item> get items => $_getList(1);
 }
 
+class FilterItems extends $pb.GeneratedMessage {
+  factory FilterItems({
+    $core.Iterable<FilterItem>? items,
+  }) {
+    final result = create();
+    if (items != null) result.items.addAll(items);
+    return result;
+  }
+
+  FilterItems._();
+
+  factory FilterItems.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory FilterItems.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'FilterItems',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
+      createEmptyInstance: create)
+    ..pPM<FilterItem>(1, _omitFieldNames ? '' : 'items',
+        subBuilder: FilterItem.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FilterItems clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  FilterItems copyWith(void Function(FilterItems) updates) =>
+      super.copyWith((message) => updates(message as FilterItems))
+          as FilterItems;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static FilterItems create() => FilterItems._();
+  @$core.override
+  FilterItems createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static FilterItems getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<FilterItems>(create);
+  static FilterItems? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $pb.PbList<FilterItem> get items => $_getList(0);
+}
+
 class MediaStream_Credit extends $pb.GeneratedMessage {
   factory MediaStream_Credit({
     $core.String? name,

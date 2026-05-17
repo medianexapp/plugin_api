@@ -34,9 +34,9 @@ type IPlugin interface {
 	GetFileResource(req *plugin.GetFileResourceRequest) (fileResource *plugin.FileResource, err error)
 	// ListStramMediaData
 	// support filter by multi column
-	GetSubMenu() ([]*plugin.Item, error)
+	GetSubMenu() (*plugin.SubMenu, error)
 	// get page filter items
-	GetFilterItems(subMenu *plugin.Item) ([]*plugin.FilterItem, error)
+	GetFilterItems(subMenu *plugin.Item) (*plugin.FilterItems, error)
 	// list media stream
 	ListMediaStream(req *plugin.ListMediaStreamRequest) (*plugin.ListMediaStreamResponse, error)
 	// get media stream by id
