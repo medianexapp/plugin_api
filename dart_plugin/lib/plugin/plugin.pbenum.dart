@@ -19,13 +19,13 @@ class PluginType extends $pb.ProtobufEnum {
       PluginType._(0, _omitEnumNames ? '' : 'PLUGIN_TYPE_UNSPECIFIED');
   static const PluginType PLUGIN_TYPE_DRIVER =
       PluginType._(1, _omitEnumNames ? '' : 'PLUGIN_TYPE_DRIVER');
-  static const PluginType PLUGIN_TYPE_MEDIA_Item =
-      PluginType._(2, _omitEnumNames ? '' : 'PLUGIN_TYPE_MEDIA_Item');
+  static const PluginType PLUGIN_TYPE_MEDIA =
+      PluginType._(2, _omitEnumNames ? '' : 'PLUGIN_TYPE_MEDIA');
 
   static const $core.List<PluginType> values = <PluginType>[
     PLUGIN_TYPE_UNSPECIFIED,
     PLUGIN_TYPE_DRIVER,
-    PLUGIN_TYPE_MEDIA_Item,
+    PLUGIN_TYPE_MEDIA,
   ];
 
   static final $core.List<PluginType?> _byValue =
@@ -128,47 +128,44 @@ class FileResource_ResourceType extends $pb.ProtobufEnum {
   const FileResource_ResourceType._(super.value, super.name);
 }
 
-class MediaItem_MediaItemType extends $pb.ProtobufEnum {
-  static const MediaItem_MediaItemType MEDIA_ITEM_UNSPECIFIED =
-      MediaItem_MediaItemType._(
-          0, _omitEnumNames ? '' : 'MEDIA_ITEM_UNSPECIFIED');
-  static const MediaItem_MediaItemType MEDIA_ITEM_SERIES =
-      MediaItem_MediaItemType._(1, _omitEnumNames ? '' : 'MEDIA_ITEM_SERIES');
-  static const MediaItem_MediaItemType MEDIA_ITEM_INFO =
-      MediaItem_MediaItemType._(2, _omitEnumNames ? '' : 'MEDIA_ITEM_INFO');
-  static const MediaItem_MediaItemType MEDIA_ITEM_PLAY_ITEM =
-      MediaItem_MediaItemType._(
-          3, _omitEnumNames ? '' : 'MEDIA_ITEM_PLAY_ITEM');
+class Media_MediaType extends $pb.ProtobufEnum {
+  static const Media_MediaType MEDIA_UNSPECIFIED =
+      Media_MediaType._(0, _omitEnumNames ? '' : 'MEDIA_UNSPECIFIED');
+  static const Media_MediaType MEDIA_SERIES =
+      Media_MediaType._(1, _omitEnumNames ? '' : 'MEDIA_SERIES');
+  static const Media_MediaType MEDIA_INFO =
+      Media_MediaType._(2, _omitEnumNames ? '' : 'MEDIA_INFO');
+  static const Media_MediaType MEDIA_ITEM =
+      Media_MediaType._(3, _omitEnumNames ? '' : 'MEDIA_ITEM');
 
-  static const $core.List<MediaItem_MediaItemType> values =
-      <MediaItem_MediaItemType>[
-    MEDIA_ITEM_UNSPECIFIED,
-    MEDIA_ITEM_SERIES,
-    MEDIA_ITEM_INFO,
-    MEDIA_ITEM_PLAY_ITEM,
+  static const $core.List<Media_MediaType> values = <Media_MediaType>[
+    MEDIA_UNSPECIFIED,
+    MEDIA_SERIES,
+    MEDIA_INFO,
+    MEDIA_ITEM,
   ];
 
-  static final $core.List<MediaItem_MediaItemType?> _byValue =
+  static final $core.List<Media_MediaType?> _byValue =
       $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static MediaItem_MediaItemType? valueOf($core.int value) =>
+  static Media_MediaType? valueOf($core.int value) =>
       value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const MediaItem_MediaItemType._(super.value, super.name);
+  const Media_MediaType._(super.value, super.name);
 }
 
-class MediaItem_CreditType extends $pb.ProtobufEnum {
-  static const MediaItem_CreditType CreditUNSPECIFIED =
-      MediaItem_CreditType._(0, _omitEnumNames ? '' : 'CreditUNSPECIFIED');
-  static const MediaItem_CreditType CreditActor =
-      MediaItem_CreditType._(1, _omitEnumNames ? '' : 'CreditActor');
-  static const MediaItem_CreditType CreditCastDirecting =
-      MediaItem_CreditType._(2, _omitEnumNames ? '' : 'CreditCastDirecting');
-  static const MediaItem_CreditType CreditCastProduction =
-      MediaItem_CreditType._(3, _omitEnumNames ? '' : 'CreditCastProduction');
-  static const MediaItem_CreditType CreditCastWriting =
-      MediaItem_CreditType._(4, _omitEnumNames ? '' : 'CreditCastWriting');
+class Media_CreditType extends $pb.ProtobufEnum {
+  static const Media_CreditType CreditUNSPECIFIED =
+      Media_CreditType._(0, _omitEnumNames ? '' : 'CreditUNSPECIFIED');
+  static const Media_CreditType CreditActor =
+      Media_CreditType._(1, _omitEnumNames ? '' : 'CreditActor');
+  static const Media_CreditType CreditCastDirecting =
+      Media_CreditType._(2, _omitEnumNames ? '' : 'CreditCastDirecting');
+  static const Media_CreditType CreditCastProduction =
+      Media_CreditType._(3, _omitEnumNames ? '' : 'CreditCastProduction');
+  static const Media_CreditType CreditCastWriting =
+      Media_CreditType._(4, _omitEnumNames ? '' : 'CreditCastWriting');
 
-  static const $core.List<MediaItem_CreditType> values = <MediaItem_CreditType>[
+  static const $core.List<Media_CreditType> values = <Media_CreditType>[
     CreditUNSPECIFIED,
     CreditActor,
     CreditCastDirecting,
@@ -176,12 +173,12 @@ class MediaItem_CreditType extends $pb.ProtobufEnum {
     CreditCastWriting,
   ];
 
-  static final $core.List<MediaItem_CreditType?> _byValue =
+  static final $core.List<Media_CreditType?> _byValue =
       $pb.ProtobufEnum.$_initByValueList(values, 4);
-  static MediaItem_CreditType? valueOf($core.int value) =>
+  static Media_CreditType? valueOf($core.int value) =>
       value < 0 || value >= _byValue.length ? null : _byValue[value];
 
-  const MediaItem_CreditType._(super.value, super.name);
+  const Media_CreditType._(super.value, super.name);
 }
 
 const $core.bool _omitEnumNames =

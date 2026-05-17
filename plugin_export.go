@@ -165,15 +165,15 @@ func _get_filter_items(reqPtr, reqLen uint64) (ret uint64) {
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(filterItemsData)), uint32(len(filterItemsData)))
 }
 
-//go:wasmexport list_media_item
-func _list_media_item(reqPtr, reqLen uint64) (ret uint64) {
+//go:wasmexport list_media_item_info
+func _list_media_item_info(reqPtr, reqLen uint64) (ret uint64) {
 	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
-	req := &plugin.ListMediaItemRequest{}
+	req := &plugin.ListMediaInfoRequest{}
 	err := req.UnmarshalVT(bytes)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	resp, err := pluginExport.ListMediaItem(req)
+	resp, err := pluginExport.ListMediaItemInfo(req)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
@@ -184,15 +184,15 @@ func _list_media_item(reqPtr, reqLen uint64) (ret uint64) {
 	return util.Uint32ToUint64(uint32(util.BytesToPtr(respData)), uint32(len(respData)))
 }
 
-//go:wasmexport get_media_item
-func _get_media_item(reqPtr, reqLen uint64) (ret uint64) {
+//go:wasmexport get_media_item_detail
+func _get_media_item_detail(reqPtr, reqLen uint64) (ret uint64) {
 	bytes := util.PtrToBytes(uint32(reqPtr), uint32(reqLen))
-	req := &plugin.GetMediaItemRequest{}
+	req := &plugin.GetMediaDetailRequest{}
 	err := req.UnmarshalVT(bytes)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}
-	resp, err := pluginExport.GetMediaItem(req)
+	resp, err := pluginExport.GetMediaItemDetail(req)
 	if err != nil {
 		return util.ErrorToUint64(err)
 	}

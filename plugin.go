@@ -38,9 +38,9 @@ type IPlugin interface {
 	// get page filter items
 	GetFilterItems(subItem *plugin.Item) (*plugin.FilterItems, error)
 	// list media item info
-	ListMediaItem(req *plugin.ListMediaItemRequest) (*plugin.ListMediaItemResponse, error)
+	ListMediaItemInfo(req *plugin.ListMediaInfoRequest) (*plugin.ListMediaInfoResponse, error)
 	// get media item info by id
-	GetMediaItem(req *plugin.GetMediaItemRequest) (*plugin.GetMediaItemResponse, error)
+	GetMediaItemDetail(req *plugin.GetMediaDetailRequest) (*plugin.GetMediaDetailResponse, error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {

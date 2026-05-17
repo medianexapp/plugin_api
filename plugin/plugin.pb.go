@@ -20,7 +20,7 @@ type PluginType int32
 const (
 	PluginType_PLUGIN_TYPE_UNSPECIFIED PluginType = 0
 	PluginType_PLUGIN_TYPE_DRIVER      PluginType = 1
-	PluginType_PLUGIN_TYPE_MEDIA_Item  PluginType = 2
+	PluginType_PLUGIN_TYPE_MEDIA       PluginType = 2
 )
 
 // Enum value maps for PluginType.
@@ -28,12 +28,12 @@ var (
 	PluginType_name = map[int32]string{
 		0: "PLUGIN_TYPE_UNSPECIFIED",
 		1: "PLUGIN_TYPE_DRIVER",
-		2: "PLUGIN_TYPE_MEDIA_Item",
+		2: "PLUGIN_TYPE_MEDIA",
 	}
 	PluginType_value = map[string]int32{
 		"PLUGIN_TYPE_UNSPECIFIED": 0,
 		"PLUGIN_TYPE_DRIVER":      1,
-		"PLUGIN_TYPE_MEDIA_Item":  2,
+		"PLUGIN_TYPE_MEDIA":       2,
 	}
 )
 
@@ -181,65 +181,65 @@ func (x FileResource_ResourceType) String() string {
 	return strconv.Itoa(int(x))
 }
 
-type MediaItem_MediaItemType int32
+type Media_MediaType int32
 
 const (
-	MediaItem_MEDIA_ITEM_UNSPECIFIED MediaItem_MediaItemType = 0
-	MediaItem_MEDIA_ITEM_SERIES      MediaItem_MediaItemType = 1
-	MediaItem_MEDIA_ITEM_INFO        MediaItem_MediaItemType = 2
-	MediaItem_MEDIA_ITEM_PLAY_ITEM   MediaItem_MediaItemType = 3
+	Media_MEDIA_UNSPECIFIED Media_MediaType = 0
+	Media_MEDIA_SERIES      Media_MediaType = 1
+	Media_MEDIA_INFO        Media_MediaType = 2
+	Media_MEDIA_ITEM        Media_MediaType = 3
 )
 
-// Enum value maps for MediaItem_MediaItemType.
+// Enum value maps for Media_MediaType.
 var (
-	MediaItem_MediaItemType_name = map[int32]string{
-		0: "MEDIA_ITEM_UNSPECIFIED",
-		1: "MEDIA_ITEM_SERIES",
-		2: "MEDIA_ITEM_INFO",
-		3: "MEDIA_ITEM_PLAY_ITEM",
+	Media_MediaType_name = map[int32]string{
+		0: "MEDIA_UNSPECIFIED",
+		1: "MEDIA_SERIES",
+		2: "MEDIA_INFO",
+		3: "MEDIA_ITEM",
 	}
-	MediaItem_MediaItemType_value = map[string]int32{
-		"MEDIA_ITEM_UNSPECIFIED": 0,
-		"MEDIA_ITEM_SERIES":      1,
-		"MEDIA_ITEM_INFO":        2,
-		"MEDIA_ITEM_PLAY_ITEM":   3,
+	Media_MediaType_value = map[string]int32{
+		"MEDIA_UNSPECIFIED": 0,
+		"MEDIA_SERIES":      1,
+		"MEDIA_INFO":        2,
+		"MEDIA_ITEM":        3,
 	}
 )
 
-func (x MediaItem_MediaItemType) Enum() *MediaItem_MediaItemType {
-	p := new(MediaItem_MediaItemType)
+func (x Media_MediaType) Enum() *Media_MediaType {
+	p := new(Media_MediaType)
 	*p = x
 	return p
 }
 
-func (x MediaItem_MediaItemType) String() string {
-	name, valid := MediaItem_MediaItemType_name[int32(x)]
+func (x Media_MediaType) String() string {
+	name, valid := Media_MediaType_name[int32(x)]
 	if valid {
 		return name
 	}
 	return strconv.Itoa(int(x))
 }
 
-type MediaItem_CreditType int32
+type Media_CreditType int32
 
 const (
-	MediaItem_CreditUNSPECIFIED    MediaItem_CreditType = 0
-	MediaItem_CreditActor          MediaItem_CreditType = 1 // Actor
-	MediaItem_CreditCastDirecting  MediaItem_CreditType = 2 // Directing
-	MediaItem_CreditCastProduction MediaItem_CreditType = 3 // Production
-	MediaItem_CreditCastWriting    MediaItem_CreditType = 4 // Writing
+	Media_CreditUNSPECIFIED    Media_CreditType = 0
+	Media_CreditActor          Media_CreditType = 1 // Actor
+	Media_CreditCastDirecting  Media_CreditType = 2 // Directing
+	Media_CreditCastProduction Media_CreditType = 3 // Production
+	Media_CreditCastWriting    Media_CreditType = 4 // Writing
 )
 
-// Enum value maps for MediaItem_CreditType.
+// Enum value maps for Media_CreditType.
 var (
-	MediaItem_CreditType_name = map[int32]string{
+	Media_CreditType_name = map[int32]string{
 		0: "CreditUNSPECIFIED",
 		1: "CreditActor",
 		2: "CreditCastDirecting",
 		3: "CreditCastProduction",
 		4: "CreditCastWriting",
 	}
-	MediaItem_CreditType_value = map[string]int32{
+	Media_CreditType_value = map[string]int32{
 		"CreditUNSPECIFIED":    0,
 		"CreditActor":          1,
 		"CreditCastDirecting":  2,
@@ -248,14 +248,14 @@ var (
 	}
 )
 
-func (x MediaItem_CreditType) Enum() *MediaItem_CreditType {
-	p := new(MediaItem_CreditType)
+func (x Media_CreditType) Enum() *Media_CreditType {
+	p := new(Media_CreditType)
 	*p = x
 	return p
 }
 
-func (x MediaItem_CreditType) String() string {
-	name, valid := MediaItem_CreditType_name[int32(x)]
+func (x Media_CreditType) String() string {
+	name, valid := Media_CreditType_name[int32(x)]
 	if valid {
 		return name
 	}
@@ -264,7 +264,7 @@ func (x MediaItem_CreditType) String() string {
 
 type Formdata struct {
 	unknownFields []byte
-	FormItems     []*Formdata_FormItem `protobuf:"bytes,11,rep,name=form_items,json=formItems,proto3" json:"formItems,omitempty"`
+	Forms         []*Formdata_FormItem `protobuf:"bytes,11,rep,name=forms,proto3" json:"forms,omitempty"`
 }
 
 func (x *Formdata) Reset() {
@@ -273,9 +273,9 @@ func (x *Formdata) Reset() {
 
 func (*Formdata) ProtoMessage() {}
 
-func (x *Formdata) GetFormItems() []*Formdata_FormItem {
+func (x *Formdata) GetForms() []*Formdata_FormItem {
 	if x != nil {
-		return x.FormItems
+		return x.Forms
 	}
 	return nil
 }
@@ -646,7 +646,7 @@ type GetFileResourceRequest struct {
 	FileEntry     *FileEntry `protobuf:"bytes,10,opt,name=file_entry,json=fileEntry,proto3" json:"fileEntry,omitempty"`
 	IsMedia       bool       `protobuf:"varint,11,opt,name=is_media,json=isMedia,proto3" json:"isMedia,omitempty"` // media file
 	// media Item play item id
-	Media_ItemPlayItemId string `protobuf:"bytes,20,opt,name=media_Item_play_item_id,json=mediaItemPlayItemId,proto3" json:"mediaItemPlayItemId,omitempty"`
+	MediaPlayId string `protobuf:"bytes,20,opt,name=media_play_id,json=mediaPlayId,proto3" json:"mediaPlayId,omitempty"`
 }
 
 func (x *GetFileResourceRequest) Reset() {
@@ -676,9 +676,9 @@ func (x *GetFileResourceRequest) GetIsMedia() bool {
 	return false
 }
 
-func (x *GetFileResourceRequest) GetMedia_ItemPlayItemId() string {
+func (x *GetFileResourceRequest) GetMediaPlayId() string {
 	if x != nil {
-		return x.Media_ItemPlayItemId
+		return x.MediaPlayId
 	}
 	return ""
 }
@@ -894,7 +894,7 @@ func (x *MediaMenu) GetMenus() []*Item {
 
 type FilterItems struct {
 	unknownFields []byte
-	FilterItems   []*FilterItems_Filter `protobuf:"bytes,1,rep,name=filter_items,json=filterItems,proto3" json:"filterItems,omitempty"`
+	Filters       []*FilterItems_Filter `protobuf:"bytes,1,rep,name=filters,proto3" json:"filters,omitempty"`
 }
 
 func (x *FilterItems) Reset() {
@@ -903,310 +903,310 @@ func (x *FilterItems) Reset() {
 
 func (*FilterItems) ProtoMessage() {}
 
-func (x *FilterItems) GetFilterItems() []*FilterItems_Filter {
+func (x *FilterItems) GetFilters() []*FilterItems_Filter {
 	if x != nil {
-		return x.FilterItems
+		return x.Filters
 	}
 	return nil
 }
 
 // media item
-type MediaItem struct {
-	unknownFields     []byte
-	MediaItemId       string                  `protobuf:"bytes,1,opt,name=media_item_id,json=mediaItemId,proto3" json:"mediaItemId,omitempty"` // media item id
-	MediaItemType     MediaItem_MediaItemType `protobuf:"varint,2,opt,name=media_item_type,json=mediaItemType,proto3" json:"mediaItemType,omitempty"`
-	Name              string                  `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Desc              string                  `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
-	ParentMediaItemId string                  `protobuf:"bytes,5,opt,name=parent_media_item_id,json=parentMediaItemId,proto3" json:"parentMediaItemId,omitempty"`
+type Media struct {
+	unknownFields []byte
+	MediaId       string          `protobuf:"bytes,1,opt,name=media_id,json=mediaId,proto3" json:"mediaId,omitempty"` // media item id
+	MediaType     Media_MediaType `protobuf:"varint,2,opt,name=media_type,json=mediaType,proto3" json:"mediaType,omitempty"`
+	Name          string          `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Desc          string          `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	ParentMediaId string          `protobuf:"bytes,5,opt,name=parent_media_id,json=parentMediaId,proto3" json:"parentMediaId,omitempty"`
 	// media info
-	ReleaseDate      string              `protobuf:"bytes,13,opt,name=release_date,json=releaseDate,proto3" json:"releaseDate,omitempty"`
-	Year             uint64              `protobuf:"varint,14,opt,name=year,proto3" json:"year,omitempty"`
-	Genres           []string            `protobuf:"bytes,15,rep,name=genres,proto3" json:"genres,omitempty"`                             // media video genres for media Item info
-	BackdropUrl      string              `protobuf:"bytes,16,opt,name=backdrop_url,json=backdropUrl,proto3" json:"backdropUrl,omitempty"` // media video backdrop image for media Item info
-	PosterUrl        string              `protobuf:"bytes,17,opt,name=poster_url,json=posterUrl,proto3" json:"posterUrl,omitempty"`       // media video poster image for media Item info
-	OriginalName     string              `protobuf:"bytes,18,opt,name=original_name,json=originalName,proto3" json:"originalName,omitempty"`
-	OriginalLanguage string              `protobuf:"bytes,19,opt,name=original_language,json=originalLanguage,proto3" json:"originalLanguage,omitempty"`
-	Credit           []*MediaItem_Credit `protobuf:"bytes,20,rep,name=credit,proto3" json:"credit,omitempty"`                                                                                             // media credits
-	Metadata         map[string]string   `protobuf:"bytes,21,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // media metadata
+	ReleaseDate      string            `protobuf:"bytes,13,opt,name=release_date,json=releaseDate,proto3" json:"releaseDate,omitempty"`
+	Year             uint64            `protobuf:"varint,14,opt,name=year,proto3" json:"year,omitempty"`
+	Genres           []string          `protobuf:"bytes,15,rep,name=genres,proto3" json:"genres,omitempty"`                             // media video genres for media Item info
+	BackdropUrl      string            `protobuf:"bytes,16,opt,name=backdrop_url,json=backdropUrl,proto3" json:"backdropUrl,omitempty"` // media video backdrop image for media Item info
+	PosterUrl        string            `protobuf:"bytes,17,opt,name=poster_url,json=posterUrl,proto3" json:"posterUrl,omitempty"`       // media video poster image for media Item info
+	OriginalName     string            `protobuf:"bytes,18,opt,name=original_name,json=originalName,proto3" json:"originalName,omitempty"`
+	OriginalLanguage string            `protobuf:"bytes,19,opt,name=original_language,json=originalLanguage,proto3" json:"originalLanguage,omitempty"`
+	Credit           []*Media_Credit   `protobuf:"bytes,20,rep,name=credit,proto3" json:"credit,omitempty"`                                                                                             // media credits
+	Metadata         map[string]string `protobuf:"bytes,21,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // media metadata
 	// media play item
-	PlayItemIndex uint64 `protobuf:"varint,30,opt,name=play_item_index,json=playItemIndex,proto3" json:"playItemIndex,omitempty"` // play item indx
-	Duration      uint64 `protobuf:"varint,31,opt,name=duration,proto3" json:"duration,omitempty"`                                // video duration unit: s
-	StillUrl      string `protobuf:"bytes,32,opt,name=still_url,json=stillUrl,proto3" json:"stillUrl,omitempty"`                  // media video poster image for media Item play item
+	PlayIndex uint64 `protobuf:"varint,30,opt,name=play_index,json=playIndex,proto3" json:"playIndex,omitempty"` // play item indx
+	Duration  uint64 `protobuf:"varint,31,opt,name=duration,proto3" json:"duration,omitempty"`                   // video duration unit: s
+	StillUrl  string `protobuf:"bytes,32,opt,name=still_url,json=stillUrl,proto3" json:"stillUrl,omitempty"`     // media video poster image for media Item play item
 }
 
-func (x *MediaItem) Reset() {
-	*x = MediaItem{}
+func (x *Media) Reset() {
+	*x = Media{}
 }
 
-func (*MediaItem) ProtoMessage() {}
+func (*Media) ProtoMessage() {}
 
-func (x *MediaItem) GetMediaItemId() string {
+func (x *Media) GetMediaId() string {
 	if x != nil {
-		return x.MediaItemId
+		return x.MediaId
 	}
 	return ""
 }
 
-func (x *MediaItem) GetMediaItemType() MediaItem_MediaItemType {
+func (x *Media) GetMediaType() Media_MediaType {
 	if x != nil {
-		return x.MediaItemType
+		return x.MediaType
 	}
-	return MediaItem_MEDIA_ITEM_UNSPECIFIED
+	return Media_MEDIA_UNSPECIFIED
 }
 
-func (x *MediaItem) GetName() string {
+func (x *Media) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *MediaItem) GetDesc() string {
+func (x *Media) GetDesc() string {
 	if x != nil {
 		return x.Desc
 	}
 	return ""
 }
 
-func (x *MediaItem) GetParentMediaItemId() string {
+func (x *Media) GetParentMediaId() string {
 	if x != nil {
-		return x.ParentMediaItemId
+		return x.ParentMediaId
 	}
 	return ""
 }
 
-func (x *MediaItem) GetReleaseDate() string {
+func (x *Media) GetReleaseDate() string {
 	if x != nil {
 		return x.ReleaseDate
 	}
 	return ""
 }
 
-func (x *MediaItem) GetYear() uint64 {
+func (x *Media) GetYear() uint64 {
 	if x != nil {
 		return x.Year
 	}
 	return 0
 }
 
-func (x *MediaItem) GetGenres() []string {
+func (x *Media) GetGenres() []string {
 	if x != nil {
 		return x.Genres
 	}
 	return nil
 }
 
-func (x *MediaItem) GetBackdropUrl() string {
+func (x *Media) GetBackdropUrl() string {
 	if x != nil {
 		return x.BackdropUrl
 	}
 	return ""
 }
 
-func (x *MediaItem) GetPosterUrl() string {
+func (x *Media) GetPosterUrl() string {
 	if x != nil {
 		return x.PosterUrl
 	}
 	return ""
 }
 
-func (x *MediaItem) GetOriginalName() string {
+func (x *Media) GetOriginalName() string {
 	if x != nil {
 		return x.OriginalName
 	}
 	return ""
 }
 
-func (x *MediaItem) GetOriginalLanguage() string {
+func (x *Media) GetOriginalLanguage() string {
 	if x != nil {
 		return x.OriginalLanguage
 	}
 	return ""
 }
 
-func (x *MediaItem) GetCredit() []*MediaItem_Credit {
+func (x *Media) GetCredit() []*Media_Credit {
 	if x != nil {
 		return x.Credit
 	}
 	return nil
 }
 
-func (x *MediaItem) GetMetadata() map[string]string {
+func (x *Media) GetMetadata() map[string]string {
 	if x != nil {
 		return x.Metadata
 	}
 	return nil
 }
 
-func (x *MediaItem) GetPlayItemIndex() uint64 {
+func (x *Media) GetPlayIndex() uint64 {
 	if x != nil {
-		return x.PlayItemIndex
+		return x.PlayIndex
 	}
 	return 0
 }
 
-func (x *MediaItem) GetDuration() uint64 {
+func (x *Media) GetDuration() uint64 {
 	if x != nil {
 		return x.Duration
 	}
 	return 0
 }
 
-func (x *MediaItem) GetStillUrl() string {
+func (x *Media) GetStillUrl() string {
 	if x != nil {
 		return x.StillUrl
 	}
 	return ""
 }
 
-type ListMediaItemRequest struct {
+type ListMediaInfoRequest struct {
 	unknownFields []byte
-	MenuItem      *Item        `protobuf:"bytes,1,opt,name=menu_item,json=menuItem,proto3" json:"menuItem,omitempty"`          // menu sub item
-	FilterItems   *FilterItems `protobuf:"bytes,2,opt,name=filter_items,json=filterItems,proto3" json:"filterItems,omitempty"` // sub page filter
-	SearchName    string       `protobuf:"bytes,3,opt,name=search_name,json=searchName,proto3" json:"searchName,omitempty"`    // name search
+	Menu          *Item        `protobuf:"bytes,1,opt,name=menu,proto3" json:"menu,omitempty"`                              // menu sub item
+	Filters       *FilterItems `protobuf:"bytes,2,opt,name=filters,proto3" json:"filters,omitempty"`                        // sub page filter
+	SearchName    string       `protobuf:"bytes,3,opt,name=search_name,json=searchName,proto3" json:"searchName,omitempty"` // name search
 	Page          uint64       `protobuf:"varint,10,opt,name=page,proto3" json:"page,omitempty"`
 	PageSize      uint64       `protobuf:"varint,11,opt,name=page_size,json=pageSize,proto3" json:"pageSize,omitempty"`
 	PageKey       string       `protobuf:"bytes,12,opt,name=page_key,json=pageKey,proto3" json:"pageKey,omitempty"`
 }
 
-func (x *ListMediaItemRequest) Reset() {
-	*x = ListMediaItemRequest{}
+func (x *ListMediaInfoRequest) Reset() {
+	*x = ListMediaInfoRequest{}
 }
 
-func (*ListMediaItemRequest) ProtoMessage() {}
+func (*ListMediaInfoRequest) ProtoMessage() {}
 
-func (x *ListMediaItemRequest) GetMenuItem() *Item {
+func (x *ListMediaInfoRequest) GetMenu() *Item {
 	if x != nil {
-		return x.MenuItem
+		return x.Menu
 	}
 	return nil
 }
 
-func (x *ListMediaItemRequest) GetFilterItems() *FilterItems {
+func (x *ListMediaInfoRequest) GetFilters() *FilterItems {
 	if x != nil {
-		return x.FilterItems
+		return x.Filters
 	}
 	return nil
 }
 
-func (x *ListMediaItemRequest) GetSearchName() string {
+func (x *ListMediaInfoRequest) GetSearchName() string {
 	if x != nil {
 		return x.SearchName
 	}
 	return ""
 }
 
-func (x *ListMediaItemRequest) GetPage() uint64 {
+func (x *ListMediaInfoRequest) GetPage() uint64 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *ListMediaItemRequest) GetPageSize() uint64 {
+func (x *ListMediaInfoRequest) GetPageSize() uint64 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
-func (x *ListMediaItemRequest) GetPageKey() string {
+func (x *ListMediaInfoRequest) GetPageKey() string {
 	if x != nil {
 		return x.PageKey
 	}
 	return ""
 }
 
-type ListMediaItemResponse struct {
+type ListMediaInfoResponse struct {
 	unknownFields     []byte
-	Media_ItemInfos   []*MediaItem `protobuf:"bytes,1,rep,name=media_Item_infos,json=mediaItemInfos,proto3" json:"mediaItemInfos,omitempty"`
+	MediaInfos        []*Media     `protobuf:"bytes,1,rep,name=media_infos,json=mediaInfos,proto3" json:"mediaInfos,omitempty"`
 	SupportSearchName bool         `protobuf:"varint,10,opt,name=support_search_name,json=supportSearchName,proto3" json:"supportSearchName,omitempty"`
-	AllFilterItems    *FilterItems `protobuf:"bytes,11,opt,name=all_filter_items,json=allFilterItems,proto3" json:"allFilterItems,omitempty"` // sub page filter
+	AllFilters        *FilterItems `protobuf:"bytes,11,opt,name=all_filters,json=allFilters,proto3" json:"allFilters,omitempty"` // sub page filter
 	NextPageKey       string       `protobuf:"bytes,12,opt,name=next_page_key,json=nextPageKey,proto3" json:"nextPageKey,omitempty"`
 }
 
-func (x *ListMediaItemResponse) Reset() {
-	*x = ListMediaItemResponse{}
+func (x *ListMediaInfoResponse) Reset() {
+	*x = ListMediaInfoResponse{}
 }
 
-func (*ListMediaItemResponse) ProtoMessage() {}
+func (*ListMediaInfoResponse) ProtoMessage() {}
 
-func (x *ListMediaItemResponse) GetMedia_ItemInfos() []*MediaItem {
+func (x *ListMediaInfoResponse) GetMediaInfos() []*Media {
 	if x != nil {
-		return x.Media_ItemInfos
+		return x.MediaInfos
 	}
 	return nil
 }
 
-func (x *ListMediaItemResponse) GetSupportSearchName() bool {
+func (x *ListMediaInfoResponse) GetSupportSearchName() bool {
 	if x != nil {
 		return x.SupportSearchName
 	}
 	return false
 }
 
-func (x *ListMediaItemResponse) GetAllFilterItems() *FilterItems {
+func (x *ListMediaInfoResponse) GetAllFilters() *FilterItems {
 	if x != nil {
-		return x.AllFilterItems
+		return x.AllFilters
 	}
 	return nil
 }
 
-func (x *ListMediaItemResponse) GetNextPageKey() string {
+func (x *ListMediaInfoResponse) GetNextPageKey() string {
 	if x != nil {
 		return x.NextPageKey
 	}
 	return ""
 }
 
-type GetMediaItemRequest struct {
-	unknownFields    []byte
-	Media_ItemInfoId string `protobuf:"bytes,1,opt,name=media_Item_info_id,json=mediaItemInfoId,proto3" json:"mediaItemInfoId,omitempty"`
+type GetMediaDetailRequest struct {
+	unknownFields []byte
+	MediaInfoId   string `protobuf:"bytes,1,opt,name=media_info_id,json=mediaInfoId,proto3" json:"mediaInfoId,omitempty"`
 }
 
-func (x *GetMediaItemRequest) Reset() {
-	*x = GetMediaItemRequest{}
+func (x *GetMediaDetailRequest) Reset() {
+	*x = GetMediaDetailRequest{}
 }
 
-func (*GetMediaItemRequest) ProtoMessage() {}
+func (*GetMediaDetailRequest) ProtoMessage() {}
 
-func (x *GetMediaItemRequest) GetMedia_ItemInfoId() string {
+func (x *GetMediaDetailRequest) GetMediaInfoId() string {
 	if x != nil {
-		return x.Media_ItemInfoId
+		return x.MediaInfoId
 	}
 	return ""
 }
 
-type GetMediaItemResponse struct {
-	unknownFields       []byte
-	Media_ItemSeries    *MediaItem   `protobuf:"bytes,1,opt,name=media_Item_series,json=mediaItemSeries,proto3" json:"mediaItemSeries,omitempty"`
-	Media_ItemInfo      *MediaItem   `protobuf:"bytes,2,opt,name=media_Item_info,json=mediaItemInfo,proto3" json:"mediaItemInfo,omitempty"`
-	Media_ItemPlayItems []*MediaItem `protobuf:"bytes,3,rep,name=media_Item_play_items,json=mediaItemPlayItems,proto3" json:"mediaItemPlayItems,omitempty"`
+type GetMediaDetailResponse struct {
+	unknownFields []byte
+	MediaSeries   *Media   `protobuf:"bytes,1,opt,name=media_series,json=mediaSeries,proto3" json:"mediaSeries,omitempty"`
+	MediaInfo     *Media   `protobuf:"bytes,2,opt,name=media_info,json=mediaInfo,proto3" json:"mediaInfo,omitempty"`
+	MediaItems    []*Media `protobuf:"bytes,3,rep,name=media_items,json=mediaItems,proto3" json:"mediaItems,omitempty"`
 }
 
-func (x *GetMediaItemResponse) Reset() {
-	*x = GetMediaItemResponse{}
+func (x *GetMediaDetailResponse) Reset() {
+	*x = GetMediaDetailResponse{}
 }
 
-func (*GetMediaItemResponse) ProtoMessage() {}
+func (*GetMediaDetailResponse) ProtoMessage() {}
 
-func (x *GetMediaItemResponse) GetMedia_ItemSeries() *MediaItem {
+func (x *GetMediaDetailResponse) GetMediaSeries() *Media {
 	if x != nil {
-		return x.Media_ItemSeries
+		return x.MediaSeries
 	}
 	return nil
 }
 
-func (x *GetMediaItemResponse) GetMedia_ItemInfo() *MediaItem {
+func (x *GetMediaDetailResponse) GetMediaInfo() *Media {
 	if x != nil {
-		return x.Media_ItemInfo
+		return x.MediaInfo
 	}
 	return nil
 }
 
-func (x *GetMediaItemResponse) GetMedia_ItemPlayItems() []*MediaItem {
+func (x *GetMediaDetailResponse) GetMediaItems() []*Media {
 	if x != nil {
-		return x.Media_ItemPlayItems
+		return x.MediaItems
 	}
 	return nil
 }
@@ -1491,52 +1491,52 @@ func (x *FilterItems_Filter) GetItems() []*Item {
 	return nil
 }
 
-type MediaItem_Credit struct {
+type Media_Credit struct {
 	unknownFields []byte
-	Name          string               `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`                               // credit name
-	CreditType    MediaItem_CreditType `protobuf:"varint,2,opt,name=credit_type,json=creditType,proto3" json:"creditType,omitempty"` // credit type
+	Name          string           `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`                               // credit name
+	CreditType    Media_CreditType `protobuf:"varint,2,opt,name=credit_type,json=creditType,proto3" json:"creditType,omitempty"` // credit type
 }
 
-func (x *MediaItem_Credit) Reset() {
-	*x = MediaItem_Credit{}
+func (x *Media_Credit) Reset() {
+	*x = Media_Credit{}
 }
 
-func (*MediaItem_Credit) ProtoMessage() {}
+func (*Media_Credit) ProtoMessage() {}
 
-func (x *MediaItem_Credit) GetName() string {
+func (x *Media_Credit) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *MediaItem_Credit) GetCreditType() MediaItem_CreditType {
+func (x *Media_Credit) GetCreditType() Media_CreditType {
 	if x != nil {
 		return x.CreditType
 	}
-	return MediaItem_CreditUNSPECIFIED
+	return Media_CreditUNSPECIFIED
 }
 
-type MediaItem_MetadataEntry struct {
+type Media_MetadataEntry struct {
 	unknownFields []byte
 	Key           string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *MediaItem_MetadataEntry) Reset() {
-	*x = MediaItem_MetadataEntry{}
+func (x *Media_MetadataEntry) Reset() {
+	*x = Media_MetadataEntry{}
 }
 
-func (*MediaItem_MetadataEntry) ProtoMessage() {}
+func (*Media_MetadataEntry) ProtoMessage() {}
 
-func (x *MediaItem_MetadataEntry) GetKey() string {
+func (x *Media_MetadataEntry) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-func (x *MediaItem_MetadataEntry) GetValue() string {
+func (x *Media_MetadataEntry) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
@@ -1668,12 +1668,12 @@ func (m *Formdata) CloneVT() *Formdata {
 		return (*Formdata)(nil)
 	}
 	r := new(Formdata)
-	if rhs := m.FormItems; rhs != nil {
+	if rhs := m.Forms; rhs != nil {
 		tmpContainer := make([]*Formdata_FormItem, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
-		r.FormItems = tmpContainer
+		r.Forms = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -1923,7 +1923,7 @@ func (m *GetFileResourceRequest) CloneVT() *GetFileResourceRequest {
 	r.FilePath = m.FilePath
 	r.FileEntry = m.FileEntry.CloneVT()
 	r.IsMedia = m.IsMedia
-	r.Media_ItemPlayItemId = m.Media_ItemPlayItemId
+	r.MediaPlayId = m.MediaPlayId
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -2130,12 +2130,12 @@ func (m *FilterItems) CloneVT() *FilterItems {
 		return (*FilterItems)(nil)
 	}
 	r := new(FilterItems)
-	if rhs := m.FilterItems; rhs != nil {
+	if rhs := m.Filters; rhs != nil {
 		tmpContainer := make([]*FilterItems_Filter, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
-		r.FilterItems = tmpContainer
+		r.Filters = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -2148,11 +2148,11 @@ func (m *FilterItems) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *MediaItem_Credit) CloneVT() *MediaItem_Credit {
+func (m *Media_Credit) CloneVT() *Media_Credit {
 	if m == nil {
-		return (*MediaItem_Credit)(nil)
+		return (*Media_Credit)(nil)
 	}
-	r := new(MediaItem_Credit)
+	r := new(Media_Credit)
 	r.Name = m.Name
 	r.CreditType = m.CreditType
 	if len(m.unknownFields) > 0 {
@@ -2162,27 +2162,27 @@ func (m *MediaItem_Credit) CloneVT() *MediaItem_Credit {
 	return r
 }
 
-func (m *MediaItem_Credit) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *Media_Credit) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *MediaItem) CloneVT() *MediaItem {
+func (m *Media) CloneVT() *Media {
 	if m == nil {
-		return (*MediaItem)(nil)
+		return (*Media)(nil)
 	}
-	r := new(MediaItem)
-	r.MediaItemId = m.MediaItemId
-	r.MediaItemType = m.MediaItemType
+	r := new(Media)
+	r.MediaId = m.MediaId
+	r.MediaType = m.MediaType
 	r.Name = m.Name
 	r.Desc = m.Desc
-	r.ParentMediaItemId = m.ParentMediaItemId
+	r.ParentMediaId = m.ParentMediaId
 	r.ReleaseDate = m.ReleaseDate
 	r.Year = m.Year
 	r.BackdropUrl = m.BackdropUrl
 	r.PosterUrl = m.PosterUrl
 	r.OriginalName = m.OriginalName
 	r.OriginalLanguage = m.OriginalLanguage
-	r.PlayItemIndex = m.PlayItemIndex
+	r.PlayIndex = m.PlayIndex
 	r.Duration = m.Duration
 	r.StillUrl = m.StillUrl
 	if rhs := m.Genres; rhs != nil {
@@ -2191,7 +2191,7 @@ func (m *MediaItem) CloneVT() *MediaItem {
 		r.Genres = tmpContainer
 	}
 	if rhs := m.Credit; rhs != nil {
-		tmpContainer := make([]*MediaItem_Credit, len(rhs))
+		tmpContainer := make([]*Media_Credit, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
@@ -2211,17 +2211,17 @@ func (m *MediaItem) CloneVT() *MediaItem {
 	return r
 }
 
-func (m *MediaItem) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *Media) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *ListMediaItemRequest) CloneVT() *ListMediaItemRequest {
+func (m *ListMediaInfoRequest) CloneVT() *ListMediaInfoRequest {
 	if m == nil {
-		return (*ListMediaItemRequest)(nil)
+		return (*ListMediaInfoRequest)(nil)
 	}
-	r := new(ListMediaItemRequest)
-	r.MenuItem = m.MenuItem.CloneVT()
-	r.FilterItems = m.FilterItems.CloneVT()
+	r := new(ListMediaInfoRequest)
+	r.Menu = m.Menu.CloneVT()
+	r.Filters = m.Filters.CloneVT()
 	r.SearchName = m.SearchName
 	r.Page = m.Page
 	r.PageSize = m.PageSize
@@ -2233,24 +2233,24 @@ func (m *ListMediaItemRequest) CloneVT() *ListMediaItemRequest {
 	return r
 }
 
-func (m *ListMediaItemRequest) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *ListMediaInfoRequest) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *ListMediaItemResponse) CloneVT() *ListMediaItemResponse {
+func (m *ListMediaInfoResponse) CloneVT() *ListMediaInfoResponse {
 	if m == nil {
-		return (*ListMediaItemResponse)(nil)
+		return (*ListMediaInfoResponse)(nil)
 	}
-	r := new(ListMediaItemResponse)
+	r := new(ListMediaInfoResponse)
 	r.SupportSearchName = m.SupportSearchName
-	r.AllFilterItems = m.AllFilterItems.CloneVT()
+	r.AllFilters = m.AllFilters.CloneVT()
 	r.NextPageKey = m.NextPageKey
-	if rhs := m.Media_ItemInfos; rhs != nil {
-		tmpContainer := make([]*MediaItem, len(rhs))
+	if rhs := m.MediaInfos; rhs != nil {
+		tmpContainer := make([]*Media, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
-		r.Media_ItemInfos = tmpContainer
+		r.MediaInfos = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -2259,16 +2259,16 @@ func (m *ListMediaItemResponse) CloneVT() *ListMediaItemResponse {
 	return r
 }
 
-func (m *ListMediaItemResponse) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *ListMediaInfoResponse) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *GetMediaItemRequest) CloneVT() *GetMediaItemRequest {
+func (m *GetMediaDetailRequest) CloneVT() *GetMediaDetailRequest {
 	if m == nil {
-		return (*GetMediaItemRequest)(nil)
+		return (*GetMediaDetailRequest)(nil)
 	}
-	r := new(GetMediaItemRequest)
-	r.Media_ItemInfoId = m.Media_ItemInfoId
+	r := new(GetMediaDetailRequest)
+	r.MediaInfoId = m.MediaInfoId
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -2276,23 +2276,23 @@ func (m *GetMediaItemRequest) CloneVT() *GetMediaItemRequest {
 	return r
 }
 
-func (m *GetMediaItemRequest) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *GetMediaDetailRequest) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
-func (m *GetMediaItemResponse) CloneVT() *GetMediaItemResponse {
+func (m *GetMediaDetailResponse) CloneVT() *GetMediaDetailResponse {
 	if m == nil {
-		return (*GetMediaItemResponse)(nil)
+		return (*GetMediaDetailResponse)(nil)
 	}
-	r := new(GetMediaItemResponse)
-	r.Media_ItemSeries = m.Media_ItemSeries.CloneVT()
-	r.Media_ItemInfo = m.Media_ItemInfo.CloneVT()
-	if rhs := m.Media_ItemPlayItems; rhs != nil {
-		tmpContainer := make([]*MediaItem, len(rhs))
+	r := new(GetMediaDetailResponse)
+	r.MediaSeries = m.MediaSeries.CloneVT()
+	r.MediaInfo = m.MediaInfo.CloneVT()
+	if rhs := m.MediaItems; rhs != nil {
+		tmpContainer := make([]*Media, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
-		r.Media_ItemPlayItems = tmpContainer
+		r.MediaItems = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -2301,7 +2301,7 @@ func (m *GetMediaItemResponse) CloneVT() *GetMediaItemResponse {
 	return r
 }
 
-func (m *GetMediaItemResponse) CloneMessageVT() protobuf_go_lite.CloneMessage {
+func (m *GetMediaDetailResponse) CloneMessageVT() protobuf_go_lite.CloneMessage {
 	return m.CloneVT()
 }
 
@@ -2534,11 +2534,11 @@ func (this *Formdata) EqualVT(that *Formdata) bool {
 	} else if this == nil || that == nil {
 		return false
 	}
-	if len(this.FormItems) != len(that.FormItems) {
+	if len(this.Forms) != len(that.Forms) {
 		return false
 	}
-	for i, vx := range this.FormItems {
-		vy := that.FormItems[i]
+	for i, vx := range this.Forms {
+		vy := that.Forms[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
 				p = &Formdata_FormItem{}
@@ -2922,7 +2922,7 @@ func (this *GetFileResourceRequest) EqualVT(that *GetFileResourceRequest) bool {
 	if this.IsMedia != that.IsMedia {
 		return false
 	}
-	if this.Media_ItemPlayItemId != that.Media_ItemPlayItemId {
+	if this.MediaPlayId != that.MediaPlayId {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -3216,11 +3216,11 @@ func (this *FilterItems) EqualVT(that *FilterItems) bool {
 	} else if this == nil || that == nil {
 		return false
 	}
-	if len(this.FilterItems) != len(that.FilterItems) {
+	if len(this.Filters) != len(that.Filters) {
 		return false
 	}
-	for i, vx := range this.FilterItems {
-		vy := that.FilterItems[i]
+	for i, vx := range this.Filters {
+		vy := that.Filters[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
 				p = &FilterItems_Filter{}
@@ -3243,7 +3243,7 @@ func (this *FilterItems) EqualMessageVT(thatMsg any) bool {
 	}
 	return this.EqualVT(that)
 }
-func (this *MediaItem_Credit) EqualVT(that *MediaItem_Credit) bool {
+func (this *Media_Credit) EqualVT(that *Media_Credit) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
@@ -3258,23 +3258,23 @@ func (this *MediaItem_Credit) EqualVT(that *MediaItem_Credit) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *MediaItem_Credit) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*MediaItem_Credit)
+func (this *Media_Credit) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*Media_Credit)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *MediaItem) EqualVT(that *MediaItem) bool {
+func (this *Media) EqualVT(that *Media) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if this.MediaItemId != that.MediaItemId {
+	if this.MediaId != that.MediaId {
 		return false
 	}
-	if this.MediaItemType != that.MediaItemType {
+	if this.MediaType != that.MediaType {
 		return false
 	}
 	if this.Name != that.Name {
@@ -3283,7 +3283,7 @@ func (this *MediaItem) EqualVT(that *MediaItem) bool {
 	if this.Desc != that.Desc {
 		return false
 	}
-	if this.ParentMediaItemId != that.ParentMediaItemId {
+	if this.ParentMediaId != that.ParentMediaId {
 		return false
 	}
 	if this.ReleaseDate != that.ReleaseDate {
@@ -3320,10 +3320,10 @@ func (this *MediaItem) EqualVT(that *MediaItem) bool {
 		vy := that.Credit[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
-				p = &MediaItem_Credit{}
+				p = &Media_Credit{}
 			}
 			if q == nil {
-				q = &MediaItem_Credit{}
+				q = &Media_Credit{}
 			}
 			if !p.EqualVT(q) {
 				return false
@@ -3342,7 +3342,7 @@ func (this *MediaItem) EqualVT(that *MediaItem) bool {
 			return false
 		}
 	}
-	if this.PlayItemIndex != that.PlayItemIndex {
+	if this.PlayIndex != that.PlayIndex {
 		return false
 	}
 	if this.Duration != that.Duration {
@@ -3354,23 +3354,23 @@ func (this *MediaItem) EqualVT(that *MediaItem) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *MediaItem) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*MediaItem)
+func (this *Media) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*Media)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *ListMediaItemRequest) EqualVT(that *ListMediaItemRequest) bool {
+func (this *ListMediaInfoRequest) EqualVT(that *ListMediaInfoRequest) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if !this.MenuItem.EqualVT(that.MenuItem) {
+	if !this.Menu.EqualVT(that.Menu) {
 		return false
 	}
-	if !this.FilterItems.EqualVT(that.FilterItems) {
+	if !this.Filters.EqualVT(that.Filters) {
 		return false
 	}
 	if this.SearchName != that.SearchName {
@@ -3388,30 +3388,30 @@ func (this *ListMediaItemRequest) EqualVT(that *ListMediaItemRequest) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *ListMediaItemRequest) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*ListMediaItemRequest)
+func (this *ListMediaInfoRequest) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*ListMediaInfoRequest)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *ListMediaItemResponse) EqualVT(that *ListMediaItemResponse) bool {
+func (this *ListMediaInfoResponse) EqualVT(that *ListMediaInfoResponse) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if len(this.Media_ItemInfos) != len(that.Media_ItemInfos) {
+	if len(this.MediaInfos) != len(that.MediaInfos) {
 		return false
 	}
-	for i, vx := range this.Media_ItemInfos {
-		vy := that.Media_ItemInfos[i]
+	for i, vx := range this.MediaInfos {
+		vy := that.MediaInfos[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
-				p = &MediaItem{}
+				p = &Media{}
 			}
 			if q == nil {
-				q = &MediaItem{}
+				q = &Media{}
 			}
 			if !p.EqualVT(q) {
 				return false
@@ -3421,7 +3421,7 @@ func (this *ListMediaItemResponse) EqualVT(that *ListMediaItemResponse) bool {
 	if this.SupportSearchName != that.SupportSearchName {
 		return false
 	}
-	if !this.AllFilterItems.EqualVT(that.AllFilterItems) {
+	if !this.AllFilters.EqualVT(that.AllFilters) {
 		return false
 	}
 	if this.NextPageKey != that.NextPageKey {
@@ -3430,55 +3430,55 @@ func (this *ListMediaItemResponse) EqualVT(that *ListMediaItemResponse) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *ListMediaItemResponse) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*ListMediaItemResponse)
+func (this *ListMediaInfoResponse) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*ListMediaInfoResponse)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetMediaItemRequest) EqualVT(that *GetMediaItemRequest) bool {
+func (this *GetMediaDetailRequest) EqualVT(that *GetMediaDetailRequest) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if this.Media_ItemInfoId != that.Media_ItemInfoId {
+	if this.MediaInfoId != that.MediaInfoId {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetMediaItemRequest) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*GetMediaItemRequest)
+func (this *GetMediaDetailRequest) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*GetMediaDetailRequest)
 	if !ok {
 		return false
 	}
 	return this.EqualVT(that)
 }
-func (this *GetMediaItemResponse) EqualVT(that *GetMediaItemResponse) bool {
+func (this *GetMediaDetailResponse) EqualVT(that *GetMediaDetailResponse) bool {
 	if this == that {
 		return true
 	} else if this == nil || that == nil {
 		return false
 	}
-	if !this.Media_ItemSeries.EqualVT(that.Media_ItemSeries) {
+	if !this.MediaSeries.EqualVT(that.MediaSeries) {
 		return false
 	}
-	if !this.Media_ItemInfo.EqualVT(that.Media_ItemInfo) {
+	if !this.MediaInfo.EqualVT(that.MediaInfo) {
 		return false
 	}
-	if len(this.Media_ItemPlayItems) != len(that.Media_ItemPlayItems) {
+	if len(this.MediaItems) != len(that.MediaItems) {
 		return false
 	}
-	for i, vx := range this.Media_ItemPlayItems {
-		vy := that.Media_ItemPlayItems[i]
+	for i, vx := range this.MediaItems {
+		vy := that.MediaItems[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
-				p = &MediaItem{}
+				p = &Media{}
 			}
 			if q == nil {
-				q = &MediaItem{}
+				q = &Media{}
 			}
 			if !p.EqualVT(q) {
 				return false
@@ -3488,8 +3488,8 @@ func (this *GetMediaItemResponse) EqualVT(that *GetMediaItemResponse) bool {
 	return string(this.unknownFields) == string(that.unknownFields)
 }
 
-func (this *GetMediaItemResponse) EqualMessageVT(thatMsg any) bool {
-	that, ok := thatMsg.(*GetMediaItemResponse)
+func (this *GetMediaDetailResponse) EqualMessageVT(thatMsg any) bool {
+	that, ok := thatMsg.(*GetMediaDetailResponse)
 	if !ok {
 		return false
 	}
@@ -3710,14 +3710,14 @@ func (x *Formdata) MarshalProtoJSON(s *json.MarshalState) {
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if len(x.FormItems) > 0 || s.HasField("formItems") {
+	if len(x.Forms) > 0 || s.HasField("forms") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("formItems")
+		s.WriteObjectField("forms")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.FormItems {
+		for _, element := range x.Forms {
 			s.WriteMoreIf(&wroteElement)
-			element.MarshalProtoJSON(s.WithField("formItems"))
+			element.MarshalProtoJSON(s.WithField("forms"))
 		}
 		s.WriteArrayEnd()
 	}
@@ -3738,23 +3738,23 @@ func (x *Formdata) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "form_items", "formItems":
-			s.AddField("form_items")
+		case "forms":
+			s.AddField("forms")
 			if s.ReadNil() {
-				x.FormItems = nil
+				x.Forms = nil
 				return
 			}
 			s.ReadArray(func() {
 				if s.ReadNil() {
-					x.FormItems = append(x.FormItems, nil)
+					x.Forms = append(x.Forms, nil)
 					return
 				}
 				v := &Formdata_FormItem{}
-				v.UnmarshalProtoJSON(s.WithField("form_items", false))
+				v.UnmarshalProtoJSON(s.WithField("forms", false))
 				if s.Err() != nil {
 					return
 				}
-				x.FormItems = append(x.FormItems, v)
+				x.Forms = append(x.Forms, v)
 			})
 		}
 	})
@@ -4414,10 +4414,10 @@ func (x *GetFileResourceRequest) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("isMedia")
 		s.WriteBool(x.IsMedia)
 	}
-	if x.Media_ItemPlayItemId != "" || s.HasField("mediaItemPlayItemId") {
+	if x.MediaPlayId != "" || s.HasField("mediaPlayId") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemPlayItemId")
-		s.WriteString(x.Media_ItemPlayItemId)
+		s.WriteObjectField("mediaPlayId")
+		s.WriteString(x.MediaPlayId)
 	}
 	s.WriteObjectEnd()
 }
@@ -4449,9 +4449,9 @@ func (x *GetFileResourceRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "is_media", "isMedia":
 			s.AddField("is_media")
 			x.IsMedia = s.ReadBool()
-		case "media_Item_play_item_id", "mediaItemPlayItemId":
-			s.AddField("media_Item_play_item_id")
-			x.Media_ItemPlayItemId = s.ReadString()
+		case "media_play_id", "mediaPlayId":
+			s.AddField("media_play_id")
+			x.MediaPlayId = s.ReadString()
 		}
 	})
 }
@@ -5192,14 +5192,14 @@ func (x *FilterItems) MarshalProtoJSON(s *json.MarshalState) {
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if len(x.FilterItems) > 0 || s.HasField("filterItems") {
+	if len(x.Filters) > 0 || s.HasField("filters") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("filterItems")
+		s.WriteObjectField("filters")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.FilterItems {
+		for _, element := range x.Filters {
 			s.WriteMoreIf(&wroteElement)
-			element.MarshalProtoJSON(s.WithField("filterItems"))
+			element.MarshalProtoJSON(s.WithField("filters"))
 		}
 		s.WriteArrayEnd()
 	}
@@ -5220,23 +5220,23 @@ func (x *FilterItems) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "filter_items", "filterItems":
-			s.AddField("filter_items")
+		case "filters":
+			s.AddField("filters")
 			if s.ReadNil() {
-				x.FilterItems = nil
+				x.Filters = nil
 				return
 			}
 			s.ReadArray(func() {
 				if s.ReadNil() {
-					x.FilterItems = append(x.FilterItems, nil)
+					x.Filters = append(x.Filters, nil)
 					return
 				}
 				v := &FilterItems_Filter{}
-				v.UnmarshalProtoJSON(s.WithField("filter_items", false))
+				v.UnmarshalProtoJSON(s.WithField("filters", false))
 				if s.Err() != nil {
 					return
 				}
-				x.FilterItems = append(x.FilterItems, v)
+				x.Filters = append(x.Filters, v)
 			})
 		}
 	})
@@ -5247,88 +5247,88 @@ func (x *FilterItems) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the MediaItem_MediaItemType to JSON.
-func (x MediaItem_MediaItemType) MarshalProtoJSON(s *json.MarshalState) {
-	s.WriteEnumString(int32(x), MediaItem_MediaItemType_name)
+// MarshalProtoJSON marshals the Media_MediaType to JSON.
+func (x Media_MediaType) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), Media_MediaType_name)
 }
 
-// MarshalText marshals the MediaItem_MediaItemType to text.
-func (x MediaItem_MediaItemType) MarshalText() ([]byte, error) {
-	return []byte(json.GetEnumString(int32(x), MediaItem_MediaItemType_name)), nil
+// MarshalText marshals the Media_MediaType to text.
+func (x Media_MediaType) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), Media_MediaType_name)), nil
 }
 
-// MarshalJSON marshals the MediaItem_MediaItemType to JSON.
-func (x MediaItem_MediaItemType) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the Media_MediaType to JSON.
+func (x Media_MediaType) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the MediaItem_MediaItemType from JSON.
-func (x *MediaItem_MediaItemType) UnmarshalProtoJSON(s *json.UnmarshalState) {
-	v := s.ReadEnum(MediaItem_MediaItemType_value)
+// UnmarshalProtoJSON unmarshals the Media_MediaType from JSON.
+func (x *Media_MediaType) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(Media_MediaType_value)
 	if err := s.Err(); err != nil {
-		s.SetErrorf("could not read MediaItemType enum: %v", err)
+		s.SetErrorf("could not read MediaType enum: %v", err)
 		return
 	}
-	*x = MediaItem_MediaItemType(v)
+	*x = Media_MediaType(v)
 }
 
-// UnmarshalText unmarshals the MediaItem_MediaItemType from text.
-func (x *MediaItem_MediaItemType) UnmarshalText(b []byte) error {
-	i, err := json.ParseEnumString(string(b), MediaItem_MediaItemType_value)
+// UnmarshalText unmarshals the Media_MediaType from text.
+func (x *Media_MediaType) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), Media_MediaType_value)
 	if err != nil {
 		return err
 	}
-	*x = MediaItem_MediaItemType(i)
+	*x = Media_MediaType(i)
 	return nil
 }
 
-// UnmarshalJSON unmarshals the MediaItem_MediaItemType from JSON.
-func (x *MediaItem_MediaItemType) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the Media_MediaType from JSON.
+func (x *Media_MediaType) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the MediaItem_CreditType to JSON.
-func (x MediaItem_CreditType) MarshalProtoJSON(s *json.MarshalState) {
-	s.WriteEnumString(int32(x), MediaItem_CreditType_name)
+// MarshalProtoJSON marshals the Media_CreditType to JSON.
+func (x Media_CreditType) MarshalProtoJSON(s *json.MarshalState) {
+	s.WriteEnumString(int32(x), Media_CreditType_name)
 }
 
-// MarshalText marshals the MediaItem_CreditType to text.
-func (x MediaItem_CreditType) MarshalText() ([]byte, error) {
-	return []byte(json.GetEnumString(int32(x), MediaItem_CreditType_name)), nil
+// MarshalText marshals the Media_CreditType to text.
+func (x Media_CreditType) MarshalText() ([]byte, error) {
+	return []byte(json.GetEnumString(int32(x), Media_CreditType_name)), nil
 }
 
-// MarshalJSON marshals the MediaItem_CreditType to JSON.
-func (x MediaItem_CreditType) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the Media_CreditType to JSON.
+func (x Media_CreditType) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the MediaItem_CreditType from JSON.
-func (x *MediaItem_CreditType) UnmarshalProtoJSON(s *json.UnmarshalState) {
-	v := s.ReadEnum(MediaItem_CreditType_value)
+// UnmarshalProtoJSON unmarshals the Media_CreditType from JSON.
+func (x *Media_CreditType) UnmarshalProtoJSON(s *json.UnmarshalState) {
+	v := s.ReadEnum(Media_CreditType_value)
 	if err := s.Err(); err != nil {
 		s.SetErrorf("could not read CreditType enum: %v", err)
 		return
 	}
-	*x = MediaItem_CreditType(v)
+	*x = Media_CreditType(v)
 }
 
-// UnmarshalText unmarshals the MediaItem_CreditType from text.
-func (x *MediaItem_CreditType) UnmarshalText(b []byte) error {
-	i, err := json.ParseEnumString(string(b), MediaItem_CreditType_value)
+// UnmarshalText unmarshals the Media_CreditType from text.
+func (x *Media_CreditType) UnmarshalText(b []byte) error {
+	i, err := json.ParseEnumString(string(b), Media_CreditType_value)
 	if err != nil {
 		return err
 	}
-	*x = MediaItem_CreditType(i)
+	*x = Media_CreditType(i)
 	return nil
 }
 
-// UnmarshalJSON unmarshals the MediaItem_CreditType from JSON.
-func (x *MediaItem_CreditType) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the Media_CreditType from JSON.
+func (x *Media_CreditType) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the MediaItem_Credit message to JSON.
-func (x *MediaItem_Credit) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the Media_Credit message to JSON.
+func (x *Media_Credit) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
@@ -5348,13 +5348,13 @@ func (x *MediaItem_Credit) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the MediaItem_Credit to JSON.
-func (x *MediaItem_Credit) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the Media_Credit to JSON.
+func (x *Media_Credit) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the MediaItem_Credit message from JSON.
-func (x *MediaItem_Credit) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the Media_Credit message from JSON.
+func (x *Media_Credit) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5372,13 +5372,13 @@ func (x *MediaItem_Credit) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the MediaItem_Credit from JSON.
-func (x *MediaItem_Credit) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the Media_Credit from JSON.
+func (x *Media_Credit) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the MediaItem_MetadataEntry message to JSON.
-func (x *MediaItem_MetadataEntry) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the Media_MetadataEntry message to JSON.
+func (x *Media_MetadataEntry) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
@@ -5398,13 +5398,13 @@ func (x *MediaItem_MetadataEntry) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the MediaItem_MetadataEntry to JSON.
-func (x *MediaItem_MetadataEntry) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the Media_MetadataEntry to JSON.
+func (x *Media_MetadataEntry) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the MediaItem_MetadataEntry message from JSON.
-func (x *MediaItem_MetadataEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the Media_MetadataEntry message from JSON.
+func (x *Media_MetadataEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5422,28 +5422,28 @@ func (x *MediaItem_MetadataEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the MediaItem_MetadataEntry from JSON.
-func (x *MediaItem_MetadataEntry) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the Media_MetadataEntry from JSON.
+func (x *Media_MetadataEntry) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the MediaItem message to JSON.
-func (x *MediaItem) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the Media message to JSON.
+func (x *Media) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if x.MediaItemId != "" || s.HasField("mediaItemId") {
+	if x.MediaId != "" || s.HasField("mediaId") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemId")
-		s.WriteString(x.MediaItemId)
+		s.WriteObjectField("mediaId")
+		s.WriteString(x.MediaId)
 	}
-	if x.MediaItemType != 0 || s.HasField("mediaItemType") {
+	if x.MediaType != 0 || s.HasField("mediaType") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemType")
-		x.MediaItemType.MarshalProtoJSON(s)
+		s.WriteObjectField("mediaType")
+		x.MediaType.MarshalProtoJSON(s)
 	}
 	if x.Name != "" || s.HasField("name") {
 		s.WriteMoreIf(&wroteField)
@@ -5455,10 +5455,10 @@ func (x *MediaItem) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("desc")
 		s.WriteString(x.Desc)
 	}
-	if x.ParentMediaItemId != "" || s.HasField("parentMediaItemId") {
+	if x.ParentMediaId != "" || s.HasField("parentMediaId") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("parentMediaItemId")
-		s.WriteString(x.ParentMediaItemId)
+		s.WriteObjectField("parentMediaId")
+		s.WriteString(x.ParentMediaId)
 	}
 	if x.ReleaseDate != "" || s.HasField("releaseDate") {
 		s.WriteMoreIf(&wroteField)
@@ -5518,10 +5518,10 @@ func (x *MediaItem) MarshalProtoJSON(s *json.MarshalState) {
 		}
 		s.WriteObjectEnd()
 	}
-	if x.PlayItemIndex != 0 || s.HasField("playItemIndex") {
+	if x.PlayIndex != 0 || s.HasField("playIndex") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("playItemIndex")
-		s.WriteUint64(x.PlayItemIndex)
+		s.WriteObjectField("playIndex")
+		s.WriteUint64(x.PlayIndex)
 	}
 	if x.Duration != 0 || s.HasField("duration") {
 		s.WriteMoreIf(&wroteField)
@@ -5536,13 +5536,13 @@ func (x *MediaItem) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the MediaItem to JSON.
-func (x *MediaItem) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the Media to JSON.
+func (x *Media) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the MediaItem message from JSON.
-func (x *MediaItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the Media message from JSON.
+func (x *Media) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5550,21 +5550,21 @@ func (x *MediaItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "media_item_id", "mediaItemId":
-			s.AddField("media_item_id")
-			x.MediaItemId = s.ReadString()
-		case "media_item_type", "mediaItemType":
-			s.AddField("media_item_type")
-			x.MediaItemType.UnmarshalProtoJSON(s)
+		case "media_id", "mediaId":
+			s.AddField("media_id")
+			x.MediaId = s.ReadString()
+		case "media_type", "mediaType":
+			s.AddField("media_type")
+			x.MediaType.UnmarshalProtoJSON(s)
 		case "name":
 			s.AddField("name")
 			x.Name = s.ReadString()
 		case "desc":
 			s.AddField("desc")
 			x.Desc = s.ReadString()
-		case "parent_media_item_id", "parentMediaItemId":
-			s.AddField("parent_media_item_id")
-			x.ParentMediaItemId = s.ReadString()
+		case "parent_media_id", "parentMediaId":
+			s.AddField("parent_media_id")
+			x.ParentMediaId = s.ReadString()
 		case "release_date", "releaseDate":
 			s.AddField("release_date")
 			x.ReleaseDate = s.ReadString()
@@ -5601,7 +5601,7 @@ func (x *MediaItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 					x.Credit = append(x.Credit, nil)
 					return
 				}
-				v := &MediaItem_Credit{}
+				v := &Media_Credit{}
 				v.UnmarshalProtoJSON(s.WithField("credit", false))
 				if s.Err() != nil {
 					return
@@ -5618,9 +5618,9 @@ func (x *MediaItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 			s.ReadStringMap(func(key string) {
 				x.Metadata[key] = s.ReadString()
 			})
-		case "play_item_index", "playItemIndex":
-			s.AddField("play_item_index")
-			x.PlayItemIndex = s.ReadUint64()
+		case "play_index", "playIndex":
+			s.AddField("play_index")
+			x.PlayIndex = s.ReadUint64()
 		case "duration":
 			s.AddField("duration")
 			x.Duration = s.ReadUint64()
@@ -5631,28 +5631,28 @@ func (x *MediaItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the MediaItem from JSON.
-func (x *MediaItem) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the Media from JSON.
+func (x *Media) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the ListMediaItemRequest message to JSON.
-func (x *ListMediaItemRequest) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the ListMediaInfoRequest message to JSON.
+func (x *ListMediaInfoRequest) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if x.MenuItem != nil || s.HasField("menuItem") {
+	if x.Menu != nil || s.HasField("menu") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("menuItem")
-		x.MenuItem.MarshalProtoJSON(s.WithField("menuItem"))
+		s.WriteObjectField("menu")
+		x.Menu.MarshalProtoJSON(s.WithField("menu"))
 	}
-	if x.FilterItems != nil || s.HasField("filterItems") {
+	if x.Filters != nil || s.HasField("filters") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("filterItems")
-		x.FilterItems.MarshalProtoJSON(s.WithField("filterItems"))
+		s.WriteObjectField("filters")
+		x.Filters.MarshalProtoJSON(s.WithField("filters"))
 	}
 	if x.SearchName != "" || s.HasField("searchName") {
 		s.WriteMoreIf(&wroteField)
@@ -5677,13 +5677,13 @@ func (x *ListMediaItemRequest) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the ListMediaItemRequest to JSON.
-func (x *ListMediaItemRequest) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the ListMediaInfoRequest to JSON.
+func (x *ListMediaInfoRequest) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the ListMediaItemRequest message from JSON.
-func (x *ListMediaItemRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the ListMediaInfoRequest message from JSON.
+func (x *ListMediaInfoRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5691,20 +5691,20 @@ func (x *ListMediaItemRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "menu_item", "menuItem":
+		case "menu":
 			if s.ReadNil() {
-				x.MenuItem = nil
+				x.Menu = nil
 				return
 			}
-			x.MenuItem = &Item{}
-			x.MenuItem.UnmarshalProtoJSON(s.WithField("menu_item", true))
-		case "filter_items", "filterItems":
+			x.Menu = &Item{}
+			x.Menu.UnmarshalProtoJSON(s.WithField("menu", true))
+		case "filters":
 			if s.ReadNil() {
-				x.FilterItems = nil
+				x.Filters = nil
 				return
 			}
-			x.FilterItems = &FilterItems{}
-			x.FilterItems.UnmarshalProtoJSON(s.WithField("filter_items", true))
+			x.Filters = &FilterItems{}
+			x.Filters.UnmarshalProtoJSON(s.WithField("filters", true))
 		case "search_name", "searchName":
 			s.AddField("search_name")
 			x.SearchName = s.ReadString()
@@ -5721,27 +5721,27 @@ func (x *ListMediaItemRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the ListMediaItemRequest from JSON.
-func (x *ListMediaItemRequest) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the ListMediaInfoRequest from JSON.
+func (x *ListMediaInfoRequest) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the ListMediaItemResponse message to JSON.
-func (x *ListMediaItemResponse) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the ListMediaInfoResponse message to JSON.
+func (x *ListMediaInfoResponse) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if len(x.Media_ItemInfos) > 0 || s.HasField("mediaItemInfos") {
+	if len(x.MediaInfos) > 0 || s.HasField("mediaInfos") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemInfos")
+		s.WriteObjectField("mediaInfos")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.Media_ItemInfos {
+		for _, element := range x.MediaInfos {
 			s.WriteMoreIf(&wroteElement)
-			element.MarshalProtoJSON(s.WithField("mediaItemInfos"))
+			element.MarshalProtoJSON(s.WithField("mediaInfos"))
 		}
 		s.WriteArrayEnd()
 	}
@@ -5750,10 +5750,10 @@ func (x *ListMediaItemResponse) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("supportSearchName")
 		s.WriteBool(x.SupportSearchName)
 	}
-	if x.AllFilterItems != nil || s.HasField("allFilterItems") {
+	if x.AllFilters != nil || s.HasField("allFilters") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("allFilterItems")
-		x.AllFilterItems.MarshalProtoJSON(s.WithField("allFilterItems"))
+		s.WriteObjectField("allFilters")
+		x.AllFilters.MarshalProtoJSON(s.WithField("allFilters"))
 	}
 	if x.NextPageKey != "" || s.HasField("nextPageKey") {
 		s.WriteMoreIf(&wroteField)
@@ -5763,13 +5763,13 @@ func (x *ListMediaItemResponse) MarshalProtoJSON(s *json.MarshalState) {
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the ListMediaItemResponse to JSON.
-func (x *ListMediaItemResponse) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the ListMediaInfoResponse to JSON.
+func (x *ListMediaInfoResponse) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the ListMediaItemResponse message from JSON.
-func (x *ListMediaItemResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the ListMediaInfoResponse message from JSON.
+func (x *ListMediaInfoResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5777,34 +5777,34 @@ func (x *ListMediaItemResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "media_Item_infos", "mediaItemInfos":
-			s.AddField("media_Item_infos")
+		case "media_infos", "mediaInfos":
+			s.AddField("media_infos")
 			if s.ReadNil() {
-				x.Media_ItemInfos = nil
+				x.MediaInfos = nil
 				return
 			}
 			s.ReadArray(func() {
 				if s.ReadNil() {
-					x.Media_ItemInfos = append(x.Media_ItemInfos, nil)
+					x.MediaInfos = append(x.MediaInfos, nil)
 					return
 				}
-				v := &MediaItem{}
-				v.UnmarshalProtoJSON(s.WithField("media_Item_infos", false))
+				v := &Media{}
+				v.UnmarshalProtoJSON(s.WithField("media_infos", false))
 				if s.Err() != nil {
 					return
 				}
-				x.Media_ItemInfos = append(x.Media_ItemInfos, v)
+				x.MediaInfos = append(x.MediaInfos, v)
 			})
 		case "support_search_name", "supportSearchName":
 			s.AddField("support_search_name")
 			x.SupportSearchName = s.ReadBool()
-		case "all_filter_items", "allFilterItems":
+		case "all_filters", "allFilters":
 			if s.ReadNil() {
-				x.AllFilterItems = nil
+				x.AllFilters = nil
 				return
 			}
-			x.AllFilterItems = &FilterItems{}
-			x.AllFilterItems.UnmarshalProtoJSON(s.WithField("all_filter_items", true))
+			x.AllFilters = &FilterItems{}
+			x.AllFilters.UnmarshalProtoJSON(s.WithField("all_filters", true))
 		case "next_page_key", "nextPageKey":
 			s.AddField("next_page_key")
 			x.NextPageKey = s.ReadString()
@@ -5812,34 +5812,34 @@ func (x *ListMediaItemResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	})
 }
 
-// UnmarshalJSON unmarshals the ListMediaItemResponse from JSON.
-func (x *ListMediaItemResponse) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the ListMediaInfoResponse from JSON.
+func (x *ListMediaInfoResponse) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the GetMediaItemRequest message to JSON.
-func (x *GetMediaItemRequest) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the GetMediaDetailRequest message to JSON.
+func (x *GetMediaDetailRequest) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if x.Media_ItemInfoId != "" || s.HasField("mediaItemInfoId") {
+	if x.MediaInfoId != "" || s.HasField("mediaInfoId") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemInfoId")
-		s.WriteString(x.Media_ItemInfoId)
+		s.WriteObjectField("mediaInfoId")
+		s.WriteString(x.MediaInfoId)
 	}
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the GetMediaItemRequest to JSON.
-func (x *GetMediaItemRequest) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the GetMediaDetailRequest to JSON.
+func (x *GetMediaDetailRequest) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the GetMediaItemRequest message from JSON.
-func (x *GetMediaItemRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the GetMediaDetailRequest message from JSON.
+func (x *GetMediaDetailRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5847,57 +5847,57 @@ func (x *GetMediaItemRequest) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "media_Item_info_id", "mediaItemInfoId":
-			s.AddField("media_Item_info_id")
-			x.Media_ItemInfoId = s.ReadString()
+		case "media_info_id", "mediaInfoId":
+			s.AddField("media_info_id")
+			x.MediaInfoId = s.ReadString()
 		}
 	})
 }
 
-// UnmarshalJSON unmarshals the GetMediaItemRequest from JSON.
-func (x *GetMediaItemRequest) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the GetMediaDetailRequest from JSON.
+func (x *GetMediaDetailRequest) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the GetMediaItemResponse message to JSON.
-func (x *GetMediaItemResponse) MarshalProtoJSON(s *json.MarshalState) {
+// MarshalProtoJSON marshals the GetMediaDetailResponse message to JSON.
+func (x *GetMediaDetailResponse) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
 		s.WriteNil()
 		return
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if x.Media_ItemSeries != nil || s.HasField("mediaItemSeries") {
+	if x.MediaSeries != nil || s.HasField("mediaSeries") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemSeries")
-		x.Media_ItemSeries.MarshalProtoJSON(s.WithField("mediaItemSeries"))
+		s.WriteObjectField("mediaSeries")
+		x.MediaSeries.MarshalProtoJSON(s.WithField("mediaSeries"))
 	}
-	if x.Media_ItemInfo != nil || s.HasField("mediaItemInfo") {
+	if x.MediaInfo != nil || s.HasField("mediaInfo") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemInfo")
-		x.Media_ItemInfo.MarshalProtoJSON(s.WithField("mediaItemInfo"))
+		s.WriteObjectField("mediaInfo")
+		x.MediaInfo.MarshalProtoJSON(s.WithField("mediaInfo"))
 	}
-	if len(x.Media_ItemPlayItems) > 0 || s.HasField("mediaItemPlayItems") {
+	if len(x.MediaItems) > 0 || s.HasField("mediaItems") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaItemPlayItems")
+		s.WriteObjectField("mediaItems")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.Media_ItemPlayItems {
+		for _, element := range x.MediaItems {
 			s.WriteMoreIf(&wroteElement)
-			element.MarshalProtoJSON(s.WithField("mediaItemPlayItems"))
+			element.MarshalProtoJSON(s.WithField("mediaItems"))
 		}
 		s.WriteArrayEnd()
 	}
 	s.WriteObjectEnd()
 }
 
-// MarshalJSON marshals the GetMediaItemResponse to JSON.
-func (x *GetMediaItemResponse) MarshalJSON() ([]byte, error) {
+// MarshalJSON marshals the GetMediaDetailResponse to JSON.
+func (x *GetMediaDetailResponse) MarshalJSON() ([]byte, error) {
 	return json.DefaultMarshalerConfig.Marshal(x)
 }
 
-// UnmarshalProtoJSON unmarshals the GetMediaItemResponse message from JSON.
-func (x *GetMediaItemResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
+// UnmarshalProtoJSON unmarshals the GetMediaDetailResponse message from JSON.
+func (x *GetMediaDetailResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
 	if s.ReadNil() {
 		return
 	}
@@ -5905,44 +5905,44 @@ func (x *GetMediaItemResponse) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "media_Item_series", "mediaItemSeries":
+		case "media_series", "mediaSeries":
 			if s.ReadNil() {
-				x.Media_ItemSeries = nil
+				x.MediaSeries = nil
 				return
 			}
-			x.Media_ItemSeries = &MediaItem{}
-			x.Media_ItemSeries.UnmarshalProtoJSON(s.WithField("media_Item_series", true))
-		case "media_Item_info", "mediaItemInfo":
+			x.MediaSeries = &Media{}
+			x.MediaSeries.UnmarshalProtoJSON(s.WithField("media_series", true))
+		case "media_info", "mediaInfo":
 			if s.ReadNil() {
-				x.Media_ItemInfo = nil
+				x.MediaInfo = nil
 				return
 			}
-			x.Media_ItemInfo = &MediaItem{}
-			x.Media_ItemInfo.UnmarshalProtoJSON(s.WithField("media_Item_info", true))
-		case "media_Item_play_items", "mediaItemPlayItems":
-			s.AddField("media_Item_play_items")
+			x.MediaInfo = &Media{}
+			x.MediaInfo.UnmarshalProtoJSON(s.WithField("media_info", true))
+		case "media_items", "mediaItems":
+			s.AddField("media_items")
 			if s.ReadNil() {
-				x.Media_ItemPlayItems = nil
+				x.MediaItems = nil
 				return
 			}
 			s.ReadArray(func() {
 				if s.ReadNil() {
-					x.Media_ItemPlayItems = append(x.Media_ItemPlayItems, nil)
+					x.MediaItems = append(x.MediaItems, nil)
 					return
 				}
-				v := &MediaItem{}
-				v.UnmarshalProtoJSON(s.WithField("media_Item_play_items", false))
+				v := &Media{}
+				v.UnmarshalProtoJSON(s.WithField("media_items", false))
 				if s.Err() != nil {
 					return
 				}
-				x.Media_ItemPlayItems = append(x.Media_ItemPlayItems, v)
+				x.MediaItems = append(x.MediaItems, v)
 			})
 		}
 	})
 }
 
-// UnmarshalJSON unmarshals the GetMediaItemResponse from JSON.
-func (x *GetMediaItemResponse) UnmarshalJSON(b []byte) error {
+// UnmarshalJSON unmarshals the GetMediaDetailResponse from JSON.
+func (x *GetMediaDetailResponse) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
@@ -6198,9 +6198,9 @@ func (m *Formdata) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.FormItems) > 0 {
-		for iNdEx := len(m.FormItems) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.FormItems[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+	if len(m.Forms) > 0 {
+		for iNdEx := len(m.Forms) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Forms[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -6788,10 +6788,10 @@ func (m *GetFileResourceRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Media_ItemPlayItemId) > 0 {
-		i -= len(m.Media_ItemPlayItemId)
-		copy(dAtA[i:], m.Media_ItemPlayItemId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Media_ItemPlayItemId)))
+	if len(m.MediaPlayId) > 0 {
+		i -= len(m.MediaPlayId)
+		copy(dAtA[i:], m.MediaPlayId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaPlayId)))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -7347,9 +7347,9 @@ func (m *FilterItems) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.FilterItems) > 0 {
-		for iNdEx := len(m.FilterItems) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.FilterItems[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+	if len(m.Filters) > 0 {
+		for iNdEx := len(m.Filters) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Filters[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -7362,7 +7362,7 @@ func (m *FilterItems) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MediaItem_Credit) MarshalVT() (dAtA []byte, err error) {
+func (m *Media_Credit) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -7375,12 +7375,12 @@ func (m *MediaItem_Credit) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MediaItem_Credit) MarshalToVT(dAtA []byte) (int, error) {
+func (m *Media_Credit) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *MediaItem_Credit) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *Media_Credit) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -7407,7 +7407,7 @@ func (m *MediaItem_Credit) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MediaItem) MarshalVT() (dAtA []byte, err error) {
+func (m *Media) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -7420,12 +7420,12 @@ func (m *MediaItem) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MediaItem) MarshalToVT(dAtA []byte) (int, error) {
+func (m *Media) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *MediaItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *Media) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -7453,8 +7453,8 @@ func (m *MediaItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0xf8
 	}
-	if m.PlayItemIndex != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PlayItemIndex))
+	if m.PlayIndex != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PlayIndex))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -7552,10 +7552,10 @@ func (m *MediaItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x6a
 	}
-	if len(m.ParentMediaItemId) > 0 {
-		i -= len(m.ParentMediaItemId)
-		copy(dAtA[i:], m.ParentMediaItemId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentMediaItemId)))
+	if len(m.ParentMediaId) > 0 {
+		i -= len(m.ParentMediaId)
+		copy(dAtA[i:], m.ParentMediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentMediaId)))
 		i--
 		dAtA[i] = 0x2a
 	}
@@ -7573,22 +7573,22 @@ func (m *MediaItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.MediaItemType != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.MediaItemType))
+	if m.MediaType != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.MediaType))
 		i--
 		dAtA[i] = 0x10
 	}
-	if len(m.MediaItemId) > 0 {
-		i -= len(m.MediaItemId)
-		copy(dAtA[i:], m.MediaItemId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaItemId)))
+	if len(m.MediaId) > 0 {
+		i -= len(m.MediaId)
+		copy(dAtA[i:], m.MediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaId)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *ListMediaItemRequest) MarshalVT() (dAtA []byte, err error) {
+func (m *ListMediaInfoRequest) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -7601,12 +7601,12 @@ func (m *ListMediaItemRequest) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListMediaItemRequest) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ListMediaInfoRequest) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ListMediaItemRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ListMediaInfoRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -7642,8 +7642,8 @@ func (m *ListMediaItemRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.FilterItems != nil {
-		size, err := m.FilterItems.MarshalToSizedBufferVT(dAtA[:i])
+	if m.Filters != nil {
+		size, err := m.Filters.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -7652,8 +7652,8 @@ func (m *ListMediaItemRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.MenuItem != nil {
-		size, err := m.MenuItem.MarshalToSizedBufferVT(dAtA[:i])
+	if m.Menu != nil {
+		size, err := m.Menu.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -7665,7 +7665,7 @@ func (m *ListMediaItemRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *ListMediaItemResponse) MarshalVT() (dAtA []byte, err error) {
+func (m *ListMediaInfoResponse) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -7678,12 +7678,12 @@ func (m *ListMediaItemResponse) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListMediaItemResponse) MarshalToVT(dAtA []byte) (int, error) {
+func (m *ListMediaInfoResponse) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *ListMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *ListMediaInfoResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -7702,8 +7702,8 @@ func (m *ListMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 		i--
 		dAtA[i] = 0x62
 	}
-	if m.AllFilterItems != nil {
-		size, err := m.AllFilterItems.MarshalToSizedBufferVT(dAtA[:i])
+	if m.AllFilters != nil {
+		size, err := m.AllFilters.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -7722,9 +7722,9 @@ func (m *ListMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 		i--
 		dAtA[i] = 0x50
 	}
-	if len(m.Media_ItemInfos) > 0 {
-		for iNdEx := len(m.Media_ItemInfos) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.Media_ItemInfos[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+	if len(m.MediaInfos) > 0 {
+		for iNdEx := len(m.MediaInfos) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.MediaInfos[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -7737,7 +7737,7 @@ func (m *ListMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *GetMediaItemRequest) MarshalVT() (dAtA []byte, err error) {
+func (m *GetMediaDetailRequest) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -7750,12 +7750,12 @@ func (m *GetMediaItemRequest) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetMediaItemRequest) MarshalToVT(dAtA []byte) (int, error) {
+func (m *GetMediaDetailRequest) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetMediaItemRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *GetMediaDetailRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -7767,17 +7767,17 @@ func (m *GetMediaItemRequest) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Media_ItemInfoId) > 0 {
-		i -= len(m.Media_ItemInfoId)
-		copy(dAtA[i:], m.Media_ItemInfoId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Media_ItemInfoId)))
+	if len(m.MediaInfoId) > 0 {
+		i -= len(m.MediaInfoId)
+		copy(dAtA[i:], m.MediaInfoId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaInfoId)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *GetMediaItemResponse) MarshalVT() (dAtA []byte, err error) {
+func (m *GetMediaDetailResponse) MarshalVT() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -7790,12 +7790,12 @@ func (m *GetMediaItemResponse) MarshalVT() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetMediaItemResponse) MarshalToVT(dAtA []byte) (int, error) {
+func (m *GetMediaDetailResponse) MarshalToVT(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVT(dAtA[:size])
 }
 
-func (m *GetMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
+func (m *GetMediaDetailResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -7807,9 +7807,9 @@ func (m *GetMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Media_ItemPlayItems) > 0 {
-		for iNdEx := len(m.Media_ItemPlayItems) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.Media_ItemPlayItems[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+	if len(m.MediaItems) > 0 {
+		for iNdEx := len(m.MediaItems) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.MediaItems[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -7819,8 +7819,8 @@ func (m *GetMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 			dAtA[i] = 0x1a
 		}
 	}
-	if m.Media_ItemInfo != nil {
-		size, err := m.Media_ItemInfo.MarshalToSizedBufferVT(dAtA[:i])
+	if m.MediaInfo != nil {
+		size, err := m.MediaInfo.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -7829,8 +7829,8 @@ func (m *GetMediaItemResponse) MarshalToSizedBufferVT(dAtA []byte) (int, error) 
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.Media_ItemSeries != nil {
-		size, err := m.Media_ItemSeries.MarshalToSizedBufferVT(dAtA[:i])
+	if m.MediaSeries != nil {
+		size, err := m.MediaSeries.MarshalToSizedBufferVT(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -8134,9 +8134,9 @@ func (m *Formdata) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.FormItems) > 0 {
-		for iNdEx := len(m.FormItems) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.FormItems[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+	if len(m.Forms) > 0 {
+		for iNdEx := len(m.Forms) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Forms[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -8743,10 +8743,10 @@ func (m *GetFileResourceRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int,
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Media_ItemPlayItemId) > 0 {
-		i -= len(m.Media_ItemPlayItemId)
-		copy(dAtA[i:], m.Media_ItemPlayItemId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Media_ItemPlayItemId)))
+	if len(m.MediaPlayId) > 0 {
+		i -= len(m.MediaPlayId)
+		copy(dAtA[i:], m.MediaPlayId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaPlayId)))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -9302,9 +9302,9 @@ func (m *FilterItems) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.FilterItems) > 0 {
-		for iNdEx := len(m.FilterItems) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.FilterItems[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+	if len(m.Filters) > 0 {
+		for iNdEx := len(m.Filters) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.Filters[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -9317,7 +9317,7 @@ func (m *FilterItems) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MediaItem_Credit) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *Media_Credit) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -9330,12 +9330,12 @@ func (m *MediaItem_Credit) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MediaItem_Credit) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *Media_Credit) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *MediaItem_Credit) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *Media_Credit) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -9362,7 +9362,7 @@ func (m *MediaItem_Credit) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error
 	return len(dAtA) - i, nil
 }
 
-func (m *MediaItem) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *Media) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -9375,12 +9375,12 @@ func (m *MediaItem) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MediaItem) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *Media) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *MediaItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *Media) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -9408,8 +9408,8 @@ func (m *MediaItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0xf8
 	}
-	if m.PlayItemIndex != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PlayItemIndex))
+	if m.PlayIndex != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PlayIndex))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -9507,10 +9507,10 @@ func (m *MediaItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x6a
 	}
-	if len(m.ParentMediaItemId) > 0 {
-		i -= len(m.ParentMediaItemId)
-		copy(dAtA[i:], m.ParentMediaItemId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentMediaItemId)))
+	if len(m.ParentMediaId) > 0 {
+		i -= len(m.ParentMediaId)
+		copy(dAtA[i:], m.ParentMediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentMediaId)))
 		i--
 		dAtA[i] = 0x2a
 	}
@@ -9528,22 +9528,22 @@ func (m *MediaItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.MediaItemType != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.MediaItemType))
+	if m.MediaType != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.MediaType))
 		i--
 		dAtA[i] = 0x10
 	}
-	if len(m.MediaItemId) > 0 {
-		i -= len(m.MediaItemId)
-		copy(dAtA[i:], m.MediaItemId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaItemId)))
+	if len(m.MediaId) > 0 {
+		i -= len(m.MediaId)
+		copy(dAtA[i:], m.MediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaId)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *ListMediaItemRequest) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ListMediaInfoRequest) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -9556,12 +9556,12 @@ func (m *ListMediaItemRequest) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListMediaItemRequest) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ListMediaInfoRequest) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ListMediaItemRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ListMediaInfoRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -9597,8 +9597,8 @@ func (m *ListMediaItemRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, e
 		i--
 		dAtA[i] = 0x1a
 	}
-	if m.FilterItems != nil {
-		size, err := m.FilterItems.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.Filters != nil {
+		size, err := m.Filters.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -9607,8 +9607,8 @@ func (m *ListMediaItemRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, e
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.MenuItem != nil {
-		size, err := m.MenuItem.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.Menu != nil {
+		size, err := m.Menu.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -9620,7 +9620,7 @@ func (m *ListMediaItemRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, e
 	return len(dAtA) - i, nil
 }
 
-func (m *ListMediaItemResponse) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *ListMediaInfoResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -9633,12 +9633,12 @@ func (m *ListMediaItemResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *ListMediaItemResponse) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *ListMediaInfoResponse) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *ListMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *ListMediaInfoResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -9657,8 +9657,8 @@ func (m *ListMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, 
 		i--
 		dAtA[i] = 0x62
 	}
-	if m.AllFilterItems != nil {
-		size, err := m.AllFilterItems.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.AllFilters != nil {
+		size, err := m.AllFilters.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -9677,9 +9677,9 @@ func (m *ListMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, 
 		i--
 		dAtA[i] = 0x50
 	}
-	if len(m.Media_ItemInfos) > 0 {
-		for iNdEx := len(m.Media_ItemInfos) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.Media_ItemInfos[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+	if len(m.MediaInfos) > 0 {
+		for iNdEx := len(m.MediaInfos) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.MediaInfos[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -9692,7 +9692,7 @@ func (m *ListMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *GetMediaItemRequest) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *GetMediaDetailRequest) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -9705,12 +9705,12 @@ func (m *GetMediaItemRequest) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetMediaItemRequest) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *GetMediaDetailRequest) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetMediaItemRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *GetMediaDetailRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -9722,17 +9722,17 @@ func (m *GetMediaItemRequest) MarshalToSizedBufferVTStrict(dAtA []byte) (int, er
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Media_ItemInfoId) > 0 {
-		i -= len(m.Media_ItemInfoId)
-		copy(dAtA[i:], m.Media_ItemInfoId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Media_ItemInfoId)))
+	if len(m.MediaInfoId) > 0 {
+		i -= len(m.MediaInfoId)
+		copy(dAtA[i:], m.MediaInfoId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaInfoId)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *GetMediaItemResponse) MarshalVTStrict() (dAtA []byte, err error) {
+func (m *GetMediaDetailResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -9745,12 +9745,12 @@ func (m *GetMediaItemResponse) MarshalVTStrict() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *GetMediaItemResponse) MarshalToVTStrict(dAtA []byte) (int, error) {
+func (m *GetMediaDetailResponse) MarshalToVTStrict(dAtA []byte) (int, error) {
 	size := m.SizeVT()
 	return m.MarshalToSizedBufferVTStrict(dAtA[:size])
 }
 
-func (m *GetMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
+func (m *GetMediaDetailResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 	if m == nil {
 		return 0, nil
 	}
@@ -9762,9 +9762,9 @@ func (m *GetMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, e
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Media_ItemPlayItems) > 0 {
-		for iNdEx := len(m.Media_ItemPlayItems) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.Media_ItemPlayItems[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+	if len(m.MediaItems) > 0 {
+		for iNdEx := len(m.MediaItems) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.MediaItems[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -9774,8 +9774,8 @@ func (m *GetMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, e
 			dAtA[i] = 0x1a
 		}
 	}
-	if m.Media_ItemInfo != nil {
-		size, err := m.Media_ItemInfo.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.MediaInfo != nil {
+		size, err := m.MediaInfo.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -9784,8 +9784,8 @@ func (m *GetMediaItemResponse) MarshalToSizedBufferVTStrict(dAtA []byte) (int, e
 		i--
 		dAtA[i] = 0x12
 	}
-	if m.Media_ItemSeries != nil {
-		size, err := m.Media_ItemSeries.MarshalToSizedBufferVTStrict(dAtA[:i])
+	if m.MediaSeries != nil {
+		size, err := m.MediaSeries.MarshalToSizedBufferVTStrict(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -9924,8 +9924,8 @@ func (m *Formdata) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	if len(m.FormItems) > 0 {
-		for _, e := range m.FormItems {
+	if len(m.Forms) > 0 {
+		for _, e := range m.Forms {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -10189,7 +10189,7 @@ func (m *GetFileResourceRequest) SizeVT() (n int) {
 	if m.IsMedia {
 		n += 2
 	}
-	l = len(m.Media_ItemPlayItemId)
+	l = len(m.MediaPlayId)
 	if l > 0 {
 		n += 2 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
@@ -10406,8 +10406,8 @@ func (m *FilterItems) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	if len(m.FilterItems) > 0 {
-		for _, e := range m.FilterItems {
+	if len(m.Filters) > 0 {
+		for _, e := range m.Filters {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -10416,7 +10416,7 @@ func (m *FilterItems) SizeVT() (n int) {
 	return n
 }
 
-func (m *MediaItem_Credit) SizeVT() (n int) {
+func (m *Media_Credit) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -10433,18 +10433,18 @@ func (m *MediaItem_Credit) SizeVT() (n int) {
 	return n
 }
 
-func (m *MediaItem) SizeVT() (n int) {
+func (m *Media) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.MediaItemId)
+	l = len(m.MediaId)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if m.MediaItemType != 0 {
-		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.MediaItemType))
+	if m.MediaType != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.MediaType))
 	}
 	l = len(m.Name)
 	if l > 0 {
@@ -10454,7 +10454,7 @@ func (m *MediaItem) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	l = len(m.ParentMediaItemId)
+	l = len(m.ParentMediaId)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
@@ -10501,8 +10501,8 @@ func (m *MediaItem) SizeVT() (n int) {
 			n += mapEntrySize + 2 + protobuf_go_lite.SizeOfVarint(uint64(mapEntrySize))
 		}
 	}
-	if m.PlayItemIndex != 0 {
-		n += 2 + protobuf_go_lite.SizeOfVarint(uint64(m.PlayItemIndex))
+	if m.PlayIndex != 0 {
+		n += 2 + protobuf_go_lite.SizeOfVarint(uint64(m.PlayIndex))
 	}
 	if m.Duration != 0 {
 		n += 2 + protobuf_go_lite.SizeOfVarint(uint64(m.Duration))
@@ -10515,18 +10515,18 @@ func (m *MediaItem) SizeVT() (n int) {
 	return n
 }
 
-func (m *ListMediaItemRequest) SizeVT() (n int) {
+func (m *ListMediaInfoRequest) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.MenuItem != nil {
-		l = m.MenuItem.SizeVT()
+	if m.Menu != nil {
+		l = m.Menu.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if m.FilterItems != nil {
-		l = m.FilterItems.SizeVT()
+	if m.Filters != nil {
+		l = m.Filters.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
 	l = len(m.SearchName)
@@ -10547,14 +10547,14 @@ func (m *ListMediaItemRequest) SizeVT() (n int) {
 	return n
 }
 
-func (m *ListMediaItemResponse) SizeVT() (n int) {
+func (m *ListMediaInfoResponse) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.Media_ItemInfos) > 0 {
-		for _, e := range m.Media_ItemInfos {
+	if len(m.MediaInfos) > 0 {
+		for _, e := range m.MediaInfos {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -10562,8 +10562,8 @@ func (m *ListMediaItemResponse) SizeVT() (n int) {
 	if m.SupportSearchName {
 		n += 2
 	}
-	if m.AllFilterItems != nil {
-		l = m.AllFilterItems.SizeVT()
+	if m.AllFilters != nil {
+		l = m.AllFilters.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
 	l = len(m.NextPageKey)
@@ -10574,13 +10574,13 @@ func (m *ListMediaItemResponse) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetMediaItemRequest) SizeVT() (n int) {
+func (m *GetMediaDetailRequest) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Media_ItemInfoId)
+	l = len(m.MediaInfoId)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
@@ -10588,22 +10588,22 @@ func (m *GetMediaItemRequest) SizeVT() (n int) {
 	return n
 }
 
-func (m *GetMediaItemResponse) SizeVT() (n int) {
+func (m *GetMediaDetailResponse) SizeVT() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Media_ItemSeries != nil {
-		l = m.Media_ItemSeries.SizeVT()
+	if m.MediaSeries != nil {
+		l = m.MediaSeries.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if m.Media_ItemInfo != nil {
-		l = m.Media_ItemInfo.SizeVT()
+	if m.MediaInfo != nil {
+		l = m.MediaInfo.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if len(m.Media_ItemPlayItems) > 0 {
-		for _, e := range m.Media_ItemPlayItems {
+	if len(m.MediaItems) > 0 {
+		for _, e := range m.MediaItems {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -10706,12 +10706,12 @@ func (x *Formdata_FormItem) String() string {
 func (x *Formdata) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("Formdata {")
-	if len(x.FormItems) > 0 {
+	if len(x.Forms) > 0 {
 		if sb.Len() > 10 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("form_items: [")
-		for i, v := range x.FormItems {
+		sb.WriteString("forms: [")
+		for i, v := range x.Forms {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -11067,12 +11067,12 @@ func (x *GetFileResourceRequest) MarshalProtoText() string {
 		sb.WriteString("is_media: ")
 		sb.WriteString(strconv.FormatBool(x.IsMedia))
 	}
-	if x.Media_ItemPlayItemId != "" {
+	if x.MediaPlayId != "" {
 		if sb.Len() > 24 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_Item_play_item_id: ")
-		sb.WriteString(strconv.Quote(x.Media_ItemPlayItemId))
+		sb.WriteString("media_play_id: ")
+		sb.WriteString(strconv.Quote(x.MediaPlayId))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -11440,12 +11440,12 @@ func (x *FilterItems_Filter) String() string {
 func (x *FilterItems) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("FilterItems {")
-	if len(x.FilterItems) > 0 {
+	if len(x.Filters) > 0 {
 		if sb.Len() > 13 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("filter_items: [")
-		for i, v := range x.FilterItems {
+		sb.WriteString("filters: [")
+		for i, v := range x.Filters {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -11460,13 +11460,13 @@ func (x *FilterItems) MarshalProtoText() string {
 func (x *FilterItems) String() string {
 	return x.MarshalProtoText()
 }
-func (x MediaItem_MediaItemType) MarshalProtoText() string {
+func (x Media_MediaType) MarshalProtoText() string {
 	return x.String()
 }
-func (x MediaItem_CreditType) MarshalProtoText() string {
+func (x Media_CreditType) MarshalProtoText() string {
 	return x.String()
 }
-func (x *MediaItem_Credit) MarshalProtoText() string {
+func (x *Media_Credit) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("Credit {")
 	if x.Name != "" {
@@ -11482,17 +11482,17 @@ func (x *MediaItem_Credit) MarshalProtoText() string {
 		}
 		sb.WriteString("credit_type: ")
 		sb.WriteString("\"")
-		sb.WriteString(MediaItem_CreditType(x.CreditType).String())
+		sb.WriteString(Media_CreditType(x.CreditType).String())
 		sb.WriteString("\"")
 	}
 	sb.WriteString("}")
 	return sb.String()
 }
 
-func (x *MediaItem_Credit) String() string {
+func (x *Media_Credit) String() string {
 	return x.MarshalProtoText()
 }
-func (x *MediaItem_MetadataEntry) MarshalProtoText() string {
+func (x *Media_MetadataEntry) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("MetadataEntry {")
 	if x.Key != "" {
@@ -11513,65 +11513,65 @@ func (x *MediaItem_MetadataEntry) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *MediaItem_MetadataEntry) String() string {
+func (x *Media_MetadataEntry) String() string {
 	return x.MarshalProtoText()
 }
-func (x *MediaItem) MarshalProtoText() string {
+func (x *Media) MarshalProtoText() string {
 	var sb strings.Builder
-	sb.WriteString("MediaItem {")
-	if x.MediaItemId != "" {
-		if sb.Len() > 11 {
+	sb.WriteString("Media {")
+	if x.MediaId != "" {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_item_id: ")
-		sb.WriteString(strconv.Quote(x.MediaItemId))
+		sb.WriteString("media_id: ")
+		sb.WriteString(strconv.Quote(x.MediaId))
 	}
-	if x.MediaItemType != 0 {
-		if sb.Len() > 11 {
+	if x.MediaType != 0 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_item_type: ")
+		sb.WriteString("media_type: ")
 		sb.WriteString("\"")
-		sb.WriteString(MediaItem_MediaItemType(x.MediaItemType).String())
+		sb.WriteString(Media_MediaType(x.MediaType).String())
 		sb.WriteString("\"")
 	}
 	if x.Name != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("name: ")
 		sb.WriteString(strconv.Quote(x.Name))
 	}
 	if x.Desc != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("desc: ")
 		sb.WriteString(strconv.Quote(x.Desc))
 	}
-	if x.ParentMediaItemId != "" {
-		if sb.Len() > 11 {
+	if x.ParentMediaId != "" {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("parent_media_item_id: ")
-		sb.WriteString(strconv.Quote(x.ParentMediaItemId))
+		sb.WriteString("parent_media_id: ")
+		sb.WriteString(strconv.Quote(x.ParentMediaId))
 	}
 	if x.ReleaseDate != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("release_date: ")
 		sb.WriteString(strconv.Quote(x.ReleaseDate))
 	}
 	if x.Year != 0 {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("year: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.Year), 10))
 	}
 	if len(x.Genres) > 0 {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("genres: [")
@@ -11584,35 +11584,35 @@ func (x *MediaItem) MarshalProtoText() string {
 		sb.WriteString("]")
 	}
 	if x.BackdropUrl != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("backdrop_url: ")
 		sb.WriteString(strconv.Quote(x.BackdropUrl))
 	}
 	if x.PosterUrl != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("poster_url: ")
 		sb.WriteString(strconv.Quote(x.PosterUrl))
 	}
 	if x.OriginalName != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("original_name: ")
 		sb.WriteString(strconv.Quote(x.OriginalName))
 	}
 	if x.OriginalLanguage != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("original_language: ")
 		sb.WriteString(strconv.Quote(x.OriginalLanguage))
 	}
 	if len(x.Credit) > 0 {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("credit: [")
@@ -11625,7 +11625,7 @@ func (x *MediaItem) MarshalProtoText() string {
 		sb.WriteString("]")
 	}
 	if len(x.Metadata) > 0 {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("metadata: {")
@@ -11637,22 +11637,22 @@ func (x *MediaItem) MarshalProtoText() string {
 		}
 		sb.WriteString(" }")
 	}
-	if x.PlayItemIndex != 0 {
-		if sb.Len() > 11 {
+	if x.PlayIndex != 0 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("play_item_index: ")
-		sb.WriteString(strconv.FormatUint(uint64(x.PlayItemIndex), 10))
+		sb.WriteString("play_index: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.PlayIndex), 10))
 	}
 	if x.Duration != 0 {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("duration: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.Duration), 10))
 	}
 	if x.StillUrl != "" {
-		if sb.Len() > 11 {
+		if sb.Len() > 7 {
 			sb.WriteString(" ")
 		}
 		sb.WriteString("still_url: ")
@@ -11662,25 +11662,25 @@ func (x *MediaItem) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *MediaItem) String() string {
+func (x *Media) String() string {
 	return x.MarshalProtoText()
 }
-func (x *ListMediaItemRequest) MarshalProtoText() string {
+func (x *ListMediaInfoRequest) MarshalProtoText() string {
 	var sb strings.Builder
-	sb.WriteString("ListMediaItemRequest {")
-	if x.MenuItem != nil {
+	sb.WriteString("ListMediaInfoRequest {")
+	if x.Menu != nil {
 		if sb.Len() > 22 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("menu_item: ")
-		sb.WriteString(x.MenuItem.MarshalProtoText())
+		sb.WriteString("menu: ")
+		sb.WriteString(x.Menu.MarshalProtoText())
 	}
-	if x.FilterItems != nil {
+	if x.Filters != nil {
 		if sb.Len() > 22 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("filter_items: ")
-		sb.WriteString(x.FilterItems.MarshalProtoText())
+		sb.WriteString("filters: ")
+		sb.WriteString(x.Filters.MarshalProtoText())
 	}
 	if x.SearchName != "" {
 		if sb.Len() > 22 {
@@ -11714,18 +11714,18 @@ func (x *ListMediaItemRequest) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *ListMediaItemRequest) String() string {
+func (x *ListMediaInfoRequest) String() string {
 	return x.MarshalProtoText()
 }
-func (x *ListMediaItemResponse) MarshalProtoText() string {
+func (x *ListMediaInfoResponse) MarshalProtoText() string {
 	var sb strings.Builder
-	sb.WriteString("ListMediaItemResponse {")
-	if len(x.Media_ItemInfos) > 0 {
+	sb.WriteString("ListMediaInfoResponse {")
+	if len(x.MediaInfos) > 0 {
 		if sb.Len() > 23 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_Item_infos: [")
-		for i, v := range x.Media_ItemInfos {
+		sb.WriteString("media_infos: [")
+		for i, v := range x.MediaInfos {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -11740,12 +11740,12 @@ func (x *ListMediaItemResponse) MarshalProtoText() string {
 		sb.WriteString("support_search_name: ")
 		sb.WriteString(strconv.FormatBool(x.SupportSearchName))
 	}
-	if x.AllFilterItems != nil {
+	if x.AllFilters != nil {
 		if sb.Len() > 23 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("all_filter_items: ")
-		sb.WriteString(x.AllFilterItems.MarshalProtoText())
+		sb.WriteString("all_filters: ")
+		sb.WriteString(x.AllFilters.MarshalProtoText())
 	}
 	if x.NextPageKey != "" {
 		if sb.Len() > 23 {
@@ -11758,49 +11758,49 @@ func (x *ListMediaItemResponse) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *ListMediaItemResponse) String() string {
+func (x *ListMediaInfoResponse) String() string {
 	return x.MarshalProtoText()
 }
-func (x *GetMediaItemRequest) MarshalProtoText() string {
+func (x *GetMediaDetailRequest) MarshalProtoText() string {
 	var sb strings.Builder
-	sb.WriteString("GetMediaItemRequest {")
-	if x.Media_ItemInfoId != "" {
-		if sb.Len() > 21 {
+	sb.WriteString("GetMediaDetailRequest {")
+	if x.MediaInfoId != "" {
+		if sb.Len() > 23 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_Item_info_id: ")
-		sb.WriteString(strconv.Quote(x.Media_ItemInfoId))
+		sb.WriteString("media_info_id: ")
+		sb.WriteString(strconv.Quote(x.MediaInfoId))
 	}
 	sb.WriteString("}")
 	return sb.String()
 }
 
-func (x *GetMediaItemRequest) String() string {
+func (x *GetMediaDetailRequest) String() string {
 	return x.MarshalProtoText()
 }
-func (x *GetMediaItemResponse) MarshalProtoText() string {
+func (x *GetMediaDetailResponse) MarshalProtoText() string {
 	var sb strings.Builder
-	sb.WriteString("GetMediaItemResponse {")
-	if x.Media_ItemSeries != nil {
-		if sb.Len() > 22 {
+	sb.WriteString("GetMediaDetailResponse {")
+	if x.MediaSeries != nil {
+		if sb.Len() > 24 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_Item_series: ")
-		sb.WriteString(x.Media_ItemSeries.MarshalProtoText())
+		sb.WriteString("media_series: ")
+		sb.WriteString(x.MediaSeries.MarshalProtoText())
 	}
-	if x.Media_ItemInfo != nil {
-		if sb.Len() > 22 {
+	if x.MediaInfo != nil {
+		if sb.Len() > 24 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_Item_info: ")
-		sb.WriteString(x.Media_ItemInfo.MarshalProtoText())
+		sb.WriteString("media_info: ")
+		sb.WriteString(x.MediaInfo.MarshalProtoText())
 	}
-	if len(x.Media_ItemPlayItems) > 0 {
-		if sb.Len() > 22 {
+	if len(x.MediaItems) > 0 {
+		if sb.Len() > 24 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_Item_play_items: [")
-		for i, v := range x.Media_ItemPlayItems {
+		sb.WriteString("media_items: [")
+		for i, v := range x.MediaItems {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -11812,7 +11812,7 @@ func (x *GetMediaItemResponse) MarshalProtoText() string {
 	return sb.String()
 }
 
-func (x *GetMediaItemResponse) String() string {
+func (x *GetMediaDetailResponse) String() string {
 	return x.MarshalProtoText()
 }
 func (m *Formdata_FormItem) UnmarshalVT(dAtA []byte) error {
@@ -12250,7 +12250,7 @@ func (m *Formdata) UnmarshalVT(dAtA []byte) error {
 		switch fieldNum {
 		case 11:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FormItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Forms", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -12277,8 +12277,8 @@ func (m *Formdata) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FormItems = append(m.FormItems, &Formdata_FormItem{})
-			if err := m.FormItems[len(m.FormItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			m.Forms = append(m.Forms, &Formdata_FormItem{})
+			if err := m.Forms[len(m.Forms)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -13726,7 +13726,7 @@ func (m *GetFileResourceRequest) UnmarshalVT(dAtA []byte) error {
 			m.IsMedia = bool(v != 0)
 		case 20:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemPlayItemId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaPlayId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -13754,7 +13754,7 @@ func (m *GetFileResourceRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Media_ItemPlayItemId = string(dAtA[iNdEx:postIndex])
+			m.MediaPlayId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -15164,7 +15164,7 @@ func (m *FilterItems) UnmarshalVT(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FilterItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Filters", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -15191,8 +15191,8 @@ func (m *FilterItems) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FilterItems = append(m.FilterItems, &FilterItems_Filter{})
-			if err := m.FilterItems[len(m.FilterItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			m.Filters = append(m.Filters, &FilterItems_Filter{})
+			if err := m.Filters[len(m.Filters)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -15218,7 +15218,7 @@ func (m *FilterItems) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MediaItem_Credit) UnmarshalVT(dAtA []byte) error {
+func (m *Media_Credit) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -15241,10 +15241,10 @@ func (m *MediaItem_Credit) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MediaItem_Credit: wiretype end group for non-group")
+			return fmt.Errorf("proto: Media_Credit: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MediaItem_Credit: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: Media_Credit: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -15293,7 +15293,7 @@ func (m *MediaItem_Credit) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CreditType |= MediaItem_CreditType(b&0x7F) << shift
+				m.CreditType |= Media_CreditType(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -15320,7 +15320,7 @@ func (m *MediaItem_Credit) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
+func (m *Media) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -15343,15 +15343,15 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MediaItem: wiretype end group for non-group")
+			return fmt.Errorf("proto: Media: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MediaItem: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: Media: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MediaItemId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -15379,13 +15379,13 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.MediaItemId = string(dAtA[iNdEx:postIndex])
+			m.MediaId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MediaItemType", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaType", wireType)
 			}
-			m.MediaItemType = 0
+			m.MediaType = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -15395,7 +15395,7 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.MediaItemType |= MediaItem_MediaItemType(b&0x7F) << shift
+				m.MediaType |= Media_MediaType(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -15466,7 +15466,7 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentMediaItemId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ParentMediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -15494,7 +15494,7 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ParentMediaItemId = string(dAtA[iNdEx:postIndex])
+			m.ParentMediaId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 13:
 			if wireType != 2 {
@@ -15736,7 +15736,7 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Credit = append(m.Credit, &MediaItem_Credit{})
+			m.Credit = append(m.Credit, &Media_Credit{})
 			if err := m.Credit[len(m.Credit)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -15870,9 +15870,9 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 30:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemIndex", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PlayIndex", wireType)
 			}
-			m.PlayItemIndex = 0
+			m.PlayIndex = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -15882,7 +15882,7 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.PlayItemIndex |= uint64(b&0x7F) << shift
+				m.PlayIndex |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -15960,7 +15960,7 @@ func (m *MediaItem) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListMediaItemRequest) UnmarshalVT(dAtA []byte) error {
+func (m *ListMediaInfoRequest) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -15983,15 +15983,15 @@ func (m *ListMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListMediaItemRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListMediaInfoRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListMediaItemRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListMediaInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MenuItem", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Menu", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16018,16 +16018,16 @@ func (m *ListMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.MenuItem == nil {
-				m.MenuItem = &Item{}
+			if m.Menu == nil {
+				m.Menu = &Item{}
 			}
-			if err := m.MenuItem.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Menu.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FilterItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Filters", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16054,10 +16054,10 @@ func (m *ListMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.FilterItems == nil {
-				m.FilterItems = &FilterItems{}
+			if m.Filters == nil {
+				m.Filters = &FilterItems{}
 			}
-			if err := m.FilterItems.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Filters.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -16185,7 +16185,7 @@ func (m *ListMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListMediaItemResponse) UnmarshalVT(dAtA []byte) error {
+func (m *ListMediaInfoResponse) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -16208,15 +16208,15 @@ func (m *ListMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListMediaItemResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListMediaInfoResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListMediaItemResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListMediaInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemInfos", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaInfos", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16243,8 +16243,8 @@ func (m *ListMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Media_ItemInfos = append(m.Media_ItemInfos, &MediaItem{})
-			if err := m.Media_ItemInfos[len(m.Media_ItemInfos)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			m.MediaInfos = append(m.MediaInfos, &Media{})
+			if err := m.MediaInfos[len(m.MediaInfos)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -16270,7 +16270,7 @@ func (m *ListMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 			m.SupportSearchName = bool(v != 0)
 		case 11:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AllFilterItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field AllFilters", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16297,10 +16297,10 @@ func (m *ListMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.AllFilterItems == nil {
-				m.AllFilterItems = &FilterItems{}
+			if m.AllFilters == nil {
+				m.AllFilters = &FilterItems{}
 			}
-			if err := m.AllFilterItems.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.AllFilters.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -16358,7 +16358,7 @@ func (m *ListMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetMediaItemRequest) UnmarshalVT(dAtA []byte) error {
+func (m *GetMediaDetailRequest) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -16381,15 +16381,15 @@ func (m *GetMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetMediaItemRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: GetMediaDetailRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetMediaItemRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GetMediaDetailRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemInfoId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaInfoId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -16417,7 +16417,7 @@ func (m *GetMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Media_ItemInfoId = string(dAtA[iNdEx:postIndex])
+			m.MediaInfoId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -16441,7 +16441,7 @@ func (m *GetMediaItemRequest) UnmarshalVT(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetMediaItemResponse) UnmarshalVT(dAtA []byte) error {
+func (m *GetMediaDetailResponse) UnmarshalVT(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -16464,15 +16464,15 @@ func (m *GetMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetMediaItemResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: GetMediaDetailResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetMediaItemResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GetMediaDetailResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemSeries", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaSeries", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16499,16 +16499,16 @@ func (m *GetMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Media_ItemSeries == nil {
-				m.Media_ItemSeries = &MediaItem{}
+			if m.MediaSeries == nil {
+				m.MediaSeries = &Media{}
 			}
-			if err := m.Media_ItemSeries.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MediaSeries.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemInfo", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaInfo", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16535,16 +16535,16 @@ func (m *GetMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Media_ItemInfo == nil {
-				m.Media_ItemInfo = &MediaItem{}
+			if m.MediaInfo == nil {
+				m.MediaInfo = &Media{}
 			}
-			if err := m.Media_ItemInfo.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MediaInfo.UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemPlayItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaItems", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -16571,8 +16571,8 @@ func (m *GetMediaItemResponse) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Media_ItemPlayItems = append(m.Media_ItemPlayItems, &MediaItem{})
-			if err := m.Media_ItemPlayItems[len(m.Media_ItemPlayItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			m.MediaItems = append(m.MediaItems, &Media{})
+			if err := m.MediaItems[len(m.MediaItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -17037,7 +17037,7 @@ func (m *Formdata) UnmarshalVTUnsafe(dAtA []byte) error {
 		switch fieldNum {
 		case 11:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FormItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Forms", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -17064,8 +17064,8 @@ func (m *Formdata) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FormItems = append(m.FormItems, &Formdata_FormItem{})
-			if err := m.FormItems[len(m.FormItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			m.Forms = append(m.Forms, &Formdata_FormItem{})
+			if err := m.Forms[len(m.Forms)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -18555,7 +18555,7 @@ func (m *GetFileResourceRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			m.IsMedia = bool(v != 0)
 		case 20:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemPlayItemId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaPlayId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -18587,7 +18587,7 @@ func (m *GetFileResourceRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.Media_ItemPlayItemId = stringValue
+			m.MediaPlayId = stringValue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -20066,7 +20066,7 @@ func (m *FilterItems) UnmarshalVTUnsafe(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FilterItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Filters", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20093,8 +20093,8 @@ func (m *FilterItems) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FilterItems = append(m.FilterItems, &FilterItems_Filter{})
-			if err := m.FilterItems[len(m.FilterItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			m.Filters = append(m.Filters, &FilterItems_Filter{})
+			if err := m.Filters[len(m.Filters)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -20120,7 +20120,7 @@ func (m *FilterItems) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MediaItem_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *Media_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20143,10 +20143,10 @@ func (m *MediaItem_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MediaItem_Credit: wiretype end group for non-group")
+			return fmt.Errorf("proto: Media_Credit: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MediaItem_Credit: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: Media_Credit: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -20199,7 +20199,7 @@ func (m *MediaItem_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CreditType |= MediaItem_CreditType(b&0x7F) << shift
+				m.CreditType |= Media_CreditType(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -20226,7 +20226,7 @@ func (m *MediaItem_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *Media) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20249,15 +20249,15 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MediaItem: wiretype end group for non-group")
+			return fmt.Errorf("proto: Media: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MediaItem: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: Media: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MediaItemId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -20289,13 +20289,13 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.MediaItemId = stringValue
+			m.MediaId = stringValue
 			iNdEx = postIndex
 		case 2:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MediaItemType", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaType", wireType)
 			}
-			m.MediaItemType = 0
+			m.MediaType = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -20305,7 +20305,7 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.MediaItemType |= MediaItem_MediaItemType(b&0x7F) << shift
+				m.MediaType |= Media_MediaType(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -20384,7 +20384,7 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentMediaItemId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ParentMediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -20416,7 +20416,7 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.ParentMediaItemId = stringValue
+			m.ParentMediaId = stringValue
 			iNdEx = postIndex
 		case 13:
 			if wireType != 2 {
@@ -20682,7 +20682,7 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Credit = append(m.Credit, &MediaItem_Credit{})
+			m.Credit = append(m.Credit, &Media_Credit{})
 			if err := m.Credit[len(m.Credit)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -20824,9 +20824,9 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 30:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemIndex", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PlayIndex", wireType)
 			}
-			m.PlayItemIndex = 0
+			m.PlayIndex = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -20836,7 +20836,7 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.PlayItemIndex |= uint64(b&0x7F) << shift
+				m.PlayIndex |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
@@ -20918,7 +20918,7 @@ func (m *MediaItem) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ListMediaInfoRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -20941,15 +20941,15 @@ func (m *ListMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListMediaItemRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListMediaInfoRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListMediaItemRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListMediaInfoRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MenuItem", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Menu", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20976,16 +20976,16 @@ func (m *ListMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.MenuItem == nil {
-				m.MenuItem = &Item{}
+			if m.Menu == nil {
+				m.Menu = &Item{}
 			}
-			if err := m.MenuItem.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Menu.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FilterItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Filters", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -21012,10 +21012,10 @@ func (m *ListMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.FilterItems == nil {
-				m.FilterItems = &FilterItems{}
+			if m.Filters == nil {
+				m.Filters = &FilterItems{}
 			}
-			if err := m.FilterItems.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.Filters.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -21151,7 +21151,7 @@ func (m *ListMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *ListMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *ListMediaInfoResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -21174,15 +21174,15 @@ func (m *ListMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: ListMediaItemResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: ListMediaInfoResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: ListMediaItemResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: ListMediaInfoResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemInfos", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaInfos", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -21209,8 +21209,8 @@ func (m *ListMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Media_ItemInfos = append(m.Media_ItemInfos, &MediaItem{})
-			if err := m.Media_ItemInfos[len(m.Media_ItemInfos)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			m.MediaInfos = append(m.MediaInfos, &Media{})
+			if err := m.MediaInfos[len(m.MediaInfos)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -21236,7 +21236,7 @@ func (m *ListMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			m.SupportSearchName = bool(v != 0)
 		case 11:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field AllFilterItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field AllFilters", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -21263,10 +21263,10 @@ func (m *ListMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.AllFilterItems == nil {
-				m.AllFilterItems = &FilterItems{}
+			if m.AllFilters == nil {
+				m.AllFilters = &FilterItems{}
 			}
-			if err := m.AllFilterItems.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.AllFilters.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -21328,7 +21328,7 @@ func (m *ListMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *GetMediaDetailRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -21351,15 +21351,15 @@ func (m *GetMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetMediaItemRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: GetMediaDetailRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetMediaItemRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GetMediaDetailRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemInfoId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaInfoId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -21391,7 +21391,7 @@ func (m *GetMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.Media_ItemInfoId = stringValue
+			m.MediaInfoId = stringValue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -21415,7 +21415,7 @@ func (m *GetMediaItemRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *GetMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
+func (m *GetMediaDetailResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -21438,15 +21438,15 @@ func (m *GetMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: GetMediaItemResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: GetMediaDetailResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: GetMediaItemResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: GetMediaDetailResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemSeries", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaSeries", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -21473,16 +21473,16 @@ func (m *GetMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Media_ItemSeries == nil {
-				m.Media_ItemSeries = &MediaItem{}
+			if m.MediaSeries == nil {
+				m.MediaSeries = &Media{}
 			}
-			if err := m.Media_ItemSeries.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MediaSeries.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemInfo", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaInfo", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -21509,16 +21509,16 @@ func (m *GetMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if m.Media_ItemInfo == nil {
-				m.Media_ItemInfo = &MediaItem{}
+			if m.MediaInfo == nil {
+				m.MediaInfo = &Media{}
 			}
-			if err := m.Media_ItemInfo.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.MediaInfo.UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 3:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Media_ItemPlayItems", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field MediaItems", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -21545,8 +21545,8 @@ func (m *GetMediaItemResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Media_ItemPlayItems = append(m.Media_ItemPlayItems, &MediaItem{})
-			if err := m.Media_ItemPlayItems[len(m.Media_ItemPlayItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			m.MediaItems = append(m.MediaItems, &Media{})
+			if err := m.MediaItems[len(m.MediaItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

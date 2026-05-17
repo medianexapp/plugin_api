@@ -7,7 +7,7 @@ import "plugin/wrappers.proto";
 enum PluginType {
     PLUGIN_TYPE_UNSPECIFIED = 0;
     PLUGIN_TYPE_DRIVER      = 1;
-    PLUGIN_TYPE_MEDIA_Item  = 2;
+    PLUGIN_TYPE_MEDIA       = 2;
 }
 
 message Formdata {
@@ -24,7 +24,7 @@ message Formdata {
         }
         repeated FormItem enum_values = 10;  // for dropdown widget
     }
-    repeated FormItem form_items = 11;
+    repeated FormItem forms = 11;
 }
 
 message Scanqrcode {
@@ -99,7 +99,7 @@ message GetFileResourceRequest {
     bool      is_media   = 11;  // media file
 
     // media Item play item id
-    string media_Item_play_item_id = 20;
+    string media_play_id = 20;
 }
 
 message FileResource {
@@ -179,22 +179,22 @@ message FilterItems {
         string        name  = 1;
         repeated Item items = 2;
     }
-    repeated Filter filter_items = 1;
+    repeated Filter filters = 1;
 }
 
 // media item
-message MediaItem {
-    string media_item_id = 1;  // media item id
-    enum MediaItemType {
-        MEDIA_ITEM_UNSPECIFIED = 0;
-        MEDIA_ITEM_SERIES      = 1;
-        MEDIA_ITEM_INFO        = 2;
-        MEDIA_ITEM_PLAY_ITEM   = 3;
+message Media {
+    string media_id = 1;  // media item id
+    enum MediaType {
+        MEDIA_UNSPECIFIED = 0;
+        MEDIA_SERIES      = 1;
+        MEDIA_INFO        = 2;
+        MEDIA_ITEM        = 3;
     }
-    MediaItemType media_item_type      = 2;
-    string        name                 = 3;
-    string        desc                 = 4;
-    string        parent_media_item_id = 5;
+    MediaType media_type      = 2;
+    string    name            = 3;
+    string    desc            = 4;
+    string    parent_media_id = 5;
     // media info
     string          release_date      = 13;
     uint64          year              = 14;
@@ -217,35 +217,35 @@ message MediaItem {
     repeated Credit     credit   = 20;  // media credits
     map<string, string> metadata = 21;  // media metadata
     // media play item
-    uint64 play_item_index = 30;  // play item indx
-    uint64 duration        = 31;  // video duration unit: s
-    string still_url       = 32;  // media video poster image for media Item play item
+    uint64 play_index = 30;  // play item indx
+    uint64 duration   = 31;  // video duration unit: s
+    string still_url  = 32;  // media video poster image for media Item play item
 }
 
-message ListMediaItemRequest {
-    Item        menu_item    = 1;  // menu sub item
-    FilterItems filter_items = 2;  // sub page filter
-    string      search_name  = 3;  // name search
+message ListMediaInfoRequest {
+    Item        menu        = 1;  // menu sub item
+    FilterItems filters     = 2;  // sub page filter
+    string      search_name = 3;  // name search
 
     uint64 page      = 10;
     uint64 page_size = 11;
     string page_key  = 12;
 }
 
-message ListMediaItemResponse {
-    repeated MediaItem media_Item_infos = 1;
+message ListMediaInfoResponse {
+    repeated Media media_infos = 1;
 
     bool        support_search_name = 10;
-    FilterItems all_filter_items    = 11;  // sub page filter
+    FilterItems all_filters         = 11;  // sub page filter
     string      next_page_key       = 12;
 }
 
-message GetMediaItemRequest {
-    string media_Item_info_id = 1;
+message GetMediaDetailRequest {
+    string media_info_id = 1;
 }
 
-message GetMediaItemResponse {
-    MediaItem          media_Item_series     = 1;
-    MediaItem          media_Item_info       = 2;
-    repeated MediaItem media_Item_play_items = 3;
+message GetMediaDetailResponse {
+    Media          media_series = 1;
+    Media          media_info   = 2;
+    repeated Media media_items  = 3;
 }
