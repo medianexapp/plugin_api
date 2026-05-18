@@ -24,7 +24,7 @@ message Formdata {
         }
         repeated FormItem enum_values = 10;  // for dropdown widget
     }
-    repeated FormItem forms = 11;
+    repeated FormItem form_items = 11;
 }
 
 message Scanqrcode {

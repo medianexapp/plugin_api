@@ -232,10 +232,10 @@ class Formdata_FormItem extends $pb.GeneratedMessage {
 
 class Formdata extends $pb.GeneratedMessage {
   factory Formdata({
-    $core.Iterable<Formdata_FormItem>? forms,
+    $core.Iterable<Formdata_FormItem>? formItems,
   }) {
     final result = create();
-    if (forms != null) result.forms.addAll(forms);
+    if (formItems != null) result.formItems.addAll(formItems);
     return result;
   }
 
@@ -252,7 +252,7 @@ class Formdata extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Formdata',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..pPM<Formdata_FormItem>(11, _omitFieldNames ? '' : 'forms',
+    ..pPM<Formdata_FormItem>(11, _omitFieldNames ? '' : 'formItems',
         subBuilder: Formdata_FormItem.create)
     ..hasRequiredFields = false;
 
@@ -275,7 +275,7 @@ class Formdata extends $pb.GeneratedMessage {
   static Formdata? _defaultInstance;
 
   @$pb.TagNumber(11)
-  $pb.PbList<Formdata_FormItem> get forms => $_getList(0);
+  $pb.PbList<Formdata_FormItem> get formItems => $_getList(0);
 }
 
 class Scanqrcode extends $pb.GeneratedMessage {

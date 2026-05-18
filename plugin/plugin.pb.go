@@ -264,7 +264,7 @@ func (x Media_CreditType) String() string {
 
 type Formdata struct {
 	unknownFields []byte
-	Forms         []*Formdata_FormItem `protobuf:"bytes,11,rep,name=forms,proto3" json:"forms,omitempty"`
+	FormItems     []*Formdata_FormItem `protobuf:"bytes,11,rep,name=form_items,json=formItems,proto3" json:"formItems,omitempty"`
 }
 
 func (x *Formdata) Reset() {
@@ -273,9 +273,9 @@ func (x *Formdata) Reset() {
 
 func (*Formdata) ProtoMessage() {}
 
-func (x *Formdata) GetForms() []*Formdata_FormItem {
+func (x *Formdata) GetFormItems() []*Formdata_FormItem {
 	if x != nil {
-		return x.Forms
+		return x.FormItems
 	}
 	return nil
 }
@@ -1668,12 +1668,12 @@ func (m *Formdata) CloneVT() *Formdata {
 		return (*Formdata)(nil)
 	}
 	r := new(Formdata)
-	if rhs := m.Forms; rhs != nil {
+	if rhs := m.FormItems; rhs != nil {
 		tmpContainer := make([]*Formdata_FormItem, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
-		r.Forms = tmpContainer
+		r.FormItems = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -2534,11 +2534,11 @@ func (this *Formdata) EqualVT(that *Formdata) bool {
 	} else if this == nil || that == nil {
 		return false
 	}
-	if len(this.Forms) != len(that.Forms) {
+	if len(this.FormItems) != len(that.FormItems) {
 		return false
 	}
-	for i, vx := range this.Forms {
-		vy := that.Forms[i]
+	for i, vx := range this.FormItems {
+		vy := that.FormItems[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
 				p = &Formdata_FormItem{}
@@ -3710,14 +3710,14 @@ func (x *Formdata) MarshalProtoJSON(s *json.MarshalState) {
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if len(x.Forms) > 0 || s.HasField("forms") {
+	if len(x.FormItems) > 0 || s.HasField("formItems") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("forms")
+		s.WriteObjectField("formItems")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.Forms {
+		for _, element := range x.FormItems {
 			s.WriteMoreIf(&wroteElement)
-			element.MarshalProtoJSON(s.WithField("forms"))
+			element.MarshalProtoJSON(s.WithField("formItems"))
 		}
 		s.WriteArrayEnd()
 	}
@@ -3738,23 +3738,23 @@ func (x *Formdata) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "forms":
-			s.AddField("forms")
+		case "form_items", "formItems":
+			s.AddField("form_items")
 			if s.ReadNil() {
-				x.Forms = nil
+				x.FormItems = nil
 				return
 			}
 			s.ReadArray(func() {
 				if s.ReadNil() {
-					x.Forms = append(x.Forms, nil)
+					x.FormItems = append(x.FormItems, nil)
 					return
 				}
 				v := &Formdata_FormItem{}
-				v.UnmarshalProtoJSON(s.WithField("forms", false))
+				v.UnmarshalProtoJSON(s.WithField("form_items", false))
 				if s.Err() != nil {
 					return
 				}
-				x.Forms = append(x.Forms, v)
+				x.FormItems = append(x.FormItems, v)
 			})
 		}
 	})
@@ -6198,9 +6198,9 @@ func (m *Formdata) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Forms) > 0 {
-		for iNdEx := len(m.Forms) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.Forms[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+	if len(m.FormItems) > 0 {
+		for iNdEx := len(m.FormItems) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.FormItems[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -8134,9 +8134,9 @@ func (m *Formdata) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.Forms) > 0 {
-		for iNdEx := len(m.Forms) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.Forms[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+	if len(m.FormItems) > 0 {
+		for iNdEx := len(m.FormItems) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.FormItems[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -9924,8 +9924,8 @@ func (m *Formdata) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	if len(m.Forms) > 0 {
-		for _, e := range m.Forms {
+	if len(m.FormItems) > 0 {
+		for _, e := range m.FormItems {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -10706,12 +10706,12 @@ func (x *Formdata_FormItem) String() string {
 func (x *Formdata) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("Formdata {")
-	if len(x.Forms) > 0 {
+	if len(x.FormItems) > 0 {
 		if sb.Len() > 10 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("forms: [")
-		for i, v := range x.Forms {
+		sb.WriteString("form_items: [")
+		for i, v := range x.FormItems {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -12250,7 +12250,7 @@ func (m *Formdata) UnmarshalVT(dAtA []byte) error {
 		switch fieldNum {
 		case 11:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Forms", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field FormItems", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -12277,8 +12277,8 @@ func (m *Formdata) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Forms = append(m.Forms, &Formdata_FormItem{})
-			if err := m.Forms[len(m.Forms)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			m.FormItems = append(m.FormItems, &Formdata_FormItem{})
+			if err := m.FormItems[len(m.FormItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -17037,7 +17037,7 @@ func (m *Formdata) UnmarshalVTUnsafe(dAtA []byte) error {
 		switch fieldNum {
 		case 11:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Forms", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field FormItems", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -17064,8 +17064,8 @@ func (m *Formdata) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Forms = append(m.Forms, &Formdata_FormItem{})
-			if err := m.Forms[len(m.Forms)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			m.FormItems = append(m.FormItems, &Formdata_FormItem{})
+			if err := m.FormItems[len(m.FormItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
