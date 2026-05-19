@@ -594,17 +594,16 @@ final $typed_data.Uint8List tokenDescriptor = $convert.base64Decode(
 const Item$json = {
   '1': 'Item',
   '2': [
-    {'1': 'index', '3': 1, '4': 1, '5': 5, '10': 'index'},
-    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'value', '3': 3, '4': 1, '5': 9, '10': 'value'},
-    {'1': 'icon', '3': 4, '4': 1, '5': 9, '10': 'icon'},
+    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+    {'1': 'icon', '3': 3, '4': 1, '5': 9, '10': 'icon'},
   ],
 };
 
 /// Descriptor for `Item`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List itemDescriptor = $convert.base64Decode(
-    'CgRJdGVtEhQKBWluZGV4GAEgASgFUgVpbmRleBISCgRuYW1lGAIgASgJUgRuYW1lEhQKBXZhbH'
-    'VlGAMgASgJUgV2YWx1ZRISCgRpY29uGAQgASgJUgRpY29u');
+    'CgRJdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSFAoFdmFsdWUYAiABKAlSBXZhbHVlEhIKBGljb2'
+    '4YAyABKAlSBGljb24=');
 
 @$core.Deprecated('Use mediaMenuDescriptor instead')
 const MediaMenu$json = {

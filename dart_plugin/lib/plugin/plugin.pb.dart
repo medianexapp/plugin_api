@@ -1635,13 +1635,11 @@ class Token extends $pb.GeneratedMessage {
 
 class Item extends $pb.GeneratedMessage {
   factory Item({
-    $core.int? index,
     $core.String? name,
     $core.String? value,
     $core.String? icon,
   }) {
     final result = create();
-    if (index != null) result.index = index;
     if (name != null) result.name = name;
     if (value != null) result.value = value;
     if (icon != null) result.icon = icon;
@@ -1661,10 +1659,9 @@ class Item extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Item',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aI(1, _omitFieldNames ? '' : 'index')
-    ..aOS(2, _omitFieldNames ? '' : 'name')
-    ..aOS(3, _omitFieldNames ? '' : 'value')
-    ..aOS(4, _omitFieldNames ? '' : 'icon')
+    ..aOS(1, _omitFieldNames ? '' : 'name')
+    ..aOS(2, _omitFieldNames ? '' : 'value')
+    ..aOS(3, _omitFieldNames ? '' : 'icon')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1686,40 +1683,31 @@ class Item extends $pb.GeneratedMessage {
   static Item? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get index => $_getIZ(0);
+  $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set index($core.int value) => $_setSignedInt32(0, value);
+  set name($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasIndex() => $_has(0);
+  $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearIndex() => $_clearField(1);
+  void clearName() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get name => $_getSZ(1);
+  $core.String get value => $_getSZ(1);
   @$pb.TagNumber(2)
-  set name($core.String value) => $_setString(1, value);
+  set value($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasName() => $_has(1);
+  $core.bool hasValue() => $_has(1);
   @$pb.TagNumber(2)
-  void clearName() => $_clearField(2);
+  void clearValue() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get value => $_getSZ(2);
+  $core.String get icon => $_getSZ(2);
   @$pb.TagNumber(3)
-  set value($core.String value) => $_setString(2, value);
+  set icon($core.String value) => $_setString(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasValue() => $_has(2);
+  $core.bool hasIcon() => $_has(2);
   @$pb.TagNumber(3)
-  void clearValue() => $_clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get icon => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set icon($core.String value) => $_setString(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasIcon() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearIcon() => $_clearField(4);
+  void clearIcon() => $_clearField(3);
 }
 
 /// menu
