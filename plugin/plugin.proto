@@ -165,10 +165,9 @@ message Token {
 }
 
 message Item {
-    int32  index = 1;
-    string name  = 2;
-    string value = 3;
-    string icon  = 4;  // icon url
+    string name  = 1;
+    string value = 2;
+    string icon  = 3;  // icon url
 }
 
 // menu
