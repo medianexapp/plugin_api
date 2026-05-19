@@ -885,7 +885,7 @@ func (x *Item) GetIcon() string {
 type MediaMenu struct {
 	unknownFields []byte
 	Menu          *Item        `protobuf:"bytes,1,opt,name=menu,proto3" json:"menu,omitempty"`
-	ParentMenu    []*MediaMenu `protobuf:"bytes,2,rep,name=parent_menu,json=parentMenu,proto3" json:"parentMenu,omitempty"`
+	SubMenu       []*MediaMenu `protobuf:"bytes,2,rep,name=sub_menu,json=subMenu,proto3" json:"subMenu,omitempty"`
 }
 
 func (x *MediaMenu) Reset() {
@@ -901,9 +901,9 @@ func (x *MediaMenu) GetMenu() *Item {
 	return nil
 }
 
-func (x *MediaMenu) GetParentMenu() []*MediaMenu {
+func (x *MediaMenu) GetSubMenu() []*MediaMenu {
 	if x != nil {
-		return x.ParentMenu
+		return x.SubMenu
 	}
 	return nil
 }
@@ -2101,12 +2101,12 @@ func (m *MediaMenu) CloneVT() *MediaMenu {
 	}
 	r := new(MediaMenu)
 	r.Menu = m.Menu.CloneVT()
-	if rhs := m.ParentMenu; rhs != nil {
+	if rhs := m.SubMenu; rhs != nil {
 		tmpContainer := make([]*MediaMenu, len(rhs))
 		for k, v := range rhs {
 			tmpContainer[k] = v.CloneVT()
 		}
-		r.ParentMenu = tmpContainer
+		r.SubMenu = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -3171,11 +3171,11 @@ func (this *MediaMenu) EqualVT(that *MediaMenu) bool {
 	if !this.Menu.EqualVT(that.Menu) {
 		return false
 	}
-	if len(this.ParentMenu) != len(that.ParentMenu) {
+	if len(this.SubMenu) != len(that.SubMenu) {
 		return false
 	}
-	for i, vx := range this.ParentMenu {
-		vy := that.ParentMenu[i]
+	for i, vx := range this.SubMenu {
+		vy := that.SubMenu[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
 				p = &MediaMenu{}
@@ -5095,14 +5095,14 @@ func (x *MediaMenu) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("menu")
 		x.Menu.MarshalProtoJSON(s.WithField("menu"))
 	}
-	if len(x.ParentMenu) > 0 || s.HasField("parentMenu") {
+	if len(x.SubMenu) > 0 || s.HasField("subMenu") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("parentMenu")
+		s.WriteObjectField("subMenu")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.ParentMenu {
+		for _, element := range x.SubMenu {
 			s.WriteMoreIf(&wroteElement)
-			element.MarshalProtoJSON(s.WithField("parentMenu"))
+			element.MarshalProtoJSON(s.WithField("subMenu"))
 		}
 		s.WriteArrayEnd()
 	}
@@ -5130,23 +5130,23 @@ func (x *MediaMenu) UnmarshalProtoJSON(s *json.UnmarshalState) {
 			}
 			x.Menu = &Item{}
 			x.Menu.UnmarshalProtoJSON(s.WithField("menu", true))
-		case "parent_menu", "parentMenu":
-			s.AddField("parent_menu")
+		case "sub_menu", "subMenu":
+			s.AddField("sub_menu")
 			if s.ReadNil() {
-				x.ParentMenu = nil
+				x.SubMenu = nil
 				return
 			}
 			s.ReadArray(func() {
 				if s.ReadNil() {
-					x.ParentMenu = append(x.ParentMenu, nil)
+					x.SubMenu = append(x.SubMenu, nil)
 					return
 				}
 				v := &MediaMenu{}
-				v.UnmarshalProtoJSON(s.WithField("parent_menu", false))
+				v.UnmarshalProtoJSON(s.WithField("sub_menu", false))
 				if s.Err() != nil {
 					return
 				}
-				x.ParentMenu = append(x.ParentMenu, v)
+				x.SubMenu = append(x.SubMenu, v)
 			})
 		}
 	})
@@ -7301,9 +7301,9 @@ func (m *MediaMenu) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.ParentMenu) > 0 {
-		for iNdEx := len(m.ParentMenu) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.ParentMenu[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+	if len(m.SubMenu) > 0 {
+		for iNdEx := len(m.SubMenu) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.SubMenu[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -9273,9 +9273,9 @@ func (m *MediaMenu) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.ParentMenu) > 0 {
-		for iNdEx := len(m.ParentMenu) - 1; iNdEx >= 0; iNdEx-- {
-			size, err := m.ParentMenu[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+	if len(m.SubMenu) > 0 {
+		for iNdEx := len(m.SubMenu) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.SubMenu[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
 			if err != nil {
 				return 0, err
 			}
@@ -10456,8 +10456,8 @@ func (m *MediaMenu) SizeVT() (n int) {
 		l = m.Menu.SizeVT()
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if len(m.ParentMenu) > 0 {
-		for _, e := range m.ParentMenu {
+	if len(m.SubMenu) > 0 {
+		for _, e := range m.SubMenu {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -11487,12 +11487,12 @@ func (x *MediaMenu) MarshalProtoText() string {
 		sb.WriteString("menu: ")
 		sb.WriteString(x.Menu.MarshalProtoText())
 	}
-	if len(x.ParentMenu) > 0 {
+	if len(x.SubMenu) > 0 {
 		if sb.Len() > 11 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("parent_menu: [")
-		for i, v := range x.ParentMenu {
+		sb.WriteString("sub_menu: [")
+		for i, v := range x.SubMenu {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -15130,7 +15130,7 @@ func (m *MediaMenu) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentMenu", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field SubMenu", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -15157,8 +15157,8 @@ func (m *MediaMenu) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ParentMenu = append(m.ParentMenu, &MediaMenu{})
-			if err := m.ParentMenu[len(m.ParentMenu)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+			m.SubMenu = append(m.SubMenu, &MediaMenu{})
+			if err := m.SubMenu[len(m.SubMenu)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -20100,7 +20100,7 @@ func (m *MediaMenu) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentMenu", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field SubMenu", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -20127,8 +20127,8 @@ func (m *MediaMenu) UnmarshalVTUnsafe(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ParentMenu = append(m.ParentMenu, &MediaMenu{})
-			if err := m.ParentMenu[len(m.ParentMenu)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+			m.SubMenu = append(m.SubMenu, &MediaMenu{})
+			if err := m.SubMenu[len(m.SubMenu)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

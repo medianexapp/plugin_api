@@ -611,20 +611,20 @@ const MediaMenu$json = {
   '2': [
     {'1': 'menu', '3': 1, '4': 1, '5': 11, '6': '.plugin.Item', '10': 'menu'},
     {
-      '1': 'parent_menu',
+      '1': 'sub_menu',
       '3': 2,
       '4': 3,
       '5': 11,
       '6': '.plugin.MediaMenu',
-      '10': 'parentMenu'
+      '10': 'subMenu'
     },
   ],
 };
 
 /// Descriptor for `MediaMenu`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mediaMenuDescriptor = $convert.base64Decode(
-    'CglNZWRpYU1lbnUSIAoEbWVudRgBIAEoCzIMLnBsdWdpbi5JdGVtUgRtZW51EjIKC3BhcmVudF'
-    '9tZW51GAIgAygLMhEucGx1Z2luLk1lZGlhTWVudVIKcGFyZW50TWVudQ==');
+    'CglNZWRpYU1lbnUSIAoEbWVudRgBIAEoCzIMLnBsdWdpbi5JdGVtUgRtZW51EiwKCHN1Yl9tZW'
+    '51GAIgAygLMhEucGx1Z2luLk1lZGlhTWVudVIHc3ViTWVudQ==');
 
 @$core.Deprecated('Use filterItemsDescriptor instead')
 const FilterItems$json = {

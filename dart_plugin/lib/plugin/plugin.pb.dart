@@ -1714,11 +1714,11 @@ class Item extends $pb.GeneratedMessage {
 class MediaMenu extends $pb.GeneratedMessage {
   factory MediaMenu({
     Item? menu,
-    $core.Iterable<MediaMenu>? parentMenu,
+    $core.Iterable<MediaMenu>? subMenu,
   }) {
     final result = create();
     if (menu != null) result.menu = menu;
-    if (parentMenu != null) result.parentMenu.addAll(parentMenu);
+    if (subMenu != null) result.subMenu.addAll(subMenu);
     return result;
   }
 
@@ -1736,7 +1736,7 @@ class MediaMenu extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOM<Item>(1, _omitFieldNames ? '' : 'menu', subBuilder: Item.create)
-    ..pPM<MediaMenu>(2, _omitFieldNames ? '' : 'parentMenu',
+    ..pPM<MediaMenu>(2, _omitFieldNames ? '' : 'subMenu',
         subBuilder: MediaMenu.create)
     ..hasRequiredFields = false;
 
@@ -1770,7 +1770,7 @@ class MediaMenu extends $pb.GeneratedMessage {
   Item ensureMenu() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $pb.PbList<MediaMenu> get parentMenu => $_getList(1);
+  $pb.PbList<MediaMenu> get subMenu => $_getList(1);
 }
 
 class FilterItems_Filter extends $pb.GeneratedMessage {
