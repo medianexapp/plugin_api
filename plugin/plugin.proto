@@ -172,7 +172,8 @@ message Item {
 
 // menu
 message MediaMenu {
-    repeated Item menus = 1;
+    Item               menu        = 1;
+    repeated MediaMenu parent_menu = 2;
 }
 
 message FilterItems {

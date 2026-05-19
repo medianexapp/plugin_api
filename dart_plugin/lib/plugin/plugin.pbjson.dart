@@ -609,13 +609,22 @@ final $typed_data.Uint8List itemDescriptor = $convert.base64Decode(
 const MediaMenu$json = {
   '1': 'MediaMenu',
   '2': [
-    {'1': 'menus', '3': 1, '4': 3, '5': 11, '6': '.plugin.Item', '10': 'menus'},
+    {'1': 'menu', '3': 1, '4': 1, '5': 11, '6': '.plugin.Item', '10': 'menu'},
+    {
+      '1': 'parent_menu',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.MediaMenu',
+      '10': 'parentMenu'
+    },
   ],
 };
 
 /// Descriptor for `MediaMenu`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mediaMenuDescriptor = $convert.base64Decode(
-    'CglNZWRpYU1lbnUSIgoFbWVudXMYASADKAsyDC5wbHVnaW4uSXRlbVIFbWVudXM=');
+    'CglNZWRpYU1lbnUSIAoEbWVudRgBIAEoCzIMLnBsdWdpbi5JdGVtUgRtZW51EjIKC3BhcmVudF'
+    '9tZW51GAIgAygLMhEucGx1Z2luLk1lZGlhTWVudVIKcGFyZW50TWVudQ==');
 
 @$core.Deprecated('Use filterItemsDescriptor instead')
 const FilterItems$json = {
