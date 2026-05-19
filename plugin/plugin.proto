@@ -165,8 +165,10 @@ message Token {
 }
 
 message Item {
-    string name  = 1;
-    string value = 2;
+    int32  index = 1;
+    string name  = 2;
+    string value = 3;
+    string icon  = 4;  // icon url
 }
 
 // menu
@@ -189,7 +191,7 @@ message Media {
         MEDIA_UNSPECIFIED = 0;
         MEDIA_SERIES      = 1;
         MEDIA_INFO        = 2;
-        MEDIA_ITEM        = 3;
+        MEDIA_PLAY_ITEM   = 3;
     }
     MediaType media_type      = 2;
     string    name            = 3;

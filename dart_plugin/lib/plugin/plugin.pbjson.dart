@@ -594,14 +594,17 @@ final $typed_data.Uint8List tokenDescriptor = $convert.base64Decode(
 const Item$json = {
   '1': 'Item',
   '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+    {'1': 'index', '3': 1, '4': 1, '5': 5, '10': 'index'},
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'value', '3': 3, '4': 1, '5': 9, '10': 'value'},
+    {'1': 'icon', '3': 4, '4': 1, '5': 9, '10': 'icon'},
   ],
 };
 
 /// Descriptor for `Item`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List itemDescriptor = $convert.base64Decode(
-    'CgRJdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSFAoFdmFsdWUYAiABKAlSBXZhbHVl');
+    'CgRJdGVtEhQKBWluZGV4GAEgASgFUgVpbmRleBISCgRuYW1lGAIgASgJUgRuYW1lEhQKBXZhbH'
+    'VlGAMgASgJUgV2YWx1ZRISCgRpY29uGAQgASgJUgRpY29u');
 
 @$core.Deprecated('Use mediaMenuDescriptor instead')
 const MediaMenu$json = {
@@ -732,7 +735,7 @@ const Media_MediaType$json = {
     {'1': 'MEDIA_UNSPECIFIED', '2': 0},
     {'1': 'MEDIA_SERIES', '2': 1},
     {'1': 'MEDIA_INFO', '2': 2},
-    {'1': 'MEDIA_ITEM', '2': 3},
+    {'1': 'MEDIA_PLAY_ITEM', '2': 3},
   ],
 };
 
@@ -763,11 +766,11 @@ final $typed_data.Uint8List mediaDescriptor = $convert.base64Decode(
     'dGlvbhIbCglzdGlsbF91cmwYICABKAlSCHN0aWxsVXJsGlcKBkNyZWRpdBISCgRuYW1lGAEgAS'
     'gJUgRuYW1lEjkKC2NyZWRpdF90eXBlGAIgASgOMhgucGx1Z2luLk1lZGlhLkNyZWRpdFR5cGVS'
     'CmNyZWRpdFR5cGUaOwoNTWV0YWRhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZR'
-    'gCIAEoCVIFdmFsdWU6AjgBIlQKCU1lZGlhVHlwZRIVChFNRURJQV9VTlNQRUNJRklFRBAAEhAK'
-    'DE1FRElBX1NFUklFUxABEg4KCk1FRElBX0lORk8QAhIOCgpNRURJQV9JVEVNEAMifgoKQ3JlZG'
-    'l0VHlwZRIVChFDcmVkaXRVTlNQRUNJRklFRBAAEg8KC0NyZWRpdEFjdG9yEAESFwoTQ3JlZGl0'
-    'Q2FzdERpcmVjdGluZxACEhgKFENyZWRpdENhc3RQcm9kdWN0aW9uEAMSFQoRQ3JlZGl0Q2FzdF'
-    'dyaXRpbmcQBA==');
+    'gCIAEoCVIFdmFsdWU6AjgBIlkKCU1lZGlhVHlwZRIVChFNRURJQV9VTlNQRUNJRklFRBAAEhAK'
+    'DE1FRElBX1NFUklFUxABEg4KCk1FRElBX0lORk8QAhITCg9NRURJQV9QTEFZX0lURU0QAyJ+Cg'
+    'pDcmVkaXRUeXBlEhUKEUNyZWRpdFVOU1BFQ0lGSUVEEAASDwoLQ3JlZGl0QWN0b3IQARIXChND'
+    'cmVkaXRDYXN0RGlyZWN0aW5nEAISGAoUQ3JlZGl0Q2FzdFByb2R1Y3Rpb24QAxIVChFDcmVkaX'
+    'RDYXN0V3JpdGluZxAE');
 
 @$core.Deprecated('Use listMediaInfoRequestDescriptor instead')
 const ListMediaInfoRequest$json = {

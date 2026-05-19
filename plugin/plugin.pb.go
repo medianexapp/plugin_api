@@ -187,7 +187,7 @@ const (
 	Media_MEDIA_UNSPECIFIED Media_MediaType = 0
 	Media_MEDIA_SERIES      Media_MediaType = 1
 	Media_MEDIA_INFO        Media_MediaType = 2
-	Media_MEDIA_ITEM        Media_MediaType = 3
+	Media_MEDIA_PLAY_ITEM   Media_MediaType = 3
 )
 
 // Enum value maps for Media_MediaType.
@@ -196,13 +196,13 @@ var (
 		0: "MEDIA_UNSPECIFIED",
 		1: "MEDIA_SERIES",
 		2: "MEDIA_INFO",
-		3: "MEDIA_ITEM",
+		3: "MEDIA_PLAY_ITEM",
 	}
 	Media_MediaType_value = map[string]int32{
 		"MEDIA_UNSPECIFIED": 0,
 		"MEDIA_SERIES":      1,
 		"MEDIA_INFO":        2,
-		"MEDIA_ITEM":        3,
+		"MEDIA_PLAY_ITEM":   3,
 	}
 )
 
@@ -849,8 +849,10 @@ func (x *Token) GetExpiresIn() uint64 {
 
 type Item struct {
 	unknownFields []byte
-	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	Index         int32  `protobuf:"varint,1,opt,name=index,proto3" json:"index,omitempty"`
+	Name          string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Value         string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
+	Icon          string `protobuf:"bytes,4,opt,name=icon,proto3" json:"icon,omitempty"` // icon url
 }
 
 func (x *Item) Reset() {
@@ -858,6 +860,13 @@ func (x *Item) Reset() {
 }
 
 func (*Item) ProtoMessage() {}
+
+func (x *Item) GetIndex() int32 {
+	if x != nil {
+		return x.Index
+	}
+	return 0
+}
 
 func (x *Item) GetName() string {
 	if x != nil {
@@ -869,6 +878,13 @@ func (x *Item) GetName() string {
 func (x *Item) GetValue() string {
 	if x != nil {
 		return x.Value
+	}
+	return ""
+}
+
+func (x *Item) GetIcon() string {
+	if x != nil {
+		return x.Icon
 	}
 	return ""
 }
@@ -2065,8 +2081,10 @@ func (m *Item) CloneVT() *Item {
 		return (*Item)(nil)
 	}
 	r := new(Item)
+	r.Index = m.Index
 	r.Name = m.Name
 	r.Value = m.Value
+	r.Icon = m.Icon
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -3125,10 +3143,16 @@ func (this *Item) EqualVT(that *Item) bool {
 	} else if this == nil || that == nil {
 		return false
 	}
+	if this.Index != that.Index {
+		return false
+	}
 	if this.Name != that.Name {
 		return false
 	}
 	if this.Value != that.Value {
+		return false
+	}
+	if this.Icon != that.Icon {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -5008,6 +5032,11 @@ func (x *Item) MarshalProtoJSON(s *json.MarshalState) {
 	}
 	s.WriteObjectStart()
 	var wroteField bool
+	if x.Index != 0 || s.HasField("index") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("index")
+		s.WriteInt32(x.Index)
+	}
 	if x.Name != "" || s.HasField("name") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("name")
@@ -5017,6 +5046,11 @@ func (x *Item) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("value")
 		s.WriteString(x.Value)
+	}
+	if x.Icon != "" || s.HasField("icon") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("icon")
+		s.WriteString(x.Icon)
 	}
 	s.WriteObjectEnd()
 }
@@ -5035,12 +5069,18 @@ func (x *Item) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
+		case "index":
+			s.AddField("index")
+			x.Index = s.ReadInt32()
 		case "name":
 			s.AddField("name")
 			x.Name = s.ReadString()
 		case "value":
 			s.AddField("value")
 			x.Value = s.ReadString()
+		case "icon":
+			s.AddField("icon")
+			x.Icon = s.ReadString()
 		}
 	})
 }
@@ -7203,19 +7243,31 @@ func (m *Item) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.Icon) > 0 {
+		i -= len(m.Icon)
+		copy(dAtA[i:], m.Icon)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Icon)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if len(m.Value) > 0 {
 		i -= len(m.Value)
 		copy(dAtA[i:], m.Value)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Value)))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x1a
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
 		copy(dAtA[i:], m.Name)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Name)))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x12
+	}
+	if m.Index != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Index))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -9158,19 +9210,31 @@ func (m *Item) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.Icon) > 0 {
+		i -= len(m.Icon)
+		copy(dAtA[i:], m.Icon)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Icon)))
+		i--
+		dAtA[i] = 0x22
+	}
 	if len(m.Value) > 0 {
 		i -= len(m.Value)
 		copy(dAtA[i:], m.Value)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Value)))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x1a
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
 		copy(dAtA[i:], m.Name)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Name)))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x12
+	}
+	if m.Index != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Index))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -10352,11 +10416,18 @@ func (m *Item) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
+	if m.Index != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.Index))
+	}
 	l = len(m.Name)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
 	l = len(m.Value)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.Icon)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
@@ -11363,6 +11434,13 @@ func (x *Token) String() string {
 func (x *Item) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("Item {")
+	if x.Index != 0 {
+		if sb.Len() > 6 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("index: ")
+		sb.WriteString(strconv.FormatInt(int64(x.Index), 10))
+	}
 	if x.Name != "" {
 		if sb.Len() > 6 {
 			sb.WriteString(" ")
@@ -11376,6 +11454,13 @@ func (x *Item) MarshalProtoText() string {
 		}
 		sb.WriteString("value: ")
 		sb.WriteString(strconv.Quote(x.Value))
+	}
+	if x.Icon != "" {
+		if sb.Len() > 6 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("icon: ")
+		sb.WriteString(strconv.Quote(x.Icon))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -14846,6 +14931,25 @@ func (m *Item) UnmarshalVT(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			m.Index = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Index |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
@@ -14877,7 +14981,7 @@ func (m *Item) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Name = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 2:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
 			}
@@ -14908,6 +15012,38 @@ func (m *Item) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Value = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Icon", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Icon = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -19736,6 +19872,25 @@ func (m *Item) UnmarshalVTUnsafe(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			m.Index = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Index |= int32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
@@ -19771,7 +19926,7 @@ func (m *Item) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.Name = stringValue
 			iNdEx = postIndex
-		case 2:
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
 			}
@@ -19806,6 +19961,42 @@ func (m *Item) UnmarshalVTUnsafe(dAtA []byte) error {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
 			m.Value = stringValue
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Icon", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.Icon = stringValue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

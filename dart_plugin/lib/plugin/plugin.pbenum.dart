@@ -135,14 +135,14 @@ class Media_MediaType extends $pb.ProtobufEnum {
       Media_MediaType._(1, _omitEnumNames ? '' : 'MEDIA_SERIES');
   static const Media_MediaType MEDIA_INFO =
       Media_MediaType._(2, _omitEnumNames ? '' : 'MEDIA_INFO');
-  static const Media_MediaType MEDIA_ITEM =
-      Media_MediaType._(3, _omitEnumNames ? '' : 'MEDIA_ITEM');
+  static const Media_MediaType MEDIA_PLAY_ITEM =
+      Media_MediaType._(3, _omitEnumNames ? '' : 'MEDIA_PLAY_ITEM');
 
   static const $core.List<Media_MediaType> values = <Media_MediaType>[
     MEDIA_UNSPECIFIED,
     MEDIA_SERIES,
     MEDIA_INFO,
-    MEDIA_ITEM,
+    MEDIA_PLAY_ITEM,
   ];
 
   static final $core.List<Media_MediaType?> _byValue =
