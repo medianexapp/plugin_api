@@ -171,9 +171,13 @@ message Item {
 }
 
 // menu
+message Menu {
+    Item          menu     = 1;
+    repeated Menu sub_menu = 2;
+}
+
 message MediaMenu {
-    Item               menu     = 1;
-    repeated MediaMenu sub_menu = 2;
+    repeated Menu media_menus = 1;
 }
 
 message FilterItems {

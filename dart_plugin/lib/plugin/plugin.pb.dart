@@ -1711,14 +1711,73 @@ class Item extends $pb.GeneratedMessage {
 }
 
 /// menu
-class MediaMenu extends $pb.GeneratedMessage {
-  factory MediaMenu({
+class Menu extends $pb.GeneratedMessage {
+  factory Menu({
     Item? menu,
-    $core.Iterable<MediaMenu>? subMenu,
+    $core.Iterable<Menu>? subMenu,
   }) {
     final result = create();
     if (menu != null) result.menu = menu;
     if (subMenu != null) result.subMenu.addAll(subMenu);
+    return result;
+  }
+
+  Menu._();
+
+  factory Menu.fromBuffer($core.List<$core.int> data,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromBuffer(data, registry);
+  factory Menu.fromJson($core.String json,
+          [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
+      create()..mergeFromJson(json, registry);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(
+      _omitMessageNames ? '' : 'Menu',
+      package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
+      createEmptyInstance: create)
+    ..aOM<Item>(1, _omitFieldNames ? '' : 'menu', subBuilder: Item.create)
+    ..pPM<Menu>(2, _omitFieldNames ? '' : 'subMenu', subBuilder: Menu.create)
+    ..hasRequiredFields = false;
+
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Menu clone() => deepCopy();
+  @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
+  Menu copyWith(void Function(Menu) updates) =>
+      super.copyWith((message) => updates(message as Menu)) as Menu;
+
+  @$core.override
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static Menu create() => Menu._();
+  @$core.override
+  Menu createEmptyInstance() => create();
+  @$core.pragma('dart2js:noInline')
+  static Menu getDefault() =>
+      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Menu>(create);
+  static Menu? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Item get menu => $_getN(0);
+  @$pb.TagNumber(1)
+  set menu(Item value) => $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasMenu() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMenu() => $_clearField(1);
+  @$pb.TagNumber(1)
+  Item ensureMenu() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $pb.PbList<Menu> get subMenu => $_getList(1);
+}
+
+class MediaMenu extends $pb.GeneratedMessage {
+  factory MediaMenu({
+    $core.Iterable<Menu>? mediaMenus,
+  }) {
+    final result = create();
+    if (mediaMenus != null) result.mediaMenus.addAll(mediaMenus);
     return result;
   }
 
@@ -1735,9 +1794,7 @@ class MediaMenu extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'MediaMenu',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aOM<Item>(1, _omitFieldNames ? '' : 'menu', subBuilder: Item.create)
-    ..pPM<MediaMenu>(2, _omitFieldNames ? '' : 'subMenu',
-        subBuilder: MediaMenu.create)
+    ..pPM<Menu>(1, _omitFieldNames ? '' : 'mediaMenus', subBuilder: Menu.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1759,18 +1816,7 @@ class MediaMenu extends $pb.GeneratedMessage {
   static MediaMenu? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Item get menu => $_getN(0);
-  @$pb.TagNumber(1)
-  set menu(Item value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasMenu() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearMenu() => $_clearField(1);
-  @$pb.TagNumber(1)
-  Item ensureMenu() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $pb.PbList<MediaMenu> get subMenu => $_getList(1);
+  $pb.PbList<Menu> get mediaMenus => $_getList(0);
 }
 
 class FilterItems_Filter extends $pb.GeneratedMessage {

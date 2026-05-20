@@ -605,9 +605,9 @@ final $typed_data.Uint8List itemDescriptor = $convert.base64Decode(
     'CgRJdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSFAoFdmFsdWUYAiABKAlSBXZhbHVlEhIKBGljb2'
     '4YAyABKAlSBGljb24=');
 
-@$core.Deprecated('Use mediaMenuDescriptor instead')
-const MediaMenu$json = {
-  '1': 'MediaMenu',
+@$core.Deprecated('Use menuDescriptor instead')
+const Menu$json = {
+  '1': 'Menu',
   '2': [
     {'1': 'menu', '3': 1, '4': 1, '5': 11, '6': '.plugin.Item', '10': 'menu'},
     {
@@ -615,16 +615,36 @@ const MediaMenu$json = {
       '3': 2,
       '4': 3,
       '5': 11,
-      '6': '.plugin.MediaMenu',
+      '6': '.plugin.Menu',
       '10': 'subMenu'
+    },
+  ],
+};
+
+/// Descriptor for `Menu`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List menuDescriptor = $convert.base64Decode(
+    'CgRNZW51EiAKBG1lbnUYASABKAsyDC5wbHVnaW4uSXRlbVIEbWVudRInCghzdWJfbWVudRgCIA'
+    'MoCzIMLnBsdWdpbi5NZW51UgdzdWJNZW51');
+
+@$core.Deprecated('Use mediaMenuDescriptor instead')
+const MediaMenu$json = {
+  '1': 'MediaMenu',
+  '2': [
+    {
+      '1': 'media_menus',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.plugin.Menu',
+      '10': 'mediaMenus'
     },
   ],
 };
 
 /// Descriptor for `MediaMenu`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List mediaMenuDescriptor = $convert.base64Decode(
-    'CglNZWRpYU1lbnUSIAoEbWVudRgBIAEoCzIMLnBsdWdpbi5JdGVtUgRtZW51EiwKCHN1Yl9tZW'
-    '51GAIgAygLMhEucGx1Z2luLk1lZGlhTWVudVIHc3ViTWVudQ==');
+    'CglNZWRpYU1lbnUSLQoLbWVkaWFfbWVudXMYASADKAsyDC5wbHVnaW4uTWVudVIKbWVkaWFNZW'
+    '51cw==');
 
 @$core.Deprecated('Use filterItemsDescriptor instead')
 const FilterItems$json = {
