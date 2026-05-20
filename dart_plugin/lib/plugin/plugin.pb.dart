@@ -1633,8 +1633,8 @@ class Token extends $pb.GeneratedMessage {
   void clearExpiresIn() => $_clearField(4);
 }
 
-class Item extends $pb.GeneratedMessage {
-  factory Item({
+class PluginItem extends $pb.GeneratedMessage {
+  factory PluginItem({
     $core.String? name,
     $core.String? value,
     $core.String? icon,
@@ -1646,17 +1646,17 @@ class Item extends $pb.GeneratedMessage {
     return result;
   }
 
-  Item._();
+  PluginItem._();
 
-  factory Item.fromBuffer($core.List<$core.int> data,
+  factory PluginItem.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Item.fromJson($core.String json,
+  factory PluginItem.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Item',
+      _omitMessageNames ? '' : 'PluginItem',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
@@ -1665,22 +1665,22 @@ class Item extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Item clone() => deepCopy();
+  PluginItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Item copyWith(void Function(Item) updates) =>
-      super.copyWith((message) => updates(message as Item)) as Item;
+  PluginItem copyWith(void Function(PluginItem) updates) =>
+      super.copyWith((message) => updates(message as PluginItem)) as PluginItem;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Item create() => Item._();
+  static PluginItem create() => PluginItem._();
   @$core.override
-  Item createEmptyInstance() => create();
+  PluginItem createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Item getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Item>(create);
-  static Item? _defaultInstance;
+  static PluginItem getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginItem>(create);
+  static PluginItem? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
@@ -1711,10 +1711,10 @@ class Item extends $pb.GeneratedMessage {
 }
 
 /// menu
-class Menu extends $pb.GeneratedMessage {
-  factory Menu({
-    Item? menu,
-    $core.Iterable<Menu>? subMenu,
+class PluginMenu extends $pb.GeneratedMessage {
+  factory PluginMenu({
+    PluginItem? menu,
+    $core.Iterable<PluginMenu>? subMenu,
   }) {
     final result = create();
     if (menu != null) result.menu = menu;
@@ -1722,107 +1722,111 @@ class Menu extends $pb.GeneratedMessage {
     return result;
   }
 
-  Menu._();
+  PluginMenu._();
 
-  factory Menu.fromBuffer($core.List<$core.int> data,
+  factory PluginMenu.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Menu.fromJson($core.String json,
+  factory PluginMenu.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Menu',
+      _omitMessageNames ? '' : 'PluginMenu',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aOM<Item>(1, _omitFieldNames ? '' : 'menu', subBuilder: Item.create)
-    ..pPM<Menu>(2, _omitFieldNames ? '' : 'subMenu', subBuilder: Menu.create)
+    ..aOM<PluginItem>(1, _omitFieldNames ? '' : 'menu',
+        subBuilder: PluginItem.create)
+    ..pPM<PluginMenu>(2, _omitFieldNames ? '' : 'subMenu',
+        subBuilder: PluginMenu.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Menu clone() => deepCopy();
+  PluginMenu clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Menu copyWith(void Function(Menu) updates) =>
-      super.copyWith((message) => updates(message as Menu)) as Menu;
+  PluginMenu copyWith(void Function(PluginMenu) updates) =>
+      super.copyWith((message) => updates(message as PluginMenu)) as PluginMenu;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Menu create() => Menu._();
+  static PluginMenu create() => PluginMenu._();
   @$core.override
-  Menu createEmptyInstance() => create();
+  PluginMenu createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Menu getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Menu>(create);
-  static Menu? _defaultInstance;
+  static PluginMenu getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginMenu>(create);
+  static PluginMenu? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Item get menu => $_getN(0);
+  PluginItem get menu => $_getN(0);
   @$pb.TagNumber(1)
-  set menu(Item value) => $_setField(1, value);
+  set menu(PluginItem value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasMenu() => $_has(0);
   @$pb.TagNumber(1)
   void clearMenu() => $_clearField(1);
   @$pb.TagNumber(1)
-  Item ensureMenu() => $_ensure(0);
+  PluginItem ensureMenu() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $pb.PbList<Menu> get subMenu => $_getList(1);
+  $pb.PbList<PluginMenu> get subMenu => $_getList(1);
 }
 
-class MediaMenu extends $pb.GeneratedMessage {
-  factory MediaMenu({
-    $core.Iterable<Menu>? mediaMenus,
+class PluginMenus extends $pb.GeneratedMessage {
+  factory PluginMenus({
+    $core.Iterable<PluginMenu>? pluginMenus,
   }) {
     final result = create();
-    if (mediaMenus != null) result.mediaMenus.addAll(mediaMenus);
+    if (pluginMenus != null) result.pluginMenus.addAll(pluginMenus);
     return result;
   }
 
-  MediaMenu._();
+  PluginMenus._();
 
-  factory MediaMenu.fromBuffer($core.List<$core.int> data,
+  factory PluginMenus.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory MediaMenu.fromJson($core.String json,
+  factory PluginMenus.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'MediaMenu',
+      _omitMessageNames ? '' : 'PluginMenus',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..pPM<Menu>(1, _omitFieldNames ? '' : 'mediaMenus', subBuilder: Menu.create)
+    ..pPM<PluginMenu>(1, _omitFieldNames ? '' : 'pluginMenus',
+        subBuilder: PluginMenu.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MediaMenu clone() => deepCopy();
+  PluginMenus clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MediaMenu copyWith(void Function(MediaMenu) updates) =>
-      super.copyWith((message) => updates(message as MediaMenu)) as MediaMenu;
+  PluginMenus copyWith(void Function(PluginMenus) updates) =>
+      super.copyWith((message) => updates(message as PluginMenus))
+          as PluginMenus;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static MediaMenu create() => MediaMenu._();
+  static PluginMenus create() => PluginMenus._();
   @$core.override
-  MediaMenu createEmptyInstance() => create();
+  PluginMenus createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static MediaMenu getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MediaMenu>(create);
-  static MediaMenu? _defaultInstance;
+  static PluginMenus getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginMenus>(create);
+  static PluginMenus? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $pb.PbList<Menu> get mediaMenus => $_getList(0);
+  $pb.PbList<PluginMenu> get pluginMenus => $_getList(0);
 }
 
-class FilterItems_Filter extends $pb.GeneratedMessage {
-  factory FilterItems_Filter({
+class PluginFilterItems_Filter extends $pb.GeneratedMessage {
+  factory PluginFilterItems_Filter({
     $core.String? name,
-    $core.Iterable<Item>? items,
+    $core.Iterable<PluginItem>? items,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -1830,41 +1834,43 @@ class FilterItems_Filter extends $pb.GeneratedMessage {
     return result;
   }
 
-  FilterItems_Filter._();
+  PluginFilterItems_Filter._();
 
-  factory FilterItems_Filter.fromBuffer($core.List<$core.int> data,
+  factory PluginFilterItems_Filter.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory FilterItems_Filter.fromJson($core.String json,
+  factory PluginFilterItems_Filter.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FilterItems.Filter',
+      _omitMessageNames ? '' : 'PluginFilterItems.Filter',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..pPM<Item>(2, _omitFieldNames ? '' : 'items', subBuilder: Item.create)
+    ..pPM<PluginItem>(2, _omitFieldNames ? '' : 'items',
+        subBuilder: PluginItem.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FilterItems_Filter clone() => deepCopy();
+  PluginFilterItems_Filter clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FilterItems_Filter copyWith(void Function(FilterItems_Filter) updates) =>
-      super.copyWith((message) => updates(message as FilterItems_Filter))
-          as FilterItems_Filter;
+  PluginFilterItems_Filter copyWith(
+          void Function(PluginFilterItems_Filter) updates) =>
+      super.copyWith((message) => updates(message as PluginFilterItems_Filter))
+          as PluginFilterItems_Filter;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static FilterItems_Filter create() => FilterItems_Filter._();
+  static PluginFilterItems_Filter create() => PluginFilterItems_Filter._();
   @$core.override
-  FilterItems_Filter createEmptyInstance() => create();
+  PluginFilterItems_Filter createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FilterItems_Filter getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FilterItems_Filter>(create);
-  static FilterItems_Filter? _defaultInstance;
+  static PluginFilterItems_Filter getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginFilterItems_Filter>(create);
+  static PluginFilterItems_Filter? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
@@ -1876,62 +1882,62 @@ class FilterItems_Filter extends $pb.GeneratedMessage {
   void clearName() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $pb.PbList<Item> get items => $_getList(1);
+  $pb.PbList<PluginItem> get items => $_getList(1);
 }
 
-class FilterItems extends $pb.GeneratedMessage {
-  factory FilterItems({
-    $core.Iterable<FilterItems_Filter>? filters,
+class PluginFilterItems extends $pb.GeneratedMessage {
+  factory PluginFilterItems({
+    $core.Iterable<PluginFilterItems_Filter>? filters,
   }) {
     final result = create();
     if (filters != null) result.filters.addAll(filters);
     return result;
   }
 
-  FilterItems._();
+  PluginFilterItems._();
 
-  factory FilterItems.fromBuffer($core.List<$core.int> data,
+  factory PluginFilterItems.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory FilterItems.fromJson($core.String json,
+  factory PluginFilterItems.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'FilterItems',
+      _omitMessageNames ? '' : 'PluginFilterItems',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..pPM<FilterItems_Filter>(1, _omitFieldNames ? '' : 'filters',
-        subBuilder: FilterItems_Filter.create)
+    ..pPM<PluginFilterItems_Filter>(1, _omitFieldNames ? '' : 'filters',
+        subBuilder: PluginFilterItems_Filter.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FilterItems clone() => deepCopy();
+  PluginFilterItems clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FilterItems copyWith(void Function(FilterItems) updates) =>
-      super.copyWith((message) => updates(message as FilterItems))
-          as FilterItems;
+  PluginFilterItems copyWith(void Function(PluginFilterItems) updates) =>
+      super.copyWith((message) => updates(message as PluginFilterItems))
+          as PluginFilterItems;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static FilterItems create() => FilterItems._();
+  static PluginFilterItems create() => PluginFilterItems._();
   @$core.override
-  FilterItems createEmptyInstance() => create();
+  PluginFilterItems createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static FilterItems getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<FilterItems>(create);
-  static FilterItems? _defaultInstance;
+  static PluginFilterItems getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginFilterItems>(create);
+  static PluginFilterItems? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $pb.PbList<FilterItems_Filter> get filters => $_getList(0);
+  $pb.PbList<PluginFilterItems_Filter> get filters => $_getList(0);
 }
 
-class Media_Credit extends $pb.GeneratedMessage {
-  factory Media_Credit({
+class PluginMedia_Credit extends $pb.GeneratedMessage {
+  factory PluginMedia_Credit({
     $core.String? name,
-    Media_CreditType? creditType,
+    PluginMedia_CreditType? creditType,
   }) {
     final result = create();
     if (name != null) result.name = name;
@@ -1939,42 +1945,42 @@ class Media_Credit extends $pb.GeneratedMessage {
     return result;
   }
 
-  Media_Credit._();
+  PluginMedia_Credit._();
 
-  factory Media_Credit.fromBuffer($core.List<$core.int> data,
+  factory PluginMedia_Credit.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Media_Credit.fromJson($core.String json,
+  factory PluginMedia_Credit.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Media.Credit',
+      _omitMessageNames ? '' : 'PluginMedia.Credit',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aE<Media_CreditType>(2, _omitFieldNames ? '' : 'creditType',
-        enumValues: Media_CreditType.values)
+    ..aE<PluginMedia_CreditType>(2, _omitFieldNames ? '' : 'creditType',
+        enumValues: PluginMedia_CreditType.values)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Media_Credit clone() => deepCopy();
+  PluginMedia_Credit clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Media_Credit copyWith(void Function(Media_Credit) updates) =>
-      super.copyWith((message) => updates(message as Media_Credit))
-          as Media_Credit;
+  PluginMedia_Credit copyWith(void Function(PluginMedia_Credit) updates) =>
+      super.copyWith((message) => updates(message as PluginMedia_Credit))
+          as PluginMedia_Credit;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Media_Credit create() => Media_Credit._();
+  static PluginMedia_Credit create() => PluginMedia_Credit._();
   @$core.override
-  Media_Credit createEmptyInstance() => create();
+  PluginMedia_Credit createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Media_Credit getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<Media_Credit>(create);
-  static Media_Credit? _defaultInstance;
+  static PluginMedia_Credit getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginMedia_Credit>(create);
+  static PluginMedia_Credit? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get name => $_getSZ(0);
@@ -1986,9 +1992,9 @@ class Media_Credit extends $pb.GeneratedMessage {
   void clearName() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  Media_CreditType get creditType => $_getN(1);
+  PluginMedia_CreditType get creditType => $_getN(1);
   @$pb.TagNumber(2)
-  set creditType(Media_CreditType value) => $_setField(2, value);
+  set creditType(PluginMedia_CreditType value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasCreditType() => $_has(1);
   @$pb.TagNumber(2)
@@ -1996,10 +2002,10 @@ class Media_Credit extends $pb.GeneratedMessage {
 }
 
 /// media item
-class Media extends $pb.GeneratedMessage {
-  factory Media({
+class PluginMedia extends $pb.GeneratedMessage {
+  factory PluginMedia({
     $core.String? mediaId,
-    Media_MediaType? mediaType,
+    PluginMedia_MediaType? mediaType,
     $core.String? name,
     $core.String? desc,
     $core.String? parentMediaId,
@@ -2010,7 +2016,7 @@ class Media extends $pb.GeneratedMessage {
     $core.String? posterUrl,
     $core.String? originalName,
     $core.String? originalLanguage,
-    $core.Iterable<Media_Credit>? credit,
+    $core.Iterable<PluginMedia_Credit>? credit,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? metadata,
     $fixnum.Int64? playIndex,
     $fixnum.Int64? duration,
@@ -2037,22 +2043,22 @@ class Media extends $pb.GeneratedMessage {
     return result;
   }
 
-  Media._();
+  PluginMedia._();
 
-  factory Media.fromBuffer($core.List<$core.int> data,
+  factory PluginMedia.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory Media.fromJson($core.String json,
+  factory PluginMedia.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'Media',
+      _omitMessageNames ? '' : 'PluginMedia',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaId')
-    ..aE<Media_MediaType>(2, _omitFieldNames ? '' : 'mediaType',
-        enumValues: Media_MediaType.values)
+    ..aE<PluginMedia_MediaType>(2, _omitFieldNames ? '' : 'mediaType',
+        enumValues: PluginMedia_MediaType.values)
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'desc')
     ..aOS(5, _omitFieldNames ? '' : 'parentMediaId')
@@ -2064,10 +2070,10 @@ class Media extends $pb.GeneratedMessage {
     ..aOS(17, _omitFieldNames ? '' : 'posterUrl')
     ..aOS(18, _omitFieldNames ? '' : 'originalName')
     ..aOS(19, _omitFieldNames ? '' : 'originalLanguage')
-    ..pPM<Media_Credit>(20, _omitFieldNames ? '' : 'credit',
-        subBuilder: Media_Credit.create)
+    ..pPM<PluginMedia_Credit>(20, _omitFieldNames ? '' : 'credit',
+        subBuilder: PluginMedia_Credit.create)
     ..m<$core.String, $core.String>(21, _omitFieldNames ? '' : 'metadata',
-        entryClassName: 'Media.MetadataEntry',
+        entryClassName: 'PluginMedia.MetadataEntry',
         keyFieldType: $pb.PbFieldType.OS,
         valueFieldType: $pb.PbFieldType.OS,
         packageName: const $pb.PackageName('plugin'))
@@ -2081,22 +2087,23 @@ class Media extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Media clone() => deepCopy();
+  PluginMedia clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Media copyWith(void Function(Media) updates) =>
-      super.copyWith((message) => updates(message as Media)) as Media;
+  PluginMedia copyWith(void Function(PluginMedia) updates) =>
+      super.copyWith((message) => updates(message as PluginMedia))
+          as PluginMedia;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static Media create() => Media._();
+  static PluginMedia create() => PluginMedia._();
   @$core.override
-  Media createEmptyInstance() => create();
+  PluginMedia createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static Media getDefault() =>
-      _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Media>(create);
-  static Media? _defaultInstance;
+  static PluginMedia getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<PluginMedia>(create);
+  static PluginMedia? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get mediaId => $_getSZ(0);
@@ -2108,9 +2115,9 @@ class Media extends $pb.GeneratedMessage {
   void clearMediaId() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  Media_MediaType get mediaType => $_getN(1);
+  PluginMedia_MediaType get mediaType => $_getN(1);
   @$pb.TagNumber(2)
-  set mediaType(Media_MediaType value) => $_setField(2, value);
+  set mediaType(PluginMedia_MediaType value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasMediaType() => $_has(1);
   @$pb.TagNumber(2)
@@ -2202,7 +2209,7 @@ class Media extends $pb.GeneratedMessage {
   void clearOriginalLanguage() => $_clearField(19);
 
   @$pb.TagNumber(20)
-  $pb.PbList<Media_Credit> get credit => $_getList(12);
+  $pb.PbList<PluginMedia_Credit> get credit => $_getList(12);
 
   @$pb.TagNumber(21)
   $pb.PbMap<$core.String, $core.String> get metadata => $_getMap(13);
@@ -2236,10 +2243,10 @@ class Media extends $pb.GeneratedMessage {
   void clearStillUrl() => $_clearField(32);
 }
 
-class ListMediaInfoRequest extends $pb.GeneratedMessage {
-  factory ListMediaInfoRequest({
-    Item? menu,
-    FilterItems? filters,
+class ListPluginMediaInfoRequest extends $pb.GeneratedMessage {
+  factory ListPluginMediaInfoRequest({
+    PluginItem? menu,
+    PluginFilterItems? filters,
     $core.String? searchName,
     $fixnum.Int64? page,
     $fixnum.Int64? pageSize,
@@ -2255,22 +2262,23 @@ class ListMediaInfoRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  ListMediaInfoRequest._();
+  ListPluginMediaInfoRequest._();
 
-  factory ListMediaInfoRequest.fromBuffer($core.List<$core.int> data,
+  factory ListPluginMediaInfoRequest.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ListMediaInfoRequest.fromJson($core.String json,
+  factory ListPluginMediaInfoRequest.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ListMediaInfoRequest',
+      _omitMessageNames ? '' : 'ListPluginMediaInfoRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aOM<Item>(1, _omitFieldNames ? '' : 'menu', subBuilder: Item.create)
-    ..aOM<FilterItems>(2, _omitFieldNames ? '' : 'filters',
-        subBuilder: FilterItems.create)
+    ..aOM<PluginItem>(1, _omitFieldNames ? '' : 'menu',
+        subBuilder: PluginItem.create)
+    ..aOM<PluginFilterItems>(2, _omitFieldNames ? '' : 'filters',
+        subBuilder: PluginFilterItems.create)
     ..aOS(3, _omitFieldNames ? '' : 'searchName')
     ..a<$fixnum.Int64>(10, _omitFieldNames ? '' : 'page', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
@@ -2281,45 +2289,47 @@ class ListMediaInfoRequest extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListMediaInfoRequest clone() => deepCopy();
+  ListPluginMediaInfoRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListMediaInfoRequest copyWith(void Function(ListMediaInfoRequest) updates) =>
-      super.copyWith((message) => updates(message as ListMediaInfoRequest))
-          as ListMediaInfoRequest;
+  ListPluginMediaInfoRequest copyWith(
+          void Function(ListPluginMediaInfoRequest) updates) =>
+      super.copyWith(
+              (message) => updates(message as ListPluginMediaInfoRequest))
+          as ListPluginMediaInfoRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListMediaInfoRequest create() => ListMediaInfoRequest._();
+  static ListPluginMediaInfoRequest create() => ListPluginMediaInfoRequest._();
   @$core.override
-  ListMediaInfoRequest createEmptyInstance() => create();
+  ListPluginMediaInfoRequest createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ListMediaInfoRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListMediaInfoRequest>(create);
-  static ListMediaInfoRequest? _defaultInstance;
+  static ListPluginMediaInfoRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListPluginMediaInfoRequest>(create);
+  static ListPluginMediaInfoRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Item get menu => $_getN(0);
+  PluginItem get menu => $_getN(0);
   @$pb.TagNumber(1)
-  set menu(Item value) => $_setField(1, value);
+  set menu(PluginItem value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasMenu() => $_has(0);
   @$pb.TagNumber(1)
   void clearMenu() => $_clearField(1);
   @$pb.TagNumber(1)
-  Item ensureMenu() => $_ensure(0);
+  PluginItem ensureMenu() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  FilterItems get filters => $_getN(1);
+  PluginFilterItems get filters => $_getN(1);
   @$pb.TagNumber(2)
-  set filters(FilterItems value) => $_setField(2, value);
+  set filters(PluginFilterItems value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasFilters() => $_has(1);
   @$pb.TagNumber(2)
   void clearFilters() => $_clearField(2);
   @$pb.TagNumber(2)
-  FilterItems ensureFilters() => $_ensure(1);
+  PluginFilterItems ensureFilters() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get searchName => $_getSZ(2);
@@ -2358,64 +2368,67 @@ class ListMediaInfoRequest extends $pb.GeneratedMessage {
   void clearPageKey() => $_clearField(12);
 }
 
-class ListMediaInfoResponse extends $pb.GeneratedMessage {
-  factory ListMediaInfoResponse({
-    $core.Iterable<Media>? mediaInfos,
+class ListPluginMediaInfoResponse extends $pb.GeneratedMessage {
+  factory ListPluginMediaInfoResponse({
+    $core.Iterable<PluginMedia>? mediaInfos,
     $core.bool? supportSearchName,
-    FilterItems? allFilters,
+    PluginFilterItems? allPluginFilterItems,
     $core.String? nextPageKey,
   }) {
     final result = create();
     if (mediaInfos != null) result.mediaInfos.addAll(mediaInfos);
     if (supportSearchName != null) result.supportSearchName = supportSearchName;
-    if (allFilters != null) result.allFilters = allFilters;
+    if (allPluginFilterItems != null)
+      result.allPluginFilterItems = allPluginFilterItems;
     if (nextPageKey != null) result.nextPageKey = nextPageKey;
     return result;
   }
 
-  ListMediaInfoResponse._();
+  ListPluginMediaInfoResponse._();
 
-  factory ListMediaInfoResponse.fromBuffer($core.List<$core.int> data,
+  factory ListPluginMediaInfoResponse.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory ListMediaInfoResponse.fromJson($core.String json,
+  factory ListPluginMediaInfoResponse.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'ListMediaInfoResponse',
+      _omitMessageNames ? '' : 'ListPluginMediaInfoResponse',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..pPM<Media>(1, _omitFieldNames ? '' : 'mediaInfos',
-        subBuilder: Media.create)
+    ..pPM<PluginMedia>(1, _omitFieldNames ? '' : 'mediaInfos',
+        subBuilder: PluginMedia.create)
     ..aOB(10, _omitFieldNames ? '' : 'supportSearchName')
-    ..aOM<FilterItems>(11, _omitFieldNames ? '' : 'allFilters',
-        subBuilder: FilterItems.create)
+    ..aOM<PluginFilterItems>(11, _omitFieldNames ? '' : 'allPluginFilterItems',
+        subBuilder: PluginFilterItems.create)
     ..aOS(12, _omitFieldNames ? '' : 'nextPageKey')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListMediaInfoResponse clone() => deepCopy();
+  ListPluginMediaInfoResponse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ListMediaInfoResponse copyWith(
-          void Function(ListMediaInfoResponse) updates) =>
-      super.copyWith((message) => updates(message as ListMediaInfoResponse))
-          as ListMediaInfoResponse;
+  ListPluginMediaInfoResponse copyWith(
+          void Function(ListPluginMediaInfoResponse) updates) =>
+      super.copyWith(
+              (message) => updates(message as ListPluginMediaInfoResponse))
+          as ListPluginMediaInfoResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static ListMediaInfoResponse create() => ListMediaInfoResponse._();
+  static ListPluginMediaInfoResponse create() =>
+      ListPluginMediaInfoResponse._();
   @$core.override
-  ListMediaInfoResponse createEmptyInstance() => create();
+  ListPluginMediaInfoResponse createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static ListMediaInfoResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<ListMediaInfoResponse>(create);
-  static ListMediaInfoResponse? _defaultInstance;
+  static ListPluginMediaInfoResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<ListPluginMediaInfoResponse>(create);
+  static ListPluginMediaInfoResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $pb.PbList<Media> get mediaInfos => $_getList(0);
+  $pb.PbList<PluginMedia> get mediaInfos => $_getList(0);
 
   @$pb.TagNumber(10)
   $core.bool get supportSearchName => $_getBF(1);
@@ -2427,15 +2440,15 @@ class ListMediaInfoResponse extends $pb.GeneratedMessage {
   void clearSupportSearchName() => $_clearField(10);
 
   @$pb.TagNumber(11)
-  FilterItems get allFilters => $_getN(2);
+  PluginFilterItems get allPluginFilterItems => $_getN(2);
   @$pb.TagNumber(11)
-  set allFilters(FilterItems value) => $_setField(11, value);
+  set allPluginFilterItems(PluginFilterItems value) => $_setField(11, value);
   @$pb.TagNumber(11)
-  $core.bool hasAllFilters() => $_has(2);
+  $core.bool hasAllPluginFilterItems() => $_has(2);
   @$pb.TagNumber(11)
-  void clearAllFilters() => $_clearField(11);
+  void clearAllPluginFilterItems() => $_clearField(11);
   @$pb.TagNumber(11)
-  FilterItems ensureAllFilters() => $_ensure(2);
+  PluginFilterItems ensureAllPluginFilterItems() => $_ensure(2);
 
   @$pb.TagNumber(12)
   $core.String get nextPageKey => $_getSZ(3);
@@ -2447,8 +2460,8 @@ class ListMediaInfoResponse extends $pb.GeneratedMessage {
   void clearNextPageKey() => $_clearField(12);
 }
 
-class GetMediaDetailRequest extends $pb.GeneratedMessage {
-  factory GetMediaDetailRequest({
+class GetPluginMediaDetailRequest extends $pb.GeneratedMessage {
+  factory GetPluginMediaDetailRequest({
     $core.String? mediaInfoId,
   }) {
     final result = create();
@@ -2456,41 +2469,43 @@ class GetMediaDetailRequest extends $pb.GeneratedMessage {
     return result;
   }
 
-  GetMediaDetailRequest._();
+  GetPluginMediaDetailRequest._();
 
-  factory GetMediaDetailRequest.fromBuffer($core.List<$core.int> data,
+  factory GetPluginMediaDetailRequest.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory GetMediaDetailRequest.fromJson($core.String json,
+  factory GetPluginMediaDetailRequest.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetMediaDetailRequest',
+      _omitMessageNames ? '' : 'GetPluginMediaDetailRequest',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaInfoId')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetMediaDetailRequest clone() => deepCopy();
+  GetPluginMediaDetailRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetMediaDetailRequest copyWith(
-          void Function(GetMediaDetailRequest) updates) =>
-      super.copyWith((message) => updates(message as GetMediaDetailRequest))
-          as GetMediaDetailRequest;
+  GetPluginMediaDetailRequest copyWith(
+          void Function(GetPluginMediaDetailRequest) updates) =>
+      super.copyWith(
+              (message) => updates(message as GetPluginMediaDetailRequest))
+          as GetPluginMediaDetailRequest;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetMediaDetailRequest create() => GetMediaDetailRequest._();
+  static GetPluginMediaDetailRequest create() =>
+      GetPluginMediaDetailRequest._();
   @$core.override
-  GetMediaDetailRequest createEmptyInstance() => create();
+  GetPluginMediaDetailRequest createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetMediaDetailRequest getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetMediaDetailRequest>(create);
-  static GetMediaDetailRequest? _defaultInstance;
+  static GetPluginMediaDetailRequest getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetPluginMediaDetailRequest>(create);
+  static GetPluginMediaDetailRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get mediaInfoId => $_getSZ(0);
@@ -2502,11 +2517,11 @@ class GetMediaDetailRequest extends $pb.GeneratedMessage {
   void clearMediaInfoId() => $_clearField(1);
 }
 
-class GetMediaDetailResponse extends $pb.GeneratedMessage {
-  factory GetMediaDetailResponse({
-    Media? mediaSeries,
-    Media? mediaInfo,
-    $core.Iterable<Media>? mediaItems,
+class GetPluginMediaDetailResponse extends $pb.GeneratedMessage {
+  factory GetPluginMediaDetailResponse({
+    PluginMedia? mediaSeries,
+    PluginMedia? mediaInfo,
+    $core.Iterable<PluginMedia>? mediaItems,
   }) {
     final result = create();
     if (mediaSeries != null) result.mediaSeries = mediaSeries;
@@ -2515,71 +2530,73 @@ class GetMediaDetailResponse extends $pb.GeneratedMessage {
     return result;
   }
 
-  GetMediaDetailResponse._();
+  GetPluginMediaDetailResponse._();
 
-  factory GetMediaDetailResponse.fromBuffer($core.List<$core.int> data,
+  factory GetPluginMediaDetailResponse.fromBuffer($core.List<$core.int> data,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromBuffer(data, registry);
-  factory GetMediaDetailResponse.fromJson($core.String json,
+  factory GetPluginMediaDetailResponse.fromJson($core.String json,
           [$pb.ExtensionRegistry registry = $pb.ExtensionRegistry.EMPTY]) =>
       create()..mergeFromJson(json, registry);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(
-      _omitMessageNames ? '' : 'GetMediaDetailResponse',
+      _omitMessageNames ? '' : 'GetPluginMediaDetailResponse',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aOM<Media>(1, _omitFieldNames ? '' : 'mediaSeries',
-        subBuilder: Media.create)
-    ..aOM<Media>(2, _omitFieldNames ? '' : 'mediaInfo',
-        subBuilder: Media.create)
-    ..pPM<Media>(3, _omitFieldNames ? '' : 'mediaItems',
-        subBuilder: Media.create)
+    ..aOM<PluginMedia>(1, _omitFieldNames ? '' : 'mediaSeries',
+        subBuilder: PluginMedia.create)
+    ..aOM<PluginMedia>(2, _omitFieldNames ? '' : 'mediaInfo',
+        subBuilder: PluginMedia.create)
+    ..pPM<PluginMedia>(3, _omitFieldNames ? '' : 'mediaItems',
+        subBuilder: PluginMedia.create)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetMediaDetailResponse clone() => deepCopy();
+  GetPluginMediaDetailResponse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  GetMediaDetailResponse copyWith(
-          void Function(GetMediaDetailResponse) updates) =>
-      super.copyWith((message) => updates(message as GetMediaDetailResponse))
-          as GetMediaDetailResponse;
+  GetPluginMediaDetailResponse copyWith(
+          void Function(GetPluginMediaDetailResponse) updates) =>
+      super.copyWith(
+              (message) => updates(message as GetPluginMediaDetailResponse))
+          as GetPluginMediaDetailResponse;
 
   @$core.override
   $pb.BuilderInfo get info_ => _i;
 
   @$core.pragma('dart2js:noInline')
-  static GetMediaDetailResponse create() => GetMediaDetailResponse._();
+  static GetPluginMediaDetailResponse create() =>
+      GetPluginMediaDetailResponse._();
   @$core.override
-  GetMediaDetailResponse createEmptyInstance() => create();
+  GetPluginMediaDetailResponse createEmptyInstance() => create();
   @$core.pragma('dart2js:noInline')
-  static GetMediaDetailResponse getDefault() => _defaultInstance ??=
-      $pb.GeneratedMessage.$_defaultFor<GetMediaDetailResponse>(create);
-  static GetMediaDetailResponse? _defaultInstance;
+  static GetPluginMediaDetailResponse getDefault() => _defaultInstance ??=
+      $pb.GeneratedMessage.$_defaultFor<GetPluginMediaDetailResponse>(create);
+  static GetPluginMediaDetailResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Media get mediaSeries => $_getN(0);
+  PluginMedia get mediaSeries => $_getN(0);
   @$pb.TagNumber(1)
-  set mediaSeries(Media value) => $_setField(1, value);
+  set mediaSeries(PluginMedia value) => $_setField(1, value);
   @$pb.TagNumber(1)
   $core.bool hasMediaSeries() => $_has(0);
   @$pb.TagNumber(1)
   void clearMediaSeries() => $_clearField(1);
   @$pb.TagNumber(1)
-  Media ensureMediaSeries() => $_ensure(0);
+  PluginMedia ensureMediaSeries() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  Media get mediaInfo => $_getN(1);
+  PluginMedia get mediaInfo => $_getN(1);
   @$pb.TagNumber(2)
-  set mediaInfo(Media value) => $_setField(2, value);
+  set mediaInfo(PluginMedia value) => $_setField(2, value);
   @$pb.TagNumber(2)
   $core.bool hasMediaInfo() => $_has(1);
   @$pb.TagNumber(2)
   void clearMediaInfo() => $_clearField(2);
   @$pb.TagNumber(2)
-  Media ensureMediaInfo() => $_ensure(1);
+  PluginMedia ensureMediaInfo() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $pb.PbList<Media> get mediaItems => $_getList(2);
+  $pb.PbList<PluginMedia> get mediaItems => $_getList(2);
 }
 
 const $core.bool _omitFieldNames =

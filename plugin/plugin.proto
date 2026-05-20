@@ -164,32 +164,32 @@ message Token {
     uint64 expires_in    = 4;
 }
 
-message Item {
+message PluginItem {
     string name  = 1;
     string value = 2;
     string icon  = 3;  // icon url
 }
 
 // menu
-message Menu {
-    Item          menu     = 1;
-    repeated Menu sub_menu = 2;
+message PluginMenu {
+    PluginItem          menu     = 1;
+    repeated PluginMenu sub_menu = 2;
 }
 
-message MediaMenu {
-    repeated Menu media_menus = 1;
+message PluginMenus {
+    repeated PluginMenu plugin_menus = 1;
 }
 
-message FilterItems {
+message PluginFilterItems {
     message Filter {
-        string        name  = 1;
-        repeated Item items = 2;
+        string              name  = 1;
+        repeated PluginItem items = 2;
     }
     repeated Filter filters = 1;
 }
 
 // media item
-message Media {
+message PluginMedia {
     string media_id = 1;  // media item id
     enum MediaType {
         MEDIA_UNSPECIFIED = 0;
@@ -228,30 +228,30 @@ message Media {
     string still_url  = 32;  // media video poster image for media Item play item
 }
 
-message ListMediaInfoRequest {
-    Item        menu        = 1;  // menu sub item
-    FilterItems filters     = 2;  // sub page filter
-    string      search_name = 3;  // name search
+message ListPluginMediaInfoRequest {
+    PluginItem        menu        = 1;  // menu sub item
+    PluginFilterItems filters     = 2;  // sub page filter
+    string            search_name = 3;  // name search
 
     uint64 page      = 10;
     uint64 page_size = 11;
     string page_key  = 12;
 }
 
-message ListMediaInfoResponse {
-    repeated Media media_infos = 1;
+message ListPluginMediaInfoResponse {
+    repeated PluginMedia media_infos = 1;
 
-    bool        support_search_name = 10;
-    FilterItems all_filters         = 11;  // sub page filter
-    string      next_page_key       = 12;
+    bool              support_search_name     = 10;
+    PluginFilterItems all_plugin_filter_items = 11;  // sub page filter
+    string            next_page_key           = 12;
 }
 
-message GetMediaDetailRequest {
+message GetPluginMediaDetailRequest {
     string media_info_id = 1;
 }
 
-message GetMediaDetailResponse {
-    Media          media_series = 1;
-    Media          media_info   = 2;
-    repeated Media media_items  = 3;
+message GetPluginMediaDetailResponse {
+    PluginMedia          media_series = 1;
+    PluginMedia          media_info   = 2;
+    repeated PluginMedia media_items  = 3;
 }

@@ -34,13 +34,13 @@ type IPlugin interface {
 	GetFileResource(req *plugin.GetFileResourceRequest) (fileResource *plugin.FileResource, err error)
 
 	// support filter by multi column
-	GetMediaMenu() (*plugin.MediaMenu, error)
+	GetPluginMenus() (*plugin.PluginMenus, error)
 	// get page filter items
-	GetFilterItems(subItem *plugin.Item) (*plugin.FilterItems, error)
+	GetPluginFilterItems(subItem *plugin.PluginItem) (*plugin.PluginFilterItems, error)
 	// list media item info
-	ListMediaItemInfo(req *plugin.ListMediaInfoRequest) (*plugin.ListMediaInfoResponse, error)
+	ListPluginMediaItemInfo(req *plugin.ListPluginMediaInfoRequest) (*plugin.ListPluginMediaInfoResponse, error)
 	// get media item info by id
-	GetMediaItemDetail(req *plugin.GetMediaDetailRequest) (*plugin.GetMediaDetailResponse, error)
+	GetPluginMediaItemDetail(req *plugin.GetPluginMediaDetailRequest) (*plugin.GetPluginMediaDetailResponse, error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {
