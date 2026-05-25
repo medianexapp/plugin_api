@@ -217,8 +217,10 @@ message PluginMedia {
         CreditCastWriting    = 4;  // Writing
     }
     message Credit {
-        string     name        = 1;  // credit name
-        CreditType credit_type = 2;  // credit type
+        CreditType credit_type = 1;  // credit type
+        string     name        = 2;  // credit name
+        string     profile_url = 3;
+        string     character   = 4;
     }
     repeated Credit     credit   = 20;  // media credits
     map<string, string> metadata = 21;  // media metadata
