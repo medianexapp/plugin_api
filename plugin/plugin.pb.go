@@ -1527,8 +1527,10 @@ func (x *PluginFilterItems_Filter) GetItems() []*PluginItem {
 
 type PluginMedia_Credit struct {
 	unknownFields []byte
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`                               // credit name
-	CreditType    PluginMedia_CreditType `protobuf:"varint,2,opt,name=credit_type,json=creditType,proto3" json:"creditType,omitempty"` // credit type
+	CreditType    PluginMedia_CreditType `protobuf:"varint,1,opt,name=credit_type,json=creditType,proto3" json:"creditType,omitempty"` // credit type
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                               // credit name
+	ProfileUrl    string                 `protobuf:"bytes,3,opt,name=profile_url,json=profileUrl,proto3" json:"profileUrl,omitempty"`
+	Character     string                 `protobuf:"bytes,4,opt,name=character,proto3" json:"character,omitempty"`
 }
 
 func (x *PluginMedia_Credit) Reset() {
@@ -1537,6 +1539,13 @@ func (x *PluginMedia_Credit) Reset() {
 
 func (*PluginMedia_Credit) ProtoMessage() {}
 
+func (x *PluginMedia_Credit) GetCreditType() PluginMedia_CreditType {
+	if x != nil {
+		return x.CreditType
+	}
+	return PluginMedia_CreditUNSPECIFIED
+}
+
 func (x *PluginMedia_Credit) GetName() string {
 	if x != nil {
 		return x.Name
@@ -1544,11 +1553,18 @@ func (x *PluginMedia_Credit) GetName() string {
 	return ""
 }
 
-func (x *PluginMedia_Credit) GetCreditType() PluginMedia_CreditType {
+func (x *PluginMedia_Credit) GetProfileUrl() string {
 	if x != nil {
-		return x.CreditType
+		return x.ProfileUrl
 	}
-	return PluginMedia_CreditUNSPECIFIED
+	return ""
+}
+
+func (x *PluginMedia_Credit) GetCharacter() string {
+	if x != nil {
+		return x.Character
+	}
+	return ""
 }
 
 type PluginMedia_MetadataEntry struct {
@@ -2212,8 +2228,10 @@ func (m *PluginMedia_Credit) CloneVT() *PluginMedia_Credit {
 		return (*PluginMedia_Credit)(nil)
 	}
 	r := new(PluginMedia_Credit)
-	r.Name = m.Name
 	r.CreditType = m.CreditType
+	r.Name = m.Name
+	r.ProfileUrl = m.ProfileUrl
+	r.Character = m.Character
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -3347,10 +3365,16 @@ func (this *PluginMedia_Credit) EqualVT(that *PluginMedia_Credit) bool {
 	} else if this == nil || that == nil {
 		return false
 	}
+	if this.CreditType != that.CreditType {
+		return false
+	}
 	if this.Name != that.Name {
 		return false
 	}
-	if this.CreditType != that.CreditType {
+	if this.ProfileUrl != that.ProfileUrl {
+		return false
+	}
+	if this.Character != that.Character {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -5516,15 +5540,25 @@ func (x *PluginMedia_Credit) MarshalProtoJSON(s *json.MarshalState) {
 	}
 	s.WriteObjectStart()
 	var wroteField bool
+	if x.CreditType != 0 || s.HasField("creditType") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("creditType")
+		x.CreditType.MarshalProtoJSON(s)
+	}
 	if x.Name != "" || s.HasField("name") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("name")
 		s.WriteString(x.Name)
 	}
-	if x.CreditType != 0 || s.HasField("creditType") {
+	if x.ProfileUrl != "" || s.HasField("profileUrl") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("creditType")
-		x.CreditType.MarshalProtoJSON(s)
+		s.WriteObjectField("profileUrl")
+		s.WriteString(x.ProfileUrl)
+	}
+	if x.Character != "" || s.HasField("character") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("character")
+		s.WriteString(x.Character)
 	}
 	s.WriteObjectEnd()
 }
@@ -5543,12 +5577,18 @@ func (x *PluginMedia_Credit) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "name":
-			s.AddField("name")
-			x.Name = s.ReadString()
 		case "credit_type", "creditType":
 			s.AddField("credit_type")
 			x.CreditType.UnmarshalProtoJSON(s)
+		case "name":
+			s.AddField("name")
+			x.Name = s.ReadString()
+		case "profile_url", "profileUrl":
+			s.AddField("profile_url")
+			x.ProfileUrl = s.ReadString()
+		case "character":
+			s.AddField("character")
+			x.Character = s.ReadString()
 		}
 	})
 }
@@ -7635,17 +7675,31 @@ func (m *PluginMedia_Credit) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.CreditType != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.CreditType))
+	if len(m.Character) > 0 {
+		i -= len(m.Character)
+		copy(dAtA[i:], m.Character)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Character)))
 		i--
-		dAtA[i] = 0x10
+		dAtA[i] = 0x22
+	}
+	if len(m.ProfileUrl) > 0 {
+		i -= len(m.ProfileUrl)
+		copy(dAtA[i:], m.ProfileUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ProfileUrl)))
+		i--
+		dAtA[i] = 0x1a
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
 		copy(dAtA[i:], m.Name)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Name)))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x12
+	}
+	if m.CreditType != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.CreditType))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -9652,17 +9706,31 @@ func (m *PluginMedia_Credit) MarshalToSizedBufferVTStrict(dAtA []byte) (int, err
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if m.CreditType != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.CreditType))
+	if len(m.Character) > 0 {
+		i -= len(m.Character)
+		copy(dAtA[i:], m.Character)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Character)))
 		i--
-		dAtA[i] = 0x10
+		dAtA[i] = 0x22
+	}
+	if len(m.ProfileUrl) > 0 {
+		i -= len(m.ProfileUrl)
+		copy(dAtA[i:], m.ProfileUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ProfileUrl)))
+		i--
+		dAtA[i] = 0x1a
 	}
 	if len(m.Name) > 0 {
 		i -= len(m.Name)
 		copy(dAtA[i:], m.Name)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.Name)))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x12
+	}
+	if m.CreditType != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.CreditType))
+		i--
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -10751,12 +10819,20 @@ func (m *PluginMedia_Credit) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
+	if m.CreditType != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.CreditType))
+	}
 	l = len(m.Name)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	if m.CreditType != 0 {
-		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.CreditType))
+	l = len(m.ProfileUrl)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	l = len(m.Character)
+	if l > 0 {
+		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -11835,13 +11911,6 @@ func (x PluginMedia_CreditType) MarshalProtoText() string {
 func (x *PluginMedia_Credit) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("Credit {")
-	if x.Name != "" {
-		if sb.Len() > 8 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("name: ")
-		sb.WriteString(strconv.Quote(x.Name))
-	}
 	if x.CreditType != 0 {
 		if sb.Len() > 8 {
 			sb.WriteString(" ")
@@ -11850,6 +11919,27 @@ func (x *PluginMedia_Credit) MarshalProtoText() string {
 		sb.WriteString("\"")
 		sb.WriteString(PluginMedia_CreditType(x.CreditType).String())
 		sb.WriteString("\"")
+	}
+	if x.Name != "" {
+		if sb.Len() > 8 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("name: ")
+		sb.WriteString(strconv.Quote(x.Name))
+	}
+	if x.ProfileUrl != "" {
+		if sb.Len() > 8 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("profile_url: ")
+		sb.WriteString(strconv.Quote(x.ProfileUrl))
+	}
+	if x.Character != "" {
+		if sb.Len() > 8 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("character: ")
+		sb.WriteString(strconv.Quote(x.Character))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -15767,6 +15857,25 @@ func (m *PluginMedia_Credit) UnmarshalVT(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreditType", wireType)
+			}
+			m.CreditType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreditType |= PluginMedia_CreditType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
@@ -15798,11 +15907,11 @@ func (m *PluginMedia_Credit) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Name = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreditType", wireType)
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileUrl", wireType)
 			}
-			m.CreditType = 0
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -15812,11 +15921,56 @@ func (m *PluginMedia_Credit) UnmarshalVT(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CreditType |= PluginMedia_CreditType(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProfileUrl = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Character", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Character = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -20826,6 +20980,25 @@ func (m *PluginMedia_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CreditType", wireType)
+			}
+			m.CreditType = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.CreditType |= PluginMedia_CreditType(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 2:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
@@ -20861,11 +21034,11 @@ func (m *PluginMedia_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.Name = stringValue
 			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field CreditType", wireType)
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProfileUrl", wireType)
 			}
-			m.CreditType = 0
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return protobuf_go_lite.ErrIntOverflow
@@ -20875,11 +21048,64 @@ func (m *PluginMedia_Credit) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.CreditType |= PluginMedia_CreditType(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.ProfileUrl = stringValue
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Character", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.Character = stringValue
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

@@ -748,15 +748,17 @@ const PluginMedia$json = {
 const PluginMedia_Credit$json = {
   '1': 'Credit',
   '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {
       '1': 'credit_type',
-      '3': 2,
+      '3': 1,
       '4': 1,
       '5': 14,
       '6': '.plugin.PluginMedia.CreditType',
       '10': 'creditType'
     },
+    {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    {'1': 'profile_url', '3': 3, '4': 1, '5': 9, '10': 'profileUrl'},
+    {'1': 'character', '3': 4, '4': 1, '5': 9, '10': 'character'},
   ],
 };
 
@@ -806,13 +808,14 @@ final $typed_data.Uint8List pluginMediaDescriptor = $convert.base64Decode(
     'aWEuQ3JlZGl0UgZjcmVkaXQSPQoIbWV0YWRhdGEYFSADKAsyIS5wbHVnaW4uUGx1Z2luTWVkaW'
     'EuTWV0YWRhdGFFbnRyeVIIbWV0YWRhdGESHQoKcGxheV9pbmRleBgeIAEoBFIJcGxheUluZGV4'
     'EhoKCGR1cmF0aW9uGB8gASgEUghkdXJhdGlvbhIbCglzdGlsbF91cmwYICABKAlSCHN0aWxsVX'
-    'JsGl0KBkNyZWRpdBISCgRuYW1lGAEgASgJUgRuYW1lEj8KC2NyZWRpdF90eXBlGAIgASgOMh4u'
-    'cGx1Z2luLlBsdWdpbk1lZGlhLkNyZWRpdFR5cGVSCmNyZWRpdFR5cGUaOwoNTWV0YWRhdGFFbn'
-    'RyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBIlkKCU1lZGlh'
-    'VHlwZRIVChFNRURJQV9VTlNQRUNJRklFRBAAEhAKDE1FRElBX1NFUklFUxABEg4KCk1FRElBX0'
-    'lORk8QAhITCg9NRURJQV9QTEFZX0lURU0QAyJ+CgpDcmVkaXRUeXBlEhUKEUNyZWRpdFVOU1BF'
-    'Q0lGSUVEEAASDwoLQ3JlZGl0QWN0b3IQARIXChNDcmVkaXRDYXN0RGlyZWN0aW5nEAISGAoUQ3'
-    'JlZGl0Q2FzdFByb2R1Y3Rpb24QAxIVChFDcmVkaXRDYXN0V3JpdGluZxAE');
+    'JsGpwBCgZDcmVkaXQSPwoLY3JlZGl0X3R5cGUYASABKA4yHi5wbHVnaW4uUGx1Z2luTWVkaWEu'
+    'Q3JlZGl0VHlwZVIKY3JlZGl0VHlwZRISCgRuYW1lGAIgASgJUgRuYW1lEh8KC3Byb2ZpbGVfdX'
+    'JsGAMgASgJUgpwcm9maWxlVXJsEhwKCWNoYXJhY3RlchgEIAEoCVIJY2hhcmFjdGVyGjsKDU1l'
+    'dGFkYXRhRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4AS'
+    'JZCglNZWRpYVR5cGUSFQoRTUVESUFfVU5TUEVDSUZJRUQQABIQCgxNRURJQV9TRVJJRVMQARIO'
+    'CgpNRURJQV9JTkZPEAISEwoPTUVESUFfUExBWV9JVEVNEAMifgoKQ3JlZGl0VHlwZRIVChFDcm'
+    'VkaXRVTlNQRUNJRklFRBAAEg8KC0NyZWRpdEFjdG9yEAESFwoTQ3JlZGl0Q2FzdERpcmVjdGlu'
+    'ZxACEhgKFENyZWRpdENhc3RQcm9kdWN0aW9uEAMSFQoRQ3JlZGl0Q2FzdFdyaXRpbmcQBA==');
 
 @$core.Deprecated('Use listPluginMediaInfoRequestDescriptor instead')
 const ListPluginMediaInfoRequest$json = {

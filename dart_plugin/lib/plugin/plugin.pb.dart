@@ -1936,12 +1936,16 @@ class PluginFilterItems extends $pb.GeneratedMessage {
 
 class PluginMedia_Credit extends $pb.GeneratedMessage {
   factory PluginMedia_Credit({
-    $core.String? name,
     PluginMedia_CreditType? creditType,
+    $core.String? name,
+    $core.String? profileUrl,
+    $core.String? character,
   }) {
     final result = create();
-    if (name != null) result.name = name;
     if (creditType != null) result.creditType = creditType;
+    if (name != null) result.name = name;
+    if (profileUrl != null) result.profileUrl = profileUrl;
+    if (character != null) result.character = character;
     return result;
   }
 
@@ -1958,9 +1962,11 @@ class PluginMedia_Credit extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'PluginMedia.Credit',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aE<PluginMedia_CreditType>(2, _omitFieldNames ? '' : 'creditType',
+    ..aE<PluginMedia_CreditType>(1, _omitFieldNames ? '' : 'creditType',
         enumValues: PluginMedia_CreditType.values)
+    ..aOS(2, _omitFieldNames ? '' : 'name')
+    ..aOS(3, _omitFieldNames ? '' : 'profileUrl')
+    ..aOS(4, _omitFieldNames ? '' : 'character')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1983,22 +1989,40 @@ class PluginMedia_Credit extends $pb.GeneratedMessage {
   static PluginMedia_Credit? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  PluginMedia_CreditType get creditType => $_getN(0);
   @$pb.TagNumber(1)
-  set name($core.String value) => $_setString(0, value);
+  set creditType(PluginMedia_CreditType value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasCreditType() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => $_clearField(1);
+  void clearCreditType() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  PluginMedia_CreditType get creditType => $_getN(1);
+  $core.String get name => $_getSZ(1);
   @$pb.TagNumber(2)
-  set creditType(PluginMedia_CreditType value) => $_setField(2, value);
+  set name($core.String value) => $_setString(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasCreditType() => $_has(1);
+  $core.bool hasName() => $_has(1);
   @$pb.TagNumber(2)
-  void clearCreditType() => $_clearField(2);
+  void clearName() => $_clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get profileUrl => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set profileUrl($core.String value) => $_setString(2, value);
+  @$pb.TagNumber(3)
+  $core.bool hasProfileUrl() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearProfileUrl() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get character => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set character($core.String value) => $_setString(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasCharacter() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearCharacter() => $_clearField(4);
 }
 
 /// media item
