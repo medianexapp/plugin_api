@@ -2045,6 +2045,8 @@ class PluginMedia extends $pb.GeneratedMessage {
     $fixnum.Int64? playIndex,
     $fixnum.Int64? duration,
     $core.String? stillUrl,
+    $core.String? playItemUrl,
+    $core.Iterable<$core.MapEntry<$core.String, $core.String>>? playItemHeader,
   }) {
     final result = create();
     if (mediaId != null) result.mediaId = mediaId;
@@ -2064,6 +2066,9 @@ class PluginMedia extends $pb.GeneratedMessage {
     if (playIndex != null) result.playIndex = playIndex;
     if (duration != null) result.duration = duration;
     if (stillUrl != null) result.stillUrl = stillUrl;
+    if (playItemUrl != null) result.playItemUrl = playItemUrl;
+    if (playItemHeader != null)
+      result.playItemHeader.addEntries(playItemHeader);
     return result;
   }
 
@@ -2108,6 +2113,12 @@ class PluginMedia extends $pb.GeneratedMessage {
         31, _omitFieldNames ? '' : 'duration', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(32, _omitFieldNames ? '' : 'stillUrl')
+    ..aOS(33, _omitFieldNames ? '' : 'playItemUrl')
+    ..m<$core.String, $core.String>(34, _omitFieldNames ? '' : 'playItemHeader',
+        entryClassName: 'PluginMedia.PlayItemHeaderEntry',
+        keyFieldType: $pb.PbFieldType.OS,
+        valueFieldType: $pb.PbFieldType.OS,
+        packageName: const $pb.PackageName('plugin'))
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2265,6 +2276,18 @@ class PluginMedia extends $pb.GeneratedMessage {
   $core.bool hasStillUrl() => $_has(16);
   @$pb.TagNumber(32)
   void clearStillUrl() => $_clearField(32);
+
+  @$pb.TagNumber(33)
+  $core.String get playItemUrl => $_getSZ(17);
+  @$pb.TagNumber(33)
+  set playItemUrl($core.String value) => $_setString(17, value);
+  @$pb.TagNumber(33)
+  $core.bool hasPlayItemUrl() => $_has(17);
+  @$pb.TagNumber(33)
+  void clearPlayItemUrl() => $_clearField(33);
+
+  @$pb.TagNumber(34)
+  $pb.PbMap<$core.String, $core.String> get playItemHeader => $_getMap(18);
 }
 
 class ListPluginMediaInfoRequest extends $pb.GeneratedMessage {

@@ -228,6 +228,9 @@ message PluginMedia {
     uint64 play_index = 30;  // play item indx
     uint64 duration   = 31;  // video duration unit: s
     string still_url  = 32;  // media video poster image for media Item play item
+
+    string              play_item_url    = 33;
+    map<string, string> play_item_header = 34;
 }
 
 message ListPluginMediaInfoRequest {
