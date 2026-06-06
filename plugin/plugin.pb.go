@@ -1236,10 +1236,11 @@ func (x *GetPluginMediaDetailRequest) GetSeasonIndex() uint32 {
 }
 
 type GetPluginMediaDetailResponse struct {
-	unknownFields []byte
-	MediaSeries   *PluginMedia   `protobuf:"bytes,1,opt,name=media_series,json=mediaSeries,proto3" json:"mediaSeries,omitempty"`
-	MediaInfo     *PluginMedia   `protobuf:"bytes,2,opt,name=media_info,json=mediaInfo,proto3" json:"mediaInfo,omitempty"`
-	MediaItems    []*PluginMedia `protobuf:"bytes,3,rep,name=media_items,json=mediaItems,proto3" json:"mediaItems,omitempty"`
+	unknownFields     []byte
+	MediaSeries       *PluginMedia   `protobuf:"bytes,1,opt,name=media_series,json=mediaSeries,proto3" json:"mediaSeries,omitempty"`
+	MediaInfo         *PluginMedia   `protobuf:"bytes,2,opt,name=media_info,json=mediaInfo,proto3" json:"mediaInfo,omitempty"`
+	MediaItems        []*PluginMedia `protobuf:"bytes,3,rep,name=media_items,json=mediaItems,proto3" json:"mediaItems,omitempty"`
+	RelationMediaInfo []*PluginMedia `protobuf:"bytes,4,rep,name=relation_media_info,json=relationMediaInfo,proto3" json:"relationMediaInfo,omitempty"` // relation media info
 }
 
 func (x *GetPluginMediaDetailResponse) Reset() {
@@ -1265,6 +1266,13 @@ func (x *GetPluginMediaDetailResponse) GetMediaInfo() *PluginMedia {
 func (x *GetPluginMediaDetailResponse) GetMediaItems() []*PluginMedia {
 	if x != nil {
 		return x.MediaItems
+	}
+	return nil
+}
+
+func (x *GetPluginMediaDetailResponse) GetRelationMediaInfo() []*PluginMedia {
+	if x != nil {
+		return x.RelationMediaInfo
 	}
 	return nil
 }
@@ -2429,6 +2437,13 @@ func (m *GetPluginMediaDetailResponse) CloneVT() *GetPluginMediaDetailResponse {
 			tmpContainer[k] = v.CloneVT()
 		}
 		r.MediaItems = tmpContainer
+	}
+	if rhs := m.RelationMediaInfo; rhs != nil {
+		tmpContainer := make([]*PluginMedia, len(rhs))
+		for k, v := range rhs {
+			tmpContainer[k] = v.CloneVT()
+		}
+		r.RelationMediaInfo = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -3672,6 +3687,23 @@ func (this *GetPluginMediaDetailResponse) EqualVT(that *GetPluginMediaDetailResp
 	}
 	for i, vx := range this.MediaItems {
 		vy := that.MediaItems[i]
+		if p, q := vx, vy; p != q {
+			if p == nil {
+				p = &PluginMedia{}
+			}
+			if q == nil {
+				q = &PluginMedia{}
+			}
+			if !p.EqualVT(q) {
+				return false
+			}
+		}
+	}
+	if len(this.RelationMediaInfo) != len(that.RelationMediaInfo) {
+		return false
+	}
+	for i, vx := range this.RelationMediaInfo {
+		vy := that.RelationMediaInfo[i]
 		if p, q := vx, vy; p != q {
 			if p == nil {
 				p = &PluginMedia{}
@@ -6274,6 +6306,17 @@ func (x *GetPluginMediaDetailResponse) MarshalProtoJSON(s *json.MarshalState) {
 		}
 		s.WriteArrayEnd()
 	}
+	if len(x.RelationMediaInfo) > 0 || s.HasField("relationMediaInfo") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("relationMediaInfo")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.RelationMediaInfo {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s.WithField("relationMediaInfo"))
+		}
+		s.WriteArrayEnd()
+	}
 	s.WriteObjectEnd()
 }
 
@@ -6322,6 +6365,24 @@ func (x *GetPluginMediaDetailResponse) UnmarshalProtoJSON(s *json.UnmarshalState
 					return
 				}
 				x.MediaItems = append(x.MediaItems, v)
+			})
+		case "relation_media_info", "relationMediaInfo":
+			s.AddField("relation_media_info")
+			if s.ReadNil() {
+				x.RelationMediaInfo = nil
+				return
+			}
+			s.ReadArray(func() {
+				if s.ReadNil() {
+					x.RelationMediaInfo = append(x.RelationMediaInfo, nil)
+					return
+				}
+				v := &PluginMedia{}
+				v.UnmarshalProtoJSON(s.WithField("relation_media_info", false))
+				if s.Err() != nil {
+					return
+				}
+				x.RelationMediaInfo = append(x.RelationMediaInfo, v)
 			})
 		}
 	})
@@ -8303,6 +8364,18 @@ func (m *GetPluginMediaDetailResponse) MarshalToSizedBufferVT(dAtA []byte) (int,
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if len(m.RelationMediaInfo) > 0 {
+		for iNdEx := len(m.RelationMediaInfo) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.RelationMediaInfo[iNdEx].MarshalToSizedBufferVT(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+			i--
+			dAtA[i] = 0x22
+		}
 	}
 	if len(m.MediaItems) > 0 {
 		for iNdEx := len(m.MediaItems) - 1; iNdEx >= 0; iNdEx-- {
@@ -10370,6 +10443,18 @@ func (m *GetPluginMediaDetailResponse) MarshalToSizedBufferVTStrict(dAtA []byte)
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if len(m.RelationMediaInfo) > 0 {
+		for iNdEx := len(m.RelationMediaInfo) - 1; iNdEx >= 0; iNdEx-- {
+			size, err := m.RelationMediaInfo[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(size))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
 	if len(m.MediaItems) > 0 {
 		for iNdEx := len(m.MediaItems) - 1; iNdEx >= 0; iNdEx-- {
 			size, err := m.MediaItems[iNdEx].MarshalToSizedBufferVTStrict(dAtA[:i])
@@ -11259,6 +11344,12 @@ func (m *GetPluginMediaDetailResponse) SizeVT() (n int) {
 	}
 	if len(m.MediaItems) > 0 {
 		for _, e := range m.MediaItems {
+			l = e.SizeVT()
+			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+		}
+	}
+	if len(m.RelationMediaInfo) > 0 {
+		for _, e := range m.RelationMediaInfo {
 			l = e.SizeVT()
 			n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 		}
@@ -12558,6 +12649,19 @@ func (x *GetPluginMediaDetailResponse) MarshalProtoText() string {
 		}
 		sb.WriteString("media_items: [")
 		for i, v := range x.MediaItems {
+			if i > 0 {
+				sb.WriteString(", ")
+			}
+			sb.WriteString(v.MarshalProtoText())
+		}
+		sb.WriteString("]")
+	}
+	if len(x.RelationMediaInfo) > 0 {
+		if sb.Len() > 30 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("relation_media_info: [")
+		for i, v := range x.RelationMediaInfo {
 			if i > 0 {
 				sb.WriteString(", ")
 			}
@@ -17725,6 +17829,40 @@ func (m *GetPluginMediaDetailResponse) UnmarshalVT(dAtA []byte) error {
 			}
 			m.MediaItems = append(m.MediaItems, &PluginMedia{})
 			if err := m.MediaItems[len(m.MediaItems)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RelationMediaInfo", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RelationMediaInfo = append(m.RelationMediaInfo, &PluginMedia{})
+			if err := m.RelationMediaInfo[len(m.RelationMediaInfo)-1].UnmarshalVT(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -23118,6 +23256,40 @@ func (m *GetPluginMediaDetailResponse) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.MediaItems = append(m.MediaItems, &PluginMedia{})
 			if err := m.MediaItems[len(m.MediaItems)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RelationMediaInfo", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RelationMediaInfo = append(m.RelationMediaInfo, &PluginMedia{})
+			if err := m.RelationMediaInfo[len(m.RelationMediaInfo)-1].UnmarshalVTUnsafe(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

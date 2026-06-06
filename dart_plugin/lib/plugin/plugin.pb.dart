@@ -2582,11 +2582,14 @@ class GetPluginMediaDetailResponse extends $pb.GeneratedMessage {
     PluginMedia? mediaSeries,
     PluginMedia? mediaInfo,
     $core.Iterable<PluginMedia>? mediaItems,
+    $core.Iterable<PluginMedia>? relationMediaInfo,
   }) {
     final result = create();
     if (mediaSeries != null) result.mediaSeries = mediaSeries;
     if (mediaInfo != null) result.mediaInfo = mediaInfo;
     if (mediaItems != null) result.mediaItems.addAll(mediaItems);
+    if (relationMediaInfo != null)
+      result.relationMediaInfo.addAll(relationMediaInfo);
     return result;
   }
 
@@ -2608,6 +2611,8 @@ class GetPluginMediaDetailResponse extends $pb.GeneratedMessage {
     ..aOM<PluginMedia>(2, _omitFieldNames ? '' : 'mediaInfo',
         subBuilder: PluginMedia.create)
     ..pPM<PluginMedia>(3, _omitFieldNames ? '' : 'mediaItems',
+        subBuilder: PluginMedia.create)
+    ..pPM<PluginMedia>(4, _omitFieldNames ? '' : 'relationMediaInfo',
         subBuilder: PluginMedia.create)
     ..hasRequiredFields = false;
 
@@ -2657,6 +2662,9 @@ class GetPluginMediaDetailResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(3)
   $pb.PbList<PluginMedia> get mediaItems => $_getList(2);
+
+  @$pb.TagNumber(4)
+  $pb.PbList<PluginMedia> get relationMediaInfo => $_getList(3);
 }
 
 const $core.bool _omitFieldNames =
