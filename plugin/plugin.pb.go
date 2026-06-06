@@ -1212,6 +1212,7 @@ func (x *ListPluginMediaInfoResponse) GetNextPageKey() string {
 type GetPluginMediaDetailRequest struct {
 	unknownFields []byte
 	MediaInfoId   string `protobuf:"bytes,1,opt,name=media_info_id,json=mediaInfoId,proto3" json:"mediaInfoId,omitempty"`
+	SeasonIndex   uint32 `protobuf:"varint,2,opt,name=season_index,json=seasonIndex,proto3" json:"seasonIndex,omitempty"` // season index
 }
 
 func (x *GetPluginMediaDetailRequest) Reset() {
@@ -1225,6 +1226,13 @@ func (x *GetPluginMediaDetailRequest) GetMediaInfoId() string {
 		return x.MediaInfoId
 	}
 	return ""
+}
+
+func (x *GetPluginMediaDetailRequest) GetSeasonIndex() uint32 {
+	if x != nil {
+		return x.SeasonIndex
+	}
+	return 0
 }
 
 type GetPluginMediaDetailResponse struct {
@@ -2396,6 +2404,7 @@ func (m *GetPluginMediaDetailRequest) CloneVT() *GetPluginMediaDetailRequest {
 	}
 	r := new(GetPluginMediaDetailRequest)
 	r.MediaInfoId = m.MediaInfoId
+	r.SeasonIndex = m.SeasonIndex
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -3631,6 +3640,9 @@ func (this *GetPluginMediaDetailRequest) EqualVT(that *GetPluginMediaDetailReque
 		return false
 	}
 	if this.MediaInfoId != that.MediaInfoId {
+		return false
+	}
+	if this.SeasonIndex != that.SeasonIndex {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -6196,6 +6208,11 @@ func (x *GetPluginMediaDetailRequest) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("mediaInfoId")
 		s.WriteString(x.MediaInfoId)
 	}
+	if x.SeasonIndex != 0 || s.HasField("seasonIndex") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("seasonIndex")
+		s.WriteUint32(x.SeasonIndex)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -6216,6 +6233,9 @@ func (x *GetPluginMediaDetailRequest) UnmarshalProtoJSON(s *json.UnmarshalState)
 		case "media_info_id", "mediaInfoId":
 			s.AddField("media_info_id")
 			x.MediaInfoId = s.ReadString()
+		case "season_index", "seasonIndex":
+			s.AddField("season_index")
+			x.SeasonIndex = s.ReadUint32()
 		}
 	})
 }
@@ -8238,6 +8258,11 @@ func (m *GetPluginMediaDetailRequest) MarshalToSizedBufferVT(dAtA []byte) (int, 
 	if m.unknownFields != nil {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
+	}
+	if m.SeasonIndex != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.SeasonIndex))
+		i--
+		dAtA[i] = 0x10
 	}
 	if len(m.MediaInfoId) > 0 {
 		i -= len(m.MediaInfoId)
@@ -10300,6 +10325,11 @@ func (m *GetPluginMediaDetailRequest) MarshalToSizedBufferVTStrict(dAtA []byte) 
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.SeasonIndex != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.SeasonIndex))
+		i--
+		dAtA[i] = 0x10
+	}
 	if len(m.MediaInfoId) > 0 {
 		i -= len(m.MediaInfoId)
 		copy(dAtA[i:], m.MediaInfoId)
@@ -11205,6 +11235,9 @@ func (m *GetPluginMediaDetailRequest) SizeVT() (n int) {
 	l = len(m.MediaInfoId)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	if m.SeasonIndex != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.SeasonIndex))
 	}
 	n += len(m.unknownFields)
 	return n
@@ -12487,6 +12520,13 @@ func (x *GetPluginMediaDetailRequest) MarshalProtoText() string {
 		}
 		sb.WriteString("media_info_id: ")
 		sb.WriteString(strconv.Quote(x.MediaInfoId))
+	}
+	if x.SeasonIndex != 0 {
+		if sb.Len() > 29 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("season_index: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.SeasonIndex), 10))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -17512,6 +17552,25 @@ func (m *GetPluginMediaDetailRequest) UnmarshalVT(dAtA []byte) error {
 			}
 			m.MediaInfoId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SeasonIndex", wireType)
+			}
+			m.SeasonIndex = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SeasonIndex |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -22886,6 +22945,25 @@ func (m *GetPluginMediaDetailRequest) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.MediaInfoId = stringValue
 			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SeasonIndex", wireType)
+			}
+			m.SeasonIndex = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.SeasonIndex |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

@@ -923,6 +923,7 @@ const GetPluginMediaDetailRequest$json = {
   '1': 'GetPluginMediaDetailRequest',
   '2': [
     {'1': 'media_info_id', '3': 1, '4': 1, '5': 9, '10': 'mediaInfoId'},
+    {'1': 'season_index', '3': 2, '4': 1, '5': 13, '10': 'seasonIndex'},
   ],
 };
 
@@ -930,7 +931,7 @@ const GetPluginMediaDetailRequest$json = {
 final $typed_data.Uint8List getPluginMediaDetailRequestDescriptor =
     $convert.base64Decode(
         'ChtHZXRQbHVnaW5NZWRpYURldGFpbFJlcXVlc3QSIgoNbWVkaWFfaW5mb19pZBgBIAEoCVILbW'
-        'VkaWFJbmZvSWQ=');
+        'VkaWFJbmZvSWQSIQoMc2Vhc29uX2luZGV4GAIgASgNUgtzZWFzb25JbmRleA==');
 
 @$core.Deprecated('Use getPluginMediaDetailResponseDescriptor instead')
 const GetPluginMediaDetailResponse$json = {
