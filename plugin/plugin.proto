@@ -165,9 +165,10 @@ message Token {
 }
 
 message PluginItem {
-    string name  = 1;
-    string value = 2;
-    string icon  = 3;  // icon url
+    string name     = 1;
+    string value    = 2;
+    string icon     = 3;  // icon url
+    bool   disabled = 4;  // disable the item
 }
 
 // menu

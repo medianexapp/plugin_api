@@ -851,7 +851,8 @@ type PluginItem struct {
 	unknownFields []byte
 	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	Icon          string `protobuf:"bytes,3,opt,name=icon,proto3" json:"icon,omitempty"` // icon url
+	Icon          string `protobuf:"bytes,3,opt,name=icon,proto3" json:"icon,omitempty"`          // icon url
+	Disabled      bool   `protobuf:"varint,4,opt,name=disabled,proto3" json:"disabled,omitempty"` // disable the item
 }
 
 func (x *PluginItem) Reset() {
@@ -879,6 +880,13 @@ func (x *PluginItem) GetIcon() string {
 		return x.Icon
 	}
 	return ""
+}
+
+func (x *PluginItem) GetDisabled() bool {
+	if x != nil {
+		return x.Disabled
+	}
+	return false
 }
 
 // menu
@@ -2176,6 +2184,7 @@ func (m *PluginItem) CloneVT() *PluginItem {
 	r.Name = m.Name
 	r.Value = m.Value
 	r.Icon = m.Icon
+	r.Disabled = m.Disabled
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
 		copy(r.unknownFields, m.unknownFields)
@@ -3283,6 +3292,9 @@ func (this *PluginItem) EqualVT(that *PluginItem) bool {
 		return false
 	}
 	if this.Icon != that.Icon {
+		return false
+	}
+	if this.Disabled != that.Disabled {
 		return false
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
@@ -5254,6 +5266,11 @@ func (x *PluginItem) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("icon")
 		s.WriteString(x.Icon)
 	}
+	if x.Disabled || s.HasField("disabled") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("disabled")
+		s.WriteBool(x.Disabled)
+	}
 	s.WriteObjectEnd()
 }
 
@@ -5280,6 +5297,9 @@ func (x *PluginItem) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "icon":
 			s.AddField("icon")
 			x.Icon = s.ReadString()
+		case "disabled":
+			s.AddField("disabled")
+			x.Disabled = s.ReadBool()
 		}
 	})
 }
@@ -7650,6 +7670,16 @@ func (m *PluginItem) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.Disabled {
+		i--
+		if m.Disabled {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x20
+	}
 	if len(m.Icon) > 0 {
 		i -= len(m.Icon)
 		copy(dAtA[i:], m.Icon)
@@ -9728,6 +9758,16 @@ func (m *PluginItem) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
+	if m.Disabled {
+		i--
+		if m.Disabled {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x20
+	}
 	if len(m.Icon) > 0 {
 		i -= len(m.Icon)
 		copy(dAtA[i:], m.Icon)
@@ -11057,6 +11097,9 @@ func (m *PluginItem) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
+	if m.Disabled {
+		n += 2
+	}
 	n += len(m.unknownFields)
 	return n
 }
@@ -12129,6 +12172,13 @@ func (x *PluginItem) MarshalProtoText() string {
 		}
 		sb.WriteString("icon: ")
 		sb.WriteString(strconv.Quote(x.Icon))
+	}
+	if x.Disabled != false {
+		if sb.Len() > 12 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("disabled: ")
+		sb.WriteString(strconv.FormatBool(x.Disabled))
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -15802,6 +15852,26 @@ func (m *PluginItem) UnmarshalVT(dAtA []byte) error {
 			}
 			m.Icon = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Disabled", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Disabled = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
@@ -21133,6 +21203,26 @@ func (m *PluginItem) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.Icon = stringValue
 			iNdEx = postIndex
+		case 4:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Disabled", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Disabled = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])

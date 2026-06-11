@@ -597,13 +597,14 @@ const PluginItem$json = {
     {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
     {'1': 'icon', '3': 3, '4': 1, '5': 9, '10': 'icon'},
+    {'1': 'disabled', '3': 4, '4': 1, '5': 8, '10': 'disabled'},
   ],
 };
 
 /// Descriptor for `PluginItem`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List pluginItemDescriptor = $convert.base64Decode(
     'CgpQbHVnaW5JdGVtEhIKBG5hbWUYASABKAlSBG5hbWUSFAoFdmFsdWUYAiABKAlSBXZhbHVlEh'
-    'IKBGljb24YAyABKAlSBGljb24=');
+    'IKBGljb24YAyABKAlSBGljb24SGgoIZGlzYWJsZWQYBCABKAhSCGRpc2FibGVk');
 
 @$core.Deprecated('Use pluginMenuDescriptor instead')
 const PluginMenu$json = {

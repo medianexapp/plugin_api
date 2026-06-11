@@ -1638,11 +1638,13 @@ class PluginItem extends $pb.GeneratedMessage {
     $core.String? name,
     $core.String? value,
     $core.String? icon,
+    $core.bool? disabled,
   }) {
     final result = create();
     if (name != null) result.name = name;
     if (value != null) result.value = value;
     if (icon != null) result.icon = icon;
+    if (disabled != null) result.disabled = disabled;
     return result;
   }
 
@@ -1662,6 +1664,7 @@ class PluginItem extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'name')
     ..aOS(2, _omitFieldNames ? '' : 'value')
     ..aOS(3, _omitFieldNames ? '' : 'icon')
+    ..aOB(4, _omitFieldNames ? '' : 'disabled')
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1708,6 +1711,15 @@ class PluginItem extends $pb.GeneratedMessage {
   $core.bool hasIcon() => $_has(2);
   @$pb.TagNumber(3)
   void clearIcon() => $_clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get disabled => $_getBF(3);
+  @$pb.TagNumber(4)
+  set disabled($core.bool value) => $_setBool(3, value);
+  @$pb.TagNumber(4)
+  $core.bool hasDisabled() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearDisabled() => $_clearField(4);
 }
 
 /// menu
