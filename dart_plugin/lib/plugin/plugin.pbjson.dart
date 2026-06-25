@@ -962,12 +962,12 @@ const GetPluginMediaDetailResponse$json = {
       '10': 'mediaItems'
     },
     {
-      '1': 'relation_media_info',
+      '1': 'media_info_relations',
       '3': 4,
       '4': 3,
       '5': 11,
       '6': '.plugin.PluginMedia',
-      '10': 'relationMediaInfo'
+      '10': 'mediaInfoRelations'
     },
   ],
 };
@@ -977,5 +977,5 @@ final $typed_data.Uint8List getPluginMediaDetailResponseDescriptor = $convert.ba
     'ChxHZXRQbHVnaW5NZWRpYURldGFpbFJlc3BvbnNlEjYKDG1lZGlhX3NlcmllcxgBIAEoCzITLn'
     'BsdWdpbi5QbHVnaW5NZWRpYVILbWVkaWFTZXJpZXMSMgoKbWVkaWFfaW5mbxgCIAEoCzITLnBs'
     'dWdpbi5QbHVnaW5NZWRpYVIJbWVkaWFJbmZvEjQKC21lZGlhX2l0ZW1zGAMgAygLMhMucGx1Z2'
-    'luLlBsdWdpbk1lZGlhUgptZWRpYUl0ZW1zEkMKE3JlbGF0aW9uX21lZGlhX2luZm8YBCADKAsy'
-    'Ey5wbHVnaW4uUGx1Z2luTWVkaWFSEXJlbGF0aW9uTWVkaWFJbmZv');
+    'luLlBsdWdpbk1lZGlhUgptZWRpYUl0ZW1zEkUKFG1lZGlhX2luZm9fcmVsYXRpb25zGAQgAygL'
+    'MhMucGx1Z2luLlBsdWdpbk1lZGlhUhJtZWRpYUluZm9SZWxhdGlvbnM=');

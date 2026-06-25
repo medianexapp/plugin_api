@@ -257,8 +257,8 @@ message GetPluginMediaDetailRequest {
 }
 
 message GetPluginMediaDetailResponse {
-    PluginMedia          media_series        = 1;
-    PluginMedia          media_info          = 2;
-    repeated PluginMedia media_items         = 3;
-    repeated PluginMedia relation_media_info = 4;  // relation media info
+    PluginMedia          media_series         = 1;
+    PluginMedia          media_info           = 2;
+    repeated PluginMedia media_items          = 3;
+    repeated PluginMedia media_info_relations = 4;  // relation media info
 }
