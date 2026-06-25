@@ -2522,11 +2522,9 @@ class ListPluginMediaInfoResponse extends $pb.GeneratedMessage {
 class GetPluginMediaDetailRequest extends $pb.GeneratedMessage {
   factory GetPluginMediaDetailRequest({
     $core.String? mediaInfoId,
-    $core.int? seasonIndex,
   }) {
     final result = create();
     if (mediaInfoId != null) result.mediaInfoId = mediaInfoId;
-    if (seasonIndex != null) result.seasonIndex = seasonIndex;
     return result;
   }
 
@@ -2544,8 +2542,6 @@ class GetPluginMediaDetailRequest extends $pb.GeneratedMessage {
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'mediaInfoId')
-    ..aI(2, _omitFieldNames ? '' : 'seasonIndex',
-        fieldType: $pb.PbFieldType.OU3)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2578,15 +2574,6 @@ class GetPluginMediaDetailRequest extends $pb.GeneratedMessage {
   $core.bool hasMediaInfoId() => $_has(0);
   @$pb.TagNumber(1)
   void clearMediaInfoId() => $_clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.int get seasonIndex => $_getIZ(1);
-  @$pb.TagNumber(2)
-  set seasonIndex($core.int value) => $_setUnsignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSeasonIndex() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSeasonIndex() => $_clearField(2);
 }
 
 class GetPluginMediaDetailResponse extends $pb.GeneratedMessage {

@@ -254,7 +254,6 @@ message ListPluginMediaInfoResponse {
 
 message GetPluginMediaDetailRequest {
     string media_info_id = 1;
-    uint32 season_index  = 2;  // season index
 }
 
 message GetPluginMediaDetailResponse {
