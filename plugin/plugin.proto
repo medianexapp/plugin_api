@@ -225,7 +225,7 @@ message PluginMedia {
     }
     repeated Credit     credit   = 20;  // media credits
     map<string, string> metadata = 21;  // media metadata
-    string              logo_url = 17;
+    string              logo_url = 22;
     // media play item
     uint64 play_index = 30;  // play item indx
     uint64 duration   = 31;  // video duration unit: s

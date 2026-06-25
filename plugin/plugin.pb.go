@@ -970,6 +970,7 @@ type PluginMedia struct {
 	OriginalLanguage string                `protobuf:"bytes,19,opt,name=original_language,json=originalLanguage,proto3" json:"originalLanguage,omitempty"`
 	Credit           []*PluginMedia_Credit `protobuf:"bytes,20,rep,name=credit,proto3" json:"credit,omitempty"`                                                                                             // media credits
 	Metadata         map[string]string     `protobuf:"bytes,21,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // media metadata
+	LogoUrl          string                `protobuf:"bytes,22,opt,name=logo_url,json=logoUrl,proto3" json:"logoUrl,omitempty"`
 	// media play item
 	PlayIndex      uint64            `protobuf:"varint,30,opt,name=play_index,json=playIndex,proto3" json:"playIndex,omitempty"` // play item indx
 	Duration       uint64            `protobuf:"varint,31,opt,name=duration,proto3" json:"duration,omitempty"`                   // video duration unit: s
@@ -1080,6 +1081,13 @@ func (x *PluginMedia) GetMetadata() map[string]string {
 		return x.Metadata
 	}
 	return nil
+}
+
+func (x *PluginMedia) GetLogoUrl() string {
+	if x != nil {
+		return x.LogoUrl
+	}
+	return ""
 }
 
 func (x *PluginMedia) GetPlayIndex() uint64 {
@@ -2318,6 +2326,7 @@ func (m *PluginMedia) CloneVT() *PluginMedia {
 	r.PosterUrl = m.PosterUrl
 	r.OriginalName = m.OriginalName
 	r.OriginalLanguage = m.OriginalLanguage
+	r.LogoUrl = m.LogoUrl
 	r.PlayIndex = m.PlayIndex
 	r.Duration = m.Duration
 	r.StillUrl = m.StillUrl
@@ -3540,6 +3549,9 @@ func (this *PluginMedia) EqualVT(that *PluginMedia) bool {
 		if vx != vy {
 			return false
 		}
+	}
+	if this.LogoUrl != that.LogoUrl {
+		return false
 	}
 	if this.PlayIndex != that.PlayIndex {
 		return false
@@ -5906,6 +5918,11 @@ func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 		}
 		s.WriteObjectEnd()
 	}
+	if x.LogoUrl != "" || s.HasField("logoUrl") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("logoUrl")
+		s.WriteString(x.LogoUrl)
+	}
 	if x.PlayIndex != 0 || s.HasField("playIndex") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("playIndex")
@@ -6023,6 +6040,9 @@ func (x *PluginMedia) UnmarshalProtoJSON(s *json.UnmarshalState) {
 			s.ReadStringMap(func(key string) {
 				x.Metadata[key] = s.ReadString()
 			})
+		case "logo_url", "logoUrl":
+			s.AddField("logo_url")
+			x.LogoUrl = s.ReadString()
 		case "play_index", "playIndex":
 			s.AddField("play_index")
 			x.PlayIndex = s.ReadUint64()
@@ -8022,6 +8042,15 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		dAtA[i] = 0x1
 		i--
 		dAtA[i] = 0xf0
+	}
+	if len(m.LogoUrl) > 0 {
+		i -= len(m.LogoUrl)
+		copy(dAtA[i:], m.LogoUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.LogoUrl)))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xb2
 	}
 	if len(m.Metadata) > 0 {
 		for k := range m.Metadata {
@@ -10106,6 +10135,15 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0xf0
 	}
+	if len(m.LogoUrl) > 0 {
+		i -= len(m.LogoUrl)
+		copy(dAtA[i:], m.LogoUrl)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.LogoUrl)))
+		i--
+		dAtA[i] = 0x1
+		i--
+		dAtA[i] = 0xb2
+	}
 	if len(m.Metadata) > 0 {
 		for k := range m.Metadata {
 			v := m.Metadata[k]
@@ -11238,6 +11276,10 @@ func (m *PluginMedia) SizeVT() (n int) {
 			mapEntrySize := 1 + len(k) + protobuf_go_lite.SizeOfVarint(uint64(len(k))) + 1 + len(v) + protobuf_go_lite.SizeOfVarint(uint64(len(v)))
 			n += mapEntrySize + 2 + protobuf_go_lite.SizeOfVarint(uint64(mapEntrySize))
 		}
+	}
+	l = len(m.LogoUrl)
+	if l > 0 {
+		n += 2 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
 	if m.PlayIndex != 0 {
 		n += 2 + protobuf_go_lite.SizeOfVarint(uint64(m.PlayIndex))
@@ -12474,6 +12516,13 @@ func (x *PluginMedia) MarshalProtoText() string {
 			sb.WriteString(strconv.Quote(v))
 		}
 		sb.WriteString(" }")
+	}
+	if x.LogoUrl != "" {
+		if sb.Len() > 13 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("logo_url: ")
+		sb.WriteString(strconv.Quote(x.LogoUrl))
 	}
 	if x.PlayIndex != 0 {
 		if sb.Len() > 13 {
@@ -16975,6 +17024,38 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 				}
 			}
 			m.Metadata[mapkey] = mapvalue
+			iNdEx = postIndex
+		case 22:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LogoUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.LogoUrl = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 30:
 			if wireType != 0 {
@@ -22371,6 +22452,42 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 				}
 			}
 			m.Metadata[mapkey] = mapvalue
+			iNdEx = postIndex
+		case 22:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LogoUrl", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return protobuf_go_lite.ErrInvalidLength
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			var stringValue string
+			if intStringLen > 0 {
+				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
+			}
+			m.LogoUrl = stringValue
 			iNdEx = postIndex
 		case 30:
 			if wireType != 0 {

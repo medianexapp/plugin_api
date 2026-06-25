@@ -737,6 +737,7 @@ const PluginMedia$json = {
       '6': '.plugin.PluginMedia.MetadataEntry',
       '10': 'metadata'
     },
+    {'1': 'logo_url', '3': 22, '4': 1, '5': 9, '10': 'logoUrl'},
     {'1': 'play_index', '3': 30, '4': 1, '5': 4, '10': 'playIndex'},
     {'1': 'duration', '3': 31, '4': 1, '5': 4, '10': 'duration'},
     {'1': 'still_url', '3': 32, '4': 1, '5': 9, '10': 'stillUrl'},
@@ -830,20 +831,20 @@ final $typed_data.Uint8List pluginMediaDescriptor = $convert.base64Decode(
     'aWdpbmFsX25hbWUYEiABKAlSDG9yaWdpbmFsTmFtZRIrChFvcmlnaW5hbF9sYW5ndWFnZRgTIA'
     'EoCVIQb3JpZ2luYWxMYW5ndWFnZRIyCgZjcmVkaXQYFCADKAsyGi5wbHVnaW4uUGx1Z2luTWVk'
     'aWEuQ3JlZGl0UgZjcmVkaXQSPQoIbWV0YWRhdGEYFSADKAsyIS5wbHVnaW4uUGx1Z2luTWVkaW'
-    'EuTWV0YWRhdGFFbnRyeVIIbWV0YWRhdGESHQoKcGxheV9pbmRleBgeIAEoBFIJcGxheUluZGV4'
-    'EhoKCGR1cmF0aW9uGB8gASgEUghkdXJhdGlvbhIbCglzdGlsbF91cmwYICABKAlSCHN0aWxsVX'
-    'JsEiIKDXBsYXlfaXRlbV91cmwYISABKAlSC3BsYXlJdGVtVXJsElEKEHBsYXlfaXRlbV9oZWFk'
-    'ZXIYIiADKAsyJy5wbHVnaW4uUGx1Z2luTWVkaWEuUGxheUl0ZW1IZWFkZXJFbnRyeVIOcGxheU'
-    'l0ZW1IZWFkZXIanAEKBkNyZWRpdBI/CgtjcmVkaXRfdHlwZRgBIAEoDjIeLnBsdWdpbi5QbHVn'
-    'aW5NZWRpYS5DcmVkaXRUeXBlUgpjcmVkaXRUeXBlEhIKBG5hbWUYAiABKAlSBG5hbWUSHwoLcH'
-    'JvZmlsZV91cmwYAyABKAlSCnByb2ZpbGVVcmwSHAoJY2hhcmFjdGVyGAQgASgJUgljaGFyYWN0'
-    'ZXIaOwoNTWV0YWRhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdm'
-    'FsdWU6AjgBGkEKE1BsYXlJdGVtSGVhZGVyRW50cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFs'
-    'dWUYAiABKAlSBXZhbHVlOgI4ASJZCglNZWRpYVR5cGUSFQoRTUVESUFfVU5TUEVDSUZJRUQQAB'
-    'IQCgxNRURJQV9TRVJJRVMQARIOCgpNRURJQV9JTkZPEAISEwoPTUVESUFfUExBWV9JVEVNEAMi'
-    'fgoKQ3JlZGl0VHlwZRIVChFDcmVkaXRVTlNQRUNJRklFRBAAEg8KC0NyZWRpdEFjdG9yEAESFw'
-    'oTQ3JlZGl0Q2FzdERpcmVjdGluZxACEhgKFENyZWRpdENhc3RQcm9kdWN0aW9uEAMSFQoRQ3Jl'
-    'ZGl0Q2FzdFdyaXRpbmcQBA==');
+    'EuTWV0YWRhdGFFbnRyeVIIbWV0YWRhdGESGQoIbG9nb191cmwYFiABKAlSB2xvZ29VcmwSHQoK'
+    'cGxheV9pbmRleBgeIAEoBFIJcGxheUluZGV4EhoKCGR1cmF0aW9uGB8gASgEUghkdXJhdGlvbh'
+    'IbCglzdGlsbF91cmwYICABKAlSCHN0aWxsVXJsEiIKDXBsYXlfaXRlbV91cmwYISABKAlSC3Bs'
+    'YXlJdGVtVXJsElEKEHBsYXlfaXRlbV9oZWFkZXIYIiADKAsyJy5wbHVnaW4uUGx1Z2luTWVkaW'
+    'EuUGxheUl0ZW1IZWFkZXJFbnRyeVIOcGxheUl0ZW1IZWFkZXIanAEKBkNyZWRpdBI/CgtjcmVk'
+    'aXRfdHlwZRgBIAEoDjIeLnBsdWdpbi5QbHVnaW5NZWRpYS5DcmVkaXRUeXBlUgpjcmVkaXRUeX'
+    'BlEhIKBG5hbWUYAiABKAlSBG5hbWUSHwoLcHJvZmlsZV91cmwYAyABKAlSCnByb2ZpbGVVcmwS'
+    'HAoJY2hhcmFjdGVyGAQgASgJUgljaGFyYWN0ZXIaOwoNTWV0YWRhdGFFbnRyeRIQCgNrZXkYAS'
+    'ABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdmFsdWU6AjgBGkEKE1BsYXlJdGVtSGVhZGVyRW50'
+    'cnkSEAoDa2V5GAEgASgJUgNrZXkSFAoFdmFsdWUYAiABKAlSBXZhbHVlOgI4ASJZCglNZWRpYV'
+    'R5cGUSFQoRTUVESUFfVU5TUEVDSUZJRUQQABIQCgxNRURJQV9TRVJJRVMQARIOCgpNRURJQV9J'
+    'TkZPEAISEwoPTUVESUFfUExBWV9JVEVNEAMifgoKQ3JlZGl0VHlwZRIVChFDcmVkaXRVTlNQRU'
+    'NJRklFRBAAEg8KC0NyZWRpdEFjdG9yEAESFwoTQ3JlZGl0Q2FzdERpcmVjdGluZxACEhgKFENy'
+    'ZWRpdENhc3RQcm9kdWN0aW9uEAMSFQoRQ3JlZGl0Q2FzdFdyaXRpbmcQBA==');
 
 @$core.Deprecated('Use listPluginMediaInfoRequestDescriptor instead')
 const ListPluginMediaInfoRequest$json = {
