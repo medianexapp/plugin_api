@@ -2040,11 +2040,12 @@ class PluginMedia_Credit extends $pb.GeneratedMessage {
 /// media item
 class PluginMedia extends $pb.GeneratedMessage {
   factory PluginMedia({
-    $core.String? mediaId,
+    $core.String? pluginMediaId,
     PluginMedia_MediaType? mediaType,
     $core.String? name,
     $core.String? desc,
-    $core.String? parentMediaId,
+    $core.String? parentPluginMediaId,
+    $fixnum.Int64? index,
     $core.String? releaseDate,
     $fixnum.Int64? year,
     $core.Iterable<$core.String>? genres,
@@ -2055,18 +2056,19 @@ class PluginMedia extends $pb.GeneratedMessage {
     $core.Iterable<PluginMedia_Credit>? credit,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? metadata,
     $core.String? logoUrl,
-    $fixnum.Int64? playIndex,
     $fixnum.Int64? duration,
     $core.String? stillUrl,
     $core.String? playItemUrl,
     $core.Iterable<$core.MapEntry<$core.String, $core.String>>? playItemHeader,
   }) {
     final result = create();
-    if (mediaId != null) result.mediaId = mediaId;
+    if (pluginMediaId != null) result.pluginMediaId = pluginMediaId;
     if (mediaType != null) result.mediaType = mediaType;
     if (name != null) result.name = name;
     if (desc != null) result.desc = desc;
-    if (parentMediaId != null) result.parentMediaId = parentMediaId;
+    if (parentPluginMediaId != null)
+      result.parentPluginMediaId = parentPluginMediaId;
+    if (index != null) result.index = index;
     if (releaseDate != null) result.releaseDate = releaseDate;
     if (year != null) result.year = year;
     if (genres != null) result.genres.addAll(genres);
@@ -2077,7 +2079,6 @@ class PluginMedia extends $pb.GeneratedMessage {
     if (credit != null) result.credit.addAll(credit);
     if (metadata != null) result.metadata.addEntries(metadata);
     if (logoUrl != null) result.logoUrl = logoUrl;
-    if (playIndex != null) result.playIndex = playIndex;
     if (duration != null) result.duration = duration;
     if (stillUrl != null) result.stillUrl = stillUrl;
     if (playItemUrl != null) result.playItemUrl = playItemUrl;
@@ -2099,12 +2100,14 @@ class PluginMedia extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'PluginMedia',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'plugin'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'mediaId')
+    ..aOS(1, _omitFieldNames ? '' : 'pluginMediaId')
     ..aE<PluginMedia_MediaType>(2, _omitFieldNames ? '' : 'mediaType',
         enumValues: PluginMedia_MediaType.values)
     ..aOS(3, _omitFieldNames ? '' : 'name')
     ..aOS(4, _omitFieldNames ? '' : 'desc')
-    ..aOS(5, _omitFieldNames ? '' : 'parentMediaId')
+    ..aOS(5, _omitFieldNames ? '' : 'parentPluginMediaId')
+    ..a<$fixnum.Int64>(6, _omitFieldNames ? '' : 'index', $pb.PbFieldType.OU6,
+        defaultOrMaker: $fixnum.Int64.ZERO)
     ..aOS(13, _omitFieldNames ? '' : 'releaseDate')
     ..a<$fixnum.Int64>(14, _omitFieldNames ? '' : 'year', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
@@ -2122,14 +2125,11 @@ class PluginMedia extends $pb.GeneratedMessage {
         packageName: const $pb.PackageName('plugin'))
     ..aOS(22, _omitFieldNames ? '' : 'logoUrl')
     ..a<$fixnum.Int64>(
-        30, _omitFieldNames ? '' : 'playIndex', $pb.PbFieldType.OU6,
+        30, _omitFieldNames ? '' : 'duration', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
-    ..a<$fixnum.Int64>(
-        31, _omitFieldNames ? '' : 'duration', $pb.PbFieldType.OU6,
-        defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aOS(32, _omitFieldNames ? '' : 'stillUrl')
-    ..aOS(33, _omitFieldNames ? '' : 'playItemUrl')
-    ..m<$core.String, $core.String>(34, _omitFieldNames ? '' : 'playItemHeader',
+    ..aOS(31, _omitFieldNames ? '' : 'stillUrl')
+    ..aOS(32, _omitFieldNames ? '' : 'playItemUrl')
+    ..m<$core.String, $core.String>(33, _omitFieldNames ? '' : 'playItemHeader',
         entryClassName: 'PluginMedia.PlayItemHeaderEntry',
         keyFieldType: $pb.PbFieldType.OS,
         valueFieldType: $pb.PbFieldType.OS,
@@ -2156,13 +2156,13 @@ class PluginMedia extends $pb.GeneratedMessage {
   static PluginMedia? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get mediaId => $_getSZ(0);
+  $core.String get pluginMediaId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set mediaId($core.String value) => $_setString(0, value);
+  set pluginMediaId($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasMediaId() => $_has(0);
+  $core.bool hasPluginMediaId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearMediaId() => $_clearField(1);
+  void clearPluginMediaId() => $_clearField(1);
 
   @$pb.TagNumber(2)
   PluginMedia_MediaType get mediaType => $_getN(1);
@@ -2192,125 +2192,125 @@ class PluginMedia extends $pb.GeneratedMessage {
   void clearDesc() => $_clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get parentMediaId => $_getSZ(4);
+  $core.String get parentPluginMediaId => $_getSZ(4);
   @$pb.TagNumber(5)
-  set parentMediaId($core.String value) => $_setString(4, value);
+  set parentPluginMediaId($core.String value) => $_setString(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasParentMediaId() => $_has(4);
+  $core.bool hasParentPluginMediaId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearParentMediaId() => $_clearField(5);
+  void clearParentPluginMediaId() => $_clearField(5);
+
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get index => $_getI64(5);
+  @$pb.TagNumber(6)
+  set index($fixnum.Int64 value) => $_setInt64(5, value);
+  @$pb.TagNumber(6)
+  $core.bool hasIndex() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearIndex() => $_clearField(6);
 
   /// media info
   @$pb.TagNumber(13)
-  $core.String get releaseDate => $_getSZ(5);
+  $core.String get releaseDate => $_getSZ(6);
   @$pb.TagNumber(13)
-  set releaseDate($core.String value) => $_setString(5, value);
+  set releaseDate($core.String value) => $_setString(6, value);
   @$pb.TagNumber(13)
-  $core.bool hasReleaseDate() => $_has(5);
+  $core.bool hasReleaseDate() => $_has(6);
   @$pb.TagNumber(13)
   void clearReleaseDate() => $_clearField(13);
 
   @$pb.TagNumber(14)
-  $fixnum.Int64 get year => $_getI64(6);
+  $fixnum.Int64 get year => $_getI64(7);
   @$pb.TagNumber(14)
-  set year($fixnum.Int64 value) => $_setInt64(6, value);
+  set year($fixnum.Int64 value) => $_setInt64(7, value);
   @$pb.TagNumber(14)
-  $core.bool hasYear() => $_has(6);
+  $core.bool hasYear() => $_has(7);
   @$pb.TagNumber(14)
   void clearYear() => $_clearField(14);
 
   @$pb.TagNumber(15)
-  $pb.PbList<$core.String> get genres => $_getList(7);
+  $pb.PbList<$core.String> get genres => $_getList(8);
 
   @$pb.TagNumber(16)
-  $core.String get backdropUrl => $_getSZ(8);
+  $core.String get backdropUrl => $_getSZ(9);
   @$pb.TagNumber(16)
-  set backdropUrl($core.String value) => $_setString(8, value);
+  set backdropUrl($core.String value) => $_setString(9, value);
   @$pb.TagNumber(16)
-  $core.bool hasBackdropUrl() => $_has(8);
+  $core.bool hasBackdropUrl() => $_has(9);
   @$pb.TagNumber(16)
   void clearBackdropUrl() => $_clearField(16);
 
   @$pb.TagNumber(17)
-  $core.String get posterUrl => $_getSZ(9);
+  $core.String get posterUrl => $_getSZ(10);
   @$pb.TagNumber(17)
-  set posterUrl($core.String value) => $_setString(9, value);
+  set posterUrl($core.String value) => $_setString(10, value);
   @$pb.TagNumber(17)
-  $core.bool hasPosterUrl() => $_has(9);
+  $core.bool hasPosterUrl() => $_has(10);
   @$pb.TagNumber(17)
   void clearPosterUrl() => $_clearField(17);
 
   @$pb.TagNumber(18)
-  $core.String get originalName => $_getSZ(10);
+  $core.String get originalName => $_getSZ(11);
   @$pb.TagNumber(18)
-  set originalName($core.String value) => $_setString(10, value);
+  set originalName($core.String value) => $_setString(11, value);
   @$pb.TagNumber(18)
-  $core.bool hasOriginalName() => $_has(10);
+  $core.bool hasOriginalName() => $_has(11);
   @$pb.TagNumber(18)
   void clearOriginalName() => $_clearField(18);
 
   @$pb.TagNumber(19)
-  $core.String get originalLanguage => $_getSZ(11);
+  $core.String get originalLanguage => $_getSZ(12);
   @$pb.TagNumber(19)
-  set originalLanguage($core.String value) => $_setString(11, value);
+  set originalLanguage($core.String value) => $_setString(12, value);
   @$pb.TagNumber(19)
-  $core.bool hasOriginalLanguage() => $_has(11);
+  $core.bool hasOriginalLanguage() => $_has(12);
   @$pb.TagNumber(19)
   void clearOriginalLanguage() => $_clearField(19);
 
   @$pb.TagNumber(20)
-  $pb.PbList<PluginMedia_Credit> get credit => $_getList(12);
+  $pb.PbList<PluginMedia_Credit> get credit => $_getList(13);
 
   @$pb.TagNumber(21)
-  $pb.PbMap<$core.String, $core.String> get metadata => $_getMap(13);
+  $pb.PbMap<$core.String, $core.String> get metadata => $_getMap(14);
 
   @$pb.TagNumber(22)
-  $core.String get logoUrl => $_getSZ(14);
+  $core.String get logoUrl => $_getSZ(15);
   @$pb.TagNumber(22)
-  set logoUrl($core.String value) => $_setString(14, value);
+  set logoUrl($core.String value) => $_setString(15, value);
   @$pb.TagNumber(22)
-  $core.bool hasLogoUrl() => $_has(14);
+  $core.bool hasLogoUrl() => $_has(15);
   @$pb.TagNumber(22)
   void clearLogoUrl() => $_clearField(22);
 
   /// media play item
   @$pb.TagNumber(30)
-  $fixnum.Int64 get playIndex => $_getI64(15);
-  @$pb.TagNumber(30)
-  set playIndex($fixnum.Int64 value) => $_setInt64(15, value);
-  @$pb.TagNumber(30)
-  $core.bool hasPlayIndex() => $_has(15);
-  @$pb.TagNumber(30)
-  void clearPlayIndex() => $_clearField(30);
-
-  @$pb.TagNumber(31)
   $fixnum.Int64 get duration => $_getI64(16);
-  @$pb.TagNumber(31)
+  @$pb.TagNumber(30)
   set duration($fixnum.Int64 value) => $_setInt64(16, value);
-  @$pb.TagNumber(31)
+  @$pb.TagNumber(30)
   $core.bool hasDuration() => $_has(16);
+  @$pb.TagNumber(30)
+  void clearDuration() => $_clearField(30);
+
   @$pb.TagNumber(31)
-  void clearDuration() => $_clearField(31);
-
-  @$pb.TagNumber(32)
   $core.String get stillUrl => $_getSZ(17);
-  @$pb.TagNumber(32)
+  @$pb.TagNumber(31)
   set stillUrl($core.String value) => $_setString(17, value);
-  @$pb.TagNumber(32)
+  @$pb.TagNumber(31)
   $core.bool hasStillUrl() => $_has(17);
+  @$pb.TagNumber(31)
+  void clearStillUrl() => $_clearField(31);
+
   @$pb.TagNumber(32)
-  void clearStillUrl() => $_clearField(32);
-
-  @$pb.TagNumber(33)
   $core.String get playItemUrl => $_getSZ(18);
-  @$pb.TagNumber(33)
+  @$pb.TagNumber(32)
   set playItemUrl($core.String value) => $_setString(18, value);
-  @$pb.TagNumber(33)
+  @$pb.TagNumber(32)
   $core.bool hasPlayItemUrl() => $_has(18);
-  @$pb.TagNumber(33)
-  void clearPlayItemUrl() => $_clearField(33);
+  @$pb.TagNumber(32)
+  void clearPlayItemUrl() => $_clearField(32);
 
-  @$pb.TagNumber(34)
+  @$pb.TagNumber(33)
   $pb.PbMap<$core.String, $core.String> get playItemHeader => $_getMap(19);
 }
 

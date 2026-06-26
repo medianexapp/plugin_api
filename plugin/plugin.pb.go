@@ -954,12 +954,13 @@ func (x *PluginFilterItems) GetFilters() []*PluginFilterItems_Filter {
 
 // media item
 type PluginMedia struct {
-	unknownFields []byte
-	MediaId       string                `protobuf:"bytes,1,opt,name=media_id,json=mediaId,proto3" json:"mediaId,omitempty"` // media item id
-	MediaType     PluginMedia_MediaType `protobuf:"varint,2,opt,name=media_type,json=mediaType,proto3" json:"mediaType,omitempty"`
-	Name          string                `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Desc          string                `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
-	ParentMediaId string                `protobuf:"bytes,5,opt,name=parent_media_id,json=parentMediaId,proto3" json:"parentMediaId,omitempty"`
+	unknownFields       []byte
+	PluginMediaId       string                `protobuf:"bytes,1,opt,name=plugin_media_id,json=pluginMediaId,proto3" json:"pluginMediaId,omitempty"` // media item id
+	MediaType           PluginMedia_MediaType `protobuf:"varint,2,opt,name=media_type,json=mediaType,proto3" json:"mediaType,omitempty"`
+	Name                string                `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Desc                string                `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	ParentPluginMediaId string                `protobuf:"bytes,5,opt,name=parent_plugin_media_id,json=parentPluginMediaId,proto3" json:"parentPluginMediaId,omitempty"`
+	Index               uint64                `protobuf:"varint,6,opt,name=index,proto3" json:"index,omitempty"` // play item indx
 	// media info
 	ReleaseDate      string                `protobuf:"bytes,13,opt,name=release_date,json=releaseDate,proto3" json:"releaseDate,omitempty"`
 	Year             uint64                `protobuf:"varint,14,opt,name=year,proto3" json:"year,omitempty"`
@@ -972,11 +973,10 @@ type PluginMedia struct {
 	Metadata         map[string]string     `protobuf:"bytes,21,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // media metadata
 	LogoUrl          string                `protobuf:"bytes,22,opt,name=logo_url,json=logoUrl,proto3" json:"logoUrl,omitempty"`
 	// media play item
-	PlayIndex      uint64            `protobuf:"varint,30,opt,name=play_index,json=playIndex,proto3" json:"playIndex,omitempty"` // play item indx
-	Duration       uint64            `protobuf:"varint,31,opt,name=duration,proto3" json:"duration,omitempty"`                   // video duration unit: s
-	StillUrl       string            `protobuf:"bytes,32,opt,name=still_url,json=stillUrl,proto3" json:"stillUrl,omitempty"`     // media video poster image for media Item play item
-	PlayItemUrl    string            `protobuf:"bytes,33,opt,name=play_item_url,json=playItemUrl,proto3" json:"playItemUrl,omitempty"`
-	PlayItemHeader map[string]string `protobuf:"bytes,34,rep,name=play_item_header,json=playItemHeader,proto3" json:"playItemHeader,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration       uint64            `protobuf:"varint,30,opt,name=duration,proto3" json:"duration,omitempty"`               // video duration unit: s
+	StillUrl       string            `protobuf:"bytes,31,opt,name=still_url,json=stillUrl,proto3" json:"stillUrl,omitempty"` // media video poster image for media Item play item
+	PlayItemUrl    string            `protobuf:"bytes,32,opt,name=play_item_url,json=playItemUrl,proto3" json:"playItemUrl,omitempty"`
+	PlayItemHeader map[string]string `protobuf:"bytes,33,rep,name=play_item_header,json=playItemHeader,proto3" json:"playItemHeader,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
 func (x *PluginMedia) Reset() {
@@ -985,9 +985,9 @@ func (x *PluginMedia) Reset() {
 
 func (*PluginMedia) ProtoMessage() {}
 
-func (x *PluginMedia) GetMediaId() string {
+func (x *PluginMedia) GetPluginMediaId() string {
 	if x != nil {
-		return x.MediaId
+		return x.PluginMediaId
 	}
 	return ""
 }
@@ -1013,11 +1013,18 @@ func (x *PluginMedia) GetDesc() string {
 	return ""
 }
 
-func (x *PluginMedia) GetParentMediaId() string {
+func (x *PluginMedia) GetParentPluginMediaId() string {
 	if x != nil {
-		return x.ParentMediaId
+		return x.ParentPluginMediaId
 	}
 	return ""
+}
+
+func (x *PluginMedia) GetIndex() uint64 {
+	if x != nil {
+		return x.Index
+	}
+	return 0
 }
 
 func (x *PluginMedia) GetReleaseDate() string {
@@ -1088,13 +1095,6 @@ func (x *PluginMedia) GetLogoUrl() string {
 		return x.LogoUrl
 	}
 	return ""
-}
-
-func (x *PluginMedia) GetPlayIndex() uint64 {
-	if x != nil {
-		return x.PlayIndex
-	}
-	return 0
 }
 
 func (x *PluginMedia) GetDuration() uint64 {
@@ -2315,11 +2315,12 @@ func (m *PluginMedia) CloneVT() *PluginMedia {
 		return (*PluginMedia)(nil)
 	}
 	r := new(PluginMedia)
-	r.MediaId = m.MediaId
+	r.PluginMediaId = m.PluginMediaId
 	r.MediaType = m.MediaType
 	r.Name = m.Name
 	r.Desc = m.Desc
-	r.ParentMediaId = m.ParentMediaId
+	r.ParentPluginMediaId = m.ParentPluginMediaId
+	r.Index = m.Index
 	r.ReleaseDate = m.ReleaseDate
 	r.Year = m.Year
 	r.BackdropUrl = m.BackdropUrl
@@ -2327,7 +2328,6 @@ func (m *PluginMedia) CloneVT() *PluginMedia {
 	r.OriginalName = m.OriginalName
 	r.OriginalLanguage = m.OriginalLanguage
 	r.LogoUrl = m.LogoUrl
-	r.PlayIndex = m.PlayIndex
 	r.Duration = m.Duration
 	r.StillUrl = m.StillUrl
 	r.PlayItemUrl = m.PlayItemUrl
@@ -3479,7 +3479,7 @@ func (this *PluginMedia) EqualVT(that *PluginMedia) bool {
 	} else if this == nil || that == nil {
 		return false
 	}
-	if this.MediaId != that.MediaId {
+	if this.PluginMediaId != that.PluginMediaId {
 		return false
 	}
 	if this.MediaType != that.MediaType {
@@ -3491,7 +3491,10 @@ func (this *PluginMedia) EqualVT(that *PluginMedia) bool {
 	if this.Desc != that.Desc {
 		return false
 	}
-	if this.ParentMediaId != that.ParentMediaId {
+	if this.ParentPluginMediaId != that.ParentPluginMediaId {
+		return false
+	}
+	if this.Index != that.Index {
 		return false
 	}
 	if this.ReleaseDate != that.ReleaseDate {
@@ -3551,9 +3554,6 @@ func (this *PluginMedia) EqualVT(that *PluginMedia) bool {
 		}
 	}
 	if this.LogoUrl != that.LogoUrl {
-		return false
-	}
-	if this.PlayIndex != that.PlayIndex {
 		return false
 	}
 	if this.Duration != that.Duration {
@@ -5835,10 +5835,10 @@ func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if x.MediaId != "" || s.HasField("mediaId") {
+	if x.PluginMediaId != "" || s.HasField("pluginMediaId") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("mediaId")
-		s.WriteString(x.MediaId)
+		s.WriteObjectField("pluginMediaId")
+		s.WriteString(x.PluginMediaId)
 	}
 	if x.MediaType != 0 || s.HasField("mediaType") {
 		s.WriteMoreIf(&wroteField)
@@ -5855,10 +5855,15 @@ func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("desc")
 		s.WriteString(x.Desc)
 	}
-	if x.ParentMediaId != "" || s.HasField("parentMediaId") {
+	if x.ParentPluginMediaId != "" || s.HasField("parentPluginMediaId") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("parentMediaId")
-		s.WriteString(x.ParentMediaId)
+		s.WriteObjectField("parentPluginMediaId")
+		s.WriteString(x.ParentPluginMediaId)
+	}
+	if x.Index != 0 || s.HasField("index") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("index")
+		s.WriteUint64(x.Index)
 	}
 	if x.ReleaseDate != "" || s.HasField("releaseDate") {
 		s.WriteMoreIf(&wroteField)
@@ -5923,11 +5928,6 @@ func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("logoUrl")
 		s.WriteString(x.LogoUrl)
 	}
-	if x.PlayIndex != 0 || s.HasField("playIndex") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("playIndex")
-		s.WriteUint64(x.PlayIndex)
-	}
 	if x.Duration != 0 || s.HasField("duration") {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("duration")
@@ -5972,9 +5972,9 @@ func (x *PluginMedia) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		switch key {
 		default:
 			s.Skip() // ignore unknown field
-		case "media_id", "mediaId":
-			s.AddField("media_id")
-			x.MediaId = s.ReadString()
+		case "plugin_media_id", "pluginMediaId":
+			s.AddField("plugin_media_id")
+			x.PluginMediaId = s.ReadString()
 		case "media_type", "mediaType":
 			s.AddField("media_type")
 			x.MediaType.UnmarshalProtoJSON(s)
@@ -5984,9 +5984,12 @@ func (x *PluginMedia) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "desc":
 			s.AddField("desc")
 			x.Desc = s.ReadString()
-		case "parent_media_id", "parentMediaId":
-			s.AddField("parent_media_id")
-			x.ParentMediaId = s.ReadString()
+		case "parent_plugin_media_id", "parentPluginMediaId":
+			s.AddField("parent_plugin_media_id")
+			x.ParentPluginMediaId = s.ReadString()
+		case "index":
+			s.AddField("index")
+			x.Index = s.ReadUint64()
 		case "release_date", "releaseDate":
 			s.AddField("release_date")
 			x.ReleaseDate = s.ReadString()
@@ -6043,9 +6046,6 @@ func (x *PluginMedia) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "logo_url", "logoUrl":
 			s.AddField("logo_url")
 			x.LogoUrl = s.ReadString()
-		case "play_index", "playIndex":
-			s.AddField("play_index")
-			x.PlayIndex = s.ReadUint64()
 		case "duration":
 			s.AddField("duration")
 			x.Duration = s.ReadUint64()
@@ -8008,7 +8008,7 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 			i--
 			dAtA[i] = 0x2
 			i--
-			dAtA[i] = 0x92
+			dAtA[i] = 0x8a
 		}
 	}
 	if len(m.PlayItemUrl) > 0 {
@@ -8018,26 +8018,19 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x2
 		i--
-		dAtA[i] = 0x8a
+		dAtA[i] = 0x82
 	}
 	if len(m.StillUrl) > 0 {
 		i -= len(m.StillUrl)
 		copy(dAtA[i:], m.StillUrl)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.StillUrl)))
 		i--
-		dAtA[i] = 0x2
+		dAtA[i] = 0x1
 		i--
-		dAtA[i] = 0x82
+		dAtA[i] = 0xfa
 	}
 	if m.Duration != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Duration))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf8
-	}
-	if m.PlayIndex != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PlayIndex))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -8144,10 +8137,15 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x6a
 	}
-	if len(m.ParentMediaId) > 0 {
-		i -= len(m.ParentMediaId)
-		copy(dAtA[i:], m.ParentMediaId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentMediaId)))
+	if m.Index != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Index))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.ParentPluginMediaId) > 0 {
+		i -= len(m.ParentPluginMediaId)
+		copy(dAtA[i:], m.ParentPluginMediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentPluginMediaId)))
 		i--
 		dAtA[i] = 0x2a
 	}
@@ -8170,10 +8168,10 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x10
 	}
-	if len(m.MediaId) > 0 {
-		i -= len(m.MediaId)
-		copy(dAtA[i:], m.MediaId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaId)))
+	if len(m.PluginMediaId) > 0 {
+		i -= len(m.PluginMediaId)
+		copy(dAtA[i:], m.PluginMediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.PluginMediaId)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -10100,7 +10098,7 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 			i--
 			dAtA[i] = 0x2
 			i--
-			dAtA[i] = 0x92
+			dAtA[i] = 0x8a
 		}
 	}
 	if len(m.PlayItemUrl) > 0 {
@@ -10110,26 +10108,19 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x2
 		i--
-		dAtA[i] = 0x8a
+		dAtA[i] = 0x82
 	}
 	if len(m.StillUrl) > 0 {
 		i -= len(m.StillUrl)
 		copy(dAtA[i:], m.StillUrl)
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.StillUrl)))
 		i--
-		dAtA[i] = 0x2
+		dAtA[i] = 0x1
 		i--
-		dAtA[i] = 0x82
+		dAtA[i] = 0xfa
 	}
 	if m.Duration != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Duration))
-		i--
-		dAtA[i] = 0x1
-		i--
-		dAtA[i] = 0xf8
-	}
-	if m.PlayIndex != 0 {
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.PlayIndex))
 		i--
 		dAtA[i] = 0x1
 		i--
@@ -10236,10 +10227,15 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x6a
 	}
-	if len(m.ParentMediaId) > 0 {
-		i -= len(m.ParentMediaId)
-		copy(dAtA[i:], m.ParentMediaId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentMediaId)))
+	if m.Index != 0 {
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Index))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.ParentPluginMediaId) > 0 {
+		i -= len(m.ParentPluginMediaId)
+		copy(dAtA[i:], m.ParentPluginMediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ParentPluginMediaId)))
 		i--
 		dAtA[i] = 0x2a
 	}
@@ -10262,10 +10258,10 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x10
 	}
-	if len(m.MediaId) > 0 {
-		i -= len(m.MediaId)
-		copy(dAtA[i:], m.MediaId)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.MediaId)))
+	if len(m.PluginMediaId) > 0 {
+		i -= len(m.PluginMediaId)
+		copy(dAtA[i:], m.PluginMediaId)
+		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.PluginMediaId)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -11215,7 +11211,7 @@ func (m *PluginMedia) SizeVT() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.MediaId)
+	l = len(m.PluginMediaId)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
@@ -11230,9 +11226,12 @@ func (m *PluginMedia) SizeVT() (n int) {
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
 	}
-	l = len(m.ParentMediaId)
+	l = len(m.ParentPluginMediaId)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
+	}
+	if m.Index != 0 {
+		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.Index))
 	}
 	l = len(m.ReleaseDate)
 	if l > 0 {
@@ -11280,9 +11279,6 @@ func (m *PluginMedia) SizeVT() (n int) {
 	l = len(m.LogoUrl)
 	if l > 0 {
 		n += 2 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
-	}
-	if m.PlayIndex != 0 {
-		n += 2 + protobuf_go_lite.SizeOfVarint(uint64(m.PlayIndex))
 	}
 	if m.Duration != 0 {
 		n += 2 + protobuf_go_lite.SizeOfVarint(uint64(m.Duration))
@@ -12399,12 +12395,12 @@ func (x *PluginMedia_PlayItemHeaderEntry) String() string {
 func (x *PluginMedia) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("PluginMedia {")
-	if x.MediaId != "" {
+	if x.PluginMediaId != "" {
 		if sb.Len() > 13 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("media_id: ")
-		sb.WriteString(strconv.Quote(x.MediaId))
+		sb.WriteString("plugin_media_id: ")
+		sb.WriteString(strconv.Quote(x.PluginMediaId))
 	}
 	if x.MediaType != 0 {
 		if sb.Len() > 13 {
@@ -12429,12 +12425,19 @@ func (x *PluginMedia) MarshalProtoText() string {
 		sb.WriteString("desc: ")
 		sb.WriteString(strconv.Quote(x.Desc))
 	}
-	if x.ParentMediaId != "" {
+	if x.ParentPluginMediaId != "" {
 		if sb.Len() > 13 {
 			sb.WriteString(" ")
 		}
-		sb.WriteString("parent_media_id: ")
-		sb.WriteString(strconv.Quote(x.ParentMediaId))
+		sb.WriteString("parent_plugin_media_id: ")
+		sb.WriteString(strconv.Quote(x.ParentPluginMediaId))
+	}
+	if x.Index != 0 {
+		if sb.Len() > 13 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("index: ")
+		sb.WriteString(strconv.FormatUint(uint64(x.Index), 10))
 	}
 	if x.ReleaseDate != "" {
 		if sb.Len() > 13 {
@@ -12523,13 +12526,6 @@ func (x *PluginMedia) MarshalProtoText() string {
 		}
 		sb.WriteString("logo_url: ")
 		sb.WriteString(strconv.Quote(x.LogoUrl))
-	}
-	if x.PlayIndex != 0 {
-		if sb.Len() > 13 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("play_index: ")
-		sb.WriteString(strconv.FormatUint(uint64(x.PlayIndex), 10))
 	}
 	if x.Duration != 0 {
 		if sb.Len() > 13 {
@@ -16508,7 +16504,7 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MediaId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PluginMediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -16536,7 +16532,7 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.MediaId = string(dAtA[iNdEx:postIndex])
+			m.PluginMediaId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		case 2:
 			if wireType != 0 {
@@ -16623,7 +16619,7 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentMediaId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ParentPluginMediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -16651,8 +16647,27 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ParentMediaId = string(dAtA[iNdEx:postIndex])
+			m.ParentPluginMediaId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			m.Index = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Index |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		case 13:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ReleaseDate", wireType)
@@ -17059,25 +17074,6 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 			iNdEx = postIndex
 		case 30:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayIndex", wireType)
-			}
-			m.PlayIndex = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.PlayIndex |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 31:
-			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Duration", wireType)
 			}
 			m.Duration = 0
@@ -17095,7 +17091,7 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
-		case 32:
+		case 31:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StillUrl", wireType)
 			}
@@ -17127,7 +17123,7 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 			}
 			m.StillUrl = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 33:
+		case 32:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemUrl", wireType)
 			}
@@ -17159,7 +17155,7 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 			}
 			m.PlayItemUrl = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 34:
+		case 33:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemHeader", wireType)
 			}
@@ -21888,7 +21884,7 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field MediaId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PluginMediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -21920,7 +21916,7 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.MediaId = stringValue
+			m.PluginMediaId = stringValue
 			iNdEx = postIndex
 		case 2:
 			if wireType != 0 {
@@ -22015,7 +22011,7 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 5:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ParentMediaId", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ParentPluginMediaId", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -22047,8 +22043,27 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 			if intStringLen > 0 {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
-			m.ParentMediaId = stringValue
+			m.ParentPluginMediaId = stringValue
 			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			m.Index = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.Index |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
 		case 13:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ReleaseDate", wireType)
@@ -22491,25 +22506,6 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 			iNdEx = postIndex
 		case 30:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayIndex", wireType)
-			}
-			m.PlayIndex = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.PlayIndex |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 31:
-			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Duration", wireType)
 			}
 			m.Duration = 0
@@ -22527,7 +22523,7 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 					break
 				}
 			}
-		case 32:
+		case 31:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field StillUrl", wireType)
 			}
@@ -22563,7 +22559,7 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.StillUrl = stringValue
 			iNdEx = postIndex
-		case 33:
+		case 32:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemUrl", wireType)
 			}
@@ -22599,7 +22595,7 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 			}
 			m.PlayItemUrl = stringValue
 			iNdEx = postIndex
-		case 34:
+		case 33:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemHeader", wireType)
 			}
