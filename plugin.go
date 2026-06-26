@@ -37,10 +37,10 @@ type IPlugin interface {
 	GetPluginMenus() (*plugin.PluginMenus, error)
 	// get page filter items
 	GetPluginFilterItems(subItem *plugin.PluginItem) (*plugin.PluginFilterItems, error)
-	// list media item info
-	ListPluginMediaItemInfo(req *plugin.ListPluginMediaInfoRequest) (*plugin.ListPluginMediaInfoResponse, error)
-	// get media item info by id
-	GetPluginMediaItemDetail(req *plugin.GetPluginMediaDetailRequest) (*plugin.GetPluginMediaDetailResponse, error)
+	// list media info
+	ListPluginMediaInfo(req *plugin.ListPluginMediaInfoRequest) (*plugin.ListPluginMediaInfoResponse, error)
+	// get media info by id
+	GetPluginMediaDetail(req *plugin.GetPluginMediaDetailRequest) (*plugin.GetPluginMediaDetailResponse, error)
 }
 
 func RegistryPlugin(iPlugin IPlugin) {
