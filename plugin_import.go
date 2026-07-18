@@ -1,3 +1,5 @@
+//go:build wasip1
+
 package plugin_api
 
 import "github.com/labulakalia/wazero_net/util"
