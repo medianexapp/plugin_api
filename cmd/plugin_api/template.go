@@ -10,6 +10,7 @@ const pluginImplTemplate = `package main
 import (
 	"log/slog"
 
+	"github.com/medianexapp/plugin_api"
 	httpclient "github.com/medianexapp/plugin_api/httpclient"
 	_ "github.com/medianexapp/plugin_api/httpclient"
 	"github.com/medianexapp/plugin_api/plugin"
@@ -19,6 +20,7 @@ import (
 )
 
 type PluginImpl struct {
+	plugin_api.PluginExport
 }
 
 func NewPluginImpl() *PluginImpl {
