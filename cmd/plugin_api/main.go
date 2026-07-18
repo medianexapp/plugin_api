@@ -16,16 +16,18 @@ import (
 	"os/exec"
 
 	"github.com/BurntSushi/toml"
+	"github.com/medianexapp/plugin_api/plugin"
 )
 
 type pluginConfig struct {
-	Id        string   `toml:"id"`
-	Name      string   `toml:"name"`
-	Desc      string   `toml:"desc"`
-	Author    []string `toml:"author"`
-	Version   string   `toml:"version"`
-	Icon      string   `toml:"icon"`
-	Changelog []string `toml:"changelog"`
+	Id         string            `toml:"id"`
+	Name       string            `toml:"name"`
+	Desc       string            `toml:"desc"`
+	Author     []string          `toml:"author"`
+	Version    string            `toml:"version"`
+	Icon       string            `toml:"icon"`
+	Changelog  []string          `toml:"changelog"`
+	PluginType plugin.PluginType `toml:"plugin_type"`
 }
 
 func main() {
@@ -35,45 +37,7 @@ func main() {
 	} else if args[0] == "build" {
 		buildPlugin()
 	} else if args[0] == "init" {
-		if len(args) == 1 {
-			fmt.Println("command init need argument eg: plugin_api init newName")
-			os.Exit(1)
-		}
-		pluginName := args[1]
-		_, err := os.Stat(pluginName)
-		if err == nil {
-			fmt.Printf("plugin %s exist", pluginName)
-			os.Exit(1)
-		}
-		pluginConfig := pluginConfig{
-			Id: pluginName,
-		}
-		_ = os.Mkdir(pluginName, 0755)
-		for _, fileTemplate := range fileTemplates {
-			fileNameTmp, err := template.New("").Parse(fileTemplate.FileName)
-			if err != nil {
-				fmt.Printf("parse template failed: %v\n", err)
-				os.Exit(1)
-			}
-			var buf bytes.Buffer
-			fileNameTmp.Execute(&buf, pluginConfig)
-			fileName := buf.String()
-
-			tmp, err := template.New(fileName).Parse(fileTemplate.Content)
-			if err != nil {
-				fmt.Printf("parse template failed: %v\n", err)
-				os.Exit(1)
-			}
-			file, err := os.Create(filepath.Join(pluginName, fileName))
-			if err != nil {
-				fmt.Printf("open file failed: %v\n", err)
-				os.Exit(1)
-			}
-
-			tmp.Execute(file, pluginConfig)
-			file.Close()
-		}
-		fmt.Printf("plugin %s init success\n", pluginName)
+		writeTemplate(args)
 	} else {
 		showHelp()
 	}
@@ -83,9 +47,65 @@ func showHelp() {
 	fmt.Print(`Usage: plugin_api <commands> [argument]
 commands:
 	build:    	compile plugin
-	init:    	init new plugin temp dir
+	init:    	init new plugin temp dir, eg: plugin_api init plugin1 FILE_SYSTEM/MEDIA
 	help:		show usage
 `)
+}
+
+func writeTemplate(args []string) {
+	fmt.Println(args)
+	if len(args) != 3 {
+		fmt.Println("command init need argument eg: plugin_api init newName FILE_SYSTEM/MEDIA")
+		os.Exit(1)
+	}
+	pluginName := args[1]
+	fmt.Println(pluginName)
+	_, err := os.Stat(pluginName)
+	if err == nil {
+		fmt.Printf("plugin %s exist", pluginName)
+		os.Exit(1)
+	}
+	fmt.Println(args[2])
+	var pluginType plugin.PluginType
+	switch args[2] {
+	case "FILE_SYSTEM":
+		pluginType = plugin.PluginType_PLUGIN_TYPE_FILE_SYSTEM
+	case "MEDIA":
+		pluginType = plugin.PluginType_PLUGIN_TYPE_MEDIA
+	default:
+		fmt.Println("pluginType invalid", args)
+		os.Exit(1)
+	}
+	pluginConfig := pluginConfig{
+		Id:         pluginName,
+		PluginType: pluginType,
+	}
+	_ = os.Mkdir(pluginName, 0755)
+	for _, fileTemplate := range fileTemplates {
+		fileNameTmp, err := template.New("").Parse(fileTemplate.FileName)
+		if err != nil {
+			fmt.Printf("parse template failed: %v\n", err)
+			os.Exit(1)
+		}
+		var buf bytes.Buffer
+		fileNameTmp.Execute(&buf, pluginConfig)
+		fileName := buf.String()
+
+		tmp, err := template.New(fileName).Parse(fileTemplate.Content)
+		if err != nil {
+			fmt.Printf("parse template failed: %v\n", err)
+			os.Exit(1)
+		}
+		file, err := os.Create(filepath.Join(pluginName, fileName))
+		if err != nil {
+			fmt.Printf("open file failed: %v\n", err)
+			os.Exit(1)
+		}
+
+		tmp.Execute(file, pluginConfig)
+		file.Close()
+	}
+	fmt.Printf("plugin %s init success\n", pluginName)
 }
 
 func buildPlugin() {

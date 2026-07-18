@@ -27,6 +27,15 @@ func NewPluginImpl() *PluginImpl {
 	}
 }
 
+// PluginType implements IPlugin.
+func (p *PluginImpl) PluginType() (plugin.PluginType, error) {
+{{if eq .PluginType 1}}
+	return plugin.PluginType_PLUGIN_TYPE_FILE_SYSTEM,nil
+{{else}}
+	return plugin.PluginType_PLUGIN_TYPE_MEDIA,nil
+{{end}}
+}
+
 // Id implements IPlugin.
 func (p *PluginImpl) PluginId() (string, error) {
 	return "{{.Id}}", nil
@@ -65,6 +74,15 @@ func (p *PluginImpl) PluginAuthId() (string, error) {
 	panic("impl me")
 }
 
+
+// plugin type PLUGIN_TYPE_FILE_SYSTEM
+// GetFileResource implements IPlugin.
+func (p *PluginImpl) GetFileResource(req *plugin.GetFileResourceRequest) (*plugin.FileResource, error) {
+	slog.Debug("GetFileResource", "req", req)
+	panic("impl me")
+}
+
+{{if eq .PluginType 1}}
 // GetDirEntry implements IPlugin.
 // return dir file entry
 // save your driver file raw data to FileEntry.RawData,you can get it after GetDirEntry and GetFileResource request
@@ -73,12 +91,38 @@ func (p *PluginImpl) GetDirEntry(req *plugin.GetDirEntryRequest) (*plugin.DirEnt
 	slog.Debug("GetDirEntry", "req", req.FileEntry)
 	panic("impl me")
 }
-
-// GetFileResource implements IPlugin.
-func (p *PluginImpl) GetFileResource(req *plugin.GetFileResourceRequest) (*plugin.FileResource, error) {
-	slog.Debug("GetFileResource", "req", req)
+{{else}}
+// plugin type PLUGIN_TYPE_MEDIA
+// support filter by multi column
+func (p *PluginImpl)GetPluginMenus() (*plugin.PluginMenus, error) {
+	slog.Debug("GetPluginMenus")
 	panic("impl me")
 }
+
+// get page filter items
+func (p *PluginImpl)GetPluginFilterItems(req *plugin.PluginItem) (*plugin.PluginFilterItems, error){
+	slog.Debug("GetPluginFilterItems", "req", req)
+	panic("impl me")
+}
+
+// list media info
+func (p *PluginImpl)ListPluginMediaInfo(req *plugin.ListPluginMediaInfoRequest) (*plugin.ListPluginMediaInfoResponse, error){
+	slog.Debug("ListPluginMediaInfo", "req", req)
+	panic("impl me")
+}
+
+// get media info by id
+func (p *PluginImpl)GetPluginMediaDetail(req *plugin.GetPluginMediaDetailRequest) (*plugin.GetPluginMediaDetailResponse, error){
+	slog.Debug("GetPluginMediaDetail", "req", req)
+	panic("impl me")
+}
+{{end}}
+
+
+
+
+
+
 `
 
 var fileTemplates = []FileTemplate{
@@ -133,76 +177,5 @@ changelog = ["{{.Id}} plugin init"]
 	{
 		FileName: "plugin_impl.go",
 		Content:  pluginImplTemplate,
-	},
-	{
-		FileName: "plugin_impl_test.go",
-		Content: `package main
-
-import (
-	"strings"
-	"testing"
-
-	"github.com/medianexapp/plugin_api/plugin"
-)
-
-func TestPluginImpl(t *testing.T) {
-	p := NewPluginImpl()
-	auth, _ := p.GetAuth()
-	method := auth.AuthMethods[0].Method
-	method = method // <= save auth data
-	 
-	authData, err := p.CheckAuthMethod(&plugin.AuthMethod{
-		Method: auth.AuthMethods[0].Method,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = p.CheckAuthData(authData.AuthDataBytes)
-	if err != nil {
-		t.Fatal(err)
-	}
-	resp, err := p.GetDirEntry(&plugin.GetDirEntryRequest{
-		Path:     "/",
-		Page:     1,
-		PageSize: 100,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, fileEntry := range resp.FileEntries {
-		if fileEntry.FileType != plugin.FileEntry_FileTypeFile {
-			continue
-		}
-		t.Log("file entry name", fileEntry.Name)
-		// if is movie get file resource
-		if strings.HasSuffix(fileEntry.Name, "mp4") || strings.HasSuffix(fileEntry.Name, "mkv") {
-			fileResource, err := p.GetFileResource(&plugin.GetFileResourceRequest{
-				FilePath:  "/" + fileEntry.Name,
-				FileEntry: fileEntry,
-			})
-			if err != nil {
-				t.Fatal(err)
-			}
-			t.Logf("get file %s fileResource %+v", fileEntry.Name, fileResource.FileResourceData)
-		}
-	}
-	return
-}
-`,
-	},
-	{
-		FileName: "go.mod",
-		Content: `module testplugin
-
-go 1.24.0
-
-require (
-	github.com/aperturerobotics/json-iterator-lite v1.0.0 // indirect
-	github.com/aperturerobotics/protobuf-go-lite v0.9.1 // indirect
-	github.com/labulakalia/wazero_net v0.0.9-0.20250427091815-5eb06e3a5aa6 // indirect
-	github.com/medianexapp/plugin_api v0.0.25-0.20250427042910-f3bb62ff570f // indirect
-	github.com/tetratelabs/wazero v1.9.0 // indirect
-)
-`,
 	},
 }
