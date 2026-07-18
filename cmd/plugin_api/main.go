@@ -53,19 +53,16 @@ commands:
 }
 
 func writeTemplate(args []string) {
-	fmt.Println(args)
 	if len(args) != 3 {
 		fmt.Println("command init need argument eg: plugin_api init newName FILE_SYSTEM/MEDIA")
 		os.Exit(1)
 	}
 	pluginName := args[1]
-	fmt.Println(pluginName)
 	_, err := os.Stat(pluginName)
 	if err == nil {
 		fmt.Printf("plugin %s exist", pluginName)
 		os.Exit(1)
 	}
-	fmt.Println(args[2])
 	var pluginType plugin.PluginType
 	switch args[2] {
 	case "FILE_SYSTEM":
