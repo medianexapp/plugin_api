@@ -12,5 +12,7 @@ require (
 require (
 	github.com/aperturerobotics/json-iterator-lite v1.0.0 // indirect
 	github.com/tetratelabs/wazero v1.11.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
 )

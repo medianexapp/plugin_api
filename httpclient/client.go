@@ -15,6 +15,8 @@ import (
 	"slices"
 	"strings"
 	"time"
+
+	"golang.org/x/net/http/httpproxy"
 )
 
 var (
@@ -50,6 +52,8 @@ type Builder struct {
 	respStatusCode *int
 
 	client *http.Client
+
+	httpProxy *httpproxy.Config
 }
 
 func NewBuilder() *Builder {
@@ -79,6 +83,8 @@ func (rb *Builder) clone() *Builder {
 		respHeader:     rb.respHeader,
 		respStatusCode: rb.respStatusCode,
 		client:         rb.client,
+
+		httpProxy: rb.httpProxy,
 	}
 	if rb.urlParams != nil {
 		urlParams := url.Values{}
@@ -302,6 +308,12 @@ func (rb *Builder) SetRetry(retry int) *Builder {
 	return nb
 }
 
+func (rb *Builder) AutoProxy() *Builder {
+	nb := rb.clone()
+	nb.httpProxy = GetProxy()
+	return nb
+}
+
 func (rb *Builder) SetUnmarshaler(unmarshaler Unmarshaler) *Builder {
 	nb := rb.clone()
 	nb.unmarshaler = unmarshaler
@@ -347,9 +359,17 @@ func (rb *Builder) callReq() (*http.Response, error) {
 	if rb.timeout > 0 {
 		opts = append(opts, WithTimeout(rb.timeout))
 	}
-	if rb.client != nil {
-		opts = append(opts, WithClient(rb.client))
+	if rb.client == nil {
+		rb.client = &http.Client{}
 	}
+	if rb.httpProxy != nil {
+		rb.client.Transport = &http.Transport{
+			Proxy: func(r *http.Request) (*url.URL, error) {
+				return rb.httpProxy.ProxyFunc()(r.URL)
+			},
+		}
+	}
+	opts = append(opts, WithClient(rb.client))
 	client := NewClient(opts...)
 	resp, err := client.Do(req)
 	if err != nil {

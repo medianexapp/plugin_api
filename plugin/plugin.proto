@@ -204,6 +204,7 @@ message PluginMedia {
     string    parent_plugin_media_id = 5;
     uint64    index                  = 6;  // play item indx
     // media info
+    bool            show_detail       = 12;  // exist media info detail
     string          release_date      = 13;
     uint64          year              = 14;
     repeated string genres            = 15;  // media video genres for media Item info
@@ -228,10 +229,8 @@ message PluginMedia {
     map<string, string> metadata = 21;  // media metadata
     string              logo_url = 22;
     // media play item
-    uint64              duration         = 30;  // video duration unit: s
-    string              still_url        = 31;  // media video poster image for media Item play item
-    string              play_item_url    = 32;
-    map<string, string> play_item_header = 33;
+    uint64 duration  = 30;  // video duration unit: s
+    string still_url = 31;  // media video poster image for media Item play item
 }
 
 message ListPluginMediaInfoRequest {
