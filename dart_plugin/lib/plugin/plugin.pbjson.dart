@@ -715,6 +715,7 @@ const PluginMedia$json = {
       '10': 'parentPluginMediaId'
     },
     {'1': 'index', '3': 6, '4': 1, '5': 4, '10': 'index'},
+    {'1': 'show_detail', '3': 12, '4': 1, '5': 8, '10': 'showDetail'},
     {'1': 'release_date', '3': 13, '4': 1, '5': 9, '10': 'releaseDate'},
     {'1': 'year', '3': 14, '4': 1, '5': 4, '10': 'year'},
     {'1': 'genres', '3': 15, '4': 3, '5': 9, '10': 'genres'},
@@ -747,21 +748,8 @@ const PluginMedia$json = {
     {'1': 'logo_url', '3': 22, '4': 1, '5': 9, '10': 'logoUrl'},
     {'1': 'duration', '3': 30, '4': 1, '5': 4, '10': 'duration'},
     {'1': 'still_url', '3': 31, '4': 1, '5': 9, '10': 'stillUrl'},
-    {'1': 'play_item_url', '3': 32, '4': 1, '5': 9, '10': 'playItemUrl'},
-    {
-      '1': 'play_item_header',
-      '3': 33,
-      '4': 3,
-      '5': 11,
-      '6': '.plugin.PluginMedia.PlayItemHeaderEntry',
-      '10': 'playItemHeader'
-    },
   ],
-  '3': [
-    PluginMedia_Credit$json,
-    PluginMedia_MetadataEntry$json,
-    PluginMedia_PlayItemHeaderEntry$json
-  ],
+  '3': [PluginMedia_Credit$json, PluginMedia_MetadataEntry$json],
   '4': [PluginMedia_MediaType$json, PluginMedia_CreditType$json],
 };
 
@@ -786,16 +774,6 @@ const PluginMedia_Credit$json = {
 @$core.Deprecated('Use pluginMediaDescriptor instead')
 const PluginMedia_MetadataEntry$json = {
   '1': 'MetadataEntry',
-  '2': [
-    {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
-  ],
-  '7': {'7': true},
-};
-
-@$core.Deprecated('Use pluginMediaDescriptor instead')
-const PluginMedia_PlayItemHeaderEntry$json = {
-  '1': 'PlayItemHeaderEntry',
   '2': [
     {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
     {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
@@ -832,26 +810,23 @@ final $typed_data.Uint8List pluginMediaDescriptor = $convert.base64Decode(
     'oKbWVkaWFfdHlwZRgCIAEoDjIdLnBsdWdpbi5QbHVnaW5NZWRpYS5NZWRpYVR5cGVSCW1lZGlh'
     'VHlwZRISCgRuYW1lGAMgASgJUgRuYW1lEhIKBGRlc2MYBCABKAlSBGRlc2MSMwoWcGFyZW50X3'
     'BsdWdpbl9tZWRpYV9pZBgFIAEoCVITcGFyZW50UGx1Z2luTWVkaWFJZBIUCgVpbmRleBgGIAEo'
-    'BFIFaW5kZXgSIQoMcmVsZWFzZV9kYXRlGA0gASgJUgtyZWxlYXNlRGF0ZRISCgR5ZWFyGA4gAS'
-    'gEUgR5ZWFyEhYKBmdlbnJlcxgPIAMoCVIGZ2VucmVzEiEKDGJhY2tkcm9wX3VybBgQIAEoCVIL'
-    'YmFja2Ryb3BVcmwSHQoKcG9zdGVyX3VybBgRIAEoCVIJcG9zdGVyVXJsEiMKDW9yaWdpbmFsX2'
-    '5hbWUYEiABKAlSDG9yaWdpbmFsTmFtZRIrChFvcmlnaW5hbF9sYW5ndWFnZRgTIAEoCVIQb3Jp'
-    'Z2luYWxMYW5ndWFnZRIyCgZjcmVkaXQYFCADKAsyGi5wbHVnaW4uUGx1Z2luTWVkaWEuQ3JlZG'
-    'l0UgZjcmVkaXQSPQoIbWV0YWRhdGEYFSADKAsyIS5wbHVnaW4uUGx1Z2luTWVkaWEuTWV0YWRh'
-    'dGFFbnRyeVIIbWV0YWRhdGESGQoIbG9nb191cmwYFiABKAlSB2xvZ29VcmwSGgoIZHVyYXRpb2'
-    '4YHiABKARSCGR1cmF0aW9uEhsKCXN0aWxsX3VybBgfIAEoCVIIc3RpbGxVcmwSIgoNcGxheV9p'
-    'dGVtX3VybBggIAEoCVILcGxheUl0ZW1VcmwSUQoQcGxheV9pdGVtX2hlYWRlchghIAMoCzInLn'
-    'BsdWdpbi5QbHVnaW5NZWRpYS5QbGF5SXRlbUhlYWRlckVudHJ5Ug5wbGF5SXRlbUhlYWRlchqc'
-    'AQoGQ3JlZGl0Ej8KC2NyZWRpdF90eXBlGAEgASgOMh4ucGx1Z2luLlBsdWdpbk1lZGlhLkNyZW'
-    'RpdFR5cGVSCmNyZWRpdFR5cGUSEgoEbmFtZRgCIAEoCVIEbmFtZRIfCgtwcm9maWxlX3VybBgD'
-    'IAEoCVIKcHJvZmlsZVVybBIcCgljaGFyYWN0ZXIYBCABKAlSCWNoYXJhY3Rlcho7Cg1NZXRhZG'
-    'F0YUVudHJ5EhAKA2tleRgBIAEoCVIDa2V5EhQKBXZhbHVlGAIgASgJUgV2YWx1ZToCOAEaQQoT'
-    'UGxheUl0ZW1IZWFkZXJFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2YWx1ZRgCIAEoCVIFdm'
-    'FsdWU6AjgBIlkKCU1lZGlhVHlwZRIVChFNRURJQV9VTlNQRUNJRklFRBAAEhAKDE1FRElBX1NF'
-    'UklFUxABEg4KCk1FRElBX0lORk8QAhITCg9NRURJQV9QTEFZX0lURU0QAyJ+CgpDcmVkaXRUeX'
-    'BlEhUKEUNyZWRpdFVOU1BFQ0lGSUVEEAASDwoLQ3JlZGl0QWN0b3IQARIXChNDcmVkaXRDYXN0'
-    'RGlyZWN0aW5nEAISGAoUQ3JlZGl0Q2FzdFByb2R1Y3Rpb24QAxIVChFDcmVkaXRDYXN0V3JpdG'
-    'luZxAE');
+    'BFIFaW5kZXgSHwoLc2hvd19kZXRhaWwYDCABKAhSCnNob3dEZXRhaWwSIQoMcmVsZWFzZV9kYX'
+    'RlGA0gASgJUgtyZWxlYXNlRGF0ZRISCgR5ZWFyGA4gASgEUgR5ZWFyEhYKBmdlbnJlcxgPIAMo'
+    'CVIGZ2VucmVzEiEKDGJhY2tkcm9wX3VybBgQIAEoCVILYmFja2Ryb3BVcmwSHQoKcG9zdGVyX3'
+    'VybBgRIAEoCVIJcG9zdGVyVXJsEiMKDW9yaWdpbmFsX25hbWUYEiABKAlSDG9yaWdpbmFsTmFt'
+    'ZRIrChFvcmlnaW5hbF9sYW5ndWFnZRgTIAEoCVIQb3JpZ2luYWxMYW5ndWFnZRIyCgZjcmVkaX'
+    'QYFCADKAsyGi5wbHVnaW4uUGx1Z2luTWVkaWEuQ3JlZGl0UgZjcmVkaXQSPQoIbWV0YWRhdGEY'
+    'FSADKAsyIS5wbHVnaW4uUGx1Z2luTWVkaWEuTWV0YWRhdGFFbnRyeVIIbWV0YWRhdGESGQoIbG'
+    '9nb191cmwYFiABKAlSB2xvZ29VcmwSGgoIZHVyYXRpb24YHiABKARSCGR1cmF0aW9uEhsKCXN0'
+    'aWxsX3VybBgfIAEoCVIIc3RpbGxVcmwanAEKBkNyZWRpdBI/CgtjcmVkaXRfdHlwZRgBIAEoDj'
+    'IeLnBsdWdpbi5QbHVnaW5NZWRpYS5DcmVkaXRUeXBlUgpjcmVkaXRUeXBlEhIKBG5hbWUYAiAB'
+    'KAlSBG5hbWUSHwoLcHJvZmlsZV91cmwYAyABKAlSCnByb2ZpbGVVcmwSHAoJY2hhcmFjdGVyGA'
+    'QgASgJUgljaGFyYWN0ZXIaOwoNTWV0YWRhdGFFbnRyeRIQCgNrZXkYASABKAlSA2tleRIUCgV2'
+    'YWx1ZRgCIAEoCVIFdmFsdWU6AjgBIlkKCU1lZGlhVHlwZRIVChFNRURJQV9VTlNQRUNJRklFRB'
+    'AAEhAKDE1FRElBX1NFUklFUxABEg4KCk1FRElBX0lORk8QAhITCg9NRURJQV9QTEFZX0lURU0Q'
+    'AyJ+CgpDcmVkaXRUeXBlEhUKEUNyZWRpdFVOU1BFQ0lGSUVEEAASDwoLQ3JlZGl0QWN0b3IQAR'
+    'IXChNDcmVkaXRDYXN0RGlyZWN0aW5nEAISGAoUQ3JlZGl0Q2FzdFByb2R1Y3Rpb24QAxIVChFD'
+    'cmVkaXRDYXN0V3JpdGluZxAE');
 
 @$core.Deprecated('Use listPluginMediaInfoRequestDescriptor instead')
 const ListPluginMediaInfoRequest$json = {

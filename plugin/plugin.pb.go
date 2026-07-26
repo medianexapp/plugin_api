@@ -962,6 +962,7 @@ type PluginMedia struct {
 	ParentPluginMediaId string                `protobuf:"bytes,5,opt,name=parent_plugin_media_id,json=parentPluginMediaId,proto3" json:"parentPluginMediaId,omitempty"`
 	Index               uint64                `protobuf:"varint,6,opt,name=index,proto3" json:"index,omitempty"` // play item indx
 	// media info
+	ShowDetail       bool                  `protobuf:"varint,12,opt,name=show_detail,json=showDetail,proto3" json:"showDetail,omitempty"` // exist media info detail
 	ReleaseDate      string                `protobuf:"bytes,13,opt,name=release_date,json=releaseDate,proto3" json:"releaseDate,omitempty"`
 	Year             uint64                `protobuf:"varint,14,opt,name=year,proto3" json:"year,omitempty"`
 	Genres           []string              `protobuf:"bytes,15,rep,name=genres,proto3" json:"genres,omitempty"`                             // media video genres for media Item info
@@ -973,10 +974,8 @@ type PluginMedia struct {
 	Metadata         map[string]string     `protobuf:"bytes,21,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // media metadata
 	LogoUrl          string                `protobuf:"bytes,22,opt,name=logo_url,json=logoUrl,proto3" json:"logoUrl,omitempty"`
 	// media play item
-	Duration       uint64            `protobuf:"varint,30,opt,name=duration,proto3" json:"duration,omitempty"`               // video duration unit: s
-	StillUrl       string            `protobuf:"bytes,31,opt,name=still_url,json=stillUrl,proto3" json:"stillUrl,omitempty"` // media video poster image for media Item play item
-	PlayItemUrl    string            `protobuf:"bytes,32,opt,name=play_item_url,json=playItemUrl,proto3" json:"playItemUrl,omitempty"`
-	PlayItemHeader map[string]string `protobuf:"bytes,33,rep,name=play_item_header,json=playItemHeader,proto3" json:"playItemHeader,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Duration uint64 `protobuf:"varint,30,opt,name=duration,proto3" json:"duration,omitempty"`               // video duration unit: s
+	StillUrl string `protobuf:"bytes,31,opt,name=still_url,json=stillUrl,proto3" json:"stillUrl,omitempty"` // media video poster image for media Item play item
 }
 
 func (x *PluginMedia) Reset() {
@@ -1025,6 +1024,13 @@ func (x *PluginMedia) GetIndex() uint64 {
 		return x.Index
 	}
 	return 0
+}
+
+func (x *PluginMedia) GetShowDetail() bool {
+	if x != nil {
+		return x.ShowDetail
+	}
+	return false
 }
 
 func (x *PluginMedia) GetReleaseDate() string {
@@ -1109,20 +1115,6 @@ func (x *PluginMedia) GetStillUrl() string {
 		return x.StillUrl
 	}
 	return ""
-}
-
-func (x *PluginMedia) GetPlayItemUrl() string {
-	if x != nil {
-		return x.PlayItemUrl
-	}
-	return ""
-}
-
-func (x *PluginMedia) GetPlayItemHeader() map[string]string {
-	if x != nil {
-		return x.PlayItemHeader
-	}
-	return nil
 }
 
 type ListPluginMediaInfoRequest struct {
@@ -1627,32 +1619,6 @@ func (x *PluginMedia_MetadataEntry) GetKey() string {
 }
 
 func (x *PluginMedia_MetadataEntry) GetValue() string {
-	if x != nil {
-		return x.Value
-	}
-	return ""
-}
-
-type PluginMedia_PlayItemHeaderEntry struct {
-	unknownFields []byte
-	Key           string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-}
-
-func (x *PluginMedia_PlayItemHeaderEntry) Reset() {
-	*x = PluginMedia_PlayItemHeaderEntry{}
-}
-
-func (*PluginMedia_PlayItemHeaderEntry) ProtoMessage() {}
-
-func (x *PluginMedia_PlayItemHeaderEntry) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-func (x *PluginMedia_PlayItemHeaderEntry) GetValue() string {
 	if x != nil {
 		return x.Value
 	}
@@ -2321,6 +2287,7 @@ func (m *PluginMedia) CloneVT() *PluginMedia {
 	r.Desc = m.Desc
 	r.ParentPluginMediaId = m.ParentPluginMediaId
 	r.Index = m.Index
+	r.ShowDetail = m.ShowDetail
 	r.ReleaseDate = m.ReleaseDate
 	r.Year = m.Year
 	r.BackdropUrl = m.BackdropUrl
@@ -2330,7 +2297,6 @@ func (m *PluginMedia) CloneVT() *PluginMedia {
 	r.LogoUrl = m.LogoUrl
 	r.Duration = m.Duration
 	r.StillUrl = m.StillUrl
-	r.PlayItemUrl = m.PlayItemUrl
 	if rhs := m.Genres; rhs != nil {
 		tmpContainer := make([]string, len(rhs))
 		copy(tmpContainer, rhs)
@@ -2349,13 +2315,6 @@ func (m *PluginMedia) CloneVT() *PluginMedia {
 			tmpContainer[k] = v
 		}
 		r.Metadata = tmpContainer
-	}
-	if rhs := m.PlayItemHeader; rhs != nil {
-		tmpContainer := make(map[string]string, len(rhs))
-		for k, v := range rhs {
-			tmpContainer[k] = v
-		}
-		r.PlayItemHeader = tmpContainer
 	}
 	if len(m.unknownFields) > 0 {
 		r.unknownFields = make([]byte, len(m.unknownFields))
@@ -3497,6 +3456,9 @@ func (this *PluginMedia) EqualVT(that *PluginMedia) bool {
 	if this.Index != that.Index {
 		return false
 	}
+	if this.ShowDetail != that.ShowDetail {
+		return false
+	}
 	if this.ReleaseDate != that.ReleaseDate {
 		return false
 	}
@@ -3561,21 +3523,6 @@ func (this *PluginMedia) EqualVT(that *PluginMedia) bool {
 	}
 	if this.StillUrl != that.StillUrl {
 		return false
-	}
-	if this.PlayItemUrl != that.PlayItemUrl {
-		return false
-	}
-	if len(this.PlayItemHeader) != len(that.PlayItemHeader) {
-		return false
-	}
-	for i, vx := range this.PlayItemHeader {
-		vy, ok := that.PlayItemHeader[i]
-		if !ok {
-			return false
-		}
-		if vx != vy {
-			return false
-		}
 	}
 	return string(this.unknownFields) == string(that.unknownFields)
 }
@@ -5777,56 +5724,6 @@ func (x *PluginMedia_MetadataEntry) UnmarshalJSON(b []byte) error {
 	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
-// MarshalProtoJSON marshals the PluginMedia_PlayItemHeaderEntry message to JSON.
-func (x *PluginMedia_PlayItemHeaderEntry) MarshalProtoJSON(s *json.MarshalState) {
-	if x == nil {
-		s.WriteNil()
-		return
-	}
-	s.WriteObjectStart()
-	var wroteField bool
-	if x.Key != "" || s.HasField("key") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("key")
-		s.WriteString(x.Key)
-	}
-	if x.Value != "" || s.HasField("value") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("value")
-		s.WriteString(x.Value)
-	}
-	s.WriteObjectEnd()
-}
-
-// MarshalJSON marshals the PluginMedia_PlayItemHeaderEntry to JSON.
-func (x *PluginMedia_PlayItemHeaderEntry) MarshalJSON() ([]byte, error) {
-	return json.DefaultMarshalerConfig.Marshal(x)
-}
-
-// UnmarshalProtoJSON unmarshals the PluginMedia_PlayItemHeaderEntry message from JSON.
-func (x *PluginMedia_PlayItemHeaderEntry) UnmarshalProtoJSON(s *json.UnmarshalState) {
-	if s.ReadNil() {
-		return
-	}
-	s.ReadObject(func(key string) {
-		switch key {
-		default:
-			s.Skip() // ignore unknown field
-		case "key":
-			s.AddField("key")
-			x.Key = s.ReadString()
-		case "value":
-			s.AddField("value")
-			x.Value = s.ReadString()
-		}
-	})
-}
-
-// UnmarshalJSON unmarshals the PluginMedia_PlayItemHeaderEntry from JSON.
-func (x *PluginMedia_PlayItemHeaderEntry) UnmarshalJSON(b []byte) error {
-	return json.DefaultUnmarshalerConfig.Unmarshal(b, x)
-}
-
 // MarshalProtoJSON marshals the PluginMedia message to JSON.
 func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 	if x == nil {
@@ -5864,6 +5761,11 @@ func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteMoreIf(&wroteField)
 		s.WriteObjectField("index")
 		s.WriteUint64(x.Index)
+	}
+	if x.ShowDetail || s.HasField("showDetail") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("showDetail")
+		s.WriteBool(x.ShowDetail)
 	}
 	if x.ReleaseDate != "" || s.HasField("releaseDate") {
 		s.WriteMoreIf(&wroteField)
@@ -5938,23 +5840,6 @@ func (x *PluginMedia) MarshalProtoJSON(s *json.MarshalState) {
 		s.WriteObjectField("stillUrl")
 		s.WriteString(x.StillUrl)
 	}
-	if x.PlayItemUrl != "" || s.HasField("playItemUrl") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("playItemUrl")
-		s.WriteString(x.PlayItemUrl)
-	}
-	if x.PlayItemHeader != nil || s.HasField("playItemHeader") {
-		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("playItemHeader")
-		s.WriteObjectStart()
-		var wroteElement bool
-		for k, v := range x.PlayItemHeader {
-			s.WriteMoreIf(&wroteElement)
-			s.WriteObjectStringField(k)
-			s.WriteString(v)
-		}
-		s.WriteObjectEnd()
-	}
 	s.WriteObjectEnd()
 }
 
@@ -5990,6 +5875,9 @@ func (x *PluginMedia) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "index":
 			s.AddField("index")
 			x.Index = s.ReadUint64()
+		case "show_detail", "showDetail":
+			s.AddField("show_detail")
+			x.ShowDetail = s.ReadBool()
 		case "release_date", "releaseDate":
 			s.AddField("release_date")
 			x.ReleaseDate = s.ReadString()
@@ -6052,19 +5940,6 @@ func (x *PluginMedia) UnmarshalProtoJSON(s *json.UnmarshalState) {
 		case "still_url", "stillUrl":
 			s.AddField("still_url")
 			x.StillUrl = s.ReadString()
-		case "play_item_url", "playItemUrl":
-			s.AddField("play_item_url")
-			x.PlayItemUrl = s.ReadString()
-		case "play_item_header", "playItemHeader":
-			s.AddField("play_item_header")
-			if s.ReadNil() {
-				x.PlayItemHeader = nil
-				return
-			}
-			x.PlayItemHeader = make(map[string]string)
-			s.ReadStringMap(func(key string) {
-				x.PlayItemHeader[key] = s.ReadString()
-			})
 		}
 	})
 }
@@ -7990,36 +7865,6 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.PlayItemHeader) > 0 {
-		for k := range m.PlayItemHeader {
-			v := m.PlayItemHeader[k]
-			baseI := i
-			i -= len(v)
-			copy(dAtA[i:], v)
-			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(v)))
-			i--
-			dAtA[i] = 0x12
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0x2
-			i--
-			dAtA[i] = 0x8a
-		}
-	}
-	if len(m.PlayItemUrl) > 0 {
-		i -= len(m.PlayItemUrl)
-		copy(dAtA[i:], m.PlayItemUrl)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.PlayItemUrl)))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0x82
-	}
 	if len(m.StillUrl) > 0 {
 		i -= len(m.StillUrl)
 		copy(dAtA[i:], m.StillUrl)
@@ -8136,6 +7981,16 @@ func (m *PluginMedia) MarshalToSizedBufferVT(dAtA []byte) (int, error) {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ReleaseDate)))
 		i--
 		dAtA[i] = 0x6a
+	}
+	if m.ShowDetail {
+		i--
+		if m.ShowDetail {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x60
 	}
 	if m.Index != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Index))
@@ -10080,36 +9935,6 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i -= len(m.unknownFields)
 		copy(dAtA[i:], m.unknownFields)
 	}
-	if len(m.PlayItemHeader) > 0 {
-		for k := range m.PlayItemHeader {
-			v := m.PlayItemHeader[k]
-			baseI := i
-			i -= len(v)
-			copy(dAtA[i:], v)
-			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(v)))
-			i--
-			dAtA[i] = 0x12
-			i -= len(k)
-			copy(dAtA[i:], k)
-			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(k)))
-			i--
-			dAtA[i] = 0xa
-			i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(baseI-i))
-			i--
-			dAtA[i] = 0x2
-			i--
-			dAtA[i] = 0x8a
-		}
-	}
-	if len(m.PlayItemUrl) > 0 {
-		i -= len(m.PlayItemUrl)
-		copy(dAtA[i:], m.PlayItemUrl)
-		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.PlayItemUrl)))
-		i--
-		dAtA[i] = 0x2
-		i--
-		dAtA[i] = 0x82
-	}
 	if len(m.StillUrl) > 0 {
 		i -= len(m.StillUrl)
 		copy(dAtA[i:], m.StillUrl)
@@ -10226,6 +10051,16 @@ func (m *PluginMedia) MarshalToSizedBufferVTStrict(dAtA []byte) (int, error) {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(len(m.ReleaseDate)))
 		i--
 		dAtA[i] = 0x6a
+	}
+	if m.ShowDetail {
+		i--
+		if m.ShowDetail {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i--
+		dAtA[i] = 0x60
 	}
 	if m.Index != 0 {
 		i = protobuf_go_lite.EncodeVarint(dAtA, i, uint64(m.Index))
@@ -11233,6 +11068,9 @@ func (m *PluginMedia) SizeVT() (n int) {
 	if m.Index != 0 {
 		n += 1 + protobuf_go_lite.SizeOfVarint(uint64(m.Index))
 	}
+	if m.ShowDetail {
+		n += 2
+	}
 	l = len(m.ReleaseDate)
 	if l > 0 {
 		n += 1 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
@@ -11286,18 +11124,6 @@ func (m *PluginMedia) SizeVT() (n int) {
 	l = len(m.StillUrl)
 	if l > 0 {
 		n += 2 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
-	}
-	l = len(m.PlayItemUrl)
-	if l > 0 {
-		n += 2 + l + protobuf_go_lite.SizeOfVarint(uint64(l))
-	}
-	if len(m.PlayItemHeader) > 0 {
-		for k, v := range m.PlayItemHeader {
-			_ = k
-			_ = v
-			mapEntrySize := 1 + len(k) + protobuf_go_lite.SizeOfVarint(uint64(len(k))) + 1 + len(v) + protobuf_go_lite.SizeOfVarint(uint64(len(v)))
-			n += mapEntrySize + 2 + protobuf_go_lite.SizeOfVarint(uint64(mapEntrySize))
-		}
 	}
 	n += len(m.unknownFields)
 	return n
@@ -12368,30 +12194,6 @@ func (x *PluginMedia_MetadataEntry) MarshalProtoText() string {
 func (x *PluginMedia_MetadataEntry) String() string {
 	return x.MarshalProtoText()
 }
-func (x *PluginMedia_PlayItemHeaderEntry) MarshalProtoText() string {
-	var sb strings.Builder
-	sb.WriteString("PlayItemHeaderEntry {")
-	if x.Key != "" {
-		if sb.Len() > 21 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("key: ")
-		sb.WriteString(strconv.Quote(x.Key))
-	}
-	if x.Value != "" {
-		if sb.Len() > 21 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("value: ")
-		sb.WriteString(strconv.Quote(x.Value))
-	}
-	sb.WriteString("}")
-	return sb.String()
-}
-
-func (x *PluginMedia_PlayItemHeaderEntry) String() string {
-	return x.MarshalProtoText()
-}
 func (x *PluginMedia) MarshalProtoText() string {
 	var sb strings.Builder
 	sb.WriteString("PluginMedia {")
@@ -12438,6 +12240,13 @@ func (x *PluginMedia) MarshalProtoText() string {
 		}
 		sb.WriteString("index: ")
 		sb.WriteString(strconv.FormatUint(uint64(x.Index), 10))
+	}
+	if x.ShowDetail != false {
+		if sb.Len() > 13 {
+			sb.WriteString(" ")
+		}
+		sb.WriteString("show_detail: ")
+		sb.WriteString(strconv.FormatBool(x.ShowDetail))
 	}
 	if x.ReleaseDate != "" {
 		if sb.Len() > 13 {
@@ -12540,26 +12349,6 @@ func (x *PluginMedia) MarshalProtoText() string {
 		}
 		sb.WriteString("still_url: ")
 		sb.WriteString(strconv.Quote(x.StillUrl))
-	}
-	if x.PlayItemUrl != "" {
-		if sb.Len() > 13 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("play_item_url: ")
-		sb.WriteString(strconv.Quote(x.PlayItemUrl))
-	}
-	if len(x.PlayItemHeader) > 0 {
-		if sb.Len() > 13 {
-			sb.WriteString(" ")
-		}
-		sb.WriteString("play_item_header: {")
-		for k, v := range x.PlayItemHeader {
-			sb.WriteString(" ")
-			sb.WriteString(strconv.Quote(k))
-			sb.WriteString(": ")
-			sb.WriteString(strconv.Quote(v))
-		}
-		sb.WriteString(" }")
 	}
 	sb.WriteString("}")
 	return sb.String()
@@ -16668,6 +16457,26 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 					break
 				}
 			}
+		case 12:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ShowDetail", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ShowDetail = bool(v != 0)
 		case 13:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ReleaseDate", wireType)
@@ -17122,165 +16931,6 @@ func (m *PluginMedia) UnmarshalVT(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.StillUrl = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 32:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemUrl", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.PlayItemUrl = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 33:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemHeader", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.PlayItemHeader == nil {
-				m.PlayItemHeader = make(map[string]string)
-			}
-			var mapkey string
-			var mapvalue string
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protobuf_go_lite.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protobuf_go_lite.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapkey = string(dAtA[iNdEx:postStringIndexmapkey])
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					var stringLenmapvalue uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protobuf_go_lite.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapvalue := int(stringLenmapvalue)
-					if intStringLenmapvalue < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-					if postStringIndexmapvalue < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					if postStringIndexmapvalue > l {
-						return io.ErrUnexpectedEOF
-					}
-					mapvalue = string(dAtA[iNdEx:postStringIndexmapvalue])
-					iNdEx = postStringIndexmapvalue
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if (skippy < 0) || (iNdEx+skippy) < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
-			}
-			m.PlayItemHeader[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -22064,6 +21714,26 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 					break
 				}
 			}
+		case 12:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ShowDetail", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return protobuf_go_lite.ErrIntOverflow
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ShowDetail = bool(v != 0)
 		case 13:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ReleaseDate", wireType)
@@ -22558,177 +22228,6 @@ func (m *PluginMedia) UnmarshalVTUnsafe(dAtA []byte) error {
 				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
 			}
 			m.StillUrl = stringValue
-			iNdEx = postIndex
-		case 32:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemUrl", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			var stringValue string
-			if intStringLen > 0 {
-				stringValue = unsafe.String(&dAtA[iNdEx], intStringLen)
-			}
-			m.PlayItemUrl = stringValue
-			iNdEx = postIndex
-		case 33:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PlayItemHeader", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return protobuf_go_lite.ErrIntOverflow
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return protobuf_go_lite.ErrInvalidLength
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.PlayItemHeader == nil {
-				m.PlayItemHeader = make(map[string]string)
-			}
-			var mapkey string
-			var mapvalue string
-			for iNdEx < postIndex {
-				entryPreIndex := iNdEx
-				var wire uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protobuf_go_lite.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					wire |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				fieldNum := int32(wire >> 3)
-				if fieldNum == 1 {
-					var stringLenmapkey uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protobuf_go_lite.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapkey |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapkey := int(stringLenmapkey)
-					if intStringLenmapkey < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					postStringIndexmapkey := iNdEx + intStringLenmapkey
-					if postStringIndexmapkey < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					if postStringIndexmapkey > l {
-						return io.ErrUnexpectedEOF
-					}
-					if intStringLenmapkey == 0 {
-						mapkey = ""
-					} else {
-						mapkey = unsafe.String(&dAtA[iNdEx], intStringLenmapkey)
-					}
-					iNdEx = postStringIndexmapkey
-				} else if fieldNum == 2 {
-					var stringLenmapvalue uint64
-					for shift := uint(0); ; shift += 7 {
-						if shift >= 64 {
-							return protobuf_go_lite.ErrIntOverflow
-						}
-						if iNdEx >= l {
-							return io.ErrUnexpectedEOF
-						}
-						b := dAtA[iNdEx]
-						iNdEx++
-						stringLenmapvalue |= uint64(b&0x7F) << shift
-						if b < 0x80 {
-							break
-						}
-					}
-					intStringLenmapvalue := int(stringLenmapvalue)
-					if intStringLenmapvalue < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					postStringIndexmapvalue := iNdEx + intStringLenmapvalue
-					if postStringIndexmapvalue < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					if postStringIndexmapvalue > l {
-						return io.ErrUnexpectedEOF
-					}
-					if intStringLenmapvalue == 0 {
-						mapvalue = ""
-					} else {
-						mapvalue = unsafe.String(&dAtA[iNdEx], intStringLenmapvalue)
-					}
-					iNdEx = postStringIndexmapvalue
-				} else {
-					iNdEx = entryPreIndex
-					skippy, err := protobuf_go_lite.Skip(dAtA[iNdEx:])
-					if err != nil {
-						return err
-					}
-					if (skippy < 0) || (iNdEx+skippy) < 0 {
-						return protobuf_go_lite.ErrInvalidLength
-					}
-					if (iNdEx + skippy) > postIndex {
-						return io.ErrUnexpectedEOF
-					}
-					iNdEx += skippy
-				}
-			}
-			m.PlayItemHeader[mapkey] = mapvalue
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
