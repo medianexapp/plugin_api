@@ -15,8 +15,6 @@ import (
 	"slices"
 	"strings"
 	"time"
-
-	"golang.org/x/net/http/httpproxy"
 )
 
 var (
@@ -55,7 +53,7 @@ type Builder struct {
 
 	client *http.Client
 
-	httpProxy *httpproxy.Config
+	authProxy bool
 }
 
 func NewBuilder() *Builder {
@@ -88,7 +86,7 @@ func (rb *Builder) clone() *Builder {
 
 		httpRequest: rb.httpRequest,
 
-		httpProxy: rb.httpProxy,
+		authProxy: rb.authProxy,
 	}
 	if rb.urlParams != nil {
 		urlParams := url.Values{}
@@ -320,7 +318,7 @@ func (rb *Builder) SetRetry(retry int) *Builder {
 
 func (rb *Builder) AutoProxy() *Builder {
 	nb := rb.clone()
-	nb.httpProxy = GetProxy()
+	nb.authProxy = true
 	return nb
 }
 
@@ -381,14 +379,12 @@ func (rb *Builder) callReq() (*http.Response, error) {
 		opts = append(opts, WithTimeout(rb.timeout))
 	}
 	if rb.client == nil {
-		rb.client = &http.Client{}
-	}
-	if rb.httpProxy != nil {
-		rb.client.Transport = &http.Transport{
-			Proxy: func(r *http.Request) (*url.URL, error) {
-				return rb.httpProxy.ProxyFunc()(r.URL)
-			},
+		rb.client = &http.Client{
+			Transport: &http.Transport{},
 		}
+	}
+	if rb.authProxy {
+		setProxy(rb.client.Transport)
 	}
 	opts = append(opts, WithClient(rb.client))
 	client := NewClient(opts...)
