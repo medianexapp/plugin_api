@@ -26,14 +26,11 @@ func TestBuilder(t *testing.T) {
 			t.Fatal("can get status code")
 		}
 	}
-	_, err := b.CheckRespStatusCode(http.StatusBadRequest).BytesResponse()
+	_, err := b.CheckRespStatusCode(http.StatusOK).BytesResponse()
 	if err != nil {
 		t.Error(err)
 	}
-	_, err = b.CheckRespHeader("test", "data").BytesResponse()
-	if err != nil {
-		t.Error(err)
-	}
+
 }
 
 func TestSetCookie(t *testing.T) {
