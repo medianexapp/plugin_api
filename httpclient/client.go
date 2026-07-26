@@ -51,6 +51,8 @@ type Builder struct {
 	respHeader     *http.Header
 	respStatusCode *int
 
+	httpRequest *http.Request
+
 	client *http.Client
 
 	httpProxy *httpproxy.Config
@@ -83,6 +85,8 @@ func (rb *Builder) clone() *Builder {
 		respHeader:     rb.respHeader,
 		respStatusCode: rb.respStatusCode,
 		client:         rb.client,
+
+		httpRequest: rb.httpRequest,
 
 		httpProxy: rb.httpProxy,
 	}
@@ -199,6 +203,12 @@ func (rb *Builder) ParseCookie(header http.Header) {
 			rb.cookies = append(rb.cookies, cookie)
 		}
 	}
+}
+
+func (rb *Builder) SetRequest(httpReq *http.Request) *Builder {
+	nb := rb.clone()
+	nb.httpRequest = httpReq
+	return nb
 }
 
 func (rb *Builder) SetHeaders(headers http.Header) *Builder {
@@ -327,29 +337,40 @@ func (rb *Builder) Debug() *Builder {
 }
 
 func (rb *Builder) callReq() (*http.Response, error) {
-	if rb.url == "" {
-		if rb.baseURL != "" {
-			rb.url = rb.baseURL
-			if rb.uri != "" {
-				rb.url = strings.TrimRight(rb.baseURL, "/") + "/" + strings.TrimLeft(rb.uri, "/")
+	httpRequest := rb.httpRequest
+	if httpRequest == nil {
+		if rb.url == "" {
+			if rb.baseURL != "" {
+				rb.url = rb.baseURL
+				if rb.uri != "" {
+					rb.url = strings.TrimRight(rb.baseURL, "/") + "/" + strings.TrimLeft(rb.uri, "/")
+				}
+			} else {
+				return nil, ErrMissUrl
 			}
-		} else {
-			return nil, ErrMissUrl
+		}
+		if rb.method == "" {
+			rb.method = http.MethodGet
+		}
+		if rb.urlParams.Encode() != "" {
+			rb.url += "?" + rb.urlParams.Encode()
+		}
+		req, err := http.NewRequest(rb.method, rb.url, rb.body)
+		if err != nil {
+			return nil, err
+		}
+		httpRequest = req
+	}
+	if len(rb.header) > 0 {
+		for k, v := range rb.header {
+			for _, item := range v {
+				httpRequest.Header.Add(k, item)
+			}
 		}
 	}
-	if rb.method == "" {
-		rb.method = http.MethodGet
-	}
-	if rb.urlParams.Encode() != "" {
-		rb.url += "?" + rb.urlParams.Encode()
-	}
-	req, err := http.NewRequest(rb.method, rb.url, rb.body)
-	if err != nil {
-		return nil, err
-	}
-	req.Header = rb.header
+
 	for _, cookie := range rb.cookies {
-		req.AddCookie(cookie)
+		httpRequest.AddCookie(cookie)
 	}
 	now := time.Now()
 	opts := []FuncOption{}
@@ -371,15 +392,15 @@ func (rb *Builder) callReq() (*http.Response, error) {
 	}
 	opts = append(opts, WithClient(rb.client))
 	client := NewClient(opts...)
-	resp, err := client.Do(req)
+	resp, err := client.Do(httpRequest)
 	if err != nil {
 		return nil, err
 	}
 	if rb.debug {
 		args := []any{
-			"url", req.URL,
-			"method", req.Method,
-			"header", req.Header,
+			"url", httpRequest.URL,
+			"method", httpRequest.Method,
+			"header", httpRequest.Header,
 			"duration(ms)", time.Since(now).Milliseconds(),
 			"status_code", resp.StatusCode,
 			"resp_header", resp.Header,
